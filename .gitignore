@@ -11,5 +11,5 @@ media
 .vscode/settings.json
 *.swp
 memo.txt
-
+/.vscode/
 
