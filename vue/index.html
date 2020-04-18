@@ -6,17 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
+
 <body>
     <div id="app">
+
   <div>
     <input v-model='new_goal'>
     <button v-on:click='postGoal'>新規登録する</button>
 
     <p>目標の数 : {{ goals.length }}</p>
     <li v-for='goal in goals' v-bind:key='goal.id'>
-      {{ goal.title }}
+      {{ goal.title }} : {{ goal.created_at }}
       <button v-on:click='deleteGoal(goal.id)' class='btn'>削除</button>
     </li>
+
+    <pre>{{ $data }}</pre>
   </div>
 </div>
 
