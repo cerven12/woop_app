@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -14,12 +14,16 @@
 
   <div>
     <input v-model='new_goal'>
-    <button v-on:click='postGoal'>新規登録する</button>
+    <button v-on:click='postGoal(new_goal)' class='btn'>登録</button>
 
     <p>目標の数 : {{ goals.length }}</p>
     <ul>
-    <li v-for='goal in goals' v-bind:key='goal.id'>
-      {{ goal.title }} : {{ goal.created_at }}
+    <li v-for='(goal, index) in goals' v-bind:key='goal.id'>
+      <div style='font-size: 5px;'>id : {{ goal.id }}</div>
+      <div v-if='!isEditGoal' v-on:dblclick='isEditGoal = true'>
+        {{ index }}: {{ goal.title }}</div>
+      <div v-else><input type='text' v-model='goal.title' v-on:blur='updateGoal(goal.id, goal.title)'></div>
+      <div style='font-size: 5px;'>{{ goal.created_at }}</div>
       <button v-on:click='deleteGoal(goal.id)' class='btn'>削除</button>
     </li>
     </ul>
