@@ -27,11 +27,17 @@ border: 1px solid #20262E;
 padding: 10px;
 }
 
-li {
+.purple {
 margin: 10px;
 padding-left: 10px;
 border-left: 3px solid blueviolet;
 }
+
+.yellow {
+  margin: 10px;
+  padding-left: 10px;
+  border-left: 3px solid gold;
+  }
 
 ul {
   list-style: none;

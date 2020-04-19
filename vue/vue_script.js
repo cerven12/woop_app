@@ -4,6 +4,7 @@ new Vue({
         return {
             goals: {},
             new_goal: '',
+            new_task: '',
             isEditGoal: false,
     }
 },
