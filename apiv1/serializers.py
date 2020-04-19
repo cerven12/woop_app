@@ -1,12 +1,6 @@
 from rest_framework import serializers
-# models
 from woop.models import Goal, Task
-
-class GoalSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Goal
-        fields = ['id', 'title', 'created_at']
+from drf_writable_nested.serializers import WritableNestedModelSerializer
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -14,3 +8,13 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['id', 'title', 'created_at', 'goal']
+
+
+class GoalSerializer(WritableNestedModelSerializer):
+    tasks = TaskSerializer(many=True, required=False)
+
+    class Meta:
+        model = Goal
+        fields = ['id', 'title', 'created_at', 'tasks']
+
+

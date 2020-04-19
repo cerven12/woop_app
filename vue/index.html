@@ -18,13 +18,29 @@
 
     <p>目標の数 : {{ goals.length }}</p>
     <ul>
-    <li v-for='(goal, index) in goals' v-bind:key='goal.id'>
+    <!-- Goal -->
+    <li v-for='(goal, index) in goals' v-bind:key='goal.id' class='purple'>
       <div style='font-size: 5px;'>id : {{ goal.id }}</div>
       <div v-if='!isEditGoal' v-on:dblclick='isEditGoal = true'>
         {{ index }}: {{ goal.title }}</div>
       <div v-else><input type='text' v-model='goal.title' v-on:blur='updateGoal(goal.id, goal.title)'></div>
       <div style='font-size: 5px;'>{{ goal.created_at }}</div>
       <button v-on:click='deleteGoal(goal.id)' class='btn'>削除</button>
+
+      <!-- Tasks -->
+      <ul>
+        <li v-for='(task, index) in goal.tasks' v-bind:key='task.id' class='yellow'>
+        <div style='font-size: 5px;'>id : {{ task.id }}</div>
+        <div v-if='!isEditGoal' v-on:dblclick='isEditGoal = true'>
+          {{ index }}: {{ task.title }}</div>
+        <div v-else><input type='text' v-model='task.title' v-on:blur='updateGoal(task.id, task.title)'></div>
+        <div style='font-size: 5px;'>{{ task.created_at }}</div>
+        <button v-on:click='deleteGoal(task.id)' class='btn'>削除</button>
+
+        </li>
+      </ul>
+
+
     </li>
     </ul>
 
