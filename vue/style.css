@@ -1,3 +1,7 @@
+[v-cloak]{
+  display: none;
+}
+
 body {
   background: #20262E;
   padding: 20px;
@@ -32,4 +36,15 @@ border-left: 3px solid blueviolet;
 ul {
   list-style: none;
   padding-inline-start:  0px;
+}
+
+input[type='text']{
+  width: 100%;
+  max-width: 400px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
