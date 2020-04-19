@@ -24,7 +24,6 @@ new Vue({
         },
         updateGoal: function (id, title) {
             const vm = this;
-            console.log(vm)
             axios.put('http://127.0.0.1:8000/api/v1/Goal/' + id + '/',
                 { id: id, title: title })
                 .then(response => { vm.isEditGoal = false })
