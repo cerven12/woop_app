@@ -4,7 +4,6 @@ new Vue({
         return {
             goals: {},
             new_goal: '',
-            new_task: '',
             isEditGoal: false,
     }
 },
@@ -20,7 +19,7 @@ new Vue({
         },
         deleteGoal: function (id) {
             const vm = this;
-            axios.delete('http://127.0.0.1:8000/api/v1/Goal/' + id)
+            axios.delete('http://127.0.0.1:8000/api/v1/Goal/' + id + '/')
                 .then(response => { vm.reloadGoal(); })
         },
         updateGoal: function (id, title) {

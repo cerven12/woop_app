@@ -8,10 +8,8 @@
     <title>Document</title>
 </head>
 
-
 <body>
     <div id="app">
-
   <div>
     <input v-model='new_goal'>
     <button v-on:click='postGoal(new_goal)' class='btn'>登録</button>
@@ -31,15 +29,11 @@
       <ul>
         <li v-for='(task, index) in goal.tasks' v-bind:key='task.id' class='yellow'>
         <div style='font-size: 5px;'>id : {{ task.id }}</div>
-        <div v-if='!isEditGoal' v-on:dblclick='isEditGoal = true'>
+        <div>
           {{ index }}: {{ task.title }}</div>
-        <div v-else><input type='text' v-model='task.title' v-on:blur='updateGoal(task.id, task.title)'></div>
         <div style='font-size: 5px;'>{{ task.created_at }}</div>
-        <button v-on:click='deleteGoal(task.id)' class='btn'>削除</button>
-
         </li>
       </ul>
-
 
     </li>
     </ul>
@@ -47,6 +41,8 @@
     <pre>{{ $data }}</pre>
   </div>
 </div>
+
+
 
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
