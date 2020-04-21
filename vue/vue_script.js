@@ -4,6 +4,7 @@ new Vue({
         return {
             goals: {},
             new_goal: '',
+            new_task: '',
             isEditGoal: false,
     }
 },
@@ -11,11 +12,16 @@ new Vue({
         this.reloadGoal();
     },
     methods: {
-        postGoal: function (title) {
+        postGoal: function (goal_title) {
             const vm = this;
-            axios.post('http://127.0.0.1:8000/api/v1/Goal/',
-                { title: title })
-                .then(response => { vm.reloadGoal(); })
+            axios({ method: 'post',
+                    url: 'http://127.0.0.1:8000/api/v1/Goal/',
+                    data: {
+                        goal_title: goal_title,
+                    }}).then(response => { vm.reloadGoal() });
+
+            // axios.post('http://127.0.0.1:8000/api/v1/Goal/',
+            //     { title: goal_title , { title: task_title } })
         },
         deleteGoal: function (id) {
             const vm = this;

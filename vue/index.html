@@ -12,7 +12,8 @@
     <div id="app">
   <div>
     <input v-model='new_goal'>
-    <button v-on:click='postGoal(new_goal)' class='btn'>登録</button>
+    <button v-on:click='postGoal(new_goal, new_task)' class='btn'>登録</button>
+
 
     <p>目標の数 : {{ goals.length }}</p>
     <ul>
@@ -20,8 +21,8 @@
     <li v-for='(goal, index) in goals' v-bind:key='goal.id' class='purple'>
       <div style='font-size: 5px;'>id : {{ goal.id }}</div>
       <div v-if='!isEditGoal' v-on:dblclick='isEditGoal = true'>
-        {{ index }}: {{ goal.title }}</div>
-      <div v-else><input type='text' v-model='goal.title' v-on:blur='updateGoal(goal.id, goal.title)'></div>
+        {{ index }}: {{ goal.goal_title }}</div>
+      <div v-else><input type='text' v-model='goal.goal_title' v-on:blur='updateGoal(goal.id, goal.title)'></div>
       <div style='font-size: 5px;'>{{ goal.created_at }}</div>
       <button v-on:click='deleteGoal(goal.id)' class='btn'>削除</button>
 
@@ -30,7 +31,7 @@
         <li v-for='(task, index) in goal.tasks' v-bind:key='task.id' class='yellow'>
         <div style='font-size: 5px;'>id : {{ task.id }}</div>
         <div>
-          {{ index }}: {{ task.title }}</div>
+          {{ index }}: {{ task.task_title }}</div>
         <div style='font-size: 5px;'>{{ task.created_at }}</div>
         </li>
       </ul>

@@ -7,7 +7,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['id', 'title', 'created_at', 'goal']
+        fields = ['id', 'task_title', 'created_at', 'goal']
 
 
 class GoalSerializer(WritableNestedModelSerializer):
@@ -15,6 +15,6 @@ class GoalSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Goal
-        fields = ['id', 'title', 'created_at', 'tasks']
+        fields = ['id', 'goal_title', 'created_at', 'tasks']
 
 
