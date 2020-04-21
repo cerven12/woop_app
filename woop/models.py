@@ -11,7 +11,7 @@ class Goal(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.title
+        return self.goal_title
 
 
 class Task(models.Model):
@@ -21,4 +21,4 @@ class Task(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.title
+        return self.task_title
