@@ -6,8 +6,6 @@ from apiv1 import views
 
 # router = routers.DefaultRouter()
 # router.register('Goal', views.GoalViewSet)
-
-
 router = routers.DefaultRouter()
 router.register('goals', views.GoalViewSet)
 goals_router = routers.NestedSimpleRouter(router, 'goals')
