@@ -1,55 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-  <div>
-    <input v-model='new_goal'>
-    <button v-on:click='postGoal(new_goal)' class='btn'>登録</button>
-
-    <p>目標の数 : {{ goals.length }}</p>
-    <ul>
-    <!-- Goal -->
-    <li v-for='(goal, index) in goals' v-bind:key='goal.id' class='purple'>
-      <div style='font-size: 5px;'>id : {{ goal.id }}</div>
-      <div v-if='!isEditGoal' v-on:dblclick='isEditGoal = true'>
-        {{ index }}: {{ goal.goal_title }}</div>
-      <div v-else><input type='text' v-model='goal.goal_title' v-on:blur='updateGoal(goal.id, goal.title)'></div>
-      <div style='font-size: 5px;'>{{ goal.created_at }}</div>
-      <button v-on:click='deleteGoal(goal.id)' class='btn'>削除</button>
-
-      <!-- Tasks -->
-      <ul>
-        <input v-model='new_task'>
-         <button v-on:click='postTask(goal.id, new_task)' class='btn'>登録</button>
-        <li v-for='(task, index) in goal.tasks' v-bind:key='task.id' class='yellow'>
-        <div style='font-size: 5px;'>id : {{ task.id }}</div>
+      <div>
+        <h1>あなたが叶えたい目標を書きましょう</h1>
         <div>
-          {{ index }}: {{ task.task_title }}</div>
-        <div style='font-size: 5px;'>{{ task.created_at }}</div>
-        <button v-on:click='deleteTask(goal.id, task.id)' class='btn'>削除</button>
-        </li>
-      </ul>
+          目標を追加する：<input v-model="new_goal" />
+          <button v-on:click="postGoal(new_goal)" class="btn">登録</button>
+        </div>
 
-    </li>
-    </ul>
-
-    <pre>{{ $data }}</pre>
-  </div>
-</div>
+        <div class="questions">
+          <div class='step'>モチベーションを高める</div>
+          <div class='step'>挫折を防ぐための準備をする</div >
+          <div class='step'>スケジュールを設定する</div>
+        </div>
 
 
 
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src='/vue/vue_script.js'></script>
-</body>
+
+
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+        <div>
+          目標を追加する：<input v-model="new_goal" />
+          <button v-on:click="postGoal(new_goal)" class="btn">登録</button>
+        </div>
+
+        <p>目標の数 : {{ goals.length }}</p>
+        <ul>
+          <!-- Goal -->
+          <li
+            v-for="(goal, index) in goals"
+            v-bind:key="goal.id"
+            class="purple"
+          >
+            <div style="font-size: 5px;">id : {{ goal.id }}</div>
+            <div v-if="!isEditGoal" v-on:dblclick="isEditGoal = true">
+              {{ index }}: {{ goal.goal_title }}
+            </div>
+            <div v-else>
+              <input
+                type="text"
+                v-model="goal.goal_title"
+                v-on:blur="updateGoal(goal.id, goal.title)"
+              />
+            </div>
+            <div style="font-size: 5px;">{{ goal.created_at }}</div>
+            <button v-on:click="deleteGoal(goal.id)" class="btn">削除</button>
+
+            <!-- Tasks -->
+            <ul>
+              <div>
+                タスクを追加する<input v-model="new_task" />
+                <button v-on:click="postTask(goal.id, new_task)" class="btn">
+                  登録
+                </button>
+              </div>
+              <li
+                v-for="(task, index) in goal.tasks"
+                v-bind:key="task.id"
+                class="yellow"
+              >
+                <div style="font-size: 5px;">id : {{ task.id }}</div>
+                <div>
+                  {{ index }}: {{ task.task_title }}
+                </div>
+                <div style="font-size: 5px;">{{ task.created_at }}</div>
+                <button v-on:click="deleteTask(goal.id, task.id)" class="btn">
+                  削除
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <pre>{{ $data }}</pre>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/vue/vue_script.js"></script>
+  </body>
 </html>

@@ -17,6 +17,17 @@ new Vue({
             axios.post('http://127.0.0.1:8000/api/v1/goals/',
                 { goal_title: goal_title })
         },
+
+
+
+
+
+
+        postGoal: function (goal_title) {
+            const vm = this;
+            axios.post('http://127.0.0.1:8000/api/v1/goals/',
+                { goal_title: goal_title })
+        },
         deleteGoal: function (id) {
             const vm = this;
             axios.delete('http://127.0.0.1:8000/api/v1/goals/' + id + '/')
