@@ -1,4 +1,5 @@
-/* <template>
+/*
+<template>
   <div>
     <v-app>
       <div id="back">
@@ -10,73 +11,70 @@
               </v-col>
             </v-row>
             <v-row justify="start">
-              <v-col cols="9"><v-layout justify-end><h1>{{ goal_title }}</h1></v-layout>
+              <v-col cols="9"
+                ><v-layout justify-end
+                  ><h1>{{ goal_title }}</h1></v-layout
+                >
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="2">
-                <h2 v-show="new_goal_registered" id="check"><v-icon x-large color="blue">mdi-check-bold</v-icon></h2>
+                <h2 v-show="new_goal_registered" id="check">
+                  <v-icon x-large color="blue">mdi-check-bold</v-icon>
+                </h2>
               </v-col>
-              </v-row>
-              <v-row>
+            </v-row>
+            <v-row>
               <v-col>
-              <input
-                type="text"
-                v-model="goal_title"
-                style="border-bottom: 2px solid gray;"
-              />
-              <v-text-field
-            label="Solo"
-            placeholder="Placeholder"
-            solo
-            v-model="goal_title"
-          ></v-text-field>
-              <v-btn class="ma-2" outlined color="black" v-on:click="new_goal_register">登録</v-btn>
+                <input
+                  type="text"
+                  v-model="goal_title"
+                  style="border-bottom: 2px solid gray;"
+                />
+                <v-text-field
+                  label="Solo"
+                  placeholder="Placeholder"
+                  solo
+                  v-model="goal_title"
+                ></v-text-field>
+                <v-btn
+                  class="ma-2"
+                  outlined
+                  color="black"
+                  v-on:click="new_goal_register"
+                  >登録</v-btn
+                >
               </v-col>
-              </v-row>
-          </v-row>
+            </v-row>
           </v-container>
         </div>
 
-
-        <div id='step'>
+        <div id="step">
           <v-container>
             <v-row>
               <v-col cols="12">
-            <v-stepper alt-labels>
-            <v-stepper-header>
-              <v-stepper-step
-                color="blue"
-                complete
-                step="1">
-                目標を決める
-              </v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step
-                color="orange"
-                complete
-                step="2"
-              >モチベーションを高める</v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step
-                color="brown"
-                complete
-                step="3">
-                挫折をしないために準備する
-              </v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step
-                color="green"
-                complete
-                step="4">
-                スケジュールを組もう
-              </v-stepper-step>
-            </v-stepper-header>
-          </v-stepper>
-          </v-col>
-          </v-row>
+                <v-stepper alt-labels>
+                  <v-stepper-header>
+                    <v-stepper-step color="blue" complete step="1">
+                      目標を決める
+                    </v-stepper-step>
+                    <v-divider></v-divider>
+                    <v-stepper-step color="orange" complete step="2"
+                      >モチベーションを高める</v-stepper-step
+                    >
+                    <v-divider></v-divider>
+                    <v-stepper-step color="brown" complete step="3">
+                      挫折をしないために準備する
+                    </v-stepper-step>
+                    <v-divider></v-divider>
+                    <v-stepper-step color="green" complete step="4">
+                      スケジュールを組もう
+                    </v-stepper-step>
+                  </v-stepper-header>
+                </v-stepper>
+              </v-col>
+            </v-row>
           </v-container>
         </div>
-
 
         <div id="motivation" class="input_group">
           <v-form v-model="valid">
@@ -102,7 +100,7 @@
                   <v-col cols="12" md="12">
                     <v-text-field
                       label="周囲への影響"
-                      hint="目標を達成した時、周りの人々や環境にどのような良い影響が与えるか、想像してみてください"
+                      hint="目標を達成した時、周りの人々や環境にどのような良い影響が与えるか、想像してみてください"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -119,7 +117,7 @@
                   <v-col cols="12" md="12">
                     <v-text-field
                       label="後悔"
-                      hint="もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう"
+                      hint="もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -211,9 +209,15 @@
                     </template>
                     <v-date-picker v-model="start_date" no-title scrollable>
                       <v-spacer></v-spacer>
-                      <v-btn text color="#37474F" @click="start = false">Cancel</v-btn>
-                      <v-btn text color="#37474F" @click="$refs.start.save(start_date)"
-                        >OK</v-btn>
+                      <v-btn text color="#37474F" @click="start = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="#37474F"
+                        @click="$refs.start.save(start_date)"
+                        >OK</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-col>
@@ -239,9 +243,15 @@
                     </template>
                     <v-date-picker v-model="deadline_date" no-title scrollable>
                       <v-spacer></v-spacer>
-                      <v-btn text color="#37474F" @click="deadline = false">Cancel</v-btn>
-                      <v-btn text color="#37474F" @click="$refs.deadline.save(deadline_date)"
-                        >OK</v-btn>
+                      <v-btn text color="#37474F" @click="deadline = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="#37474F"
+                        @click="$refs.deadline.save(deadline_date)"
+                        >OK</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-col>
@@ -260,21 +270,22 @@ export default {
 
   data: function() {
     return {
-      goal_title: "Django Rest FrameworkとVue CLI&Vuetifyで、SPAなタスク管理アプリケーションを作成する。",
+      goal_title:
+        "Django Rest FrameworkとVue CLI&Vuetifyで、SPAなタスク管理アプリケーションを作成する。",
       start_date: new Date().toISOString().substr(0, 10),
       deadline_date: new Date().toISOString().substr(0, 10),
       start: false,
       deadline: false,
       new_goal_registered: false,
-    }
+    };
   },
   methods: {
-    new_goal_register: function(){
+    new_goal_register: function() {
       const vm = this;
-      vm.new_goal_registered = true
+      vm.new_goal_registered = true;
     },
-  }
-  };
+  },
+};
 </script>
 
 <style scoped>
@@ -299,12 +310,7 @@ export default {
   padding: 20px;
 }
 
-#back {
-  /* background: rgb(191, 192, 192); */
-}
-
 .v-stepper {
   box-shadow: none;
 }
 </style>
- */
