@@ -1,16 +1,21 @@
 <template>
-  <NewGoal></NewGoal>
-</template>
+  <div id="app">
+    <nav>
+      <router-link to="/"></router-link>
+    </nav>
 
+    <router-view />
+  </div>
+</template>
 <script>
-import NewGoal from "./components/NewGoal";
+// import CreateGoal from "./components/CreateGoal";
 
 export default {
-  name: "App",
+  // name: "CreateGoal",
 
-  components: {
-    NewGoal,
-  },
+  // components: {
+  //   CreateGoal,
+  // },
 
   data: () => ({
     //

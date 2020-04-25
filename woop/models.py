@@ -7,7 +7,7 @@ import uuid
 
 class Goal(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    goal_title = models.CharField(verbose_name='目標', max_length=40)
+    goal_title = models.CharField(verbose_name='目標', max_length=200)
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
