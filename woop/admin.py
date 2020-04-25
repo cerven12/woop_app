@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Goal, Task
 
 class GoalAdmin(admin.ModelAdmin):
-    list_display = ('goal_title', 'created_at', 'id')
+    list_display = ('goal_title','created_at','goal_description', 'start_date','deadline','achievement','progress_type','id')
     ordering = ('-created_at',)
     readonly_field = ('id', 'created_at')
 

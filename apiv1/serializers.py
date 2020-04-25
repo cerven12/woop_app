@@ -15,6 +15,6 @@ class GoalSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Goal
-        fields = ['id', 'goal_title', 'created_at', 'tasks']
+        fields = ['id', 'goal_title','created_at','goal_description', 'start_date','deadline','achievement','progress_type', 'tasks']
 
 
