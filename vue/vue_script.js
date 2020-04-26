@@ -51,7 +51,7 @@ new Vue({
             axios.delete('http://127.0.0.1:8000/api/v1/goals/'+goal_id+'/'+'tasks'+'/'+task_id+'/')
                 .then(response => { vm.reloadGoal(); })
         },
-        updateToask: function (goal_id, task_id, task_title) {
+        updateTask: function (goal_id, task_id, task_title) {
             const vm = this;
             axios.put('http://127.0.0.1:8000/api/v1/goals/'+goal_id+'/'+'tasks'+'/'+task_id+'/',
                 { task_title: task_tiele , goal: goal_id })

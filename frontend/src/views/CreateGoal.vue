@@ -6,7 +6,7 @@
           <v-container>
             <v-row>
               <v-col cols="12" md="12">
-                <h3>あなたが達成したい目標を書きましょう{{ this_time_create_goal_data }}</h3>
+                <h3>あなたが達成したい目標を書きましょう{{ this_time_goal_data }}</h3>
               </v-col>
             </v-row>
             <v-row justify="start">
@@ -88,6 +88,7 @@
               hint="目標を叶えたい理由を書きましょう"
               rows="1"
               auto-grow
+              v-model="motive"
             ></v-textarea>
           </v-col>
         </v-row>
@@ -108,6 +109,7 @@
                 hint="目標を達成した時、周りの人々や環境にどのような良い影響が与えるか、想像してみてください"
                 rows="1"
                 auto-grow
+                v-model="self_transcendence_goal"
               ></v-textarea>
             </v-col>
           </v-row>
@@ -129,6 +131,7 @@
                 hint="もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう"
                 rows="1"
                 auto-grow
+                v-model="future_self"
               ></v-textarea>
             </v-col>
           </v-row>
@@ -167,6 +170,7 @@
               hint="行動するにあたって、不安やわからないことをたくさん書いておきましょう"
               rows="1"
               auto-grow
+              v-model="worry"
             ></v-textarea>
           </v-col>
         </v-row>
@@ -293,6 +297,7 @@
     </v-form>
 
     <v-btn @click='updateGoal(goal_description, start_date, deadline_date)'>Goalモデルの追加項目を登録！</v-btn>
+    <v-btn @click="newGoalChildRegister()">子モデルmotiveの登録！！！</v-btn>
   </div>
       </div>
 
@@ -319,30 +324,54 @@ export default {
       deadline: false,
       new_goal_registered: false,
       valid: "",
-      this_time_create_goal_data: "",
+      this_time_goal_data: "",
       url: 'http://127.0.0.1:8000/api/v1/goals/',
       start_date: '',
       goal_description: '',
+      motive: '',
+      self_transcendence_goal: '',
+      future_self: '',
+      worry: '',
     };
   },
   methods: {
     newGoalRegister: function(goal_title) {
       const vm = this;
       vm.axios.post(vm.url, { goal_title : goal_title })
-      .then(response => vm.this_time_create_goal_data = response.data).catch((error) =>{ console.log(error) })
+      .then(response => vm.this_time_goal_data = response.data)
+      .catch((error) =>{ console.log(error) })
       .then(vm.new_goal_registered = true);
     },
     updateGoal: function(goal_description, start_date, deadline_date){
       const vm = this;
-      vm.axios.put(vm.url+vm.this_time_create_goal_data.id+'/',
+      vm.axios.put(vm.url+vm.this_time_goal_data.id+'/',
       {
-        id: vm.this_time_create_goal_data.id,
-        goal_title: vm.this_time_create_goal_data.goal_title,
+        id: vm.this_time_goal_data.id,
+        goal_title: vm.this_time_goal_data.goal_title,
         goal_description: goal_description,
         start_date: start_date,
         deadline: deadline_date,
         })
-    }
+    },
+    newGoalChildRegister: function(){
+      const vm = this;
+      vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'motives/',
+      { goal: vm.this_time_goal_data.id, motive: vm.motive })
+      .then(response => vm.this_time_goal_data = response.data)
+      .catch((error) =>{ console.log(error) })
+      vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'self_transcendence_goals/',
+      { goal: vm.this_time_goal_data.id, self_transcendence_goal: vm.self_transcendence_goal })
+      .then(response => vm.this_time_goal_data = response.data)
+      .catch((error) =>{ console.log(error) })
+      vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'future_selves/',
+      { goal: vm.this_time_goal_data.id, future_self: vm.future_self })
+      .then(response => vm.this_time_goal_data = response.data)
+      .catch((error) =>{ console.log(error) })
+      vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/',
+      { goal: vm.this_time_goal_data.id, worry: vm.worry })
+      .then(response => vm.this_time_goal_data = response.data)
+      .catch((error) =>{ console.log(error) })
+    },
   },
 };
 </script>
