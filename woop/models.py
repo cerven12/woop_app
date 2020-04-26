@@ -32,3 +32,48 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task_title
+
+class Motive(models.Model):
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='motives')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    motive = models.TextField(verbose_name='動機', blank=True, null=True)
+    created_at = models.DateTimeField(verbose_name='作成日時' ,default=timezone.now)
+
+    def __str__(self):
+        return self.motive
+
+class SelfTranscendenceGoal(models.Model):
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='self_transcendence_goals')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    self_transcendence_goal = models.TextField(verbose_name='自己超越目標', null=True, blank=True)
+    created_at = models.DateTimeField(verbose_name='作成日時' ,default=timezone.now)
+
+    def __str__(self):
+        return self.self_transcendence_goal or ''
+
+class FutureSelf(models.Model):
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='future_selves')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    future_self = models.TextField(verbose_name='将来の自分', null=True, blank=True)
+    created_at = models.DateTimeField(verbose_name='作成日時' ,default=timezone.now)
+
+    def __str__(self):
+        return self.future_self or ''
+
+class Worry(models.Model):
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='worries')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    worry = models.TextField(verbose_name='心配事', null=True, blank=True)
+    created_at = models.DateTimeField(verbose_name='作成日時' ,default=timezone.now)
+
+    def __str__(self):
+        return self.worry or ''
+
+class Idea(models.Model):
+    worry = models.ForeignKey(Worry, on_delete=models.CASCADE, related_name='ideas')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    idea = models.TextField(verbose_name='対策', null=True, blank=True)
+    created_at = models.DateTimeField(verbose_name='作成日時' ,default=timezone.now)
+
+    def __str__(self):
+        return self.idea or ''
