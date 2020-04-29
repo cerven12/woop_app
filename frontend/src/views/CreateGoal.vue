@@ -184,6 +184,7 @@
               hint="前もって障壁に対する解決策を考えておきましょう"
               rows="1"
               auto-grow
+              v-model='idea'
             ></v-textarea>
           </v-col>
         </v-row>
@@ -298,6 +299,7 @@
 
     <v-btn @click='updateGoal(goal_description, start_date, deadline_date)'>Goalモデルの追加項目を登録！</v-btn>
     <v-btn @click="newGoalChildRegister()">子モデルmotiveの登録！！！</v-btn>
+    <v-btn @click="newWorryAndIdeaRegister()">心配と解決策の同時登録</v-btn>
   </div>
       </div>
 
@@ -332,6 +334,8 @@ export default {
       self_transcendence_goal: '',
       future_self: '',
       worry: '',
+      idea: '',
+      now_worry: '',
     };
   },
   methods: {
@@ -356,22 +360,34 @@ export default {
     newGoalChildRegister: function(){
       const vm = this;
       vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'motives/',
-      { goal: vm.this_time_goal_data.id, motive: vm.motive })
+      { goal: vm.this_time_goal_data.goal_id, motive: vm.motive })
       .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
       vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'self_transcendence_goals/',
-      { goal: vm.this_time_goal_data.id, self_transcendence_goal: vm.self_transcendence_goal })
+      { goal: vm.this_time_goal_data.goal_id, self_transcendence_goal: vm.self_transcendence_goal })
       .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
       vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'future_selves/',
-      { goal: vm.this_time_goal_data.id, future_self: vm.future_self })
+      { goal: vm.this_time_goal_data.goal_id, future_self: vm.future_self })
       .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
       vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/',
-      { goal: vm.this_time_goal_data.id, worry: vm.worry })
+      { goal: vm.this_time_goal_data.goal_id, worry: vm.worry })
       .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
     },
+  newWorryAndIdeaRegister: function(){
+    const vm = this;
+    vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/',
+    { goal: vm.this_time_goal_data.goal_id, worry: vm.worry })
+      .then(response => vm.this_time_goal_data = response.data)
+      .catch((error) =>{ console.log(error) })
+      .then(console.log(vm.this_time_goal_data))
+    vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/'+vm.this_time_goal_data.worry_id+'/'+'ideas'+'/',
+    { goal: vm.this_time_goal_data.goal_id, worry: vm.this_time_goal_data.now_worry, idea: vm.idea })
+      .then(response => vm.this_time_goal_data = response.data)
+      .catch((error) =>{ console.log(error) })
+  },
   },
 };
 </script>

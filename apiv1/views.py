@@ -6,20 +6,20 @@ from woop.models import Goal, Task, Motive, SelfTranscendenceGoal, FutureSelf, W
 from .serializers import GoalSerializer, TaskSerializer, MotiveSerializer, SelfTranscendenceGoalSerializer, FutureSelfSerializer, WorrySerializer, IdeaSerializer, ReferenceSerializer, NoteSerializer
 
 
-class GoalViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+class GoalViewSet(viewsets.ModelViewSet):
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
 
-    def list(self, request,):
-        queryset = Goal.objects.filter()
-        serializer = GoalSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def list(self, request,):
+    #     queryset = Goal.objects.filter()
+    #     serializer = GoalSerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
-        queryset = Goal.objects.filter()
-        client = generics.get_object_or_404(queryset, pk=pk)
-        serializer = GoalSerializer(client)
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None):
+    #     queryset = Goal.objects.filter()
+    #     goal = generics.get_object_or_404(queryset, pk=pk)
+    #     serializer = GoalSerializer(goal)
+    #     return Response(serializer.data)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -42,36 +42,36 @@ class FutureSelfViewSet(viewsets.ModelViewSet):
     serializer_class = FutureSelfSerializer
 
 
-class WorryViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+class WorryViewSet(viewsets.ModelViewSet):
     queryset = Worry.objects.all()
     serializer_class = WorrySerializer
 
-    def list(self, request, goal_pk=None):
-        queryset = Worry.objects.filter(goal_id=goal_pk)
-        serializer = WorrySerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def list(self, request, goal_pk=None):
+    #     queryset = Worry.objects.filter(goal_id=goal_pk)
+    #     serializer = WorrySerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
-    def retrieve(self, request, pk=None, goal_pk=None):
-        queryset = Worry.objects.filter(pk=pk, goal_id=goal_pk)
-        worry = generics.get_object_or_404(queryset, pk=pk)
-        serializer = WorrySerializer(worry)
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None, goal_pk=None):
+    #     queryset = Worry.objects.filter(pk=pk, goal_id=goal_pk)
+    #     worry = generics.get_object_or_404(queryset, pk=pk)
+    #     serializer = WorrySerializer(worry)
+    #     return Response(serializer.data)
 
 
-class IdeaViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+class IdeaViewSet(viewsets.ModelViewSet):
     queryset = Idea.objects.all()
     serializer_class = IdeaSerializer
 
-    def list(self, request, goal_pk=None, worry_pk=None):
-        queryset = Idea.objects.filter(worry_id__goal_id=goal_pk, worry_id=worry_pk)
-        serializer = IdeaSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def list(self, request, goal_pk=None, worry_pk=None):
+    #     queryset = Idea.objects.filter(worry_id__goal_id=goal_pk, worry_id=worry_pk)
+    #     serializer = IdeaSerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
-    def retrieve(self, request, pk=None, goal_pk=None, worry_pk=None):
-        queryset = Idea.objects.filter(pk=pk, worry_id__goal_id=goal_pk, worry_id=worry_pk)
-        idea = generics.get_object_or_404(queryset, pk=pk)
-        serializer = IdeaSerializer(idea)
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None, goal_pk=None, worry_pk=None):
+    #     queryset = Idea.objects.filter(pk=pk, worry_id__goal_id=goal_pk, worry_id=worry_pk)
+    #     idea = generics.get_object_or_404(queryset, pk=pk)
+    #     serializer = IdeaSerializer(idea)
+    #     return Response(serializer.data)
 
 
 class ReferenceViewSet(viewsets.ModelViewSet):
