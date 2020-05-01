@@ -2,6 +2,8 @@
   <div>
     <v-app>
       <div id="back">
+  <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-parallax>
+
         <div id="goal" class="input_group">
           <v-container>
             <v-row>
@@ -33,16 +35,34 @@
                   v-model="goal_title"
                 ></v-text-field>
               </v-col>
-              <v-col cols="2">
+            </v-row>
+
+            <v-row>
+              <v-col cols="10" md="10">
+                <v-textarea
+                  name="詳しく"
+                  label="詳しく"
+                  hint="達成したとみなす水準"
+                  rows="3"
+                  solo
+                  auto-grow
+                  placeholder="どこで、なにを、どのように、どの水準で達成したいか"
+                  v-model="goal_description"
+                ></v-textarea>
+              </v-col>
+            </v-row>
+            
+            <v-col>
                 <v-btn
                   class="ma-2"
                   outlined
-                  color="black"
-                  @click="newGoalRegister(goal_title)"
+                  color="primary"
+                  block
+                  @click="newGoalRegister(goal_title, goal_description)"
                   >決定</v-btn
                 >
               </v-col>
-            </v-row>
+
           </v-container>
         </div>
 
@@ -74,233 +94,18 @@
           </v-container>
         </div>
 
-  <div id="motivation" class="input_group">
-    <v-form v-model="valid">
-      <v-container>
-        <v-row>
-          <h2>モチベーションを高める</h2>
-          <v-col cols="12" md="12">
-            <v-textarea
-              placeholder=""
-              name="理由"
-              label="理由"
-              value=""
-              hint="目標を叶えたい理由を書きましょう"
-              rows="1"
-              auto-grow
-              v-model="motive"
-            ></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row justify="end">
-          <v-col cols="1"><v-btn depressed small>＋</v-btn></v-col>
-        </v-row>
-      </v-container>
-    </v-form>
-    <div>
-      <v-form v-model="valid">
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="12">
-              <v-textarea
-                name="自己超越目標"
-                label="周囲への影響"
-                value=""
-                hint="目標を達成した時、周りの人々や環境にどのような良い影響が与えるか、想像してみてください"
-                rows="1"
-                auto-grow
-                v-model="self_transcendence_goal"
-              ></v-textarea>
-            </v-col>
-          </v-row>
-          <v-row justify="end">
-            <v-col cols="1"><v-btn depressed small>＋</v-btn></v-col>
-          </v-row>
-        </v-container>
-      </v-form>
-    </div>
-    <div>
-      <v-form v-model="valid">
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="12">
-              <v-textarea
-                name="後悔"
-                label="後悔"
-                value=""
-                hint="もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう"
-                rows="1"
-                auto-grow
-                v-model="future_self"
-              ></v-textarea>
-            </v-col>
-          </v-row>
-          <v-row justify="end">
-            <v-col cols="1"><v-btn depressed small>＋</v-btn></v-col>
-          </v-row>
-        </v-container>
-      </v-form>
-    </div>
-  </div>
 
-  <div id="countermeasure" class="input_group">
-    <v-form v-model="valid">
-      <v-container>
-        <h2>挫折をしないために準備する</h2>
-                    <v-row>
-              <v-col cols="12" md="12">
-                <v-textarea
-                  name="詳しく"
-                  label="詳しく"
-                  value=""
-                  hint="達成したとみなす水準"
-                  rows="3"
-                  auto-grow
-                  placeholder="どこで、なにを、どのように、どの水準で達成したいか"
-                  v-model="goal_description"
-                ></v-textarea>
-              </v-col>
-            </v-row>
-        <v-row>
-          <v-col cols="12" md="12">
-            <v-textarea
-              name="障壁"
-              label="障壁"
-              value=""
-              hint="行動するにあたって、不安やわからないことをたくさん書いておきましょう"
-              rows="1"
-              auto-grow
-              v-model="worry"
-            ></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row justify="end">
-          <v-col cols="2"><v-btn depressed small>＋</v-btn></v-col>
-          <v-col cols="9">
-            <v-textarea
-              name="解決策"
-              label="解決策"
-              value=""
-              hint="前もって障壁に対する解決策を考えておきましょう"
-              rows="1"
-              auto-grow
-              v-model='idea'
-            ></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row justify="end">
-          <v-col cols="1"><v-btn depressed small>＋</v-btn></v-col>
-        </v-row>
-      </v-container>
-    </v-form>
-    <div>
-      <v-form v-model="valid">
-        <v-container>
-          <v-row>
-            <v-col cols="4">
-              <v-text-field
-                label="資料"
-                hint="参考にしたい資料を前もって登録しておきましょう"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="4">
-              <v-text-field
-                label="用途"
-                hint="この資料の用途を書きましょう"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="4">
-              <v-text-field label="URL"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row justify="end">
-            <v-col cols="1"><v-btn depressed small>＋</v-btn></v-col>
-          </v-row>
-        </v-container>
-      </v-form>
-    </div>
-  </div>
 
-  <div id="schedule" class="input_group">
-    <v-form v-model="valid">
-      <v-container>
-        <h2>スケジュールを組もう</h2>
-        <v-row>
-          <v-col cols="6" md="6">
-            <v-menu
-              ref="start"
-              v-model="start"
-              :close-on-content-click="false"
-              :return-value.sync="start_date"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="start_date"
-                  label="開始日"
-                  prepend-icon=""
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="start_date" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="#37474F" @click="start = false"
-                  >Cancel</v-btn
-                >
-                <v-btn
-                  text
-                  color="#37474F"
-                  @click="$refs.start.save(start_date)"
-                  >OK</v-btn
-                >
-              </v-date-picker>
-            </v-menu>
-          </v-col>
+<CreateGoalMotivation :goal_id='this_time_goal_data.goal_id'></CreateGoalMotivation>
+<CreateGoalCounterMeasure></CreateGoalCounterMeasure>
+<CreateGoalSchedule></CreateGoalSchedule>
 
-          <v-col cols="6" md="6">
-            <v-menu
-              ref="deadline"
-              v-model="deadline"
-              :close-on-content-click="false"
-              :return-value.sync="deadline_date"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="deadline_date"
-                  label="締め切り"
-                  prepend-icon=""
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="deadline_date" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="#37474F" @click="deadline = false"
-                  >Cancel</v-btn
-                >
-                <v-btn
-                  text
-                  color="#37474F"
-                  @click="$refs.deadline.save(deadline_date)"
-                  >OK</v-btn
-                >
-              </v-date-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
 
-    <v-btn @click='updateGoal(goal_description, start_date, deadline_date)'>Goalモデルの追加項目を登録！</v-btn>
+
+
+      <v-btn @click='updateGoal(goal_description, start_date, deadline_date)'>Goalモデルの追加項目を登録！</v-btn>
     <v-btn @click="newGoalChildRegister()">子モデルmotiveの登録！！！</v-btn>
     <v-btn @click="newWorryAndIdeaRegister()">心配と解決策の同時登録</v-btn>
-  </div>
       </div>
 
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -309,11 +114,16 @@
 </template>
 
 <script>
+import CreateGoalCounterMeasure from "../components/CreateGoal/CreateGoalCounterMeasure.vue"
+import CreateGoalMotivation from "../components/CreateGoal/CreateGoalMotivation.vue"
+import CreateGoalSchedule from "../components/CreateGoal/CreateGoalSchedule.vue"
 
 
 export default {
   components: {
-
+    CreateGoalCounterMeasure,
+    CreateGoalMotivation,
+    CreateGoalSchedule,
   },
 
   data: function() {
@@ -339,13 +149,16 @@ export default {
     };
   },
   methods: {
-    newGoalRegister: function(goal_title) {
+    newGoalRegister: function(goal_title, goal_description) {
       const vm = this;
-      vm.axios.post(vm.url, { goal_title : goal_title })
+      vm.axios.post(vm.url, { goal_title : goal_title, goal_description: goal_description })
       .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
       .then(vm.new_goal_registered = true);
     },
+
+
+
     updateGoal: function(goal_description, start_date, deadline_date){
       const vm = this;
       vm.axios.put(vm.url+vm.this_time_goal_data.id+'/',
@@ -359,6 +172,8 @@ export default {
     },
     newGoalChildRegister: function(){
       const vm = this;
+      vm.axios.get(vm.url+vm.this_time_goal_data.id)
+      .then(response => vm.this_time_goal_data = response.data)
       vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'motives/',
       { goal: vm.this_time_goal_data.goal_id, motive: vm.motive })
       .then(response => vm.this_time_goal_data = response.data)
@@ -374,6 +189,11 @@ export default {
       vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/',
       { goal: vm.this_time_goal_data.goal_id, worry: vm.worry })
       .then(response => vm.this_time_goal_data = response.data)
+      .then(console.log(vm.this_time_goal_data))
+      .catch((error) =>{ console.log(error) })
+      vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/'+vm.this_time_goal_data.worry_id+'/'+'ideas/',
+      { worry: vm.this_time_goal_data.worry_id, idea: vm.idea })
+      .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
     },
   newWorryAndIdeaRegister: function(){
@@ -382,9 +202,10 @@ export default {
     { goal: vm.this_time_goal_data.goal_id, worry: vm.worry })
       .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
-      .then(console.log(vm.this_time_goal_data))
-    vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/'+vm.this_time_goal_data.worry_id+'/'+'ideas'+'/',
-    { goal: vm.this_time_goal_data.goal_id, worry: vm.this_time_goal_data.now_worry, idea: vm.idea })
+      .then(response => vm.now_worry = response.data.goal.worries.worry_id)
+      .then(console.log(vm.response.data.goal.worries.worry_id))
+    vm.axios.post(vm.url+vm.this_time_goal_data.id+'/'+'worries/'+vm.this_time_goal_data.id.worries.worry_id+'/'+'ideas'+'/',
+    { worry: vm.this_time_goal_data.worries.worry_id, idea: vm.idea })
       .then(response => vm.this_time_goal_data = response.data)
       .catch((error) =>{ console.log(error) })
   },

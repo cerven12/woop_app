@@ -21,7 +21,7 @@ class Goal(models.Model):
     progress_type = models.IntegerField(verbose_name='進捗状況', choices=progress_type_choice, null=True, blank=True)
 
     def __str__(self):
-        return self.goal_title
+        return self.goal_title or ''
 
 
 class Task(models.Model):
@@ -31,7 +31,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.task_title
+        return self.task_title or ''
 
 
 class Motive(models.Model):
@@ -41,7 +41,7 @@ class Motive(models.Model):
     created_at = models.DateTimeField(verbose_name='作成日時' ,default=timezone.now)
 
     def __str__(self):
-        return self.motive
+        return self.motive or ''
 
 
 class SelfTranscendenceGoal(models.Model):
