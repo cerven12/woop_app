@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    {{ message }}
     <nav>
       <router-link to="/"></router-link>
     </nav>
@@ -11,14 +12,11 @@
 // import CreateGoal from "./components/CreateGoal";
 
 export default {
-  // name: "CreateGoal",
 
-  // components: {
-  //   CreateGoal,
-  // },
-
-  data: () => ({
-    //
-  }),
+  computed: {
+    message() {
+      return this.$store.state.message
+    },
+  },
 };
 </script>
