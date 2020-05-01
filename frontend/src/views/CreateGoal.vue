@@ -97,6 +97,7 @@
 
 
 <CreateGoalMotivation :goal_id='this_time_goal_data.goal_id'></CreateGoalMotivation>
+<CounterMeasureWorryIdea :goal_id='this_time_goal_data.goal_id'></CounterMeasureWorryIdea>
 <CreateGoalCounterMeasure></CreateGoalCounterMeasure>
 <CreateGoalSchedule></CreateGoalSchedule>
 
@@ -114,6 +115,7 @@
 </template>
 
 <script>
+import CounterMeasureWorryIdea from "../components/CreateGoal/CounterMeasureWorryIdea.vue"
 import CreateGoalCounterMeasure from "../components/CreateGoal/CreateGoalCounterMeasure.vue"
 import CreateGoalMotivation from "../components/CreateGoal/CreateGoalMotivation.vue"
 import CreateGoalSchedule from "../components/CreateGoal/CreateGoalSchedule.vue"
@@ -121,6 +123,7 @@ import CreateGoalSchedule from "../components/CreateGoal/CreateGoalSchedule.vue"
 
 export default {
   components: {
+    CounterMeasureWorryIdea,
     CreateGoalCounterMeasure,
     CreateGoalMotivation,
     CreateGoalSchedule,

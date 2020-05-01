@@ -98,13 +98,10 @@ export default {
 
   data: function() {
     return {
+      this_time_goal_data: "",
       new_goal_registered: false,
       valid: "",
-      this_time_goal_data: "",
       url: "http://127.0.0.1:8000/api/v1/goals/",
-      motive: "",
-      self_transcendence_goal: "",
-      future_self: "",
 
       motiveList: [{ motive: "" }],
       selfTranscendenceGoalList: [{ self_transcendence_goal: "" }],
