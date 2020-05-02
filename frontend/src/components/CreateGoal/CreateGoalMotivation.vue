@@ -1,22 +1,37 @@
 <template>
   <div id="motivation" class="input_group">
-    親は{{ goal_id }}
+    [ 親は{{ goal_id }} ]
+    <v-container
+      ><v-row
+        ><v-col cols="12"><h2>モチベーションを高める</h2></v-col></v-row
+      ></v-container
+    >
     <v-form v-model="valid">
       <v-container>
         <v-row>
-          <h2>モチベーションを高める</h2>
           <v-col cols="12" md="12">
-            <div v-for="motives in motiveList" v-bind:key="motives.id">
-              <v-textarea
-                v-model="motives.motive"
-                placeholder=""
-                name="理由"
-                label="理由"
-                value=""
-                hint="目標を叶えたい理由を書きましょう"
-                rows="1"
-                auto-grow
-              ></v-textarea>
+            <div v-for="(motives, index) in motiveList" v-bind:key="motives.id">
+              <div v-if="index >= 1">
+                <v-textarea
+                  v-model="motives.motive"
+                  rows="1"
+                  auto-grow
+                  outlined
+                ></v-textarea>
+              </div>
+              <div v-else>
+                <v-textarea
+                  v-model="motives.motive"
+                  placeholder=""
+                  name="理由"
+                  label="理由"
+                  value=""
+                  hint="目標を叶えたい理由を書きましょう"
+                  rows="1"
+                  outlined
+                  auto-grow
+                ></v-textarea>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -34,17 +49,29 @@
           <v-row>
             <v-col cols="12" md="12">
               <div
-                v-for="self_transcendence_goals in selfTranscendenceGoalList"
+                v-for="(self_transcendence_goals,
+                index) in selfTranscendenceGoalList"
                 v-bind:key="self_transcendence_goals.id"
               >
-                <v-textarea
-                  name="自己超越目標"
-                  label="周囲への影響"
-                  hint="目標を達成した時、周りの人々や環境にどのような良い影響が与えるか、想像してみてください"
-                  rows="1"
-                  auto-grow
-                  v-model="self_transcendence_goals.self_transcendence_goal"
-                ></v-textarea>
+                <div v-if="index >= 1">
+                  <v-textarea
+                    rows="1"
+                    auto-grow
+                    outlined
+                    v-model="self_transcendence_goals.self_transcendence_goal"
+                  ></v-textarea>
+                </div>
+                <div v-else>
+                  <v-textarea
+                    name="自己超越目標"
+                    label="周囲への影響"
+                    hint="目標を達成した時、周りの人々や環境にどのような良い影響が与えるか、想像してみてください"
+                    rows="1"
+                    outlined
+                    auto-grow
+                    v-model="self_transcendence_goals.self_transcendence_goal"
+                  ></v-textarea>
+                </div>
               </div>
             </v-col>
           </v-row>
@@ -64,17 +91,30 @@
           <v-row>
             <v-col cols="12" md="12">
               <div
-                v-for="future_selves in futureSelfList"
+                v-for="(future_selves, index) in futureSelfList"
                 v-bind:key="future_selves.id"
               >
-                <v-textarea
-                  name="後悔"
-                  label="後悔"
-                  hint="もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう"
-                  rows="1"
-                  auto-grow
-                  v-model="future_selves.future_self"
-                ></v-textarea>
+                <div v-if="index >= 1">
+                  <v-textarea
+                    rows="1"
+                    clearable
+                    auto-grow
+                    outlined
+                    v-model="future_selves.future_self"
+                  ></v-textarea>
+                </div>
+                <div v-else>
+                  <v-textarea
+                    outlined
+                    name="後悔"
+                    clearable
+                    label="後悔"
+                    hint="もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう"
+                    rows="1"
+                    auto-grow
+                    v-model="future_selves.future_self"
+                  ></v-textarea>
+                </div>
               </div>
             </v-col>
           </v-row>
@@ -109,6 +149,9 @@ export default {
     };
   },
   methods: {
+    //  everyメソッドで、最初にformの内容をバリデーションできそう。
+
+    // Dynamically increase the form
     addMotiveForm: function() {
       const form = { motive: "" };
       this.motiveList.push(form);
@@ -124,11 +167,13 @@ export default {
       this.futureSelfList.push(form);
     },
 
+    // Posting a dynamically increased form
     motivesRegister: function() {
       const vm = this;
       this.motiveList.forEach(function(motives) {
-        const judgementStr = motives.motive.replace(/^[\s|　]+|[\s|　]+$/g, "");
-        if (judgementStr) {
+        // Remove spaces and null strings
+        const judgeStr = motives.motive.replace(/^[\s|　]+|[\s|　]+$/g, "");
+        if (judgeStr) {
           vm.axios
             .post(vm.url + vm.goal_id + "/" + "motives/", {
               goal: vm.goal_id,
@@ -149,11 +194,11 @@ export default {
       this.selfTranscendenceGoalList.forEach(function(
         self_transcendence_goals
       ) {
-        const judgementStr = self_transcendence_goals.self_transcendence_goal.replace(
+        const judgeStr = self_transcendence_goals.self_transcendence_goal.replace(
           /^[\s|　]+|[\s|　]+$/g,
           ""
         );
-        if (self_transcendence_goals.self_transcendence_goal) {
+        if (judgeStr) {
           vm.axios
             .post(vm.url + vm.goal_id + "/" + "self_transcendence_goals/", {
               goal: vm.goal_id,
@@ -173,11 +218,11 @@ export default {
     futureSelvesRegister: function() {
       const vm = this;
       this.futureSelfList.forEach(function(future_selves) {
-        const judgementStr = future_selves.future_self.replace(
+        const judgeStr = future_selves.future_self.replace(
           /^[\s|　]+|[\s|　]+$/g,
           ""
         );
-        if (future_selves.future_self) {
+        if (judgeStr) {
           vm.axios
             .post(vm.url + vm.goal_id + "/" + "future_selves/", {
               goal: vm.goal_id,
@@ -198,45 +243,15 @@ export default {
       this.selfTranscendenceGoalListRegister();
       this.futureSelvesRegister();
     },
-
-    // プロミスでaxiosの処理を配列に格納して、増えた文のフォームを格納すればmultipleなフォームも一気にpostできそう
-    // allGet: function(){
-    //   const vm = this;
-    //   const rq = [
-    //     vm.axios.post(vm.url, { goal_title: 'jsfidle1', goal_description: 'テストです' }),
-    //     vm.axios.post(vm.url, { goal_title: 'jsfidle2', goal_description: 'テストです' }),
-    //     vm.axios.post(vm.url, { goal_title: 'jsfidle3', goal_description: 'テストです' }),
-    //   ];
-    //   Promise.all(rq).then((rq1, rq2, rq3)=> {vm.rq = (rq1, rq2, rq3)})
-    //   console.log(vm.rq)
-    // }
   },
 };
 </script>
 
 <style scoped>
-.input_group {
-  margin: 20px;
-  transition: all 0.2s;
-}
-
 #motivation {
   /* background: rgba(105, 105, 105, 0.288); */
   border-radius: 4px;
   padding: 20px;
-}
-
-#countermeasure {
-  /* background: rgba(79, 79, 80, 0.288); */
-  border-radius: 4px;
-  padding: 20px;
-}
-
-#goal {
-  padding: 20px;
-}
-.v-stepper {
-  box-shadow: none;
 }
 </style>
 
