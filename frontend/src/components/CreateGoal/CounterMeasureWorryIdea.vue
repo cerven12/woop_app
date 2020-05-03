@@ -48,9 +48,8 @@
             ><v-btn depressed small @click="addIdeaForm">＋</v-btn></v-col
           >
         </v-row>
+        <v-btn outlined @click="worryRegister">障害と対策の登録OK</v-btn>
       </v-container>
-
-      <v-btn @click="worryRegister">登録する</v-btn>
     </v-form>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div id="schedule" class="input_group">
     <v-form v-model="valid">
       <v-container>
-        <h2>スケジュールを組もう</h2>
+        <h2>▶　スケジュールを組もう</h2>
         <v-row>
           <v-col cols="6" md="6">
             <v-menu
@@ -72,6 +72,9 @@
             </v-menu>
           </v-col>
         </v-row>
+        <v-btn outlined @click="scheduleRegister(start_date, deadline_date)"
+          >Schedule登録！</v-btn
+        >
       </v-container>
     </v-form>
   </div>
@@ -79,6 +82,7 @@
 <script>
 export default {
   name: "CreateGoal",
+  props: ["goal_id"],
 
   data: function() {
     return {
@@ -90,10 +94,22 @@ export default {
       valid: "",
       this_time_goal_data: "",
       url: "http://127.0.0.1:8000/api/v1/goals/",
-      start_date: "",
     };
   },
-  methods: {},
+  methods: {
+    scheduleRegister: function(start, dead) {
+      const vm = this;
+      vm.axios
+        .patch(vm.url + vm.goal_id + "/", {
+          start_date: start,
+          deadline: dead,
+        })
+        .then((response) => (vm.this_time_goal_data = response.data))
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
 

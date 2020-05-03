@@ -1,13 +1,13 @@
 <template>
   <div id="motivation" class="input_group">
-    [ 親は{{ goal_id }} ]
     <v-container
       ><v-row
-        ><v-col cols="12"><h2>モチベーションを高める</h2></v-col></v-row
+        ><v-col cols="12"><h2>▶　モチベーションを高める</h2></v-col></v-row
       ></v-container
     >
     <v-form v-model="valid">
       <v-container>
+        <h3>――目標を叶えたい理由を書きましょう――</h3>
         <v-row>
           <v-col cols="12" md="12">
             <div v-for="(motives, index) in motiveList" v-bind:key="motives.id">
@@ -46,6 +46,9 @@
     <div>
       <v-form v-model="valid">
         <v-container>
+          <h3>
+            ――目標を達成したら周囲にどのような良い影響を与えるか、想像してみてください――
+          </h3>
           <v-row>
             <v-col cols="12" md="12">
               <div
@@ -88,6 +91,9 @@
     <div>
       <v-form v-model="valid">
         <v-container>
+          <h3>
+            ――もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう――
+          </h3>
           <v-row>
             <v-col cols="12" md="12">
               <div
@@ -123,10 +129,11 @@
               ><v-btn depressed small @click="addFutureSelf">＋</v-btn></v-col
             >
           </v-row>
+          <v-btn @click="allMotivesRegister" outlined
+            >モチベーションの登録OK</v-btn
+          >
         </v-container>
       </v-form>
-
-      <v-btn @click="allMotivesRegister">All Motivations register</v-btn>
     </div>
   </div>
 </template>

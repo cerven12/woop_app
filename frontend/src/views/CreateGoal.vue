@@ -11,12 +11,13 @@
             <v-row>
               <v-col cols="12" md="12">
                 <h3>
-                  あなたが達成したい目標を書きましょう{{ this_time_goal_data }}
+                  あなたが達成したい目標を書きましょう
                 </h3>
               </v-col>
             </v-row>
+
             <v-row justify="start">
-              <v-col cols="9" md="10" lg="9"
+              <v-col cols="8" md="12" lg="8"
                 ><h1>{{ goal_title }}</h1>
               </v-col>
               <v-spacer></v-spacer>
@@ -31,7 +32,14 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="10">
+              <v-col cols="12" md="12">
+                <div style="white-space: pre-line;">
+                  {{ goal_description }}
+                </div>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
                 <v-text-field
                   label="目標を決めよう"
                   placeholder=""
@@ -42,12 +50,12 @@
             </v-row>
 
             <v-row>
-              <v-col cols="10" md="10">
+              <v-col cols="12" md="12">
                 <v-textarea
                   name="詳しく"
                   label="詳しく"
                   hint="達成したとみなす水準"
-                  rows="3"
+                  rows="5"
                   outlined
                   auto-grow
                   placeholder="どこで、なにを、どのように、どの水準で達成したいか"
@@ -59,8 +67,7 @@
               <v-col cols="12">
                 <v-btn
                   class="ma-2"
-                  text
-                  color="primary"
+                  outlined
                   @click="newGoalRegister(goal_title, goal_description)"
                   >決定</v-btn
                 >
@@ -69,7 +76,7 @@
           </v-container>
         </div>
 
-        <div id="step">
+        <!-- <div id="step">
           <v-container>
             <v-row>
               <v-col cols="12">
@@ -95,7 +102,7 @@
               </v-col>
             </v-row>
           </v-container>
-        </div>
+        </div> -->
 
         <CreateGoalMotivation
           :goal_id="this_time_goal_data.goal_id"
@@ -105,11 +112,10 @@
           :goal_id="this_time_goal_data.goal_id"
         ></CreateGoalCounterMeasure>
 
-        <CreateGoalSchedule></CreateGoalSchedule>
-
-        <v-btn @click="updateGoal(goal_description, start_date, deadline_date)"
-          >Goalモデルの追加項目を登録！</v-btn
-        ><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <CreateGoalSchedule
+          :goal_id="this_time_goal_data.goal_id"
+        ></CreateGoalSchedule>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br />
       </div>
     </v-app>
   </div>
@@ -159,17 +165,6 @@ export default {
           console.log(error);
         })
         .then((vm.new_goal_registered = true));
-    },
-
-    updateGoal: function(goal_description, start_date, deadline_date) {
-      const vm = this;
-      vm.axios.put(vm.url + vm.this_time_goal_data.id + "/", {
-        id: vm.this_time_goal_data.id,
-        goal_title: vm.this_time_goal_data.goal_title,
-        goal_description: goal_description,
-        start_date: start_date,
-        deadline: deadline_date,
-      });
     },
   },
 };
