@@ -155,8 +155,7 @@ export default {
     // Goalモデルの新規登録と、登録完了:new_goal_registered = True
     newGoalRegister: function(goal_title, goal_description) {
       const vm = this;
-      vm.axios
-        .post(vm.url, {
+      vm.axios.post(vm.url, {
           goal_title: goal_title,
           goal_description: goal_description,
         })
