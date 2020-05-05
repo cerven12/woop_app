@@ -119,12 +119,21 @@ export default {
 }
 
 #schedule {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(247, 247, 247);
 
   /* border: 1px black solid; */
-  border-radius: 20px;
+  border-radius: 50px;
   padding: 40px 20px 40px 20px;
-  margin: 40px 15px 40px 15px;
+  margin: 40px 20px 40px 20px;
+  transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
+  /* 
+  border-radius: 50px;
+  box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255); */
+}
+
+#schedule:hover {
+  border-radius: 50px;
+  box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
 }
 </style>
 
