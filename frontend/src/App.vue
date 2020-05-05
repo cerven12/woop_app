@@ -3,7 +3,7 @@
     <div id="container">
       <div id="side">side bar</div>
       <div id="main">
-        {{ message }}
+        <!-- {{ message }} -->
         <nav>
           <router-link to="/"></router-link>
         </nav>
@@ -35,7 +35,7 @@ export default {
 
 #side {
   grid-area: side;
-  background: rgb(239, 239, 239);
+  background: rgb(247, 247, 247);
   border-top-left-radius: 0%;
   border-top-right-radius: 0%;
   border-bottom-right-radius: 0%;

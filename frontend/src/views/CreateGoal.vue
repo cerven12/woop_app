@@ -111,6 +111,7 @@
         <CreateGoalSchedule
           :goal_id="this_time_goal_data.goal_id"
         ></CreateGoalSchedule>
+        <br /><br /><br /><br /><br /><br /><br /><br />
       </div>
     </v-app>
   </div>
@@ -134,15 +135,10 @@ export default {
     return {
       goal_title:
         "Django Rest FrameworkとVue CLI&Vuetifyで、SPAなタスク管理アプリケーションを作成する。",
-      start_date: new Date().toISOString().substr(0, 10),
-      deadline_date: new Date().toISOString().substr(0, 10),
-      start: false,
-      deadline: false,
       new_goal_registered: false,
       valid: "",
       this_time_goal_data: "",
       url: "http://127.0.0.1:8000/api/v1/goals/",
-      start_date: "",
       goal_description: "",
     };
   },
@@ -156,10 +152,10 @@ export default {
           goal_description: goal_description,
         })
         .then((response) => (vm.this_time_goal_data = response.data))
+        .then((reaponse) => (vm.new_goal_registered = true))
         .catch((error) => {
           console.log(error);
-        })
-        .then((vm.new_goal_registered = true));
+        });
     },
   },
 };
@@ -167,18 +163,25 @@ export default {
 
 <style scoped>
 #goal {
-  background-color: rgb(255, 255, 255);
-
-  /* border: 1px black solid; */
-  border-radius: 20px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 50px;
   padding: 40px 20px 40px 20px;
-  margin: 40px 15px 40px 15px;
+  margin: 40px 20px 40px 20px;
+  transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
+
+  /* border-radius: 50px;
+  box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255); */
+}
+
+#goal:hover {
+  border-radius: 50px;
+  box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
 }
 
 .v-stepper {
   box-shadow: none;
 }
 #back {
-  background: rgb(239, 239, 239);
+  background: rgb(247, 247, 247);
 }
 </style>
