@@ -2,10 +2,6 @@
   <div>
     <v-app>
       <div id="back">
-        <v-parallax
-          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-        ></v-parallax>
-
         <div id="goal" class="input_group">
           <v-container>
             <v-row>
@@ -115,7 +111,6 @@
         <CreateGoalSchedule
           :goal_id="this_time_goal_data.goal_id"
         ></CreateGoalSchedule>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br />
       </div>
     </v-app>
   </div>
@@ -155,7 +150,8 @@ export default {
     // Goalモデルの新規登録と、登録完了:new_goal_registered = True
     newGoalRegister: function(goal_title, goal_description) {
       const vm = this;
-      vm.axios.post(vm.url, {
+      vm.axios
+        .post(vm.url, {
           goal_title: goal_title,
           goal_description: goal_description,
         })
@@ -170,7 +166,19 @@ export default {
 </script>
 
 <style scoped>
+#goal {
+  background-color: rgb(255, 255, 255);
+
+  /* border: 1px black solid; */
+  border-radius: 20px;
+  padding: 40px 20px 40px 20px;
+  margin: 40px 15px 40px 15px;
+}
+
 .v-stepper {
   box-shadow: none;
+}
+#back {
+  background: rgb(239, 239, 239);
 }
 </style>

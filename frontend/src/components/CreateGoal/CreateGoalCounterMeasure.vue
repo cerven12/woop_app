@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="creategoalcountermeasure">
     <div>
       <!--  worry and idea form -->
       <v-container>
@@ -173,10 +173,13 @@ export default {
 </script>
 
 <style scoped>
-#countermeasure {
-  /* background: rgba(79, 79, 80, 0.288); */
-  border-radius: 4px;
-  padding: 20px;
+#creategoalcountermeasure {
+  background-color: rgb(255, 255, 255);
+
+  /* border: 1px black solid; */
+  border-radius: 20px;
+  padding: 40px 20px 40px 20px;
+  margin: 40px 15px 40px 15px;
 }
 </style>
 
