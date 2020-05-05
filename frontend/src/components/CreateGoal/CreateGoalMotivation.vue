@@ -316,9 +316,12 @@ export default {
 
 <style scoped>
 #motivation {
-  /* background: rgba(105, 105, 105, 0.288); */
-  border-radius: 4px;
-  padding: 20px;
+  background-color: rgb(255, 255, 255);
+
+  /* border: 1px black solid; */
+  border-radius: 20px;
+  padding: 40px 20px 40px 20px;
+  margin: 40px 15px 40px 15px;
 }
 </style>
 
