@@ -17,19 +17,34 @@
             </div>
           </v-col>
         </v-row>
-        <v-row justify="end">
-          <v-col cols="2"></v-col>
-          <v-col cols="9">
-            <div v-for="(ideas, index) in ideaList" v-bind:key="ideas.id">
-              <div v-if="index >= 1">
+
+        <div v-for="(ideas, index) in ideaList" v-bind:key="ideas.id">
+          <div v-if="index >= 1">
+            <v-row justify="end">
+              <v-col cols="2"></v-col>
+              <v-col cols="19">
                 <v-textarea
                   rows="1"
                   auto-grow
                   outlined
                   v-model="ideas.idea"
-                ></v-textarea>
-              </div>
-              <div v-else>
+                ></v-textarea></v-col
+              ><v-col cols="1">
+                <v-btn
+                  @click="deleteIdeaForm(index)"
+                  text
+                  depressed
+                  height="55"
+                  color="error"
+                  >✘</v-btn
+                ></v-col
+              ></v-row
+            >
+          </div>
+          <div v-else>
+            <v-row justify="end">
+              <v-col cols="2"></v-col>
+              <v-col cols="10">
                 <v-textarea
                   name="解決策"
                   label="解決策"
@@ -39,16 +54,16 @@
                   outlined
                   v-model="ideas.idea"
                 ></v-textarea>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
+              </v-col>
+            </v-row>
+          </div>
+        </div>
         <v-row justify="end">
           <v-col cols="1"
             ><v-btn depressed small @click="addIdeaForm">＋</v-btn></v-col
           >
         </v-row>
-        <v-btn outlined @click="worryRegister">障害と対策の登録OK</v-btn>
+        <v-btn outlined @click="worryIdeaRegister">障害と対策の登録OK</v-btn>
       </v-container>
     </v-form>
   </div>
@@ -79,10 +94,15 @@ export default {
       this.ideaList.push(form);
     },
 
-    // worryとideaを同時に登録するメソッド
-    worryRegister: function() {
+    // Delete Form
+    deleteIdeaForm(index) {
+      this.ideaList.splice(index, 1);
+      console.log(this.ideaList);
+    },
+
+    // Posting `Worry` and `Idea` at the same time `axios.post`.
+    worryIdeaRegister: function() {
       let vm = this;
-      // worryListを１つずつ取り出して、axios.postする
       vm.worryList.forEach(function(worries) {
         let judgeStr = worries.worry.replace(/^[\s|　]+|[\s|　]+$/g, "");
         if (judgeStr) {
@@ -93,21 +113,21 @@ export default {
             })
             .then((res) => {
               vm.parentWorryId = res.data.worry_id;
-              // 現在のworryに対するideaを、ideaListから１つずつ取り出して順番にaxios.post
+              // Take the `idea` for the current `worry` one by one from
+              // the `ideaList` and post `axios.post` them in turn.
               vm.ideaRegister(vm.parentWorryId);
             })
-            // worryのaxios.postでエラーだった時にキャッチ↓
-            // worryのpostがエラーを吐いた場合は、そのworryに対するideaの登録はスキップされる。
             .catch((error) => {
               console.log(`ideaのエラーです${error}`);
             });
-          // worryのフォームに入力された情報が`if (judgementStr)`でfalseならここまで飛ぶ
+          // If the `worries` is `false`.
         } else {
           console.log("そのworryの文字列は認められませんね。");
         }
       });
     },
 
+    // Call with a `worryIdeaRegister`
     ideaRegister: function(parentWorryId) {
       const vm = this;
       vm.ideaList.forEach(function(ideas) {

@@ -11,21 +11,23 @@
         <h3>―― 心配事と、それに対する対策を考えておきましょう ――</h3>
       </v-container>
       <div id="countermeasure" class="input_group">
-        <v-container>
-          <v-row>
-            <v-col cols="2">
-              <v-btn depressed small @click.prevent="worryideacomponent++"
-                >増やす</v-btn
-              >
-            </v-col>
-          </v-row>
-        </v-container>
         <CounterMeasureWorryIdea
           ref="child"
           :goal_id="goal_id"
           v-for="n in worryideacomponent"
           v-bind:key="n.id"
         ></CounterMeasureWorryIdea>
+        <v-container>
+          <v-row>
+            <v-col cols="2">
+              <v-btn depressed small @click.prevent="worryideacomponent++"
+                >増やす</v-btn
+              ><v-btn depressed small @click.prevent="worryideacomponent--"
+                >増やす</v-btn
+              >
+            </v-col>
+          </v-row>
+        </v-container>
       </div>
       <div>
         <!-- reference form -->

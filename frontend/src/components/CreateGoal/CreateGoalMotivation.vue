@@ -8,18 +8,32 @@
     <v-form v-model="valid">
       <v-container>
         <h3>――目標を叶えたい理由を書きましょう――</h3>
-        <v-row>
-          <v-col cols="12" md="12">
-            <div v-for="(motives, index) in motiveList" v-bind:key="motives.id">
-              <div v-if="index >= 1">
+        <div v-for="(motives, index) in motiveList" v-bind:key="motives.id">
+          <div v-if="index >= 1">
+            <v-row>
+              <v-col cols="11" md="11">
                 <v-textarea
                   v-model="motives.motive"
                   rows="1"
                   auto-grow
                   outlined
                 ></v-textarea>
-              </div>
-              <div v-else>
+              </v-col>
+              <v-col cols="1"
+                ><v-btn
+                  @click="deleteMotiveForm(index)"
+                  text
+                  depressed
+                  height="55"
+                  color="error"
+                  >✘</v-btn
+                ></v-col
+              >
+            </v-row>
+          </div>
+          <div v-else>
+            <v-row>
+              <v-col cols="12">
                 <v-textarea
                   v-model="motives.motive"
                   placeholder=""
@@ -31,10 +45,11 @@
                   outlined
                   auto-grow
                 ></v-textarea>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
+              </v-col>
+            </v-row>
+          </div>
+        </div>
+        <!-- The "v-for" ends here. -->
         <v-row justify="end">
           <v-col cols="1"
             ><v-btn depressed small @click="addMotiveForm">＋</v-btn></v-col
@@ -49,22 +64,36 @@
           <h3>
             ――目標を達成したら周囲にどのような良い影響を与えるか、想像してみてください――
           </h3>
-          <v-row>
-            <v-col cols="12" md="12">
-              <div
-                v-for="(self_transcendence_goals,
-                index) in selfTranscendenceGoalList"
-                v-bind:key="self_transcendence_goals.id"
-              >
-                <div v-if="index >= 1">
+          <div
+            v-for="(self_transcendence_goals,
+            index) in selfTranscendenceGoalList"
+            v-bind:key="self_transcendence_goals.id"
+          >
+            <div v-if="index >= 1">
+              <v-row>
+                <v-col cols="11" md="11">
                   <v-textarea
                     rows="1"
                     auto-grow
                     outlined
                     v-model="self_transcendence_goals.self_transcendence_goal"
                   ></v-textarea>
-                </div>
-                <div v-else>
+                </v-col>
+                <v-col cols="1"
+                  ><v-btn
+                    @click="deleteSelfTranscendenceGoalForm(index)"
+                    text
+                    depressed
+                    height="55"
+                    color="error"
+                    >✘</v-btn
+                  ></v-col
+                ></v-row
+              >
+            </div>
+            <div v-else>
+              <v-row>
+                <v-col cols="12" md="12">
                   <v-textarea
                     name="自己超越目標"
                     label="周囲への影響"
@@ -73,11 +102,11 @@
                     outlined
                     auto-grow
                     v-model="self_transcendence_goals.self_transcendence_goal"
-                  ></v-textarea>
-                </div>
-              </div>
-            </v-col>
-          </v-row>
+                  ></v-textarea> </v-col
+              ></v-row>
+            </div>
+          </div>
+
           <v-row justify="end">
             <v-col cols="1"
               ><v-btn depressed small @click="addSelfTranscendenceGoalForm"
@@ -94,13 +123,14 @@
           <h3>
             ――もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう――
           </h3>
-          <v-row>
-            <v-col cols="12" md="12">
-              <div
-                v-for="(future_selves, index) in futureSelfList"
-                v-bind:key="future_selves.id"
-              >
-                <div v-if="index >= 1">
+
+          <div
+            v-for="(future_selves, index) in futureSelfList"
+            v-bind:key="future_selves.id"
+          >
+            <div v-if="index >= 1">
+              <v-row>
+                <v-col cols="11" md="11">
                   <v-textarea
                     rows="1"
                     clearable
@@ -108,8 +138,22 @@
                     outlined
                     v-model="future_selves.future_self"
                   ></v-textarea>
-                </div>
-                <div v-else>
+                </v-col>
+                <v-col cols="1">
+                  <v-btn
+                    @click="deleteFutureSelfForm(index)"
+                    text
+                    depressed
+                    height="55"
+                    color="error"
+                    >✘</v-btn
+                  ></v-col
+                ></v-row
+              >
+            </div>
+            <div v-else>
+              <v-row>
+                <v-col cols="12" md="12">
                   <v-textarea
                     outlined
                     name="後悔"
@@ -119,11 +163,11 @@
                     rows="1"
                     auto-grow
                     v-model="future_selves.future_self"
-                  ></v-textarea>
-                </div>
-              </div>
-            </v-col>
-          </v-row>
+                  ></v-textarea> </v-col
+              ></v-row>
+            </div>
+          </div>
+
           <v-row justify="end">
             <v-col cols="1"
               ><v-btn depressed small @click="addFutureSelf">＋</v-btn></v-col
@@ -172,6 +216,22 @@ export default {
     addFutureSelf: function() {
       const form = { future_self: "" };
       this.futureSelfList.push(form);
+    },
+
+    // Delete Form
+    deleteMotiveForm(index) {
+      this.motiveList.splice(index, 1);
+      console.log(this.motiveList);
+    },
+
+    deleteSelfTranscendenceGoalForm(index) {
+      this.selfTranscendenceGoalList.splice(index, 1);
+      console.log(this.selfTranscendenceGoalList);
+    },
+
+    deleteFutureSelfForm(index) {
+      this.futureSelfList.splice(index, 1);
+      console.log(this.futureSelfList);
     },
 
     // Posting a dynamically increased form
