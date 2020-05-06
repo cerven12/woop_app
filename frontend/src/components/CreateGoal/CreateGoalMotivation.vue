@@ -173,9 +173,7 @@
               ><v-btn depressed small @click="addFutureSelf">＋</v-btn></v-col
             >
           </v-row>
-          <v-btn @click="allMotivesRegister" outlined
-            >モチベーションの登録OK</v-btn
-          >
+          <v-btn @click="allMotivesRegister" outlined>登録！</v-btn>
         </v-container>
       </v-form>
     </div>

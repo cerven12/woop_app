@@ -12,7 +12,6 @@
       </v-container>
       <div id="countermeasure" class="input_group">
         <CounterMeasureWorryIdea
-          ref="child"
           :goal_id="goal_id"
           v-for="n in worryideacomponent"
           v-bind:key="n.id"
@@ -20,10 +19,10 @@
         <v-container>
           <v-row>
             <v-col cols="2">
-              <v-btn depressed small @click.prevent="worryideacomponent++"
+              <v-btn depressed small @click.prevent="addWorryIdeaForm"
                 >増やす</v-btn
-              ><v-btn depressed small @click.prevent="worryideacomponent--"
-                >増やす</v-btn
+              ><v-btn depressed small @click.prevent="deleteWorryIdeaForm"
+                >減らす</v-btn
               >
             </v-col>
           </v-row>
@@ -52,11 +51,16 @@
                       v-model="references.reference_use"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="4">
+                  <v-col cols="3">
                     <v-text-field
                       outlined
                       v-model="references.reference_source"
                     ></v-text-field>
+                  </v-col>
+                  <v-col cols="1">
+                    <v-btn @click="deleteRefernce(index)" color="error" text
+                      >✘</v-btn
+                    >
                   </v-col>
                 </v-row>
               </div>
@@ -95,7 +99,7 @@
                   +
                 </v-btn>
               </v-col> </v-row
-            ><v-btn outlined @click="refRegister">登録</v-btn>
+            ><v-btn outlined @click="refRegister">登録！</v-btn>
           </v-container>
         </v-form>
       </div>
@@ -126,6 +130,22 @@ export default {
     };
   },
   methods: {
+    addWorryIdeaForm: function() {
+      const vm = this;
+      vm.worryideacomponent++;
+    },
+    deleteWorryIdeaForm: function() {
+      const vm = this;
+      if (vm.worryideacomponent === 1) {
+        console.log(`これ以上は消せないよ`);
+      } else {
+        vm.worryideacomponent--;
+      }
+    },
+    // worryIdeaRegister: function() {
+    //   this.$refs.child.worryIdeaRegister();
+    // },
+
     refeadd: function() {
       const form = {
         reference_name: "",
@@ -133,6 +153,10 @@ export default {
         reference_source: "",
       };
       this.refList.push(form);
+    },
+    deleteRefernce: function(index) {
+      this.refList.splice(index, 1);
+      console.log(this.refList);
     },
 
     refRegister: function() {
@@ -193,23 +217,6 @@ export default {
 h2,
 h3 {
   color: rgb(83, 83, 83);
-}
-
-/* Color Theme Swatches in Hex */
-.Sam-Experiences-1-hex {
-  color: #0f1140;
-}
-.Sam-Experiences-2-hex {
-  color: #1c2140;
-}
-.Sam-Experiences-3-hex {
-  color: #454859;
-}
-.Sam-Experiences-4-hex {
-  color: #f2e4bb;
-}
-.Sam-Experiences-5-hex {
-  color: #d9c6b0;
 }
 </style>
 

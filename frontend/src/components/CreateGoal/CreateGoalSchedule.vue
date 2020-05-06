@@ -73,7 +73,7 @@
           </v-col>
         </v-row>
         <v-btn outlined @click="scheduleRegister(start_date, deadline_date)"
-          >Schedule登録！</v-btn
+          >登録！</v-btn
         >
       </v-container>
     </v-form>

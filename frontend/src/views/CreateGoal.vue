@@ -184,7 +184,7 @@ export default {
 }
 
 h1 {
-  color: #3f5eb5;
+  color: #383838;
 }
 
 h2,

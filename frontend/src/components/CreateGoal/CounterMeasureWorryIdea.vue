@@ -63,7 +63,7 @@
             ><v-btn depressed small @click="addIdeaForm">＋</v-btn></v-col
           >
         </v-row>
-        <v-btn outlined @click="worryIdeaRegister">障害と対策の登録OK</v-btn>
+        <!-- <v-btn outlined @click="worryIdeaRegister">障害と対策の登録OK</v-btn> -->
       </v-container>
     </v-form>
   </div>
