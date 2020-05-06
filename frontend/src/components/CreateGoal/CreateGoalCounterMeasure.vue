@@ -8,7 +8,7 @@
             <h2>▶　挫折をしないために準備する</h2>
           </v-col>
         </v-row>
-        <h3>―― 心配事と、それに対する対策を考えておきましょう ――</h3>
+        <h3>心配事と、それに対する対策を考えておきましょう</h3>
       </v-container>
       <div id="countermeasure" class="input_group">
         <CounterMeasureWorryIdea
@@ -33,7 +33,7 @@
         <!-- reference form -->
         <v-form v-model="valid">
           <v-container>
-            <h3>――参考にできそうな資料を登録しておきましょう――</h3>
+            <h3>参考にできそうな資料を登録しておきましょう</h3>
             <div
               v-for="(references, index) in refList"
               v-bind:key="references.id"
@@ -174,7 +174,7 @@ export default {
 
 <style scoped>
 #creategoalcountermeasure {
-  background: rgb(247, 247, 247);
+  background: #f7f7f7;
   /* border: 1px black solid; */
   border-radius: 50px;
   padding: 40px 20px 40px 20px;
@@ -188,6 +188,28 @@ export default {
 #creategoalcountermeasure:hover {
   border-radius: 50px;
   box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
+}
+
+h2,
+h3 {
+  color: rgb(83, 83, 83);
+}
+
+/* Color Theme Swatches in Hex */
+.Sam-Experiences-1-hex {
+  color: #0f1140;
+}
+.Sam-Experiences-2-hex {
+  color: #1c2140;
+}
+.Sam-Experiences-3-hex {
+  color: #454859;
+}
+.Sam-Experiences-4-hex {
+  color: #f2e4bb;
+}
+.Sam-Experiences-5-hex {
+  color: #d9c6b0;
 }
 </style>
 

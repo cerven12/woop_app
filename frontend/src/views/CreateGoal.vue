@@ -2,6 +2,7 @@
   <div>
     <v-app>
       <div id="back">
+        <div id="main"></div>
         <div id="goal" class="input_group">
           <v-container>
             <v-row>
@@ -20,7 +21,7 @@
               <v-col cols="2">
                 <v-icon
                   x-large
-                  color="blue"
+                  color="#3f5eb5"
                   v-show="new_goal_registered"
                   id="check"
                   >mdi-check-bold</v-icon
@@ -47,6 +48,11 @@
 
             <v-row>
               <v-col cols="12" md="12">
+                <!-- <mavon-editor
+                  v-model="goal_description"
+                  language="en"
+                  :toolbars="toolbars"
+                /> -->
                 <v-textarea
                   name="詳しく"
                   label="詳しく"
@@ -172,15 +178,23 @@ export default {
   /* border-radius: 50px;
   box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255); */
 }
-
 #goal:hover {
   border-radius: 50px;
   box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
 }
 
+h1 {
+  color: #3f5eb5;
+}
+
+h2,
+h3 {
+  color: rgb(83, 83, 83);
+}
 .v-stepper {
   box-shadow: none;
 }
+
 #back {
   background: rgb(247, 247, 247);
 }

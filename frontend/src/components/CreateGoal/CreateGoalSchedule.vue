@@ -135,6 +135,11 @@ export default {
   border-radius: 50px;
   box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
 }
+
+h2,
+h3 {
+  color: rgb(83, 83, 83);
+}
 </style>
 
 <style>

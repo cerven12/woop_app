@@ -1,7 +1,11 @@
 <template>
   <div id="app">
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/nikukyu.css"
+      rel="stylesheet"
+    />
     <div id="container">
-      <div id="side">side bar</div>
+      <div id="side"><SideBar></SideBar></div>
       <div id="main">
         <!-- {{ message }} -->
         <nav>
@@ -14,9 +18,12 @@
   </div>
 </template>
 <script>
-// import CreateGoal from "./components/CreateGoal";
+import SideBar from "./views/sidebar.vue";
 
 export default {
+  components: {
+    SideBar,
+  },
   computed: {
     message() {
       return this.$store.state.message;
@@ -46,4 +53,8 @@ export default {
   grid-area: main;
 }
 /* css grid  */
+
+body {
+  font-family: "Roboto", sans-serif;
+}
 </style>

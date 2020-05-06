@@ -2,12 +2,12 @@
   <div id="motivation" class="input_group">
     <v-container
       ><v-row
-        ><v-col cols="12"><h2>▶　モチベーションを高める</h2></v-col></v-row
+        ><v-col cols="12"><h2>▶モチベーションを高めよう</h2></v-col></v-row
       ></v-container
     >
     <v-form v-model="valid">
       <v-container>
-        <h3>――目標を叶えたい理由を書きましょう――</h3>
+        <h3>目標を叶えたい理由を書きましょう</h3>
         <div v-for="(motives, index) in motiveList" v-bind:key="motives.id">
           <div v-if="index >= 1">
             <v-row>
@@ -62,7 +62,7 @@
       <v-form v-model="valid">
         <v-container>
           <h3>
-            ――目標を達成したら周囲にどのような良い影響を与えるか、想像してみてください――
+            目標を達成したら周囲にどのような良い影響を与えるか、想像してみてください
           </h3>
           <div
             v-for="(self_transcendence_goals,
@@ -121,7 +121,7 @@
       <v-form v-model="valid">
         <v-container>
           <h3>
-            ――もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう――
+            もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう
           </h3>
 
           <div
@@ -331,6 +331,11 @@ export default {
 #motivation:hover {
   border-radius: 50px;
   box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
+}
+
+h2,
+h3 {
+  color: rgb(83, 83, 83);
 }
 </style>
 
