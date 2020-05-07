@@ -1,6 +1,6 @@
 <template>
   <div id="sidebar">
-    <v-list rounded color="#f7f7f7" flat>
+    <v-list rounded color="#f0f0f0" flat>
       <v-subheader>REPORTS</v-subheader>
       <v-list-item-group v-model="item" color="primary">
         <v-list-item v-for="(item, i) in items" :key="i">

@@ -169,7 +169,7 @@ export default {
 
 <style scoped>
 #goal {
-  background-color: rgb(247, 247, 247);
+  background-color: #f0f0f0;
   border-radius: 50px;
   padding: 40px 20px 40px 20px;
   margin: 40px 20px 40px 20px;
@@ -180,11 +180,11 @@ export default {
 }
 #goal:hover {
   border-radius: 50px;
-  box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
+  box-shadow: 8px 8px 15px #b9b9b9, -8px -8px 15px #fafafa;
 }
 
 h1 {
-  color: #383838;
+  color: #394e86;
 }
 
 h2,
@@ -196,6 +196,6 @@ h3 {
 }
 
 #back {
-  background: rgb(247, 247, 247);
+  background: #f0f0f0;
 }
 </style>

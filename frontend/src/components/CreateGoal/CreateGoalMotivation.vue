@@ -314,7 +314,7 @@ export default {
 
 <style scoped>
 #motivation {
-  background-color: rgb(247, 247, 247);
+  background-color: #f0f0f0;
 
   /* border: 1px black solid; */
   border-radius: 50px;
@@ -328,7 +328,7 @@ export default {
 
 #motivation:hover {
   border-radius: 50px;
-  box-shadow: 8px 8px 16px #acabab, -8px -8px 16px rgb(255, 255, 255);
+  box-shadow: 8px 8px 15px #b9b9b9, -8px -8px 15px #fafafa;
 }
 
 h2,

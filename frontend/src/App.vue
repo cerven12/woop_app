@@ -7,7 +7,7 @@
     <div id="container">
       <div id="side"><SideBar></SideBar></div>
       <div id="main">
-        <!-- {{ message }} -->
+        {{ state.number }}
         <nav>
           <router-link to="/"></router-link>
         </nav>
@@ -19,14 +19,15 @@
 </template>
 <script>
 import SideBar from "./views/sidebar.vue";
+// import store from "./store/index.js";
 
 export default {
   components: {
     SideBar,
   },
   computed: {
-    message() {
-      return this.$store.state.message;
+    state() {
+      return this.$store.state;
     },
   },
 };
@@ -42,7 +43,7 @@ export default {
 
 #side {
   grid-area: side;
-  background: rgb(247, 247, 247);
+  background: #f0f0f0;
   border-top-left-radius: 0%;
   border-top-right-radius: 0%;
   border-bottom-right-radius: 0%;
