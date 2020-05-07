@@ -7,7 +7,7 @@
     <div id="container">
       <div id="side"><SideBar></SideBar></div>
       <div id="main">
-        {{ state.number }}
+        {{ url }}
         <nav>
           <router-link to="/"></router-link>
         </nav>
@@ -19,15 +19,14 @@
 </template>
 <script>
 import SideBar from "./views/sidebar.vue";
-// import store from "./store/index.js";
 
 export default {
   components: {
     SideBar,
   },
   computed: {
-    state() {
-      return this.$store.state;
+    url() {
+      return this.$store.state.url;
     },
   },
 };

@@ -4,7 +4,12 @@ import CreateGoal from "@/views/CreateGoal.vue";
 
 Vue.use(VueRouter);
 
-const routes = [{ path: "/", component: CreateGoal }];
+const routes = [
+  {
+    path: "/",
+    component: CreateGoal,
+  },
+];
 
 const router = new VueRouter({
   mode: "history",

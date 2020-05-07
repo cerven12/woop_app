@@ -15,6 +15,7 @@
           :goal_id="goal_id"
           v-for="n in worryideacomponent"
           v-bind:key="n.id"
+          ref="worryidea"
         ></CounterMeasureWorryIdea>
         <v-container>
           <v-row>
@@ -29,79 +30,84 @@
         </v-container>
       </div>
       <div>
-        <!-- reference form -->
-        <v-form v-model="valid">
-          <v-container>
-            <h3>参考にできそうな資料を登録しておきましょう</h3>
-            <div
-              v-for="(references, index) in refList"
-              v-bind:key="references.id"
-            >
-              <div v-if="index >= 1">
-                <v-row>
-                  <v-col cols="4">
-                    <v-text-field
-                      outlined
-                      v-model="references.reference_name"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="4">
-                    <v-text-field
-                      outlined
-                      v-model="references.reference_use"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="3">
-                    <v-text-field
-                      outlined
-                      v-model="references.reference_source"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="1">
-                    <v-btn @click="deleteRefernce(index)" color="error" text
-                      >✘</v-btn
-                    >
-                  </v-col>
-                </v-row>
+        <!-- reference ここから -->
+        <v-btn @click="toggle">TOGGLE</v-btn>
+        <template v-if="ref">
+          <v-form v-model="valid">
+            <v-container>
+              <h3>参考にできそうな資料を登録しておきましょう</h3>
+              <div
+                v-for="(references, index) in refList"
+                v-bind:key="references.id"
+              >
+                <template v-if="index >= 1">
+                  <v-row>
+                    <v-col cols="4">
+                      <v-text-field
+                        outlined
+                        v-model="references.reference_name"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="4">
+                      <v-text-field
+                        outlined
+                        v-model="references.reference_use"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="3">
+                      <v-text-field
+                        outlined
+                        v-model="references.reference_source"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="1">
+                      <v-btn @click="deleteRefernce(index)" color="error" text
+                        >✘</v-btn
+                      >
+                    </v-col>
+                  </v-row>
+                </template>
+                <template v-else>
+                  <v-row>
+                    <v-col cols="4">
+                      <v-text-field
+                        label="資料"
+                        hint="参考にしたい資料を前もって登録しておきましょう"
+                        outlined
+                        v-model="references.reference_name"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="4">
+                      <v-text-field
+                        label="用途"
+                        hint="この資料の用途を書きましょう"
+                        outlined
+                        v-model="references.reference_use"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="4">
+                      <v-text-field
+                        label="URL"
+                        hint="場所など"
+                        outlined
+                        v-model="references.reference_source"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </template>
               </div>
-              <div v-else>
-                <v-row>
-                  <v-col cols="4">
-                    <v-text-field
-                      label="資料"
-                      hint="参考にしたい資料を前もって登録しておきましょう"
-                      outlined
-                      v-model="references.reference_name"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="4">
-                    <v-text-field
-                      label="用途"
-                      hint="この資料の用途を書きましょう"
-                      outlined
-                      v-model="references.reference_use"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="4">
-                    <v-text-field
-                      label="URL"
-                      hint="場所など"
-                      outlined
-                      v-model="references.reference_source"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </div>
-            </div>
-            <v-row justify="end">
-              <v-col cols="1">
-                <v-btn @click="refeadd" depressed small>
-                  +
-                </v-btn>
-              </v-col> </v-row
-            ><v-btn outlined @click="refRegister">登録！</v-btn>
-          </v-container>
-        </v-form>
+              <v-row justify="end">
+                <v-col cols="1">
+                  <v-btn @click="refeadd" depressed small>
+                    +
+                  </v-btn>
+                </v-col> </v-row
+              ><v-btn outlined @click="refRegister">登録！</v-btn>
+            </v-container>
+          </v-form>
+        </template>
+        <!-- reference ここまで -->
+        <template v-else> </template>
       </div>
     </div>
   </div>
@@ -122,14 +128,26 @@ export default {
       new_goal_registered: false,
       valid: "",
       this_time_goal_data: "",
-      url: "http://127.0.0.1:8000/api/v1/goals/",
       worryideacomponent: 1,
       refList: [
         { reference_name: "", reference_use: "", reference_source: "" },
       ],
+      ref: true,
     };
   },
+  conputed: {
+    url() {
+      return this.$store.state.url;
+    },
+  },
   methods: {
+    toggle: function() {
+      if (this.ref === true) {
+        this.ref = false;
+      } else {
+        this, (this.ref = true);
+      }
+    },
     addWorryIdeaForm: function() {
       const vm = this;
       vm.worryideacomponent++;

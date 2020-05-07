@@ -19,7 +19,7 @@
         </v-row>
 
         <div v-for="(ideas, index) in ideaList" v-bind:key="ideas.id">
-          <div v-if="index >= 1">
+          <template v-if="index >= 1">
             <v-row justify="end">
               <v-col cols="2"></v-col>
               <v-col cols="19">
@@ -40,8 +40,8 @@
                 ></v-col
               ></v-row
             >
-          </div>
-          <div v-else>
+          </template>
+          <template v-else>
             <v-row justify="end">
               <v-col cols="2"></v-col>
               <v-col cols="10">
@@ -56,14 +56,14 @@
                 ></v-textarea>
               </v-col>
             </v-row>
-          </div>
+          </template>
         </div>
         <v-row justify="end">
           <v-col cols="1"
             ><v-btn depressed small @click="addIdeaForm">＋</v-btn></v-col
           >
         </v-row>
-        <!-- <v-btn outlined @click="worryIdeaRegister">障害と対策の登録OK</v-btn> -->
+        <v-btn outlined @click="worryIdeaRegister">障害と対策の登録OK</v-btn>
       </v-container>
     </v-form>
   </div>
@@ -81,13 +81,20 @@ export default {
       new_goal_registered: false,
       valid: "",
       this_time_goal_data: "",
-      url: "http://127.0.0.1:8000/api/v1/goals/",
 
       worryList: [{ worry: "" }],
       ideaList: [{ idea: "" }],
       parentWorryId: "",
+
+      worryList: [{ worry: "", ideaList: [{ ides: "" }] }],
     };
   },
+  conputed: {
+    url() {
+      return this.$store.state.url;
+    },
+  },
+
   methods: {
     addIdeaForm: function() {
       const form = { idea: "" };
@@ -99,6 +106,8 @@ export default {
       this.ideaList.splice(index, 1);
       console.log(this.ideaList);
     },
+
+    worryIdeaRegisterX: function() {},
 
     // Posting `Worry` and `Idea` at the same time `axios.post`.
     worryIdeaRegister: function() {

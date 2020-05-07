@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'apiv1.apps.Apiv1Config',
     'woop.apps.WoopConfig',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # 3rd party
-    
+
     'django.middleware.common.CommonMiddleware',
 ]
 
@@ -66,10 +66,10 @@ CORS_ORIGIN_WHITELIST = [
     'https://fiddle.jshell.net',
     'http://127.0.0.1:5500',
     'http://127.0.0.1:8080',
+    'http://192.168.129.16:8080',
 ]
 
 ROOT_URLCONF = 'config.urls'
-
 
 
 TEMPLATES = [

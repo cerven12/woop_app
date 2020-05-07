@@ -5,13 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    number: 1,
+    url: "http://127.0.0.1:8000/api/v1/goals/", // create page
   },
-  mutations: {
-    increment(state) {
-      state.number++;
-    },
-  },
+  mutations: {},
   actions: {},
   modules: {},
 });
