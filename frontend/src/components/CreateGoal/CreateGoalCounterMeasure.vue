@@ -11,23 +11,147 @@
         <h3>心配事と、それに対する対策を考えておきましょう</h3>
       </v-container>
       <div id="countermeasure" class="input_group">
-        <CounterMeasureWorryIdea
-          :goal_id="goal_id"
-          v-for="n in worryideacomponent"
-          v-bind:key="n.id"
-          ref="worryidea"
-        ></CounterMeasureWorryIdea>
-        <v-container>
-          <v-row>
-            <v-col cols="2">
-              <v-btn depressed small @click.prevent="addWorryIdeaForm"
-                >増やす</v-btn
-              ><v-btn depressed small @click.prevent="deleteWorryIdeaForm"
-                >減らす</v-btn
-              >
-            </v-col>
-          </v-row>
-        </v-container>
+        <!-- @@@@ Worry, Idea Model Form @@@@ -->
+        <div v-for="(worries, worries_index) in worryList" :key="worries_index">
+          <!-- $$$$ ２つ目以降のWorryのフォームについては、Worry及びIdeaのlabelとhintを削除する $$$$ -->
+          <template v-if="worries_index >= 1">
+            <v-row>
+              <v-col cols="11" md="11">
+                <v-textarea
+                  rows="1"
+                  outlined
+                  auto-grow
+                  v-model="worries.worry"
+                ></v-textarea>
+              </v-col>
+              <v-col cols="1">
+                <v-btn
+                  @click="deleteWorryIdeaForm(worries_index)"
+                  text
+                  depressed
+                  height="55"
+                  color="error"
+                  >✘</v-btn
+                >
+              </v-col>
+            </v-row>
+            <!-- Idea Model Form -->
+            <div
+              v-for="(ideas, ideas_index) in worries.ideaList"
+              :key="ideas_index"
+            >
+              <v-row justify="end">
+                <v-col cols="2"></v-col>
+                <!-- ^^^^ 2つ目以降のWorryFormにある、ネストされたIdeaFormにlabelやhintを表示しない。 ^^^^ -->
+                <template v-if="ideas_index >= 1">
+                  <v-col cols="9">
+                    <v-textarea
+                      rows="1"
+                      auto-grow
+                      outlined
+                      v-model="ideas.idea"
+                    ></v-textarea> </v-col
+                  ><v-col cols="1"
+                    ><v-btn
+                      @click="deleteIdeaForm(worries_index, ideas_index)"
+                      text
+                      depressed
+                      height="55"
+                      color="error"
+                      >✘</v-btn
+                    ></v-col
+                  >
+                </template>
+                <!-- ^^^^ ２つ目以降のIdeaのフォーム ここまで ^^^^ -->
+                <!-- **** 1つ目のIdeaフォーム **** -->
+                <template v-else>
+                  <v-col cols="9">
+                    <v-textarea
+                      rows="1"
+                      auto-grow
+                      outlined
+                      v-model="ideas.idea"
+                    ></v-textarea></v-col
+                  ><v-col cols="1"></v-col
+                ></template>
+                <!-- **** 1つ目のIdeaフォーム ここまで **** -->
+              </v-row>
+            </div>
+          </template>
+          <!-- $$$$ 2つ目以降のWorryフォーム ここまで $$$$-->
+          <!-- %%%% １つ目のWorryとIdeaのフォーム %%%% -->
+          <template v-else>
+            <v-row>
+              <v-col cols="12" md="12">
+                <v-textarea
+                  name="障壁"
+                  label="障壁"
+                  hint="行動するにあたって、不安やわからないことをたくさん書いておきましょう"
+                  rows="1"
+                  outlined
+                  auto-grow
+                  v-model="worries.worry"
+                ></v-textarea>
+              </v-col>
+            </v-row>
+            <!-- Idea Model Form -->
+            <div
+              v-for="(ideas, ideas_index) in worries.ideaList"
+              :key="ideas_index"
+            >
+              <v-row justify="end">
+                <v-col cols="2"></v-col>
+                <!-- ^^^^ ２つ目以降のIdeaのフォームはlabelやhintを表示しない ^^^^ -->
+                <template v-if="ideas_index >= 1">
+                  <v-col cols="9">
+                    <v-textarea
+                      rows="1"
+                      auto-grow
+                      outlined
+                      v-model="ideas.idea"
+                    ></v-textarea> </v-col
+                  ><v-col cols="1"
+                    ><v-btn
+                      @click="deleteIdeaForm(worries_index, ideas_index)"
+                      text
+                      depressed
+                      height="55"
+                      color="error"
+                      >✘</v-btn
+                    ></v-col
+                  >
+                </template>
+                <!-- ^^^^ ２つ目以降のIdeaのフォーム ここまで ^^^^ -->
+                <!-- **** 1つ目のIdeaフォーム **** -->
+                <template v-else>
+                  <v-col>
+                    <v-textarea
+                      name="解決策"
+                      label="解決策"
+                      hint="前もって障壁に対する解決策を考えておきましょう"
+                      rows="1"
+                      auto-grow
+                      outlined
+                      v-model="ideas.idea"
+                    ></v-textarea></v-col
+                ></template>
+                <!-- **** 1つ目のIdeaフォーム ここまで **** -->
+              </v-row>
+            </div>
+          </template>
+          <!-- %%%% Idea Model Form ここまで %%%% -->
+          <v-row justify="end">
+            <v-col cols="1"
+              ><v-btn depressed small @click="addIdeaForm(worries_index)"
+                >＋</v-btn
+              ></v-col
+            ></v-row
+          >
+        </div>
+        <!-- @@@@ Worry, Idea Model Form ここまで @@@@ -->
+        <v-row
+          ><v-col><v-btn @click="addWorryIdeaForm">add</v-btn></v-col></v-row
+        >
       </div>
       <div>
         <!-- reference ここから -->
@@ -61,7 +185,10 @@
                       ></v-text-field>
                     </v-col>
                     <v-col cols="1">
-                      <v-btn @click="deleteRefernce(index)" color="error" text
+                      <v-btn
+                        @click="deleteRefernceForm(index)"
+                        color="error"
+                        text
                         >✘</v-btn
                       >
                     </v-col>
@@ -98,11 +225,11 @@
               </div>
               <v-row justify="end">
                 <v-col cols="1">
-                  <v-btn @click="refeadd" depressed small>
+                  <v-btn @click="addReferenceForm" depressed small>
                     +
                   </v-btn>
                 </v-col> </v-row
-              ><v-btn outlined @click="refRegister">登録！</v-btn>
+              ><v-btn outlined @click="referenceRegister">登録！</v-btn>
             </v-container>
           </v-form>
         </template>
@@ -133,6 +260,13 @@ export default {
         { reference_name: "", reference_use: "", reference_source: "" },
       ],
       ref: true,
+
+      worryList: [
+        {
+          worry: "",
+          ideaList: [{ idea: "" }],
+        },
+      ],
     };
   },
   conputed: {
@@ -149,22 +283,16 @@ export default {
       }
     },
     addWorryIdeaForm: function() {
-      const vm = this;
-      vm.worryideacomponent++;
+      const form = { worry: "", ideaList: [{ idea: "" }] };
+      this.worryList.push(form);
     },
-    deleteWorryIdeaForm: function() {
-      const vm = this;
-      if (vm.worryideacomponent === 1) {
-        console.log(`これ以上は消せないよ`);
-      } else {
-        vm.worryideacomponent--;
-      }
-    },
-    // worryIdeaRegister: function() {
-    //   this.$refs.child.worryIdeaRegister();
-    // },
 
-    refeadd: function() {
+    addIdeaForm: function(worries_id) {
+      const form = { idea: "" };
+      this.worryList[worries_id].ideaList.push(form);
+    },
+
+    addReferenceForm: function() {
       const form = {
         reference_name: "",
         reference_use: "",
@@ -172,12 +300,21 @@ export default {
       };
       this.refList.push(form);
     },
-    deleteRefernce: function(index) {
+    // Form Delete
+    deleteWorryIdeaForm: function(worry_id) {
+      this.worryList.splice(worry_id, 1);
+      console.log(this.worryList);
+    },
+    deleteIdeaForm: function(worries_id, ideas_id) {
+      this.worryList[worries_id].ideaList.splice(ideas_id, 1);
+    },
+
+    deleteRefernceForm: function(index) {
       this.refList.splice(index, 1);
       console.log(this.refList);
     },
 
-    refRegister: function() {
+    referenceRegister: function() {
       const vm = this;
       this.refList.forEach(function(refs) {
         // Remove spaces and null strings

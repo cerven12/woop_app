@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-form v-model="valid">
+    <!-- <v-form v-model="valid">
       <v-container>
         <v-row>
           <v-col cols="12" md="12">
@@ -65,7 +65,7 @@
         </v-row>
         <v-btn outlined @click="worryIdeaRegister">障害と対策の登録OK</v-btn>
       </v-container>
-    </v-form>
+    </v-form> -->
   </div>
 </template>
 
