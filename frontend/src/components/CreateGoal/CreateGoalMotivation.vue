@@ -437,8 +437,8 @@ export default {
 #motivation {
   background-color: #f0f0f0;
   border-radius: 50px;
-  padding: 40px 20px 40px 20px;
-  margin: 40px 20px 40px 20px;
+  padding: 20px 20px 20px 20px;
+  margin: 20px 20px 20px 20px;
   transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
 }
 
@@ -453,13 +453,13 @@ h3 {
 }
 
 .subtitle {
-  padding: 0 0 0 30px;
-  margin: 0 0 0 30px;
+  padding: 0 0 0 25px;
+  margin: 0 0 0 25px;
 }
 
 .list {
-  padding: 0 60px 0 70px;
-  margin: 0 60px 0 70px;
+  padding: 0 50px 0 50px;
+  margin: 0 50px 0 50px;
 }
 </style>
 
