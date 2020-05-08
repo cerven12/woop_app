@@ -309,7 +309,6 @@ export default {
       return this.$store.state.url;
     },
   },
-
   methods: {
     toggle: function() {
       if (this.reg === true) {
