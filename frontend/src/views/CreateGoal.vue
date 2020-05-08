@@ -7,7 +7,8 @@
         <div id="goal" class="reg">
           <template v-if="reg">
             <v-container>
-              <v-row>
+              <v-row
+                >{{ url }}
                 <v-col cols="12" md="12">
                   <h3>
                     あなたが達成したい目標を書きましょう
@@ -163,7 +164,7 @@ export default {
     };
   },
 
-  conputed: {
+  computed: {
     url() {
       return this.$store.state.url;
     },
