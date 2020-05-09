@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,17 +38,36 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # app
+    'apiv1.apps.Apiv1Config',
+    'woop.apps.WoopConfig',
 
     # 3rd party
     'corsheaders',
     'rest_framework',
-    'apiv1.apps.Apiv1Config',
-    'woop.apps.WoopConfig',
 
+    # 認証,　認可
+    'djoser',
 ]
 
+# Django REST frameworkの設定
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # Simple JWTの読み込み
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ],
+}
+
+# Simple JWTの設定
+SIMPLE_JWT = {
+    # トークンをJWTに設定
+    'AUTH_HEADER_TYPES': ('JWT',),
+    # トークンの持続時間の設定
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60)
+}
+
+
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,8 +77,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # 3rd party
-
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 

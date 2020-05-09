@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from rest_framework import routers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('apiv1.urls'))
+    path('api/v1/', include('apiv1.urls')),
+
+    # JWT
+    path('api/auth/', include('djoser.urls.jwt')),
 
 ]

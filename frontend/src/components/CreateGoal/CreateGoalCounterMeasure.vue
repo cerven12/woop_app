@@ -457,8 +457,8 @@ export default {
   background: #f0f0f0;
   /* border: 1px black solid; */
   border-radius: 50px;
-  padding: 20px 20px 20px 20px;
-  margin: 20px 20px 20px 20px;
+  padding: 40px 40px 40px 40px;
+  margin: 40px 40px 40px 40px;
   transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
 
   /* border-radius: 50px;
@@ -468,6 +468,11 @@ export default {
 #countermeasure:hover {
   border-radius: 50px;
   box-shadow: 8px 8px 15px #b9b9b9, -8px -8px 15px #fafafa;
+}
+
+.subtitle {
+  padding: 0 0 0 25px;
+  margin: 0 0 0 25px;
 }
 
 h2,
