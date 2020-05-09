@@ -135,9 +135,6 @@
 </template>
 
 <script>
-const IS_REGISTERED = "IS_REGISTERED";
-const IS_STANDBY = "IS_STANDBY";
-
 import CounterMeasureWorryIdea from "../components/CreateGoal/CounterMeasureWorryIdea.vue";
 import CreateGoalCounterMeasure from "../components/CreateGoal/CreateGoalCounterMeasure.vue";
 import CreateGoalMotivation from "../components/CreateGoal/CreateGoalMotivation.vue";
@@ -161,6 +158,8 @@ export default {
       this_time_goal_data: "",
 
       reg: true,
+      token:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5MDQyNDg0LCJqdGkiOiI1ODVjNWU4OTg3YTc0N2MzOWMzYzA4OTg4Yzk2MzA5ZSIsInVzZXJfaWQiOjF9.HOfcZC_7G3s0rJWis9_OpDKUMWP0tM9mWbadOsf87qc",
     };
   },
 
@@ -183,10 +182,20 @@ export default {
     newGoalRegister: function(goal_title, goal_description) {
       const vm = this;
       vm.axios
-        .post(vm.url, {
-          goal_title: goal_title,
-          goal_description: goal_description,
-        })
+        .post(
+          vm.url,
+          {
+            goal_title: goal_title,
+            goal_description: goal_description,
+          },
+          {
+            //  JWT
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5MDQyNDg0LCJqdGkiOiI1ODVjNWU4OTg3YTc0N2MzOWMzYzA4OTg4Yzk2MzA5ZSIsInVzZXJfaWQiOjF9.HOfcZC_7G3s0rJWis9_OpDKUMWP0tM9mWbadOsf87qc`,
+            },
+          }
+        )
         .then((response) => (vm.this_time_goal_data = response.data))
         .then((reaponse) => (vm.new_goal_registered = true))
         .catch((error) => {
