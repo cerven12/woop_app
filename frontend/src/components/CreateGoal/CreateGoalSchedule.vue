@@ -1,100 +1,106 @@
 <template>
-  <div id="schedule" class="input_group">
-    <v-form v-model="valid">
-      <v-container
-        ><v-btn @click="toggle">toggle</v-btn>
-        <!--  Schedule Registerd -->
-        <template v-if="rq">
-          <h2>▶　スケジュールを組もう</h2>
-          <v-row>
-            <v-col cols="6" md="6">
-              <v-menu
-                ref="start"
-                v-model="start"
-                :close-on-content-click="false"
-                :return-value.sync="start_date"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="start_date"
-                    label="開始日"
-                    prepend-icon=""
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="start_date" no-title scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="#37474F" @click="start = false"
-                    >Cancel</v-btn
+  <div>
+    <v-btn @click="toggle">toggle</v-btn>
+    <div id="schedule" class="input_group">
+      <v-form v-model="valid">
+        <v-container>
+          <!--  Schedule Registerd -->
+          <transition name="schedule" mode="out-in">
+            <div v-if="rq" key="0">
+              <h2>▶ スケジュールを組もう</h2>
+              <v-row>
+                <v-col cols="6" md="6">
+                  <v-menu
+                    ref="start"
+                    v-model="start"
+                    :close-on-content-click="false"
+                    :return-value.sync="start_date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
                   >
-                  <v-btn
-                    text
-                    color="#37474F"
-                    @click="$refs.start.save(start_date)"
-                    >OK</v-btn
-                  >
-                </v-date-picker>
-              </v-menu>
-            </v-col>
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="start_date"
+                        label="開始日"
+                        prepend-icon=""
+                        readonly
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="start_date" no-title scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn text color="#37474F" @click="start = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="#37474F"
+                        @click="$refs.start.save(start_date)"
+                        >OK</v-btn
+                      >
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
 
-            <v-col cols="6" md="6">
-              <v-menu
-                ref="deadline"
-                v-model="deadline"
-                :close-on-content-click="false"
-                :return-value.sync="deadline_date"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
+                <v-col cols="6" md="6">
+                  <v-menu
+                    ref="deadline"
+                    v-model="deadline"
+                    :close-on-content-click="false"
+                    :return-value.sync="deadline_date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="deadline_date"
+                        label="締め切り"
+                        prepend-icon=""
+                        readonly
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="deadline_date" no-title scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn text color="#37474F" @click="deadline = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="#37474F"
+                        @click="$refs.deadline.save(deadline_date)"
+                        >OK</v-btn
+                      >
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
+              </v-row>
+              <v-btn
+                outlined
+                @click="scheduleRegister(start_date, deadline_date)"
+                >登録！</v-btn
               >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="deadline_date"
-                    label="締め切り"
-                    prepend-icon=""
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="deadline_date" no-title scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="#37474F" @click="deadline = false"
-                    >Cancel</v-btn
-                  >
-                  <v-btn
-                    text
-                    color="#37474F"
-                    @click="$refs.deadline.save(deadline_date)"
-                    >OK</v-btn
-                  >
-                </v-date-picker>
-              </v-menu>
-            </v-col>
-          </v-row>
-          <v-btn outlined @click="scheduleRegister(start_date, deadline_date)"
-            >登録！</v-btn
-          ></template
-        >
-        <!--  Schedule Registerd  / -->
-        <!-- Before Schedule Register -->
-        <template v-else
-          ><h2>▶　スケジュールを組もう</h2>
-          start : {{ start_date }} deadline : {{ deadline_date }}
-        </template>
-        <!-- Before Schedule Register  / -->
-      </v-container>
-    </v-form>
+            </div>
+            <!--  Schedule Registerd  / -->
+            <!-- Before Schedule Register -->
+            <div v-else key="1">
+              <h2>▶ スケジュールを組もう</h2>
+              start : {{ start_date }} deadline : {{ deadline_date }}
+            </div>
+            <!-- Before Schedule Register  / -->
+          </transition>
+        </v-container>
+      </v-form>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "CreateGoal",
-  props: ["goal_id"],
+  props: ["goal_id", "token"],
 
   data: function() {
     return {
@@ -120,10 +126,20 @@ export default {
     scheduleRegister: function(start, dead) {
       const vm = this;
       vm.axios
-        .patch(vm.url + vm.goal_id + "/", {
-          start_date: start,
-          deadline: dead,
-        })
+        .patch(
+          vm.url + vm.goal_id + "/",
+          {
+            start_date: start,
+            deadline: dead,
+          },
+          {
+            //  JWT
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `JWT ${vm.token}`,
+            },
+          }
+        )
         .then((response) => (vm.this_time_goal_data = response.data))
         .catch((error) => {
           console.log(error);
@@ -160,13 +176,20 @@ h2,
 h3 {
   color: rgb(83, 83, 83);
 }
-</style>
-
-<style>
 .v-messages {
   font-size: 15px;
 }
 .v-messages__message {
   padding-top: 2px;
+}
+
+/* transition */
+.schedule-enter-active,
+.schedule-leave-active {
+  transition: opacity 0.3s;
+}
+.schedule-enter,
+.schedule-leave-to {
+  opacity: 0;
 }
 </style>

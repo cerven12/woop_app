@@ -5,128 +5,133 @@
         <div id="main"></div>
         <v-btn @click="toggle">表示の切り替え</v-btn>
         <div id="goal" class="reg">
-          <template v-if="reg">
-            <v-container>
-              <v-row
-                >{{ url }}
-                <v-col cols="12" md="12">
-                  <h3>
-                    あなたが達成したい目標を書きましょう
-                  </h3>
-                </v-col>
-              </v-row>
+          <transition name="goal" mode="out-in">
+            <div v-if="reg" key="0">
+              <v-container>
+                <v-row>
+                  <v-col cols="12" md="12">
+                    <h3>
+                      あなたが達成したい目標を書きましょう
+                    </h3>
+                  </v-col>
+                </v-row>
 
-              <v-row justify="start">
-                <v-col cols="8" md="12" lg="8"
-                  ><h1>{{ goal_title }}</h1>
-                </v-col>
-                <v-spacer></v-spacer>
-                <v-col cols="2">
-                  <v-icon
-                    x-large
-                    color="#3f5eb5"
-                    v-show="new_goal_registered"
-                    id="check"
-                    >mdi-check-bold</v-icon
-                  >
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" md="12">
-                  <div style="white-space: pre-line;">
-                    {{ goal_description }}
-                  </div>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="目標を決めよう"
-                    placeholder=""
-                    outlined
-                    v-model="goal_title"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
+                <v-row justify="start">
+                  <v-col cols="8" md="12" lg="8"
+                    ><h1>{{ goal_title }}</h1>
+                  </v-col>
+                  <v-spacer></v-spacer>
+                  <v-col cols="2">
+                    <v-icon
+                      x-large
+                      color="#3f5eb5"
+                      v-show="new_goal_registered"
+                      id="check"
+                      >mdi-check-bold</v-icon
+                    >
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" md="12">
+                    <div style="white-space: pre-line;">
+                      {{ goal_description }}
+                    </div>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="目標を決めよう"
+                      placeholder=""
+                      outlined
+                      v-model="goal_title"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col cols="12" md="12">
-                  <!-- <mavon-editor
+                <v-row>
+                  <v-col cols="12" md="12">
+                    <!-- <mavon-editor
                   v-model="goal_description"
                   language="en"
                   :toolbars="toolbars"
                 /> -->
-                  <v-textarea
-                    name="詳しく"
-                    label="詳しく"
-                    hint="達成したとみなす水準"
-                    rows="5"
-                    outlined
-                    auto-grow
-                    placeholder="どこで、なにを、どのように、どの水準で達成したいか"
-                    v-model="goal_description"
-                  ></v-textarea>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-btn
-                    class="ma-2"
-                    outlined
-                    @click="newGoalRegister(goal_title, goal_description)"
-                    >決定</v-btn
-                  >
-                </v-col>
-              </v-row>
-            </v-container>
-          </template>
-          <!-- 登録後 -->
-          <template v-else>
-            <v-container>
-              <v-row>
-                <v-col cols="12" md="12">
-                  <h3>
-                    あなたが達成したい目標を書きましょう
-                  </h3>
-                </v-col>
-              </v-row>
+                    <v-textarea
+                      name="詳しく"
+                      label="詳しく"
+                      hint="達成したとみなす水準"
+                      rows="5"
+                      outlined
+                      auto-grow
+                      placeholder="どこで、なにを、どのように、どの水準で達成したいか"
+                      v-model="goal_description"
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-btn
+                      class="ma-2"
+                      outlined
+                      @click="newGoalRegister(goal_title, goal_description)"
+                      >決定</v-btn
+                    >
+                  </v-col>
+                </v-row>
+              </v-container>
+            </div>
+            <!-- 登録後 -->
 
-              <v-row justify="start">
-                <v-col cols="8" md="12" lg="8"
-                  ><h1>{{ goal_title }}</h1>
-                </v-col>
-                <v-spacer></v-spacer>
-                <v-col cols="2">
-                  <v-icon
-                    x-large
-                    color="#3f5eb5"
-                    v-show="new_goal_registered"
-                    id="check"
-                    >mdi-check-bold</v-icon
-                  >
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" md="12">
-                  <div style="white-space: pre-line;">
-                    {{ goal_description }}
-                  </div>
-                </v-col>
-              </v-row>
-            </v-container>
-          </template>
+            <div v-else key="1">
+              <v-container>
+                <v-row>
+                  <v-col cols="12" md="12">
+                    <h3>
+                      あなたが達成したい目標を書きましょう
+                    </h3>
+                  </v-col>
+                </v-row>
+
+                <v-row justify="start">
+                  <v-col cols="8" md="12" lg="8"
+                    ><h1>{{ goal_title }}</h1>
+                  </v-col>
+                  <v-spacer></v-spacer>
+                  <v-col cols="2">
+                    <v-icon
+                      x-large
+                      color="#3f5eb5"
+                      v-show="new_goal_registered"
+                      id="check"
+                      >mdi-check-bold</v-icon
+                    >
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" md="12">
+                    <div style="white-space: pre-line;">
+                      {{ goal_description }}
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </div>
+          </transition>
         </div>
 
         <CreateGoalMotivation
           :goal_id="this_time_goal_data.goal_id"
+          :token="token"
         ></CreateGoalMotivation>
 
         <CreateGoalCounterMeasure
           :goal_id="this_time_goal_data.goal_id"
+          :token="token"
         ></CreateGoalCounterMeasure>
 
         <CreateGoalSchedule
           :goal_id="this_time_goal_data.goal_id"
+          :token="token"
         ></CreateGoalSchedule>
         <br /><br /><br /><br /><br /><br /><br /><br />
       </div>
@@ -135,14 +140,12 @@
 </template>
 
 <script>
-import CounterMeasureWorryIdea from "../components/CreateGoal/CounterMeasureWorryIdea.vue";
 import CreateGoalCounterMeasure from "../components/CreateGoal/CreateGoalCounterMeasure.vue";
 import CreateGoalMotivation from "../components/CreateGoal/CreateGoalMotivation.vue";
 import CreateGoalSchedule from "../components/CreateGoal/CreateGoalSchedule.vue";
 
 export default {
   components: {
-    CounterMeasureWorryIdea,
     CreateGoalCounterMeasure,
     CreateGoalMotivation,
     CreateGoalSchedule,
@@ -159,7 +162,7 @@ export default {
 
       reg: true,
       token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5MDQyNDg0LCJqdGkiOiI1ODVjNWU4OTg3YTc0N2MzOWMzYzA4OTg4Yzk2MzA5ZSIsInVzZXJfaWQiOjF9.HOfcZC_7G3s0rJWis9_OpDKUMWP0tM9mWbadOsf87qc",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5MzUzNzY0LCJqdGkiOiJlNGJjYTk5Zjg0Mjc0M2M1OTY1ZjlkNDYzNDU3OTMxNSIsInVzZXJfaWQiOjF9.PlpurexFCUZPbp1L554Av4A3tURF94Qksv9cSZ8TaZU",
     };
   },
 
@@ -192,7 +195,7 @@ export default {
             //  JWT
             headers: {
               "Content-Type": "application/json",
-              Authorization: `JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5MDQyNDg0LCJqdGkiOiI1ODVjNWU4OTg3YTc0N2MzOWMzYzA4OTg4Yzk2MzA5ZSIsInVzZXJfaWQiOjF9.HOfcZC_7G3s0rJWis9_OpDKUMWP0tM9mWbadOsf87qc`,
+              Authorization: `JWT ${vm.token}`,
             },
           }
         )
@@ -236,5 +239,15 @@ h3 {
 
 #back {
   background: #f0f0f0;
+}
+
+/* transition */
+.goal-enter-active,
+.goal-leave-active {
+  transition: opacity 0.3s;
+}
+.goal-enter,
+.goal-leave-to {
+  opacity: 0;
 }
 </style>

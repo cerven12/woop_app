@@ -1,291 +1,315 @@
 <template>
   <div>
-    <!--  worry and idea form -->
-    <div id="countermeasure" class="input_group">
-      <v-container
-        ><v-btn @click="toggle"></v-btn>
+    <v-btn @click="toggle"></v-btn>
+    <div>
+      <!--  worry and idea form -->
+      <div id="countermeasure" class="input_group">
         <!-- Counter Measure Registerd -->
-        <template v-if="ref"
-          ><v-row>
-            <v-col cols="12">
-              <h2>▶　挫折をしないために準備する</h2>
-            </v-col>
-          </v-row>
-          <h3>心配事と、それに対する対策を考えておきましょう</h3>
-          <!-- @@@@ Worry, Idea Model Form @@@@ -->
-          <div
-            v-for="(worries, worries_index) in worryList"
-            :key="worries_index"
-          >
-            <!-- $$$$ ２つ目以降のWorryのフォームについては、Worry及びIdeaのlabelとhintを削除する $$$$ -->
-            <template v-if="worries_index >= 1">
-              <v-row>
-                <v-col cols="11" md="11">
-                  <v-textarea
-                    rows="1"
-                    outlined
-                    auto-grow
-                    v-model="worries.worry"
-                  ></v-textarea>
-                </v-col>
-                <v-col cols="1">
-                  <v-btn
-                    @click="deleteWorryIdeaForm(worries_index)"
-                    text
-                    depressed
-                    height="55"
-                    color="error"
-                    >✘</v-btn
-                  >
-                </v-col>
-              </v-row>
-              <!-- Idea Model Form -->
-              <div
-                v-for="(ideas, ideas_index) in worries.ideaList"
-                :key="ideas_index"
-              >
-                <v-row justify="end">
-                  <v-col cols="2"></v-col>
-                  <!-- ^^^^ 2つ目以降のWorryFormにある、ネストされたIdeaFormにlabelやhintを表示しない。 ^^^^ -->
-                  <template v-if="ideas_index >= 1">
-                    <v-col cols="9">
-                      <v-textarea
-                        rows="1"
-                        auto-grow
-                        outlined
-                        v-model="ideas.idea"
-                      ></v-textarea> </v-col
-                    ><v-col cols="1"
-                      ><v-btn
-                        @click="deleteIdeaForm(worries_index, ideas_index)"
-                        text
-                        depressed
-                        height="55"
-                        color="error"
-                        >✘</v-btn
-                      ></v-col
-                    >
-                  </template>
-                  <!-- ^^^^ ２つ目以降のIdeaのフォーム ここまで ^^^^ -->
-                  <!-- **** 1つ目のIdeaフォーム **** -->
-                  <template v-else>
-                    <v-col cols="9">
-                      <v-textarea
-                        rows="1"
-                        auto-grow
-                        outlined
-                        v-model="ideas.idea"
-                      ></v-textarea></v-col
-                    ><v-col cols="1"></v-col
-                  ></template>
-                  <!-- **** 1つ目のIdeaフォーム ここまで **** -->
-                </v-row>
-              </div>
-            </template>
-            <!-- $$$$ 2つ目以降のWorryフォーム ここまで $$$$-->
-            <!-- %%%% １つ目のWorryとIdeaのフォーム %%%% -->
-            <template v-else>
-              <v-row>
-                <v-col cols="12" md="12">
-                  <v-textarea
-                    name="障壁"
-                    label="障壁"
-                    hint="行動するにあたって、不安やわからないことをたくさん書いておきましょう"
-                    rows="1"
-                    outlined
-                    auto-grow
-                    v-model="worries.worry"
-                  ></v-textarea>
-                </v-col>
-              </v-row>
-              <!-- Idea Model Form -->
-              <div
-                v-for="(ideas, ideas_index) in worries.ideaList"
-                :key="ideas_index"
-              >
-                <v-row justify="end">
-                  <v-col cols="2"></v-col>
-                  <!-- ^^^^ ２つ目以降のIdeaのフォームはlabelやhintを表示しない ^^^^ -->
-                  <template v-if="ideas_index >= 1">
-                    <v-col cols="9">
-                      <v-textarea
-                        rows="1"
-                        auto-grow
-                        outlined
-                        v-model="ideas.idea"
-                      ></v-textarea> </v-col
-                    ><v-col cols="1"
-                      ><v-btn
-                        @click="deleteIdeaForm(worries_index, ideas_index)"
-                        text
-                        depressed
-                        height="55"
-                        color="error"
-                        >✘</v-btn
-                      ></v-col
-                    >
-                  </template>
-                  <!-- ^^^^ ２つ目以降のIdeaのフォーム ここまで ^^^^ -->
-                  <!-- **** 1つ目のIdeaフォーム **** -->
-                  <template v-else>
-                    <v-col>
-                      <v-textarea
-                        name="解決策"
-                        label="解決策"
-                        hint="前もって障壁に対する解決策を考えておきましょう"
-                        rows="1"
-                        auto-grow
-                        outlined
-                        v-model="ideas.idea"
-                      ></v-textarea></v-col
-                  ></template>
-                  <!-- **** 1つ目のIdeaフォーム ここまで **** -->
-                </v-row>
-              </div>
-            </template>
-            <!-- %%%% Idea Model Form ここまで %%%% -->
-            <v-row justify="end">
-              <v-col cols="1"
-                ><v-btn depressed small @click="addIdeaForm(worries_index)"
-                  >＋</v-btn
-                ></v-col
-              ></v-row
-            >
-          </div>
-          <!-- @@@@ Worry, Idea Model Form ここまで @@@@ -->
-          <v-row
-            ><v-col
-              ><v-btn @click="addWorryIdeaForm" text depressed>＋</v-btn></v-col
-            ></v-row
-          >
-          <v-form v-model="valid">
+        <transition name="countermeasure" mode="out-in">
+          <div v-if="ref" key="0">
             <v-container>
-              <h3>参考にできそうな資料を登録しておきましょう</h3>
-              <div
-                v-for="(references, index) in refList"
-                v-bind:key="references.id"
-              >
-                <template v-if="index >= 1">
-                  <v-row>
-                    <v-col cols="4">
-                      <v-text-field
-                        outlined
-                        v-model="references.reference_name"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="4">
-                      <v-text-field
-                        outlined
-                        v-model="references.reference_use"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="3">
-                      <v-text-field
-                        outlined
-                        v-model="references.reference_source"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="1">
-                      <v-btn
-                        @click="deleteRefernceForm(index)"
-                        color="error"
-                        text
-                        >✘</v-btn
-                      >
-                    </v-col>
-                  </v-row>
-                </template>
-                <!-- if reference model is un registered -->
-                <template v-else>
-                  <v-row>
-                    <v-col cols="4">
-                      <v-text-field
-                        label="資料"
-                        hint="参考にしたい資料を前もって登録しておきましょう"
-                        outlined
-                        v-model="references.reference_name"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="4">
-                      <v-text-field
-                        label="用途"
-                        hint="この資料の用途を書きましょう"
-                        outlined
-                        v-model="references.reference_use"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="4">
-                      <v-text-field
-                        label="URL"
-                        hint="場所など"
-                        outlined
-                        v-model="references.reference_source"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </template>
-              </div>
-              <v-row justify="end">
-                <v-col cols="1">
-                  <v-btn @click="addReferenceForm" depressed small>
-                    +
-                  </v-btn>
-                </v-col> </v-row
-              ><v-btn outlined @click="counterMeasureAllRegister">登録！</v-btn>
+              <v-row>
+                <v-col cols="12">
+                  <h2>▶　挫折をしないために準備する</h2>
+                </v-col>
+              </v-row>
             </v-container>
-          </v-form>
-        </template>
-        <!-- Counter Measure Registerd  / -->
-
-        <!-- Before Counter Measure Register -->
-        <template v-else>
-          <!-- Worry ,Idea -->
-          <v-row>
-            <v-col cols="12">
-              <h2>▶　挫折をしないために準備する</h2>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12">
-              <div
-                v-for="(worries, worries_index) in worryList"
-                :key="worries_index"
-              >
-                {{ worries.worry }}
+            <v-container>
+              <h3>心配事と、それに対する対策を考えておきましょう</h3>
+              <!-- @@@@ Worry, Idea Model Form @@@@ -->
+              <transition-group name="form" tag="div">
                 <div
-                  v-for="(ideas, ideas_index) in worries.ideaList"
-                  :key="ideas_index"
+                  v-for="(worries, worries_index) in worryList"
+                  :key="worries_index"
                 >
-                  {{ ideas.idea }}
+                  <!-- $$$$ ２つ目以降のWorryのフォームについては、Worry及びIdeaのlabelとhintを削除する $$$$ -->
+                  <template v-if="worries_index >= 1">
+                    <v-row>
+                      <v-col cols="11" md="11">
+                        <v-textarea
+                          rows="1"
+                          outlined
+                          auto-grow
+                          v-model="worries.worry"
+                        ></v-textarea>
+                      </v-col>
+                      <v-col cols="1">
+                        <v-btn
+                          @click="deleteWorryIdeaForm(worries_index)"
+                          text
+                          depressed
+                          height="55"
+                          color="error"
+                          >✘</v-btn
+                        >
+                      </v-col>
+                    </v-row>
+                    <!-- Idea Model Form -->
+                    <transition-group name="form" tag="div">
+                      <div
+                        v-for="(ideas, ideas_index) in worries.ideaList"
+                        :key="ideas_index"
+                      >
+                        <v-row justify="end">
+                          <v-col cols="2"></v-col>
+                          <!-- ^^^^ 2つ目以降のWorryFormにある、ネストされたIdeaFormにlabelやhintを表示しない。 ^^^^ -->
+                          <template v-if="ideas_index >= 1">
+                            <v-col cols="9">
+                              <v-textarea
+                                rows="1"
+                                auto-grow
+                                outlined
+                                v-model="ideas.idea"
+                              ></v-textarea> </v-col
+                            ><v-col cols="1"
+                              ><v-btn
+                                @click="
+                                  deleteIdeaForm(worries_index, ideas_index)
+                                "
+                                text
+                                depressed
+                                height="55"
+                                color="error"
+                                >✘</v-btn
+                              ></v-col
+                            >
+                          </template>
+                          <!-- ^^^^ ２つ目以降のIdeaのフォーム ここまで ^^^^ -->
+                          <!-- **** 1つ目のIdeaフォーム **** -->
+                          <template v-else>
+                            <v-col cols="9">
+                              <v-textarea
+                                rows="1"
+                                auto-grow
+                                outlined
+                                v-model="ideas.idea"
+                              ></v-textarea></v-col
+                            ><v-col cols="1"></v-col
+                          ></template>
+                          <!-- **** 1つ目のIdeaフォーム ここまで **** -->
+                        </v-row>
+                      </div>
+                    </transition-group>
+                  </template>
+                  <!-- $$$$ 2つ目以降のWorryフォーム ここまで $$$$-->
+                  <!-- %%%% １つ目のWorryとIdeaのフォーム %%%% -->
+                  <template v-else>
+                    <v-row>
+                      <v-col cols="12" md="12">
+                        <v-textarea
+                          name="障壁"
+                          label="障壁"
+                          hint="行動するにあたって、不安やわからないことをたくさん書いておきましょう"
+                          rows="1"
+                          outlined
+                          auto-grow
+                          v-model="worries.worry"
+                        ></v-textarea>
+                      </v-col>
+                    </v-row>
+                    <!-- Idea Model Form -->
+                    <transition-group name="form" tag="div">
+                      <div
+                        v-for="(ideas, ideas_index) in worries.ideaList"
+                        :key="ideas_index"
+                      >
+                        <v-row justify="end">
+                          <v-col cols="2"></v-col>
+                          <!-- ^^^^ ２つ目以降のIdeaのフォームはlabelやhintを表示しない ^^^^ -->
+                          <template v-if="ideas_index >= 1">
+                            <v-col cols="9">
+                              <v-textarea
+                                rows="1"
+                                auto-grow
+                                outlined
+                                v-model="ideas.idea"
+                              ></v-textarea> </v-col
+                            ><v-col cols="1"
+                              ><v-btn
+                                @click="
+                                  deleteIdeaForm(worries_index, ideas_index)
+                                "
+                                text
+                                depressed
+                                height="55"
+                                color="error"
+                                >✘</v-btn
+                              ></v-col
+                            >
+                          </template>
+                          <!-- ^^^^ ２つ目以降のIdeaのフォーム ここまで ^^^^ -->
+                          <!-- **** 1つ目のIdeaフォーム **** -->
+                          <template v-else>
+                            <v-col>
+                              <v-textarea
+                                name="解決策"
+                                label="解決策"
+                                hint="前もって障壁に対する解決策を考えておきましょう"
+                                rows="1"
+                                auto-grow
+                                outlined
+                                v-model="ideas.idea"
+                              ></v-textarea></v-col
+                          ></template>
+                          <!-- **** 1つ目のIdeaフォーム ここまで **** -->
+                        </v-row>
+                      </div>
+                    </transition-group>
+                  </template>
+                  <!-- %%%% Idea Model Form ここまで %%%% -->
+                  <v-row justify="end">
+                    <v-col cols="1"
+                      ><v-btn
+                        depressed
+                        small
+                        @click="addIdeaForm(worries_index)"
+                        >＋</v-btn
+                      ></v-col
+                    ></v-row
+                  >
                 </div>
-              </div>
-            </v-col>
-          </v-row>
-          <!-- reference  -->
-          <v-row>
-            <v-col>
-              <div v-for="(refs, refs_index) in refList" :key="refs_index">
-                {{ refs.reference_name }} | {{ refs.reference_use }} |
-                {{ refs.reference_source }}
-              </div>
-            </v-col>
-          </v-row>
-        </template>
+              </transition-group>
+            </v-container>
+            <!-- @@@@ Worry, Idea Model Form ここまで @@@@ -->
+            <v-container>
+              <v-row
+                ><v-col
+                  ><v-btn @click="addWorryIdeaForm" text depressed
+                    >＋</v-btn
+                  ></v-col
+                ></v-row
+              >
+            </v-container>
+            <v-form v-model="valid">
+              <v-container>
+                <h3>参考にできそうな資料を登録しておきましょう</h3>
+                <transition-group name="form" tag="div">
+                  <div
+                    v-for="(references, ref_index) in refList"
+                    v-bind:key="ref_index"
+                  >
+                    <template v-if="ref_index >= 1">
+                      <v-row>
+                        <v-col cols="4">
+                          <v-text-field
+                            outlined
+                            v-model="references.reference_name"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="4">
+                          <v-text-field
+                            outlined
+                            v-model="references.reference_use"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            outlined
+                            v-model="references.reference_source"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="1">
+                          <v-btn
+                            @click="deleteRefernceForm(ref_index)"
+                            color="error"
+                            text
+                            >✘</v-btn
+                          >
+                        </v-col>
+                      </v-row>
+                    </template>
+                    <!-- if reference model is un registered -->
+                    <template v-else>
+                      <v-row>
+                        <v-col cols="4">
+                          <v-text-field
+                            label="資料"
+                            hint="参考にしたい資料を前もって登録しておきましょう"
+                            outlined
+                            v-model="references.reference_name"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="4">
+                          <v-text-field
+                            label="用途"
+                            hint="この資料の用途を書きましょう"
+                            outlined
+                            v-model="references.reference_use"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="4">
+                          <v-text-field
+                            label="URL"
+                            hint="場所など"
+                            outlined
+                            v-model="references.reference_source"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </template>
+                  </div>
+                </transition-group>
+                <v-row justify="end">
+                  <v-col cols="1">
+                    <v-btn @click="addReferenceForm" depressed small>
+                      +
+                    </v-btn>
+                  </v-col> </v-row
+                ><v-btn outlined @click="counterMeasureAllRegister"
+                  >登録！</v-btn
+                >
+              </v-container>
+            </v-form>
+          </div>
+          <!-- Counter Measure Registerd  / -->
+
+          <!-- Before Counter Measure Register -->
+          <div v-else key="1">
+            <!-- Worry ,Idea -->
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <h2>▶　挫折をしないために準備する</h2>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <div
+                    v-for="(worries, worries_index) in worryList"
+                    :key="worries_index"
+                  >
+                    {{ worries.worry }}
+                    <div
+                      v-for="(ideas, ideas_index) in worries.ideaList"
+                      :key="ideas_index"
+                    >
+                      {{ ideas.idea }}
+                    </div>
+                  </div>
+                </v-col>
+              </v-row>
+              <!-- reference  -->
+              <v-row>
+                <v-col>
+                  <div v-for="(refs, refs_index) in refList" :key="refs_index">
+                    {{ refs.reference_name }} | {{ refs.reference_use }} |
+                    {{ refs.reference_source }}
+                  </div>
+                </v-col>
+              </v-row>
+            </v-container>
+          </div></transition
+        >
         <!-- Before register / -->
-      </v-container>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import CounterMeasureWorryIdea from "./CounterMeasureWorryIdea.vue";
-
 export default {
   name: "CreateGoal",
   props: ["goal_id"],
-  components: {
-    CounterMeasureWorryIdea,
-  },
 
   data: function() {
     return {
@@ -479,14 +503,35 @@ h2,
 h3 {
   color: rgb(83, 83, 83);
 }
-</style>
 
-<style>
 .v-messages {
   font-size: 15px;
 }
 .v-messages__message {
   padding-top: 2px;
+}
+
+.countermeasure-enter-active,
+.countermeasure-leave-active {
+  transition: opacity 0.3s;
+}
+.countermeasure-enter,
+.countermeasure-leave-to {
+  opacity: 0;
+}
+
+/* add(delete) form */
+.form-enter-active {
+  animation: fadeInUp 0.3s;
+  transition: opacity 0.3s;
+}
+.form-leave-active {
+  animation: fadeInUp 0.3s reverse;
+  transition: opacity 0.3s;
+}
+.form-enter,
+.form-leave-to {
+  opacity: 0;
 }
 </style>
 ``
