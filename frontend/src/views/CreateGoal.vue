@@ -162,7 +162,7 @@ export default {
 
       reg: true,
       token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5MzUzNzY0LCJqdGkiOiJlNGJjYTk5Zjg0Mjc0M2M1OTY1ZjlkNDYzNDU3OTMxNSIsInVzZXJfaWQiOjF9.PlpurexFCUZPbp1L554Av4A3tURF94Qksv9cSZ8TaZU",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5Mzc4NTA1LCJqdGkiOiJmYzkyOGViM2QyNmE0Mjg0OTcyMmRhNTgyMDgzOTRlYSIsInVzZXJfaWQiOjF9.m3MrB2l12UD_RaVzpvu25_RjYHDX0gMMs9ANtd3ZdT0",
     };
   },
 

@@ -295,11 +295,11 @@
                       ><div
                         class="contents"
                         v-for="(future_selves, index) in futureSelfList"
-                        v-bind:key="future_selves.id"
+                        :key="future_selves.id"
                       >
                         <v-list-item
                           v-for="(future_self, index) in future_selves"
-                          v-bind:key="future_self.id"
+                          :key="future_self.id"
                           ><v-list-item-content
                             v-text="future_self"
                             :key="index"

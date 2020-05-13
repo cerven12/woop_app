@@ -274,26 +274,27 @@
               </v-row>
               <v-row>
                 <v-col cols="12">
-                  <div
-                    v-for="(worries, worries_index) in worryList"
-                    :key="worries_index"
-                  >
-                    {{ worries.worry }}
-                    <div
-                      v-for="(ideas, ideas_index) in worries.ideaList"
-                      :key="ideas_index"
-                    >
-                      {{ ideas.idea }}
-                    </div>
-                  </div>
+                  <template v-for="worry in worryList">
+                    <h1>{{ worry.worry }}</h1>
+                    <h5>
+                      <li v-for="idea in worry.ideaList" :key="idea.id">
+                        {{ idea.idea }}
+                      </li>
+                    </h5>
+                  </template>
                 </v-col>
               </v-row>
               <!-- reference  -->
               <v-row>
                 <v-col>
                   <div v-for="(refs, refs_index) in refList" :key="refs_index">
-                    {{ refs.reference_name }} | {{ refs.reference_use }} |
-                    {{ refs.reference_source }}
+                    <ul>
+                      <li>
+                        {{ refs.reference_name }}
+                        {{ refs.reference_use }}
+                        {{ refs.reference_source }}
+                      </li>
+                    </ul>
                   </div>
                 </v-col>
               </v-row>
@@ -309,7 +310,7 @@
 <script>
 export default {
   name: "CreateGoal",
-  props: ["goal_id"],
+  props: ["goal_id", "token"],
 
   data: function() {
     return {
@@ -394,10 +395,20 @@ export default {
 
         if (judgeStr) {
           vm.axios
-            .post(vm.url + vm.goal_id + "/" + "worries/", {
-              goal: vm.goal_id,
-              worry: worries.worry,
-            })
+            .post(
+              vm.url + vm.goal_id + "/" + "worries/",
+              {
+                goal: vm.goal_id,
+                worry: worries.worry,
+              },
+              {
+                //  JWT
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `JWT ${vm.token}`,
+                },
+              }
+            )
             .then((res) => {
               vm.parentWorryId = res.data.worry_id;
               // Take the `idea` for the current `worry` one by one from
@@ -428,6 +439,13 @@ export default {
               {
                 worry: parentWorryId,
                 idea: ideas.idea,
+              },
+              {
+                //  JWT
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `JWT ${vm.token}`,
+                },
               }
             )
             .then((res) => (vm.this_time_goal_data = res.data))
@@ -457,12 +475,22 @@ export default {
         );
         if (judgeStrName && judgeStrUse && judgeStrSource) {
           vm.axios
-            .post(vm.url + vm.goal_id + "/" + "references/", {
-              goal: vm.goal_id,
-              reference_name: refs.reference_name,
-              reference_use: refs.reference_use,
-              reference_source: refs.reference_source,
-            })
+            .post(
+              vm.url + vm.goal_id + "/" + "references/",
+              {
+                goal: vm.goal_id,
+                reference_name: refs.reference_name,
+                reference_use: refs.reference_use,
+                reference_source: refs.reference_source,
+              },
+              {
+                //  JWT
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `JWT ${vm.token}`,
+                },
+              }
+            )
             .then((response) => (vm.this_time_goal_data = response.data))
             .catch((error) => {
               console.log(error);
