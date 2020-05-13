@@ -7,7 +7,6 @@
     <div id="container">
       <div id="side"><SideBar></SideBar></div>
       <div id="main">
-        {{ url }}
         <nav>
           <router-link to="/"></router-link>
         </nav>

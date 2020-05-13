@@ -275,12 +275,10 @@
               <v-row>
                 <v-col cols="12">
                   <template v-for="worry in worryList">
-                    <h1>{{ worry.worry }}</h1>
-                    <h5>
-                      <li v-for="idea in worry.ideaList" :key="idea.id">
-                        {{ idea.idea }}
-                      </li>
-                    </h5>
+                    <h4 :key="worry.id">{{ worry.worry }}</h4>
+                    <li v-for="idea in worry.ideaList" :key="idea.id">
+                      {{ idea.idea }}
+                    </li>
                   </template>
                 </v-col>
               </v-row>
