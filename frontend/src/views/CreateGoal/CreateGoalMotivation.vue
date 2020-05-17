@@ -8,13 +8,15 @@
           <v-container
             ><v-row
               ><v-col cols="12"
-                ><h2>▶モチベーションを高めよう</h2></v-col
+                ><h2 class="display-1 font-regular">
+                  To Keep Your Motivation Flying High.
+                </h2></v-col
               ></v-row
             >
           </v-container>
           <v-form v-model="valid">
             <v-container>
-              <h3>目標を叶えたい理由を書きましょう</h3>
+              <h2 class="headline">Motivation</h2>
               <transition-group name="form" tag="div">
                 <div
                   v-for="(motives, motive_index) in motiveList"
@@ -28,7 +30,6 @@
                             v-model="motives.motive"
                             rows="1"
                             auto-grow
-                            outlined
                           ></v-textarea>
                         </v-col>
                         <v-col cols="1"
@@ -50,11 +51,10 @@
                             v-model="motives.motive"
                             placeholder=""
                             name="理由"
-                            label="理由"
+                            label=""
                             value=""
-                            hint="目標を叶えたい理由を書きましょう"
+                            hint="Why want to achieve it ?"
                             rows="1"
-                            outlined
                             auto-grow
                           ></v-textarea>
                         </v-col>
@@ -77,9 +77,9 @@
           <div>
             <v-form v-model="valid">
               <v-container>
-                <h3>
-                  目標を達成したら周囲にどのような良い影響を与えるか、想像してみてください
-                </h3>
+                <h2 class="headline">
+                  Self Transendense
+                </h2>
                 <transition-group name="form" tag="div">
                   <div
                     v-for="(self_transcendence_goals,
@@ -92,7 +92,6 @@
                           <v-textarea
                             rows="1"
                             auto-grow
-                            outlined
                             v-model="
                               self_transcendence_goals.self_transcendence_goal
                             "
@@ -115,10 +114,10 @@
                         <v-col cols="12" md="12">
                           <v-textarea
                             name="自己超越目標"
-                            label="周囲への影響"
-                            hint="目標を達成した時、周りの人々や環境にどのような良い影響が与えるか、想像してみてください"
+                            label=""
+                            hint="After achieve goal, you think what sort of good impact to
+                  my-self, family, friend etc...?"
                             rows="1"
-                            outlined
                             auto-grow
                             v-model="
                               self_transcendence_goals.self_transcendence_goal
@@ -145,9 +144,9 @@
           <div>
             <v-form v-model="valid">
               <v-container>
-                <h3>
-                  もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう
-                </h3>
+                <h2 class="headline">
+                  Bad future self
+                </h2>
                 <transition-group name="form" tag="div">
                   <div
                     v-for="(future_selves,
@@ -159,9 +158,7 @@
                         <v-col cols="11" md="11">
                           <v-textarea
                             rows="1"
-                            clearable
                             auto-grow
-                            outlined
                             v-model="future_selves.future_self"
                           ></v-textarea>
                         </v-col>
@@ -181,11 +178,9 @@
                       <v-row>
                         <v-col cols="12" md="12">
                           <v-textarea
-                            outlined
                             name="後悔"
-                            clearable
-                            label="後悔"
-                            hint="もし行動しなかった場合。10年度、20年後のあなたの後悔を想像してみましょう"
+                            label=""
+                            hint="If not action to goal think what sort of bad state a far future self."
                             rows="1"
                             auto-grow
                             v-model="future_selves.future_self"
@@ -202,18 +197,20 @@
                     ></v-col
                   >
                 </v-row>
-                <v-btn @click="allMotivesRegister" outlined>登録！</v-btn>
+                <v-btn @click="allMotivesRegister" outlined>submit</v-btn>
               </v-container>
             </v-form>
           </div>
         </div>
 
-        <!-- view mode -->
+        <!-- View mode -->
         <div v-else key="1">
           <v-container
             ><v-row
               ><v-col cols="12"
-                ><h2>▶モチベーションを高めよう</h2></v-col
+                ><h2 class="display-1 font-regular">
+                  To Keep Your Motivation Flying High.
+                </h2></v-col
               ></v-row
             >
           </v-container>
@@ -221,15 +218,15 @@
 
           <v-container>
             <div>
-              <h3 class="subtitle">目標を叶えたい理由</h3>
+              <h3 class="headline">Motivation</h3>
               <v-row
                 ><v-col>
                   <v-list shaped color="#f0f0f0" flat class="list">
                     <v-list-item-group
                       ><div
                         class="contents"
-                        v-for="(motives, index) in motiveList"
-                        v-bind:key="motives.id"
+                        v-for="(motives, motives_index) in motiveList"
+                        v-bind:key="motives_index"
                       >
                         <v-list-item
                           v-for="(motive, index) in motives"
@@ -239,7 +236,7 @@
                             :key="index"
                           ></v-list-item-content>
                         </v-list-item>
-                        <v-divider :key="index"></v-divider>
+                        <v-divider inset></v-divider>
                       </div>
                     </v-list-item-group>
                   </v-list>
@@ -252,15 +249,14 @@
           <!-- self stanscendence  -->
           <v-container>
             <div>
-              <h3 class="subtitle">達成した時、周りに与える影響</h3>
+              <h3 class="headline">Self Transendense</h3>
               <v-row
                 ><v-col>
                   <v-list shaped color="#f0f0f0" flat class="list">
                     <v-list-item-group
                       ><div
                         class="contents"
-                        v-for="(self_transcendence_goals,
-                        index) in selfTranscendenceGoalList"
+                        v-for="self_transcendence_goals in selfTranscendenceGoalList"
                         v-bind:key="self_transcendence_goals.id"
                       >
                         <v-list-item
@@ -274,7 +270,7 @@
                             :key="index"
                           ></v-list-item-content>
                         </v-list-item>
-                        <v-divider :key="index"></v-divider>
+                        <v-divider inset></v-divider>
                       </div>
                     </v-list-item-group>
                   </v-list>
@@ -287,14 +283,14 @@
           <!-- self stanscendence  -->
           <v-container>
             <div>
-              <h3 class="subtitle">後悔</h3>
+              <h3 class="headline">Bad future self</h3>
               <v-row
                 ><v-col>
                   <v-list shaped color="#f0f0f0" flat class="list">
                     <v-list-item-group
                       ><div
                         class="contents"
-                        v-for="(future_selves, index) in futureSelfList"
+                        v-for="future_selves in futureSelfList"
                         :key="future_selves.id"
                       >
                         <v-list-item
@@ -305,7 +301,7 @@
                             :key="index"
                           ></v-list-item-content>
                         </v-list-item>
-                        <v-divider :key="index"></v-divider>
+                        <v-divider inset></v-divider>
                       </div>
                     </v-list-item-group>
                   </v-list>
@@ -505,7 +501,7 @@ export default {
 #motivation {
   background-color: #f0f0f0;
   border-radius: 50px;
-  padding: 40px 40px 40px 40px;
+  padding: 70px;
   margin: 40px 40px 40px 40px;
   transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
 }
@@ -520,7 +516,7 @@ h3 {
   color: rgb(83, 83, 83);
 }
 
-.subtitle {
+/* .subtitle {
   padding: 0 0 0 25px;
   margin: 0 0 0 25px;
 }
@@ -528,7 +524,7 @@ h3 {
 .list {
   padding: 0 50px 0 50px;
   margin: 0 50px 0 50px;
-}
+} */
 
 .v-messages {
   font-size: 15px;

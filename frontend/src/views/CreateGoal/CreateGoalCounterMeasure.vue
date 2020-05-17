@@ -10,12 +10,14 @@
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <h2>▶　挫折をしないために準備する</h2>
+                  <h2 class="display-1 font-regular">
+                    Lets preparations for not give up.
+                  </h2>
                 </v-col>
               </v-row>
             </v-container>
             <v-container>
-              <h3>心配事と、それに対する対策を考えておきましょう</h3>
+              <h3 class="headline">Obstacle & Countermeasure.</h3>
               <!-- @@@@ Worry, Idea Model Form @@@@ -->
               <transition-group name="form" tag="div">
                 <div
@@ -28,7 +30,6 @@
                       <v-col cols="11" md="11">
                         <v-textarea
                           rows="1"
-                          outlined
                           auto-grow
                           v-model="worries.worry"
                         ></v-textarea>
@@ -58,7 +59,6 @@
                               <v-textarea
                                 rows="1"
                                 auto-grow
-                                outlined
                                 v-model="ideas.idea"
                               ></v-textarea> </v-col
                             ><v-col cols="1"
@@ -81,7 +81,6 @@
                               <v-textarea
                                 rows="1"
                                 auto-grow
-                                outlined
                                 v-model="ideas.idea"
                               ></v-textarea></v-col
                             ><v-col cols="1"></v-col
@@ -98,10 +97,9 @@
                       <v-col cols="12" md="12">
                         <v-textarea
                           name="障壁"
-                          label="障壁"
-                          hint="行動するにあたって、不安やわからないことをたくさん書いておきましょう"
+                          label="Obstacle"
+                          hint=""
                           rows="1"
-                          outlined
                           auto-grow
                           v-model="worries.worry"
                         ></v-textarea>
@@ -121,7 +119,6 @@
                               <v-textarea
                                 rows="1"
                                 auto-grow
-                                outlined
                                 v-model="ideas.idea"
                               ></v-textarea> </v-col
                             ><v-col cols="1"
@@ -143,11 +140,10 @@
                             <v-col>
                               <v-textarea
                                 name="解決策"
-                                label="解決策"
-                                hint="前もって障壁に対する解決策を考えておきましょう"
+                                label="Countermeasure."
+                                hint=""
                                 rows="1"
                                 auto-grow
-                                outlined
                                 v-model="ideas.idea"
                               ></v-textarea></v-col
                           ></template>
@@ -182,7 +178,7 @@
             </v-container>
             <v-form v-model="valid">
               <v-container>
-                <h3>参考にできそうな資料を登録しておきましょう</h3>
+                <h3 class="headline">References</h3>
                 <transition-group name="form" tag="div">
                   <div
                     v-for="(references, ref_index) in refList"
@@ -192,19 +188,16 @@
                       <v-row>
                         <v-col cols="4">
                           <v-text-field
-                            outlined
                             v-model="references.reference_name"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="4">
                           <v-text-field
-                            outlined
                             v-model="references.reference_use"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="3">
                           <v-text-field
-                            outlined
                             v-model="references.reference_source"
                           ></v-text-field>
                         </v-col>
@@ -223,25 +216,22 @@
                       <v-row>
                         <v-col cols="4">
                           <v-text-field
-                            label="資料"
-                            hint="参考にしたい資料を前もって登録しておきましょう"
-                            outlined
+                            label="Name"
+                            hint=""
                             v-model="references.reference_name"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="4">
                           <v-text-field
-                            label="用途"
-                            hint="この資料の用途を書きましょう"
-                            outlined
+                            label="Use"
+                            hint=""
                             v-model="references.reference_use"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="4">
                           <v-text-field
                             label="URL"
-                            hint="場所など"
-                            outlined
+                            hint=""
                             v-model="references.reference_source"
                           ></v-text-field>
                         </v-col>
@@ -507,7 +497,7 @@ export default {
   background: #f0f0f0;
   /* border: 1px black solid; */
   border-radius: 50px;
-  padding: 40px 40px 40px 40px;
+  padding: 70px;
   margin: 40px 40px 40px 40px;
   transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
 

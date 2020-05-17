@@ -1,0 +1,4238 @@
+openapi: 3.0.2
+info:
+  title: ""
+  version: ""
+paths:
+  /api/v1/goals/:
+    get:
+      operationId: listGoals
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    goal_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    goal_title:
+                      type: string
+                      maxLength: 200
+                    created_at:
+                      type: string
+                      format: date-time
+                    goal_description:
+                      type: string
+                      nullable: true
+                    start_date:
+                      type: string
+                      format: date
+                      nullable: true
+                    deadline:
+                      type: string
+                      format: date
+                      nullable: true
+                    achievement:
+                      type: integer
+                      nullable: true
+                    progress_type:
+                      enum:
+                        - 0
+                        - 1
+                        - 2
+                      nullable: true
+                    motives:
+                      type: array
+                      items:
+                        properties:
+                          motive_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          motive:
+                            type: string
+                            nullable: true
+                          created_at:
+                            type: string
+                            format: date-time
+                          goal:
+                            type: string
+                        required:
+                          - goal
+                    self_transcendence_goals:
+                      type: array
+                      items:
+                        properties:
+                          selftrans_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          self_transcendence_goal:
+                            type: string
+                            nullable: true
+                          created_at:
+                            type: string
+                            format: date-time
+                          goal:
+                            type: string
+                        required:
+                          - goal
+                    future_selves:
+                      type: array
+                      items:
+                        properties:
+                          future_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          future_self:
+                            type: string
+                            nullable: true
+                          created_at:
+                            type: string
+                            format: date-time
+                          goal:
+                            type: string
+                        required:
+                          - goal
+                    worries:
+                      type: array
+                      items:
+                        properties:
+                          worry_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          worry:
+                            type: string
+                            nullable: true
+                          created_at:
+                            type: string
+                            format: date-time
+                          goal:
+                            type: string
+                          ideas:
+                            type: array
+                            items:
+                              properties:
+                                idea_id:
+                                  type: string
+                                  format: uuid
+                                  readOnly: true
+                                idea:
+                                  type: string
+                                  nullable: true
+                                created_at:
+                                  type: string
+                                  format: date-time
+                                worry:
+                                  type: string
+                              required:
+                                - worry
+                            nullable: true
+                        required:
+                          - goal
+                      nullable: true
+                    references:
+                      type: array
+                      items:
+                        properties:
+                          reference_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          reference_name:
+                            type: string
+                            nullable: true
+                            maxLength: 200
+                          reference_use:
+                            type: string
+                            nullable: true
+                            maxLength: 200
+                          reference_source:
+                            type: string
+                            format: uri
+                            nullable: true
+                            maxLength: 200
+                            pattern:
+                              "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                              s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                              .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                              .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                              -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                              .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                              .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                          created_at:
+                            type: string
+                            format: date-time
+                          goal:
+                            type: string
+                        required:
+                          - goal
+                    notes:
+                      type: array
+                      items:
+                        properties:
+                          note_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          note_title:
+                            type: string
+                            nullable: true
+                            maxLength: 200
+                          note_main:
+                            type: string
+                            nullable: true
+                          created_at:
+                            type: string
+                            format: date-time
+                          update_at:
+                            type: string
+                            format: date-time
+                          goal:
+                            type: string
+                        required:
+                          - goal
+                    tasks:
+                      type: array
+                      items:
+                        properties:
+                          task_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          task_title:
+                            type: string
+                            maxLength: 40
+                          created_at:
+                            type: string
+                            format: date-time
+                          goal:
+                            type: string
+                        required:
+                          - task_title
+                          - goal
+                  required:
+                    - goal_title
+          description: ""
+    post:
+      operationId: createGoal
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id001
+              properties:
+                goal_title:
+                  type: string
+                  maxLength: 200
+                created_at:
+                  type: string
+                  format: date-time
+                goal_description:
+                  type: string
+                  nullable: true
+                start_date:
+                  type: string
+                  format: date
+                  nullable: true
+                deadline:
+                  type: string
+                  format: date
+                  nullable: true
+                achievement:
+                  type: integer
+                  nullable: true
+                progress_type:
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  nullable: true
+                motives:
+                  type: array
+                  items:
+                    properties:
+                      motive_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      motive:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                self_transcendence_goals:
+                  type: array
+                  items:
+                    properties:
+                      selftrans_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      self_transcendence_goal:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                future_selves:
+                  type: array
+                  items:
+                    properties:
+                      future_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      future_self:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                worries:
+                  type: array
+                  items:
+                    properties:
+                      worry_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      worry:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                      ideas:
+                        type: array
+                        items:
+                          properties:
+                            idea_id:
+                              type: string
+                              format: uuid
+                              readOnly: true
+                            idea:
+                              type: string
+                              nullable: true
+                            created_at:
+                              type: string
+                              format: date-time
+                            worry:
+                              type: string
+                          required:
+                            - worry
+                        nullable: true
+                    required:
+                      - goal
+                  nullable: true
+                references:
+                  type: array
+                  items:
+                    properties:
+                      reference_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      reference_name:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      reference_use:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      reference_source:
+                        type: string
+                        format: uri
+                        nullable: true
+                        maxLength: 200
+                        pattern:
+                          "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                          s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\\
+                          d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF\
+                          0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1-\uFFFF0-9])?(?:\\\
+                          .(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                          -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                          d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                notes:
+                  type: array
+                  items:
+                    properties:
+                      note_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      note_title:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      note_main:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      update_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                tasks:
+                  type: array
+                  items:
+                    properties:
+                      task_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      task_title:
+                        type: string
+                        maxLength: 40
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - task_title
+                      - goal
+              required:
+                - goal_title
+          application/x-www-form-urlencoded:
+            schema: *id001
+          multipart/form-data:
+            schema: *id001
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  goal_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  goal_title:
+                    type: string
+                    maxLength: 200
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal_description:
+                    type: string
+                    nullable: true
+                  start_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  deadline:
+                    type: string
+                    format: date
+                    nullable: true
+                  achievement:
+                    type: integer
+                    nullable: true
+                  progress_type:
+                    enum:
+                      - 0
+                      - 1
+                      - 2
+                    nullable: true
+                  motives:
+                    type: array
+                    items:
+                      properties:
+                        motive_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        motive:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  self_transcendence_goals:
+                    type: array
+                    items:
+                      properties:
+                        selftrans_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        self_transcendence_goal:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  future_selves:
+                    type: array
+                    items:
+                      properties:
+                        future_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        future_self:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  worries:
+                    type: array
+                    items:
+                      properties:
+                        worry_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        worry:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                        ideas:
+                          type: array
+                          items:
+                            properties:
+                              idea_id:
+                                type: string
+                                format: uuid
+                                readOnly: true
+                              idea:
+                                type: string
+                                nullable: true
+                              created_at:
+                                type: string
+                                format: date-time
+                              worry:
+                                type: string
+                            required:
+                              - worry
+                          nullable: true
+                      required:
+                        - goal
+                    nullable: true
+                  references:
+                    type: array
+                    items:
+                      properties:
+                        reference_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        reference_name:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_use:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_source:
+                          type: string
+                          format: uri
+                          nullable: true
+                          maxLength: 200
+                          pattern:
+                            "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                            s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                            .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                            .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                            -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                            .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  notes:
+                    type: array
+                    items:
+                      properties:
+                        note_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        note_title:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        note_main:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        update_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  tasks:
+                    type: array
+                    items:
+                      properties:
+                        task_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        task_title:
+                          type: string
+                          maxLength: 40
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - task_title
+                        - goal
+                required:
+                  - goal_title
+          description: ""
+  /api/v1/goals/{goal_id}/:
+    get:
+      operationId: retrieveGoal
+      description: ""
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          description: A UUID string identifying this goal.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  goal_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  goal_title:
+                    type: string
+                    maxLength: 200
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal_description:
+                    type: string
+                    nullable: true
+                  start_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  deadline:
+                    type: string
+                    format: date
+                    nullable: true
+                  achievement:
+                    type: integer
+                    nullable: true
+                  progress_type:
+                    enum:
+                      - 0
+                      - 1
+                      - 2
+                    nullable: true
+                  motives:
+                    type: array
+                    items:
+                      properties:
+                        motive_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        motive:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  self_transcendence_goals:
+                    type: array
+                    items:
+                      properties:
+                        selftrans_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        self_transcendence_goal:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  future_selves:
+                    type: array
+                    items:
+                      properties:
+                        future_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        future_self:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  worries:
+                    type: array
+                    items:
+                      properties:
+                        worry_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        worry:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                        ideas:
+                          type: array
+                          items:
+                            properties:
+                              idea_id:
+                                type: string
+                                format: uuid
+                                readOnly: true
+                              idea:
+                                type: string
+                                nullable: true
+                              created_at:
+                                type: string
+                                format: date-time
+                              worry:
+                                type: string
+                            required:
+                              - worry
+                          nullable: true
+                      required:
+                        - goal
+                    nullable: true
+                  references:
+                    type: array
+                    items:
+                      properties:
+                        reference_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        reference_name:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_use:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_source:
+                          type: string
+                          format: uri
+                          nullable: true
+                          maxLength: 200
+                          pattern:
+                            "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                            s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                            .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                            .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                            -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                            .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  notes:
+                    type: array
+                    items:
+                      properties:
+                        note_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        note_title:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        note_main:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        update_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  tasks:
+                    type: array
+                    items:
+                      properties:
+                        task_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        task_title:
+                          type: string
+                          maxLength: 40
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - task_title
+                        - goal
+                required:
+                  - goal_title
+          description: ""
+    put:
+      operationId: updateGoal
+      description: ""
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          description: A UUID string identifying this goal.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id002
+              properties:
+                goal_title:
+                  type: string
+                  maxLength: 200
+                created_at:
+                  type: string
+                  format: date-time
+                goal_description:
+                  type: string
+                  nullable: true
+                start_date:
+                  type: string
+                  format: date
+                  nullable: true
+                deadline:
+                  type: string
+                  format: date
+                  nullable: true
+                achievement:
+                  type: integer
+                  nullable: true
+                progress_type:
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  nullable: true
+                motives:
+                  type: array
+                  items:
+                    properties:
+                      motive_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      motive:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                self_transcendence_goals:
+                  type: array
+                  items:
+                    properties:
+                      selftrans_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      self_transcendence_goal:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                future_selves:
+                  type: array
+                  items:
+                    properties:
+                      future_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      future_self:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                worries:
+                  type: array
+                  items:
+                    properties:
+                      worry_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      worry:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                      ideas:
+                        type: array
+                        items:
+                          properties:
+                            idea_id:
+                              type: string
+                              format: uuid
+                              readOnly: true
+                            idea:
+                              type: string
+                              nullable: true
+                            created_at:
+                              type: string
+                              format: date-time
+                            worry:
+                              type: string
+                          required:
+                            - worry
+                        nullable: true
+                    required:
+                      - goal
+                  nullable: true
+                references:
+                  type: array
+                  items:
+                    properties:
+                      reference_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      reference_name:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      reference_use:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      reference_source:
+                        type: string
+                        format: uri
+                        nullable: true
+                        maxLength: 200
+                        pattern:
+                          "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                          s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\\
+                          d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF\
+                          0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1-\uFFFF0-9])?(?:\\\
+                          .(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                          -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                          d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                notes:
+                  type: array
+                  items:
+                    properties:
+                      note_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      note_title:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      note_main:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      update_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                tasks:
+                  type: array
+                  items:
+                    properties:
+                      task_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      task_title:
+                        type: string
+                        maxLength: 40
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - task_title
+                      - goal
+              required:
+                - goal_title
+          application/x-www-form-urlencoded:
+            schema: *id002
+          multipart/form-data:
+            schema: *id002
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  goal_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  goal_title:
+                    type: string
+                    maxLength: 200
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal_description:
+                    type: string
+                    nullable: true
+                  start_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  deadline:
+                    type: string
+                    format: date
+                    nullable: true
+                  achievement:
+                    type: integer
+                    nullable: true
+                  progress_type:
+                    enum:
+                      - 0
+                      - 1
+                      - 2
+                    nullable: true
+                  motives:
+                    type: array
+                    items:
+                      properties:
+                        motive_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        motive:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  self_transcendence_goals:
+                    type: array
+                    items:
+                      properties:
+                        selftrans_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        self_transcendence_goal:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  future_selves:
+                    type: array
+                    items:
+                      properties:
+                        future_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        future_self:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  worries:
+                    type: array
+                    items:
+                      properties:
+                        worry_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        worry:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                        ideas:
+                          type: array
+                          items:
+                            properties:
+                              idea_id:
+                                type: string
+                                format: uuid
+                                readOnly: true
+                              idea:
+                                type: string
+                                nullable: true
+                              created_at:
+                                type: string
+                                format: date-time
+                              worry:
+                                type: string
+                            required:
+                              - worry
+                          nullable: true
+                      required:
+                        - goal
+                    nullable: true
+                  references:
+                    type: array
+                    items:
+                      properties:
+                        reference_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        reference_name:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_use:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_source:
+                          type: string
+                          format: uri
+                          nullable: true
+                          maxLength: 200
+                          pattern:
+                            "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                            s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                            .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                            .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                            -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                            .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  notes:
+                    type: array
+                    items:
+                      properties:
+                        note_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        note_title:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        note_main:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        update_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  tasks:
+                    type: array
+                    items:
+                      properties:
+                        task_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        task_title:
+                          type: string
+                          maxLength: 40
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - task_title
+                        - goal
+                required:
+                  - goal_title
+          description: ""
+    patch:
+      operationId: partial_updateGoal
+      description: ""
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          description: A UUID string identifying this goal.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id003
+              properties:
+                goal_title:
+                  type: string
+                  maxLength: 200
+                created_at:
+                  type: string
+                  format: date-time
+                goal_description:
+                  type: string
+                  nullable: true
+                start_date:
+                  type: string
+                  format: date
+                  nullable: true
+                deadline:
+                  type: string
+                  format: date
+                  nullable: true
+                achievement:
+                  type: integer
+                  nullable: true
+                progress_type:
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  nullable: true
+                motives:
+                  type: array
+                  items:
+                    properties:
+                      motive_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      motive:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                self_transcendence_goals:
+                  type: array
+                  items:
+                    properties:
+                      selftrans_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      self_transcendence_goal:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                future_selves:
+                  type: array
+                  items:
+                    properties:
+                      future_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      future_self:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                worries:
+                  type: array
+                  items:
+                    properties:
+                      worry_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      worry:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                      ideas:
+                        type: array
+                        items:
+                          properties:
+                            idea_id:
+                              type: string
+                              format: uuid
+                              readOnly: true
+                            idea:
+                              type: string
+                              nullable: true
+                            created_at:
+                              type: string
+                              format: date-time
+                            worry:
+                              type: string
+                          required:
+                            - worry
+                        nullable: true
+                    required:
+                      - goal
+                  nullable: true
+                references:
+                  type: array
+                  items:
+                    properties:
+                      reference_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      reference_name:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      reference_use:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      reference_source:
+                        type: string
+                        format: uri
+                        nullable: true
+                        maxLength: 200
+                        pattern:
+                          "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                          s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\\
+                          d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF\
+                          0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1-\uFFFF0-9])?(?:\\\
+                          .(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                          -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                          d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                notes:
+                  type: array
+                  items:
+                    properties:
+                      note_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      note_title:
+                        type: string
+                        nullable: true
+                        maxLength: 200
+                      note_main:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      update_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - goal
+                tasks:
+                  type: array
+                  items:
+                    properties:
+                      task_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      task_title:
+                        type: string
+                        maxLength: 40
+                      created_at:
+                        type: string
+                        format: date-time
+                      goal:
+                        type: string
+                    required:
+                      - task_title
+                      - goal
+          application/x-www-form-urlencoded:
+            schema: *id003
+          multipart/form-data:
+            schema: *id003
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  goal_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  goal_title:
+                    type: string
+                    maxLength: 200
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal_description:
+                    type: string
+                    nullable: true
+                  start_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  deadline:
+                    type: string
+                    format: date
+                    nullable: true
+                  achievement:
+                    type: integer
+                    nullable: true
+                  progress_type:
+                    enum:
+                      - 0
+                      - 1
+                      - 2
+                    nullable: true
+                  motives:
+                    type: array
+                    items:
+                      properties:
+                        motive_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        motive:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  self_transcendence_goals:
+                    type: array
+                    items:
+                      properties:
+                        selftrans_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        self_transcendence_goal:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  future_selves:
+                    type: array
+                    items:
+                      properties:
+                        future_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        future_self:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  worries:
+                    type: array
+                    items:
+                      properties:
+                        worry_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        worry:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                        ideas:
+                          type: array
+                          items:
+                            properties:
+                              idea_id:
+                                type: string
+                                format: uuid
+                                readOnly: true
+                              idea:
+                                type: string
+                                nullable: true
+                              created_at:
+                                type: string
+                                format: date-time
+                              worry:
+                                type: string
+                            required:
+                              - worry
+                          nullable: true
+                      required:
+                        - goal
+                    nullable: true
+                  references:
+                    type: array
+                    items:
+                      properties:
+                        reference_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        reference_name:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_use:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        reference_source:
+                          type: string
+                          format: uri
+                          nullable: true
+                          maxLength: 200
+                          pattern:
+                            "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                            s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                            .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                            .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                            -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                            .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  notes:
+                    type: array
+                    items:
+                      properties:
+                        note_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        note_title:
+                          type: string
+                          nullable: true
+                          maxLength: 200
+                        note_main:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        update_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - goal
+                  tasks:
+                    type: array
+                    items:
+                      properties:
+                        task_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        task_title:
+                          type: string
+                          maxLength: 40
+                        created_at:
+                          type: string
+                          format: date-time
+                        goal:
+                          type: string
+                      required:
+                        - task_title
+                        - goal
+                required:
+                  - goal_title
+          description: ""
+    delete:
+      operationId: destroyGoal
+      description: ""
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          description: A UUID string identifying this goal.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/tasks/:
+    get:
+      operationId: listTasks
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    task_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    task_title:
+                      type: string
+                      maxLength: 40
+                    created_at:
+                      type: string
+                      format: date-time
+                    goal:
+                      type: string
+                  required:
+                    - task_title
+                    - goal
+          description: ""
+    post:
+      operationId: createTask
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id004
+              properties:
+                task_title:
+                  type: string
+                  maxLength: 40
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - task_title
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id004
+          multipart/form-data:
+            schema: *id004
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  task_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  task_title:
+                    type: string
+                    maxLength: 40
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - task_title
+                  - goal
+          description: ""
+  /api/v1/goals/{goal_pk}/tasks/{task_id}/:
+    get:
+      operationId: retrieveTask
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: A UUID string identifying this task.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  task_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  task_title:
+                    type: string
+                    maxLength: 40
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - task_title
+                  - goal
+          description: ""
+    put:
+      operationId: updateTask
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: A UUID string identifying this task.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id005
+              properties:
+                task_title:
+                  type: string
+                  maxLength: 40
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - task_title
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id005
+          multipart/form-data:
+            schema: *id005
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  task_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  task_title:
+                    type: string
+                    maxLength: 40
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - task_title
+                  - goal
+          description: ""
+    patch:
+      operationId: partial_updateTask
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: A UUID string identifying this task.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id006
+              properties:
+                task_title:
+                  type: string
+                  maxLength: 40
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id006
+          multipart/form-data:
+            schema: *id006
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  task_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  task_title:
+                    type: string
+                    maxLength: 40
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - task_title
+                  - goal
+          description: ""
+    delete:
+      operationId: destroyTask
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: A UUID string identifying this task.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/motives/:
+    get:
+      operationId: listMotives
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    motive_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    motive:
+                      type: string
+                      nullable: true
+                    created_at:
+                      type: string
+                      format: date-time
+                    goal:
+                      type: string
+                  required:
+                    - goal
+          description: ""
+    post:
+      operationId: createMotive
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id007
+              properties:
+                motive:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id007
+          multipart/form-data:
+            schema: *id007
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  motive_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  motive:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+  /api/v1/goals/{goal_pk}/motives/{motive_id}/:
+    get:
+      operationId: retrieveMotive
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: motive_id
+          in: path
+          required: true
+          description: A UUID string identifying this motive.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  motive_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  motive:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    put:
+      operationId: updateMotive
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: motive_id
+          in: path
+          required: true
+          description: A UUID string identifying this motive.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id008
+              properties:
+                motive:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id008
+          multipart/form-data:
+            schema: *id008
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  motive_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  motive:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    patch:
+      operationId: partial_updateMotive
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: motive_id
+          in: path
+          required: true
+          description: A UUID string identifying this motive.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id009
+              properties:
+                motive:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id009
+          multipart/form-data:
+            schema: *id009
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  motive_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  motive:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    delete:
+      operationId: destroyMotive
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: motive_id
+          in: path
+          required: true
+          description: A UUID string identifying this motive.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/self_transcendence_goals/:
+    get:
+      operationId: listSelfTranscendenceGoals
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    selftrans_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    self_transcendence_goal:
+                      type: string
+                      nullable: true
+                    created_at:
+                      type: string
+                      format: date-time
+                    goal:
+                      type: string
+                  required:
+                    - goal
+          description: ""
+    post:
+      operationId: createSelfTranscendenceGoal
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id010
+              properties:
+                self_transcendence_goal:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id010
+          multipart/form-data:
+            schema: *id010
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  selftrans_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  self_transcendence_goal:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+  /api/v1/goals/{goal_pk}/self_transcendence_goals/{selftrans_id}/:
+    get:
+      operationId: retrieveSelfTranscendenceGoal
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: selftrans_id
+          in: path
+          required: true
+          description: A UUID string identifying this self transcendence goal.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  selftrans_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  self_transcendence_goal:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    put:
+      operationId: updateSelfTranscendenceGoal
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: selftrans_id
+          in: path
+          required: true
+          description: A UUID string identifying this self transcendence goal.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id011
+              properties:
+                self_transcendence_goal:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id011
+          multipart/form-data:
+            schema: *id011
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  selftrans_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  self_transcendence_goal:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    patch:
+      operationId: partial_updateSelfTranscendenceGoal
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: selftrans_id
+          in: path
+          required: true
+          description: A UUID string identifying this self transcendence goal.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id012
+              properties:
+                self_transcendence_goal:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id012
+          multipart/form-data:
+            schema: *id012
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  selftrans_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  self_transcendence_goal:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    delete:
+      operationId: destroySelfTranscendenceGoal
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: selftrans_id
+          in: path
+          required: true
+          description: A UUID string identifying this self transcendence goal.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/future_selves/:
+    get:
+      operationId: listFutureSelfs
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    future_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    future_self:
+                      type: string
+                      nullable: true
+                    created_at:
+                      type: string
+                      format: date-time
+                    goal:
+                      type: string
+                  required:
+                    - goal
+          description: ""
+    post:
+      operationId: createFutureSelf
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id013
+              properties:
+                future_self:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id013
+          multipart/form-data:
+            schema: *id013
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  future_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  future_self:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+  /api/v1/goals/{goal_pk}/future_selves/{future_id}/:
+    get:
+      operationId: retrieveFutureSelf
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: future_id
+          in: path
+          required: true
+          description: A UUID string identifying this future self.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  future_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  future_self:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    put:
+      operationId: updateFutureSelf
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: future_id
+          in: path
+          required: true
+          description: A UUID string identifying this future self.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id014
+              properties:
+                future_self:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id014
+          multipart/form-data:
+            schema: *id014
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  future_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  future_self:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    patch:
+      operationId: partial_updateFutureSelf
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: future_id
+          in: path
+          required: true
+          description: A UUID string identifying this future self.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id015
+              properties:
+                future_self:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id015
+          multipart/form-data:
+            schema: *id015
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  future_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  future_self:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    delete:
+      operationId: destroyFutureSelf
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: future_id
+          in: path
+          required: true
+          description: A UUID string identifying this future self.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/worries/:
+    get:
+      operationId: listWorrys
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    worry_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    worry:
+                      type: string
+                      nullable: true
+                    created_at:
+                      type: string
+                      format: date-time
+                    goal:
+                      type: string
+                    ideas:
+                      type: array
+                      items:
+                        properties:
+                          idea_id:
+                            type: string
+                            format: uuid
+                            readOnly: true
+                          idea:
+                            type: string
+                            nullable: true
+                          created_at:
+                            type: string
+                            format: date-time
+                          worry:
+                            type: string
+                        required:
+                          - worry
+                      nullable: true
+                  required:
+                    - goal
+          description: ""
+    post:
+      operationId: createWorry
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id016
+              properties:
+                worry:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+                ideas:
+                  type: array
+                  items:
+                    properties:
+                      idea_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      idea:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      worry:
+                        type: string
+                    required:
+                      - worry
+                  nullable: true
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id016
+          multipart/form-data:
+            schema: *id016
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  worry_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  worry:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                  ideas:
+                    type: array
+                    items:
+                      properties:
+                        idea_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        idea:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        worry:
+                          type: string
+                      required:
+                        - worry
+                    nullable: true
+                required:
+                  - goal
+          description: ""
+  /api/v1/goals/{goal_pk}/worries/{worry_id}/:
+    get:
+      operationId: retrieveWorry
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_id
+          in: path
+          required: true
+          description: A UUID string identifying this worry.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  worry_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  worry:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                  ideas:
+                    type: array
+                    items:
+                      properties:
+                        idea_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        idea:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        worry:
+                          type: string
+                      required:
+                        - worry
+                    nullable: true
+                required:
+                  - goal
+          description: ""
+    put:
+      operationId: updateWorry
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_id
+          in: path
+          required: true
+          description: A UUID string identifying this worry.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id017
+              properties:
+                worry:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+                ideas:
+                  type: array
+                  items:
+                    properties:
+                      idea_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      idea:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      worry:
+                        type: string
+                    required:
+                      - worry
+                  nullable: true
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id017
+          multipart/form-data:
+            schema: *id017
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  worry_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  worry:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                  ideas:
+                    type: array
+                    items:
+                      properties:
+                        idea_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        idea:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        worry:
+                          type: string
+                      required:
+                        - worry
+                    nullable: true
+                required:
+                  - goal
+          description: ""
+    patch:
+      operationId: partial_updateWorry
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_id
+          in: path
+          required: true
+          description: A UUID string identifying this worry.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id018
+              properties:
+                worry:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+                ideas:
+                  type: array
+                  items:
+                    properties:
+                      idea_id:
+                        type: string
+                        format: uuid
+                        readOnly: true
+                      idea:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                      worry:
+                        type: string
+                    required:
+                      - worry
+                  nullable: true
+          application/x-www-form-urlencoded:
+            schema: *id018
+          multipart/form-data:
+            schema: *id018
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  worry_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  worry:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                  ideas:
+                    type: array
+                    items:
+                      properties:
+                        idea_id:
+                          type: string
+                          format: uuid
+                          readOnly: true
+                        idea:
+                          type: string
+                          nullable: true
+                        created_at:
+                          type: string
+                          format: date-time
+                        worry:
+                          type: string
+                      required:
+                        - worry
+                    nullable: true
+                required:
+                  - goal
+          description: ""
+    delete:
+      operationId: destroyWorry
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_id
+          in: path
+          required: true
+          description: A UUID string identifying this worry.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/references/:
+    get:
+      operationId: listReferences
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    reference_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    reference_name:
+                      type: string
+                      nullable: true
+                      maxLength: 200
+                    reference_use:
+                      type: string
+                      nullable: true
+                      maxLength: 200
+                    reference_source:
+                      type: string
+                      format: uri
+                      nullable: true
+                      maxLength: 200
+                      pattern:
+                        "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                        d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                        [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                        -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                        .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                        .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                    created_at:
+                      type: string
+                      format: date-time
+                    goal:
+                      type: string
+                  required:
+                    - goal
+          description: ""
+    post:
+      operationId: createReference
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id019
+              properties:
+                reference_name:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                reference_use:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                reference_source:
+                  type: string
+                  format: uri
+                  nullable: true
+                  maxLength: 200
+                  pattern:
+                    "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                    d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                    [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                    -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                    -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                    d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id019
+          multipart/form-data:
+            schema: *id019
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  reference_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  reference_name:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_use:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_source:
+                    type: string
+                    format: uri
+                    nullable: true
+                    maxLength: 200
+                    pattern:
+                      "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                      d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                      [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                      -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                      .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                      .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+  /api/v1/goals/{goal_pk}/references/{reference_id}/:
+    get:
+      operationId: retrieveReference
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: reference_id
+          in: path
+          required: true
+          description: A UUID string identifying this reference.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  reference_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  reference_name:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_use:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_source:
+                    type: string
+                    format: uri
+                    nullable: true
+                    maxLength: 200
+                    pattern:
+                      "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                      d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                      [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                      -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                      .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                      .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    put:
+      operationId: updateReference
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: reference_id
+          in: path
+          required: true
+          description: A UUID string identifying this reference.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id020
+              properties:
+                reference_name:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                reference_use:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                reference_source:
+                  type: string
+                  format: uri
+                  nullable: true
+                  maxLength: 200
+                  pattern:
+                    "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                    d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                    [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                    -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                    -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                    d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id020
+          multipart/form-data:
+            schema: *id020
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  reference_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  reference_name:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_use:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_source:
+                    type: string
+                    format: uri
+                    nullable: true
+                    maxLength: 200
+                    pattern:
+                      "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                      d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                      [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                      -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                      .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                      .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    patch:
+      operationId: partial_updateReference
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: reference_id
+          in: path
+          required: true
+          description: A UUID string identifying this reference.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id021
+              properties:
+                reference_name:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                reference_use:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                reference_source:
+                  type: string
+                  format: uri
+                  nullable: true
+                  maxLength: 200
+                  pattern:
+                    "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                    d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                    [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                    -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                    -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                    d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                created_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id021
+          multipart/form-data:
+            schema: *id021
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  reference_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  reference_name:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_use:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  reference_source:
+                    type: string
+                    format: uri
+                    nullable: true
+                    maxLength: 200
+                    pattern:
+                      "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                      d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                      [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                      -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                      .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                      .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                  created_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    delete:
+      operationId: destroyReference
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: reference_id
+          in: path
+          required: true
+          description: A UUID string identifying this reference.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/notes/:
+    get:
+      operationId: listNotes
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    note_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    note_title:
+                      type: string
+                      nullable: true
+                      maxLength: 200
+                    note_main:
+                      type: string
+                      nullable: true
+                    created_at:
+                      type: string
+                      format: date-time
+                    update_at:
+                      type: string
+                      format: date-time
+                    goal:
+                      type: string
+                  required:
+                    - goal
+          description: ""
+    post:
+      operationId: createNote
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id022
+              properties:
+                note_title:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                note_main:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                update_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id022
+          multipart/form-data:
+            schema: *id022
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  note_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  note_title:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  note_main:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  update_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+  /api/v1/goals/{goal_pk}/notes/{note_id}/:
+    get:
+      operationId: retrieveNote
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: note_id
+          in: path
+          required: true
+          description: A UUID string identifying this note.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  note_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  note_title:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  note_main:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  update_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    put:
+      operationId: updateNote
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: note_id
+          in: path
+          required: true
+          description: A UUID string identifying this note.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id023
+              properties:
+                note_title:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                note_main:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                update_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+              required:
+                - goal
+          application/x-www-form-urlencoded:
+            schema: *id023
+          multipart/form-data:
+            schema: *id023
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  note_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  note_title:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  note_main:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  update_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    patch:
+      operationId: partial_updateNote
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: note_id
+          in: path
+          required: true
+          description: A UUID string identifying this note.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id024
+              properties:
+                note_title:
+                  type: string
+                  nullable: true
+                  maxLength: 200
+                note_main:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                update_at:
+                  type: string
+                  format: date-time
+                goal:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id024
+          multipart/form-data:
+            schema: *id024
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  note_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  note_title:
+                    type: string
+                    nullable: true
+                    maxLength: 200
+                  note_main:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  update_at:
+                    type: string
+                    format: date-time
+                  goal:
+                    type: string
+                required:
+                  - goal
+          description: ""
+    delete:
+      operationId: destroyNote
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: note_id
+          in: path
+          required: true
+          description: A UUID string identifying this note.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/v1/goals/{goal_pk}/worries/{worry_pk}/ideas/:
+    get:
+      operationId: listIdeas
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    idea_id:
+                      type: string
+                      format: uuid
+                      readOnly: true
+                    idea:
+                      type: string
+                      nullable: true
+                    created_at:
+                      type: string
+                      format: date-time
+                    worry:
+                      type: string
+                  required:
+                    - worry
+          description: ""
+    post:
+      operationId: createIdea
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id025
+              properties:
+                idea:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                worry:
+                  type: string
+              required:
+                - worry
+          application/x-www-form-urlencoded:
+            schema: *id025
+          multipart/form-data:
+            schema: *id025
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  idea_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  idea:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  worry:
+                    type: string
+                required:
+                  - worry
+          description: ""
+  /api/v1/goals/{goal_pk}/worries/{worry_pk}/ideas/{idea_id}/:
+    get:
+      operationId: retrieveIdea
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: idea_id
+          in: path
+          required: true
+          description: A UUID string identifying this idea.
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  idea_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  idea:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  worry:
+                    type: string
+                required:
+                  - worry
+          description: ""
+    put:
+      operationId: updateIdea
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: idea_id
+          in: path
+          required: true
+          description: A UUID string identifying this idea.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id026
+              properties:
+                idea:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                worry:
+                  type: string
+              required:
+                - worry
+          application/x-www-form-urlencoded:
+            schema: *id026
+          multipart/form-data:
+            schema: *id026
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  idea_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  idea:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  worry:
+                    type: string
+                required:
+                  - worry
+          description: ""
+    patch:
+      operationId: partial_updateIdea
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: idea_id
+          in: path
+          required: true
+          description: A UUID string identifying this idea.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id027
+              properties:
+                idea:
+                  type: string
+                  nullable: true
+                created_at:
+                  type: string
+                  format: date-time
+                worry:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id027
+          multipart/form-data:
+            schema: *id027
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  idea_id:
+                    type: string
+                    format: uuid
+                    readOnly: true
+                  idea:
+                    type: string
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  worry:
+                    type: string
+                required:
+                  - worry
+          description: ""
+    delete:
+      operationId: destroyIdea
+      description: ""
+      parameters:
+        - name: goal_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: worry_pk
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: idea_id
+          in: path
+          required: true
+          description: A UUID string identifying this idea.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+  /api/auth/jwt/create/:
+    post:
+      operationId: CreateTokenObtainPair
+      description:
+        "Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id028
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  writeOnly: true
+              required:
+                - username
+                - password
+          application/x-www-form-urlencoded:
+            schema: *id028
+          multipart/form-data:
+            schema: *id028
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                required:
+                  - username
+          description: ""
+  /api/auth/jwt/refresh/:
+    post:
+      operationId: CreateTokenRefresh
+      description:
+        "Takes a refresh type JSON web token and returns an access type
+        JSON web
+
+        token if the refresh token is valid."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id029
+              properties:
+                refresh:
+                  type: string
+              required:
+                - refresh
+          application/x-www-form-urlencoded:
+            schema: *id029
+          multipart/form-data:
+            schema: *id029
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  refresh:
+                    type: string
+                required:
+                  - refresh
+          description: ""
+  /api/auth/jwt/verify/:
+    post:
+      operationId: CreateTokenVerify
+      description:
+        "Takes a token and indicates if it is valid.  This view provides
+        no
+
+        information about a token's fitness for a particular use."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id030
+              properties:
+                token:
+                  type: string
+              required:
+                - token
+          application/x-www-form-urlencoded:
+            schema: *id030
+          multipart/form-data:
+            schema: *id030
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  token:
+                    type: string
+                required:
+                  - token
+          description: ""

@@ -9,6 +9,7 @@
       <div id="main">
         <nav>
           <router-link to="/"></router-link>
+          <router-link to="/sign-in">Sign in</router-link>
         </nav>
 
         <router-view />

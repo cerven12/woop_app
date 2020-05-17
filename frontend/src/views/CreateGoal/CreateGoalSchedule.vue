@@ -7,7 +7,7 @@
           <!--  Schedule Registerd -->
           <transition name="schedule" mode="out-in">
             <div v-if="rq" key="0">
-              <h2>▶ スケジュールを組もう</h2>
+              <h2 class="display-1 font-regular">Schedule</h2>
               <v-row>
                 <v-col cols="6" md="6">
                   <v-menu
@@ -159,7 +159,7 @@ export default {
 
   /* border: 1px black solid; */
   border-radius: 50px;
-  padding: 40px 40px 40px 40px;
+  padding: 70px;
   margin: 40px 40px 40px 40px;
   transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
   /*

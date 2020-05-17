@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import CreateGoal from "@/views/CreateGoal.vue";
+import CreateGoal from "@/views/CreateGoal/CreateGoal.vue";
+import SignIn from "@/views/SignIn/signin.vue";
 
 Vue.use(VueRouter);
 
@@ -8,6 +9,10 @@ const routes = [
   {
     path: "/",
     component: CreateGoal,
+  },
+  {
+    path: "/sign-in",
+    component: SignIn,
   },
 ];
 

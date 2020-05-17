@@ -53,19 +53,20 @@ INSTALLED_APPS = [
 # Django REST frameworkの設定
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # Simple JWTの読み込み
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.permissions.IsAuthenticated',
     ],
 }
 
 # Simple JWTの設定
 SIMPLE_JWT = {
     # トークンをJWTに設定
+    'JWT_ALLOW_REFRESH': True,
     'AUTH_HEADER_TYPES': ('JWT',),
-    # トークンの持続時間の設定
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60)
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=5)
 }
 
+SESSION_COOKIE_HTTPONLY = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

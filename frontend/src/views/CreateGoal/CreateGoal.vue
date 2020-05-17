@@ -10,15 +10,17 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" md="12">
-                    <h3>
-                      あなたが達成したい目標を書きましょう
-                    </h3>
+                    <h2 class="headline">
+                      Write it down your Goal.
+                    </h2>
                   </v-col>
                 </v-row>
 
                 <v-row justify="start">
                   <v-col cols="8" md="12" lg="8"
-                    ><h1>{{ goal_title }}</h1>
+                    ><h1 class="display-2">
+                      {{ goal_title }}
+                    </h1>
                   </v-col>
                   <v-spacer></v-spacer>
                   <v-col cols="2">
@@ -28,22 +30,32 @@
                       v-show="new_goal_registered"
                       id="check"
                       >mdi-check-bold</v-icon
+                    ><v-btn
+                      class="ma-2"
+                      text
+                      x-large
+                      id="check"
+                      @click="newGoalRegister(goal_title, goal_description)"
+                      >Post!</v-btn
                     >
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12" md="12">
-                    <div style="white-space: pre-line;">
+                    <!-- <div
+                      style="white-space: pre-line;"
+                      class="title font-regular"
+                    >
                       {{ goal_description }}
-                    </div>
+                    </div> -->
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12">
                     <v-text-field
-                      label="目標を決めよう"
+                      label="Your Goal"
+                      hint=""
                       placeholder=""
-                      outlined
                       v-model="goal_title"
                     ></v-text-field>
                   </v-col>
@@ -57,27 +69,26 @@
                   :toolbars="toolbars"
                 /> -->
                     <v-textarea
-                      name="詳しく"
-                      label="詳しく"
-                      hint="達成したとみなす水準"
-                      rows="5"
-                      outlined
+                      name="Detail"
+                      label="Detail"
+                      hint="In more detail."
+                      rows="1"
                       auto-grow
-                      placeholder="どこで、なにを、どのように、どの水準で達成したいか"
+                      placeholder=""
                       v-model="goal_description"
                     ></v-textarea>
                   </v-col>
                 </v-row>
-                <v-row>
+                <!-- <v-row>
                   <v-col cols="12">
                     <v-btn
                       class="ma-2"
                       outlined
                       @click="newGoalRegister(goal_title, goal_description)"
-                      >決定</v-btn
+                      >submit</v-btn
                     >
                   </v-col>
-                </v-row>
+                </v-row> -->
               </v-container>
             </div>
             <!-- 登録後 -->
@@ -86,15 +97,15 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" md="12">
-                    <h3>
-                      あなたが達成したい目標を書きましょう
+                    <h3 class="headline">
+                      Your Goal
                     </h3>
                   </v-col>
                 </v-row>
 
                 <v-row justify="start">
                   <v-col cols="8" md="12" lg="8"
-                    ><h1>{{ goal_title }}</h1>
+                    ><h1 class="display-2">{{ goal_title }}</h1>
                   </v-col>
                   <v-spacer></v-spacer>
                   <v-col cols="2">
@@ -109,7 +120,10 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12" md="12">
-                    <div style="white-space: pre-line;">
+                    <div
+                      style="white-space: pre-line;"
+                      class="title font-weight-light"
+                    >
                       {{ goal_description }}
                     </div>
                   </v-col>
@@ -140,9 +154,9 @@
 </template>
 
 <script>
-import CreateGoalCounterMeasure from "../components/CreateGoal/CreateGoalCounterMeasure.vue";
-import CreateGoalMotivation from "../components/CreateGoal/CreateGoalMotivation.vue";
-import CreateGoalSchedule from "../components/CreateGoal/CreateGoalSchedule.vue";
+import CreateGoalCounterMeasure from "./CreateGoalCounterMeasure.vue";
+import CreateGoalMotivation from "./CreateGoalMotivation.vue";
+import CreateGoalSchedule from "./CreateGoalSchedule.vue";
 
 export default {
   components: {
@@ -154,7 +168,7 @@ export default {
   data: function() {
     return {
       goal_title:
-        "Django Rest FrameworkとVue CLI&Vuetifyで、SPAなタスク管理アプリケーションを作成する。",
+        "Create Web SPA Todo App  at use Django Rest Framework and Vue.",
       goal_description: "",
       new_goal_registered: false,
       valid: "",
@@ -162,7 +176,7 @@ export default {
 
       reg: true,
       token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5Mzc4NTA1LCJqdGkiOiJmYzkyOGViM2QyNmE0Mjg0OTcyMmRhNTgyMDgzOTRlYSIsInVzZXJfaWQiOjF9.m3MrB2l12UD_RaVzpvu25_RjYHDX0gMMs9ANtd3ZdT0",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5NjA1MTgwLCJqdGkiOiJlOWU3NzNjMjQ1YTU0MjYyOGQzNjNiMWI0MGM0MThhMiIsInVzZXJfaWQiOjF9.JkRpVBavVFQnvHg9vMYYOzqNu2hkjcdeZ0QVCeUXByA",
     };
   },
 
@@ -213,7 +227,7 @@ export default {
 #goal {
   background-color: #f0f0f0;
   border-radius: 50px;
-  padding: 40px 40px 40px 40px;
+  padding: 70px;
   margin: 40px 40px 40px 40px;
   transition: all 0.3s cubic-bezier(0.43, 0.49, 0.25, 0.84);
 

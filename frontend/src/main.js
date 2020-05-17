@@ -5,6 +5,7 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import jwt_decode from "jwt-decode";
 import "./assets/sass/style.scss";
 import mavonEditor from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
@@ -18,5 +19,6 @@ new Vue({
   router,
   store,
   vuetify,
+  jwt_decode,
   render: (h) => h(App),
 }).$mount("#app");
