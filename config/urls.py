@@ -22,11 +22,8 @@ from config import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('apiv1.urls')),
-
-    # JWT
     path('api/auth/', include('djoser.urls.jwt')),
 ]
-
 
 if settings.DEBUG:
     import debug_toolbar
