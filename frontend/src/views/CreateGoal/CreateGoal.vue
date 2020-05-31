@@ -176,7 +176,7 @@ export default {
 
       reg: true,
       token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5NjA1MTgwLCJqdGkiOiJlOWU3NzNjMjQ1YTU0MjYyOGQzNjNiMWI0MGM0MThhMiIsInVzZXJfaWQiOjF9.JkRpVBavVFQnvHg9vMYYOzqNu2hkjcdeZ0QVCeUXByA",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTkwNTkxMzIxLCJqdGkiOiJmYzg4NzYwOWYwNjQ0NGQ1YTFhNGM3YTM5YzM1NmQ1OSIsInVzZXJfaWQiOjF9.d-RDj8eQ2JKd1y5-iEO9uIAM1kjaD5_GFcR3_GWm9NI",
     };
   },
 
@@ -200,7 +200,7 @@ export default {
       const vm = this;
       vm.axios
         .post(
-          vm.url,
+          "http://127.0.0.1:8000/api/v1/goals/",
           {
             goal_title: goal_title,
             goal_description: goal_description,
@@ -208,7 +208,7 @@ export default {
           {
             //  JWT
             headers: {
-              "Content-Type": "application/json",
+              "Content-type": "application/json",
               Authorization: `JWT ${vm.token}`,
             },
           }

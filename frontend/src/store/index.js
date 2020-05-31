@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    url: "http://127.0.0.1:8000/api/v1/goals/",
     jwt: localStorage.getItem("t"),
     endpoints: {
       obtainJWT: "http://127.0.0.1:8000/api/auth/jwt/create/",

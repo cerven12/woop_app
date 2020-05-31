@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     # 3rd party
     'corsheaders',
     'rest_framework',
+    'django_js_reverse',
+    'silk',
 
     # 認証,　認可
     'djoser',
@@ -53,8 +55,11 @@ INSTALLED_APPS = [
 # Django REST frameworkの設定
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+
 }
 
 # Simple JWTの設定
@@ -79,6 +84,7 @@ MIDDLEWARE = [
     # 3rd party
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 
 
@@ -86,9 +92,9 @@ CORS_ORIGIN_WHITELIST = [
     'https://fiddle.jshell.net',
     'http://127.0.0.1:5500',
     'http://127.0.0.1:8080',
-    'http://192.168.129.16:8080',
     'http://localhost:8080',
     'http://192.168.3.7:8080',
+    'http://192.168.129.16:8080',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -161,7 +167,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 if DEBUG:
     def show_toolbar(request):

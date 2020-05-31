@@ -8,6 +8,7 @@
       <div id="side"><SideBar></SideBar></div>
       <div id="main">
         <nav>
+          <!-- サインインしているかどうか (v-if='"authorized"') でページを遷移 -->
           <router-link to="/"></router-link>
           <router-link to="/sign-in">Sign in</router-link>
         </nav>

@@ -19,6 +19,7 @@ class Goal(models.Model):
     deadline = models.DateField(verbose_name='締め切り', blank=True, null=True)
     achievement = models.IntegerField(verbose_name='達成度', null=True, blank=True)
     progress_type = models.IntegerField(verbose_name='進捗状況', choices=progress_type_choice, null=True, blank=True)
+    
 
     def __str__(self):
         return self.goal_title or ''
