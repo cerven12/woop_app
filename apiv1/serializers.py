@@ -2,7 +2,6 @@ from rest_framework import serializers
 from woop.models import Goal, Task, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 
-
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task

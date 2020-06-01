@@ -13,6 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 
 #  About the Goal Model
 class GoalViewSet(viewsets.ModelViewSet):
+    'add "return self.queryset.filter(user=self.request.user)"'
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
     permission_classes = [IsAuthenticated]  # authenticated-accessible
