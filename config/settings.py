@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # app
     'apiv1.apps.Apiv1Config',
     'woop.apps.WoopConfig',
+    'account',
+
 
     # 3rd party
     'corsheaders',
@@ -50,7 +52,10 @@ INSTALLED_APPS = [
 
     # 認証,　認可
     # 'djoser',
+
 ]
+
+AUTH_USER_MODEL = 'account.CustomUser'
 
 # Django REST frameworkの設定
 REST_FRAMEWORK = {
