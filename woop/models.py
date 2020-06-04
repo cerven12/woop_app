@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from account.models import *
 
 # Create your models here.
 import uuid
@@ -16,6 +17,7 @@ class Goal(models.Model):
         (1, '挑戦中'),
         (2, '達成済'),
     )
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='ユーザー')
     goal_id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
     goal_title = models.CharField(verbose_name='目標', max_length=200)
