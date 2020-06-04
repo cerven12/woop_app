@@ -16,13 +16,13 @@ class MyUserChangeForm(UserChangeForm):
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('email', 'password', 'username',)
+        fields = ('email', 'username', 'password',)
 
 class CustomUserAdmin(UserAdmin):
     # Admin site display, each taple of index 0 is label.
     fieldsets = (
-        (_('Login'), {'fields': ('email', 'password',)}),
-        (_('Personal info'), {'fields': ('username',)}),
+            (_('Login'), {'fields': ('email', 'username', 'password',)}),
+        (_('Personal info'), {'fields': ()}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions',)}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined',)}),
