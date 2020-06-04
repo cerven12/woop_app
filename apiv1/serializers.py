@@ -5,7 +5,7 @@ from drf_writable_nested.serializers import WritableNestedModelSerializer
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['task_id', 'task_title', 'created_at', 'goal']
+        fields = ['task_id', 'task_title', 'created_at', 'goal','is_repeat','backup_plan']
 
 
 class MotiveSerializer(serializers.ModelSerializer):

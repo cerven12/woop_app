@@ -12,8 +12,8 @@ admin.site.register(Goal, GoalAdmin)
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('task_title', 'created_at', 'goal', 'task_id')
-    ordering = ('-created_at',)
+    list_display = ('task_title', 'created_at', 'goal', 'task_id', 'is_repeat', 'backup_plan')
+    ordering = ('-created_at','is_repeat')
     readonly_field = ('task_id', 'created_at')
 
 admin.site.register(Task, TaskAdmin)
