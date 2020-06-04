@@ -16,26 +16,28 @@ class MyUserChangeForm(UserChangeForm):
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('email',)
+        fields = ('email', 'password', 'username',)
 
 class CustomUserAdmin(UserAdmin):
+    # Admin site display, each taple of index 0 is label.
     fieldsets = (
-        # index 0 show change form for field.
-        (None, {'fields': ('email', 'password',)}),
+        (_('Login'), {'fields': ('email', 'password',)}),
         (_('Personal info'), {'fields': ('username',)}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions',)}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined',)}),
     )
+    # User create Admin site
     add_fieldsets = (
-        (None, {
+            (_('Create User'), {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2'),
+            'fields': ('email', 'username', 'password1', 'password2'),
         }),
     )
+
     form = MyUserChangeForm
     add_form = MyUserCreationForm
-    list_display = ('email', 'username',  'is_staff','user_id',)
+    list_display = ('email', 'username', 'is_staff','user_id',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups',)
     search_fields = ('email', 'username','user_id')
     ordering = ('email',)
