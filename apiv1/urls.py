@@ -1,26 +1,70 @@
 from django.urls import path, include
-from rest_framework_nested import routers
 from apiv1 import views
+from rest_framework.routers import DefaultRouter
+
+from rest_framework_extensions.routers import ExtendedSimpleRouter
+from rest_framework_extensions.routers import NestedRouterMixin
 
 
-router = routers.DefaultRouter()
-router.register(r'goals', views.GoalViewSet, basename='goals')
+class NestedRouter(NestedRouterMixin, DefaultRouter):
+    pass
 
-goals_router = routers.NestedSimpleRouter(router, r'goals', lookup='goal')
-goals_router.register(r'tasks', views.TaskViewSet, basename='tasks')
-goals_router.register(r'motives', views.MotiveViewSet, basename='motives')
-goals_router.register(r'self_transcendence_goals', views.SelfTranscendenceGoalViewSet, basename='self_transcendence_goals')
-goals_router.register(r'future_selves', views.FutureSelfViewSet, basename='future_selves')
-goals_router.register(r'worries', views.WorryViewSet, basename='worries')
-goals_router.register(r'references', views.ReferenceViewSet, basename='references')
-goals_router.register(r'notes', views.NoteViewSet, basename='notes')
 
-worries_router = routers.NestedSimpleRouter(goals_router, r'worries', lookup='worry')
-worries_router.register(r'ideas', views.IdeaViewSet, basename='ideas')
+router = NestedRouter()
 
-urlpatterns = [
-    path('', include(router.urls)),
-    path('', include(goals_router.urls)),
-    path('', include(worries_router.urls)),
-]
+goals_routes = router.register(r'goals', views.GoalViewSet, basename='goals')
 
+goals_routes.register(
+    r'tasks',
+    views.TaskViewSet,
+    basename='tasks',
+    parents_query_lookups=['goal']
+)
+
+goals_routes.register(
+    r'motives',
+    views.MotiveViewSet,
+    basename='motives',
+    parents_query_lookups=['goal']
+)
+
+goals_routes.register(
+    r'self_transcendence_goals',
+    views.SelfTranscendenceGoalViewSet,
+    basename='self_transcendence_goals',
+    parents_query_lookups=['goal']
+)
+
+goals_routes.register(
+    r'future_selves',
+    views.FutureSelfViewSet,
+    basename='future_selves',
+    parents_query_lookups=['goal']
+)
+
+goals_routes.register(
+    r'worries',
+    views.WorryViewSet,
+    basename='worries',
+    parents_query_lookups=['goal']
+).register(
+    'ideas',
+    views.IdeaViewSet,
+    basename='ideas',
+    parents_query_lookups=['worry__goal', 'worry']
+)
+goals_routes.register(
+    r'references',
+    views.ReferenceViewSet,
+    basename='references',
+    parents_query_lookups=['goal']
+)
+
+goals_routes.register(
+    r'notes',
+    views.NoteViewSet,
+    basename='notes',
+    parents_query_lookups=['goal']
+)
+
+urlpatterns = router.urls
