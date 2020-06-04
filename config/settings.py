@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_js_reverse',
     'silk',
+    'drf_yasg',
 
     # 認証,　認可
     # 'djoser',
@@ -61,6 +62,7 @@ AUTH_USER_MODEL = 'account.CustomUser'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
