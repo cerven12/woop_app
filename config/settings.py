@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_js_reverse',
     'silk',
     'drf_yasg',
+    'django_extensions',
 
     # 認証,　認可
     # 'djoser',
@@ -136,6 +137,10 @@ DATABASES = {
     }
 }
 
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

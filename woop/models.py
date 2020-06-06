@@ -1,13 +1,16 @@
 from django.db import models
 from django.utils import timezone
 from account.models import *
+from django.contrib.auth import get_user_model
+
+
 
 # Create your models here.
 import uuid
 
 # Gift is will be given immediately.
 class Gift(models.Model):
-    gift_id= models.UUIDField(primary_key=True, editable=False)
+    gift_id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     gift = models.CharField(verbose_name='ご褒美', max_length=150)
 
 
@@ -17,7 +20,8 @@ class Goal(models.Model):
         (1, '挑戦中'),
         (2, '達成済'),
     )
-    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='ユーザー')
+    created_by = models.ForeignKey(CustomUser,
+            on_delete=models.CASCADE, verbose_name='ユーザー')
     goal_id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
     goal_title = models.CharField(verbose_name='目標', max_length=200)
