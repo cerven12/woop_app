@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Goal, Task, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea
 
 class GoalAdmin(admin.ModelAdmin):
-    list_display = ('goal_title','created_at','goal_description', 'start_date','deadline','achievement','progress_type','goal_id')
+    list_display = ('created_by', 'goal_title','created_at','goal_description', 'start_date','deadline','achievement','progress_type','goal_id')
     ordering = ('-created_at',)
     readonly_field = ('goal_id', 'created_at')
 
