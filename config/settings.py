@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'django_extensions',
 
     # 認証,　認可
-    # 'djoser',
+    'djoser',
 
 ]
 
@@ -63,20 +63,20 @@ AUTH_USER_MODEL = 'account.CustomUser'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 
 }
 
-# # Simple JWTの設定
-# SIMPLE_JWT = {
-#     # トークンをJWTに設定
-#     'JWT_ALLOW_REFRESH': True,
-#     'AUTH_HEADER_TYPES': ('JWT',),
-#     'JWT_EXPIRATION_DELTA': timedelta(minutes=5)
-# }
+SIMPLE_JWT = {
+    # Change default `USER_ID_FIELD` to `id` of CustomUser.
+    'USER_ID_FIELD': 'user_id',
+    'JWT_ALLOW_REFRESH': True,
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=60)
+}
 
 SESSION_COOKIE_HTTPONLY = True
 
@@ -95,7 +95,8 @@ MIDDLEWARE = [
     'silk.middleware.SilkyMiddleware',
 ]
 
-
+# CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_NAME = "csrftoken"
 CORS_ORIGIN_WHITELIST = [
     'https://fiddle.jshell.net',
     'http://127.0.0.1:5500',
@@ -103,6 +104,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8080',
     'http://192.168.3.7:8080',
     'http://192.168.129.16:8080',
+    'http://192.168.3.7:8080',
 ]
 
 ROOT_URLCONF = 'config.urls'
