@@ -3,12 +3,12 @@
     <div class="field">
       <label for="id_username">Username</label>
       <input
-        v-model="username"
+        v-model="email"
         type="text"
-        placeholder="Username"
+        placeholder="Email"
         autofocus="autofocus"
         maxlength="150"
-        id="id_username"
+        id="email"
       />
     </div>
     <div class="field">
@@ -20,7 +20,7 @@
         id="id_password"
       />
     </div>
-    <button @click.prevent="authenticate" class="button primary" type="submit">
+    <button @click.prevent="authenticate()" class="button primary" type="submit">
       Log In
     </button>
   </form>
@@ -30,52 +30,34 @@
 export default {
   data() {
     return {
-      username: "",
+     email: "",
       password: "",
     };
   },
   methods: {
     authenticate() {
+      const vm = this;
       const payload = {
-        username: this.username,
-        password: this.password,
+        email: vm.email,
+        password: vm.password,
       };
       this.axios
-        .post(this.$store.state.endpoints.createJWT, payload)
+        .post(vm.$store.state.endpoints.obtainSessionID, payload,)
         .then((response) => {
-          this.$store.commit("updateToken", response.data.token);
+          console.log(response.data)
+          vm.$store.commit("setSessionId", response.data);
           // get and set auth user
-          const base = {
-            baseURL: this.$store.state.endpoints.baseUrl,
-            headers: {
-              // Set your Authorization to 'JWT', not Bearer!!!
-              Authorization: `JWT ${this.$store.state.jwt}`,
-              "Content-Type": "application/json",
-            },
-            xhrFields: {
-              withCredentials: true,
-            },
-          };
-          // Even though the authentication returned a user object that can be
-          // decoded, we fetch it again. This way we aren't super dependant on
-          // JWT and can plug in something else.
-          //   const axiosInstance = this.axios.create(base);
-          //   axiosInstance({
-          //     url: "/user/",
-          //     method: "get",
-          //     params: {},
-          //   }).then((response) => {
-          //     this.$store.commit("setAuthUser", {
-          //       authUser: response.data,
-          //       isAuthenticated: true,
-          //     });
-          //     this.$router.push({ name: "Home" });
-          //   });
-          // })
-          // .catch((error) => {
-          //   console.log(error);
-          //   console.debug(error);
-          //   console.dir(error);
+          // const base = {
+          //   baseURL: this.$store.state.endpoints.baseUrl,
+          //   headers: {
+          //     // Set your Authorization to 'JWT', not Bearer!!!
+          //     Authorization: `JWT ${this.$store.state.jwt}`,
+          //     "Content-Type": "application/json",
+          //   },
+          //   xhrFields: {
+          //     withCredentials: true,
+            // },
+          // };
         });
     },
   },

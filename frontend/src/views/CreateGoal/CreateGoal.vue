@@ -42,12 +42,6 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12" md="12">
-                    <!-- <div
-                      style="white-space: pre-line;"
-                      class="title font-regular"
-                    >
-                      {{ goal_description }}
-                    </div> -->
                   </v-col>
                 </v-row>
                 <v-row>
@@ -63,12 +57,7 @@
 
                 <v-row>
                   <v-col cols="12" md="12">
-                    <!-- <mavon-editor
-                  v-model="goal_description"
-                  language="en"
-                  :toolbars="toolbars"
-                /> -->
-                    <v-textarea
+                                <v-textarea
                       name="Detail"
                       label="Detail"
                       hint="In more detail."
@@ -79,17 +68,7 @@
                     ></v-textarea>
                   </v-col>
                 </v-row>
-                <!-- <v-row>
-                  <v-col cols="12">
-                    <v-btn
-                      class="ma-2"
-                      outlined
-                      @click="newGoalRegister(goal_title, goal_description)"
-                      >submit</v-btn
-                    >
-                  </v-col>
-                </v-row> -->
-              </v-container>
+                          </v-container>
             </div>
             <!-- 登録後 -->
 

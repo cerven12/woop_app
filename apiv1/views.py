@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from woop.models import Goal, Task, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note
 from .serializers import GoalSerializer, TaskSerializer, MotiveSerializer, SelfTranscendenceGoalSerializer, \
     FutureSelfSerializer, WorrySerializer, IdeaSerializer, ReferenceSerializer, NoteSerializer
-from account.models import CustomUser
 # permission setting
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
 
@@ -17,6 +17,7 @@ class GoalViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
     permission_classes = [IsAuthenticated]  # authenticated-accessible
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     # Automatically specify the user who is logged in.
     def perform_create(self, serializer):

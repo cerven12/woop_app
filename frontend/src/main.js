@@ -9,15 +9,18 @@ import jwt_decode from "jwt-decode";
 import "./assets/sass/style.scss";
 import mavonEditor from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
+import Cookies from 'js-cookie';
+
 
 Vue.config.productionTip = false;
-
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 Vue.use(VueAxios, axios);
 Vue.use(mavonEditor);
 
 new Vue({
   router,
   store,
+  Cookies,
   vuetify,
   jwt_decode,
   render: (h) => h(App),
