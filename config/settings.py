@@ -63,7 +63,6 @@ AUTH_USER_MODEL = 'account.CustomUser'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication'
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
@@ -105,6 +104,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://192.168.3.7:8080',
     'http://192.168.129.16:8080',
     'http://192.168.3.7:8080',
+    'http://192.168.129.16:8080',
 ]
 
 ROOT_URLCONF = 'config.urls'

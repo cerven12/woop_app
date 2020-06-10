@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from account.models import *
-from django.contrib.auth import get_user_model
 
 
 

@@ -67,6 +67,9 @@ class GoalSerializer(WritableNestedModelSerializer):
     references = ReferenceSerializer(many=True, required=False)
     notes = NoteSerializer(many=True, required=False)
 
+    # Automatically specify the user who is logged in.
+    created_by = serializers.ReadOnlyField(source='created_by.user_id')
+
     class Meta:
         model = Goal
         fields = [
