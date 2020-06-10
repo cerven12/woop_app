@@ -35,7 +35,7 @@
                       text
                       x-large
                       id="check"
-                      @click="newGoalRegister(goal_title, goal_description)"
+                      @click="newGoalRegister()"
                       >Post!</v-btn
                     >
                   </v-col>
@@ -133,6 +133,7 @@
 </template>
 
 <script>
+import api from '@/services/api.js';
 import CreateGoalCounterMeasure from "./CreateGoalCounterMeasure.vue";
 import CreateGoalMotivation from "./CreateGoalMotivation.vue";
 import CreateGoalSchedule from "./CreateGoalSchedule.vue";
@@ -154,11 +155,9 @@ export default {
       this_time_goal_data: "",
 
       reg: true,
-      token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTkwNTkxMzIxLCJqdGkiOiJmYzg4NzYwOWYwNjQ0NGQ1YTFhNGM3YTM5YzM1NmQ1OSIsInVzZXJfaWQiOjF9.d-RDj8eQ2JKd1y5-iEO9uIAM1kjaD5_GFcR3_GWm9NI",
+
     };
   },
-
   computed: {
     url() {
       return this.$store.state.url;
@@ -175,23 +174,16 @@ export default {
       }
     },
 
-    newGoalRegister: function(goal_title, goal_description) {
+    newGoalRegister: function() {
       const vm = this;
-      vm.axios
-        .post(
-          "http://127.0.0.1:8000/api/v1/goals/",
-          {
-            goal_title: goal_title,
-            goal_description: goal_description,
-          },
-          {
-            //  JWT
-            headers: {
-              "Content-type": "application/json",
-              Authorization: `JWT ${vm.token}`,
-            },
+      api({
+        url: `goals/`,
+        method:'post',
+        data:{
+            goal_title: vm.goal_title,
+            goal_description: vm.goal_description,
           }
-        )
+        })
         .then((response) => (vm.this_time_goal_data = response.data))
         .then((reaponse) => (vm.new_goal_registered = true))
         .catch((error) => {

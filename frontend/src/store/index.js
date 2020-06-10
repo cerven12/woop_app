@@ -17,7 +17,6 @@ export default new Vuex.Store({
     setSessionId: function(state, newSessionId){
       state.sessionId = newSessionId.access
       localStorage.setItem('access', newSessionId.access)
+
   }},
-  actions: {
-  },
 },);

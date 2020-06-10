@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import api from '@/services/api'
 export default {
   data() {
     return {
@@ -35,29 +36,16 @@ export default {
     };
   },
   methods: {
+    // auth & axios of initialize.
     authenticate() {
       const vm = this;
       const payload = {
         email: vm.email,
         password: vm.password,
       };
-      this.axios
-        .post(vm.$store.state.endpoints.obtainSessionID, payload,)
+      api.post(vm.$store.state.endpoints.obtainSessionID, payload,)
         .then((response) => {
-          console.log(response.data)
           vm.$store.commit("setSessionId", response.data);
-          // get and set auth user
-          // const base = {
-          //   baseURL: this.$store.state.endpoints.baseUrl,
-          //   headers: {
-          //     // Set your Authorization to 'JWT', not Bearer!!!
-          //     Authorization: `JWT ${this.$store.state.jwt}`,
-          //     "Content-Type": "application/json",
-          //   },
-          //   xhrFields: {
-          //     withCredentials: true,
-            // },
-          // };
         });
     },
   },
