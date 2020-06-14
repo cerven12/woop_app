@@ -149,6 +149,12 @@ class Note(models.Model):
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
     update_at = models.DateTimeField(verbose_name='更新日時', default=timezone.now)
+    first_hint = models.CharField(
+            verbose_name='ヒント1', null=True, blank=True, max_length=20)
+    second_hint = models.CharField(
+            verbose_name='ヒント2', null=True, blank=True, max_length=20)
+    third_hint = models.CharField(
+            verbose_name='ヒント3', null=True, blank=True, max_length=20)
 
     def __str__(self):
         return self.note_title or ''

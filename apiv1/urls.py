@@ -14,6 +14,7 @@ router = NestedRouter()
 
 goals_routes = router.register(r'goals', views.GoalViewSet, basename='goals')
 
+# Tasks
 goals_routes.register(
     r'tasks',
     views.TaskViewSet,
@@ -21,6 +22,7 @@ goals_routes.register(
     parents_query_lookups=['goal']
 )
 
+# Motives
 goals_routes.register(
     r'motives',
     views.MotiveViewSet,
@@ -28,6 +30,7 @@ goals_routes.register(
     parents_query_lookups=['goal']
 )
 
+# Self Transcendence
 goals_routes.register(
     r'self_transcendence_goals',
     views.SelfTranscendenceGoalViewSet,
@@ -35,6 +38,7 @@ goals_routes.register(
     parents_query_lookups=['goal']
 )
 
+# Future Selves
 goals_routes.register(
     r'future_selves',
     views.FutureSelfViewSet,
@@ -42,17 +46,21 @@ goals_routes.register(
     parents_query_lookups=['goal']
 )
 
+# Worries
 goals_routes.register(
     r'worries',
     views.WorryViewSet,
     basename='worries',
     parents_query_lookups=['goal']
+# Ideas
 ).register(
     'ideas',
     views.IdeaViewSet,
     basename='ideas',
     parents_query_lookups=['worry__goal', 'worry']
 )
+
+# References
 goals_routes.register(
     r'references',
     views.ReferenceViewSet,
@@ -60,6 +68,7 @@ goals_routes.register(
     parents_query_lookups=['goal']
 )
 
+# Notes
 goals_routes.register(
     r'notes',
     views.NoteViewSet,

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Goal, Task, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea
+from .models import Goal, Task, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Note
 
 class GoalAdmin(admin.ModelAdmin):
     list_display = ('created_by', 'goal_title','created_at','goal_description', 'start_date','deadline','achievement','progress_type','goal_id')
@@ -56,3 +56,11 @@ class IdeaAdmin(admin.ModelAdmin):
     readonly_field = ('idea_id', 'created_at')
 
 admin.site.register(Idea, IdeaAdmin)
+
+class NotesAdmin(admin.ModelAdmin):
+    list_display = ('note_id', 'note_title', 'note_main', 'created_at', 'update_at',
+            'first_hint', 'second_hint', 'third_hint', 'goal')
+    ordering = ('-created_at',)
+    readonly_field = ('note_id', 'created_at',)
+
+admin.site.register(Note, NotesAdmin)
