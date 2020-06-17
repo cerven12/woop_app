@@ -117,6 +117,6 @@ export default {
   font-size: 18px;
   line-height: 28px;
 
-  color: #3c3d3d;
+  color: #4d4d4d;
 }
 </style>

@@ -13,7 +13,7 @@
 
         <v-row justify="center">
           <v-col cols="8">
-            <p class="goal_directory">
+            <p class="writing-text">
               A task management app that incorporates the Woop concept. When you
               set goals, it asks various questions to motivate you and prevent
               setbacks. Set small goals (tasks) to reach your goals and complete
@@ -61,13 +61,13 @@ export default {};
   line-height: 56px;
 }
 
-.goal_directory {
+.writing-text {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
-  line-height: 21px;
-
+  line-height: 1.6;
   color: #6d6d6d;
+  /* letter-spacing: 0.05em; */
 }
 </style>
