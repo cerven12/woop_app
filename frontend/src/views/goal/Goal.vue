@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <div id="background">
+      <div style="padding: 50px 0px; background: #f0f0f0;"></div>
       <AfterGoal></AfterGoal>
       <AfterMotive></AfterMotive>
+      <AfterGIveUp></AfterGIveUp>
       <BeforeGoal></BeforeGoal>
       <BeforeMotive></BeforeMotive>
       <BeforeGiveUp></BeforeGiveUp>

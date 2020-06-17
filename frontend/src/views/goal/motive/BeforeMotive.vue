@@ -355,6 +355,6 @@ motivation-enter-active,
   font-weight: normal;
   font-size: 20px;
   line-height: 40px;
-  color: #3c3d3d;
+  color: #4d4d4d;
 }
 </style>
