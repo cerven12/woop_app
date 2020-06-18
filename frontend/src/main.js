@@ -9,8 +9,8 @@ import jwt_decode from "jwt-decode";
 import "./assets/sass/style.scss";
 import mavonEditor from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
-import Cookies from 'js-cookie';
-
+import Cookies from "js-cookie";
+import draggable from "vuedraggable";
 
 Vue.config.productionTip = false;
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -20,6 +20,7 @@ Vue.use(mavonEditor);
 new Vue({
   router,
   store,
+  draggable,
   Cookies,
   vuetify,
   jwt_decode,
