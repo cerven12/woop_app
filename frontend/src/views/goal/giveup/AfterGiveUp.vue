@@ -6,7 +6,7 @@
           <v-col cols="2"></v-col>
           <v-col cols="8">
             <h2 class="message-title">
-              To Keep Your Motivation Flying High.
+              Lets preparations for not give up.
             </h2>
           </v-col>
         </v-row>
@@ -27,7 +27,7 @@
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
-              <p class="writing-text content-splitter">
+              <p class="writing-text obst-splitter">
                 {{ Obstacle.worry }}
               </p>
             </v-col>
@@ -38,7 +38,7 @@
               <v-row>
                 <v-col cols="4"></v-col>
                 <v-col cols="6">
-                  <p class="writing-text content-splitter">
+                  <p class="writing-text idea-splitter">
                     {{ idea }}
                   </p>
                 </v-col>
@@ -249,9 +249,14 @@ export default {
   margin-block-end: 0em;
 }
 
-.content-splitter {
-  border-block-end: solid 1px #c5c5c5;
-  /* padding-bottom: 5px; */
+.obst-splitter {
+  border-left: 20px rgb(142, 100, 170) solid;
+  padding-left: 15px;
+}
+
+.idea-splitter {
+  border-left: 20px rgb(247, 186, 152) solid;
+  padding-left: 15px;
 }
 
 .resize {

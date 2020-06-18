@@ -168,9 +168,6 @@
               <v-btn @click="addWorryIdeaForm" text depressed>＋</v-btn>
             </v-col>
           </v-row>
-          <!----------------------------------------------------------------------->
-          <!--            Obstacle & Countermeasure,  end         -->
-          <!----------------------------------------------------------------------->
 
           <!----------------------------------------------------------------------->
           <!--                          Reference                               -->
@@ -398,7 +395,7 @@ export default {
   font-weight: normal;
   font-size: 28px;
   line-height: 40px;
-  color: #5F75B0;
+  color: #5f75b0;
 }
 
 .category-title {

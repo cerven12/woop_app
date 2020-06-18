@@ -139,7 +139,7 @@ export default {
   font-weight: normal;
   font-size: 28px;
   line-height: 40px;
-  color: #5f75b0;
+  color: #d69e37;
 }
 
 .category-title {

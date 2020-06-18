@@ -27,7 +27,7 @@
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
-              <p class="writing-text content-splitter">
+              <p class="writing-text motive-splitter">
                 {{ motive }}
               </p>
             </v-col>
@@ -53,7 +53,7 @@
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
-              <p class="writing-text content-splitter">
+              <p class="writing-text selftrance-splitter">
                 {{ selfTrance }}
               </p>
             </v-col>
@@ -76,7 +76,7 @@
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
-              <p class="writing-text content-splitter">
+              <p class="writing-text future-splitter">
                 {{ futureSelf }}
               </p>
             </v-col>
@@ -162,8 +162,18 @@ export default {
   margin-block-end: 0em;
 }
 
-.content-splitter {
-  border-block-end: solid 1px #c5c5c5;
-  /* padding-bottom: 5px; */
+.motive-splitter {
+  border-left: 20px rgb(172, 233, 225) solid;
+  padding-left: 15px;
+}
+
+.selftrance-splitter {
+  border-left: 20px rgb(226, 158, 215) solid;
+  padding-left: 15px;
+}
+
+.future-splitter {
+  border-left: 20px rgb(124, 121, 124) solid;
+  padding-left: 15px;
 }
 </style>
