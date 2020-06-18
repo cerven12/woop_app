@@ -5,6 +5,10 @@
       <AfterGoal></AfterGoal>
       <AfterMotive></AfterMotive>
       <AfterGIveUp></AfterGIveUp>
+      <AfterSchedule></AfterSchedule>
+      <Note></Note>
+      <Acc></Acc>
+
       <BeforeGoal></BeforeGoal>
       <BeforeMotive></BeforeMotive>
       <BeforeGiveUp></BeforeGiveUp>
@@ -30,6 +34,10 @@ import AfterGIveUp from "./giveup/AfterGiveUp";
 import BeforeSchedule from "./schedule/BeforeSchedule";
 import AfterSchedule from "./schedule/AfterSchedule";
 
+// Note
+import Note from "./note/Note.vue";
+import Acc from "./note/Accordion.vue";
+
 export default {
   components: {
     BeforeGoal,
@@ -40,6 +48,8 @@ export default {
     AfterGIveUp,
     BeforeSchedule,
     AfterSchedule,
+    Note,
+    Acc,
   },
 };
 </script>
