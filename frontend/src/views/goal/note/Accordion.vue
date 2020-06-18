@@ -56,7 +56,6 @@ export default {
 
 .accordion {
   max-width: auto;
-  /* font-family: Lato; */
   margin-bottom: 30px;
   background-color: #2d9cdb;
   border-radius: 27.5px;

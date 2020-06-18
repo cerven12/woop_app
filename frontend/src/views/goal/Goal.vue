@@ -3,6 +3,7 @@
     <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
       <AfterGoal></AfterGoal>
+      <Task></Task>
       <AfterMotive></AfterMotive>
       <AfterGIveUp></AfterGIveUp>
       <AfterSchedule></AfterSchedule>
@@ -36,6 +37,9 @@ import AfterSchedule from "./schedule/AfterSchedule";
 // Note
 import Note from "./note/Note.vue";
 
+// Task
+import Task from "./task/task";
+
 export default {
   components: {
     BeforeGoal,
@@ -47,6 +51,7 @@ export default {
     BeforeSchedule,
     AfterSchedule,
     Note,
+    Task,
   },
 };
 </script>
