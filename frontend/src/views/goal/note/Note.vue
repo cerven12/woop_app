@@ -17,7 +17,11 @@
           <v-col cols="6">
             <div v-for="note in noteList" :key="note.id">
               <accordion>
-                <div slot="header">{{ note.title }}</div>
+                <div slot="header">
+                  {{ note.title }}
+                  <span slot="parent" class="atto">@countermeasure#44</span>
+                </div>
+
                 <div slot="body">{{ note.main }}</div>
               </accordion>
               <accordion theme="purple">
@@ -107,5 +111,10 @@ export default {
 .content-splitter {
   border-block-end: solid 1px #c5c5c5;
   /* padding-bottom: 5px; */
+}
+.atto {
+  padding: -90px;
+  margin: 0;
+  font-size: 14px;
 }
 </style>

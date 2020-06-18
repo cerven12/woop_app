@@ -3,6 +3,8 @@
     <div class="accordion" v-bind:class="theme">
       <div class="header" v-on:click="toggle">
         <slot name="header"></slot>
+        <slot name="parent"></slot>
+        <!-- <p style="font-size:14px;"><slot name="parent"></slot></p> -->
       </div>
       <transition
         name="accordion"
@@ -63,7 +65,7 @@ export default {
 }
 
 .accordion .header {
-  height: 90px;
+  height: 75px;
   line-height: 70px;
   padding: 0 40px 0 30px;
   font-size: 24px;
