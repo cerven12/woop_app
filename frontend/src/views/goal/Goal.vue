@@ -3,6 +3,8 @@
     <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
       <AfterGoal></AfterGoal>
+      <Kanban></Kanban>
+
       <AfterMotive></AfterMotive>
       <AfterGIveUp></AfterGIveUp>
       <AfterSchedule></AfterSchedule>
@@ -35,6 +37,7 @@ import AfterSchedule from "./schedule/AfterSchedule";
 
 // Note
 import Note from "./note/Note.vue";
+import Kanban from "./task/Kanban.vue";
 
 export default {
   components: {
@@ -47,6 +50,7 @@ export default {
     BeforeSchedule,
     AfterSchedule,
     Note,
+    Kanban,
   },
 };
 </script>
