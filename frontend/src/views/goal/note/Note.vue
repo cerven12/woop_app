@@ -21,7 +21,7 @@
                   {{ note.title }}
                   <span slot="parent" class="atto">@countermeasure#44</span>
                 </div>
-
+                <div></div>
                 <div slot="body">{{ note.main }}</div>
               </accordion>
               <accordion theme="purple">
