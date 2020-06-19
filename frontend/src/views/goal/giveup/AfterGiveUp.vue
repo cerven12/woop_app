@@ -45,7 +45,9 @@
               </v-row>
             </div>
           </div>
+          <br /><br />
         </div>
+        <br />
 
         <!----------------------------------------------------------------------->
         <!--                                 Reference                         -->
@@ -62,8 +64,8 @@
         <!-- <div v-for="Reference in References" :key="Reference.id"> -->
 
         <v-row>
-          <v-col cols="3"></v-col>
-          <v-col cols="7">
+          <v-col cols="2"></v-col>
+          <v-col cols="8">
             <template>
               <v-simple-table fixed-header height="500px">
                 <template v-slot:default>
@@ -105,7 +107,6 @@
             </template>
           </v-col>
         </v-row>
-        <!-- </div> -->
       </v-container>
     </div>
   </div>
