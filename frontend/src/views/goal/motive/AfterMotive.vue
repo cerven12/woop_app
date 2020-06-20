@@ -139,7 +139,7 @@ export default {
   font-weight: normal;
   font-size: 28px;
   line-height: 40px;
-  color: #5f75b0;
+  color: #4465c0;
 }
 
 .category-title {
@@ -148,7 +148,8 @@ export default {
   font-weight: normal;
   font-size: 20px;
   line-height: 40px;
-  color: #4d4d4d;
+  color: rgb(41, 41, 41);
+  top: 20px;
 }
 
 .writing-text {
@@ -159,7 +160,7 @@ export default {
   /* line-height: 1.6; */
   /* letter-spacing: 0.05em; */
   font-kerning: nomal;
-  color: #6d6d6d;
+  color: rgb(41, 41, 41);
   margin-block-end: 0em;
 }
 

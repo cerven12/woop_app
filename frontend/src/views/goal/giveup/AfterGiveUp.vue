@@ -224,18 +224,18 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 28px;
+  font-size: 30px;
   line-height: 40px;
-  color: #5f75b0;
+  color: #4465c0;
 }
 
 .category-title {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 40px;
-  color: #4d4d4d;
+  color: rgb(41, 41, 41);
 }
 
 .writing-text {
@@ -246,7 +246,7 @@ export default {
   /* line-height: 1.6; */
   /* letter-spacing: 0.05em; */
   font-kerning: nomal;
-  color: #6d6d6d;
+  color: rgb(41, 41, 41);
   margin-block-end: 0em;
 }
 

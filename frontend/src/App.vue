@@ -4,17 +4,12 @@
       href="https://fonts.googleapis.com/earlyaccess/nikukyu.css"
       rel="stylesheet"
     />
-    <div id="container">
-      <div id="main">
-        <nav>
-          <!-- サインインしているかどうか (v-if='"authorized"') でページを遷移 -->
-          <router-link to="/">Goal</router-link>
-          <router-link to="/sign-in">Sign in</router-link>
-        </nav>
-
-        <router-view />
-      </div>
-    </div>
+    <nav>
+      <!-- サインインしているかどうか (v-if='"authorized"') でページを遷移 -->
+      <router-link to="/">Goal</router-link>
+      <router-link to="/sign-in">Sign in</router-link>
+    </nav>
+    <router-view />
   </div>
 </template>
 <script>

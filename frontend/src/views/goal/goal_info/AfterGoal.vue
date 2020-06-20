@@ -53,7 +53,7 @@ export default {};
                             Font Desiign
  ------------------------------------------------------------*/
 .goal_title {
-  color: #5f75b0;
+  color: #4465c0;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -67,7 +67,7 @@ export default {};
   font-weight: normal;
   font-size: 18px;
   line-height: 1.6;
-  color: #6d6d6d;
+  color: rgb(41, 41, 41);
   /* letter-spacing: 0.05em; */
 }
 </style>

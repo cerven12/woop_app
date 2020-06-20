@@ -5,7 +5,7 @@
       <v-container fluid id="view-area">
         <!-- Vew Goal Title -->
         <v-row>
-          <v-col cols="1"></v-col>
+          <v-col cols="2"></v-col>
           <v-col cols="10">
             <h1 class="message-title">
               Task Kanban Flow
@@ -18,65 +18,185 @@
         <v-row>
           <v-col cols="2"></v-col>
           <div class="scrolling-wrapper">
-            <div class="board">
-              <h2>Todo</h2>
-              <draggable
-                v-model="itemsA"
-                group="myGroup"
-                @start="drag = true"
-                @end="drag = false"
-                :options="options"
-              >
-                <div class="item" v-for="item in itemsA" :key="item.id">
-                  <div>
-                    <p class="text_position">
-                      {{ item.name }}
-                    </p>
-                    <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+            <div class="board-wrapper">
+              <h2 class="board-title">Todo</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsA"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsA" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
                   </div>
-                </div>
-              </draggable>
+                </draggable>
+              </div>
             </div>
 
-            <div class="board">
-              <h2>Success</h2>
-              <draggable
-                v-model="itemsB"
-                group="myGroup"
-                @start="drag = true"
-                @end="drag = false"
-                :options="options"
-              >
-                <div class="item" v-for="item in itemsB" :key="item.id">
-                  <div>
-                    <p class="text_position">
-                      {{ item.name }}
-                    </p>
-                    <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+            <div class="board-wrapper">
+              <h2 class="board-title">Success</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsB"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsB" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
                   </div>
-                </div>
-              </draggable>
+                </draggable>
+              </div>
             </div>
 
-            <div class="board">
-              <h2>Wait</h2>
-              <draggable
-                v-model="itemsC"
-                group="myGroup"
-                @start="drag = true"
-                @end="drag = false"
-                :options="options"
-              >
-                <div class="item" v-for="item in itemsC" :key="item.id">
-                  <div>
-                    <p class="text_position">
-                      {{ item.name }}
-                    </p>
-                    <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+            <div class="board-wrapper">
+              <h2 class="board-title">Wait</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsC"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsC" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
                   </div>
-                </div>
-              </draggable>
+                </draggable>
+              </div>
             </div>
+
+            <div class="board-wrapper">
+              <h2 class="board-title">Success</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsB"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsB" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+
+            <div class="board-wrapper">
+              <h2 class="board-title">Success</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsB"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsB" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+
+            <div class="board-wrapper">
+              <h2 class="board-title">Success</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsB"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsB" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+
+            <div class="board-wrapper">
+              <h2 class="board-title">Success</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsB"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsB" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+
+            <div class="board-wrapper">
+              <h2 class="board-title">Success</h2>
+              <div class="board">
+                <draggable
+                  v-model="itemsB"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsB" :key="item.id">
+                    <div>
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+
+            <!--  -->
+            <!--  -->
+            <!--  -->
           </div>
         </v-row>
       </v-container>
@@ -104,6 +224,15 @@ export default {
         { id: 2, name: "Design to UI, UX by UI create tool Figma. #57" },
         { id: 3, name: "Add new Buttom in a input form." },
         { id: 4, name: "name04" },
+        { id: 1, name: "Add new icon." },
+        { id: 2, name: "Design to UI, UX by UI create tool Figma. #57" },
+        { id: 3, name: "Add new Buttom in a input form." },
+        { id: 1, name: "Add new icon." },
+        { id: 2, name: "Design to UI, UX by UI create tool Figma. #57" },
+        { id: 3, name: "Add new Buttom in a input form." },
+        { id: 1, name: "Add new icon." },
+        { id: 2, name: "Design to UI, UX by UI create tool Figma. #57" },
+        { id: 3, name: "Add new Buttom in a input form." },
         { id: 5, name: "name05" },
       ],
       itemsB: [
@@ -119,6 +248,9 @@ export default {
         { id: 13, name: "name13" },
         { id: 14, name: "name14" },
         { id: 15, name: "name15" },
+        { id: 16, name: "name16" },
+        { id: 17, name: "name17" },
+        { id: 18, name: "name18" },
       ],
     };
   },
@@ -135,10 +267,13 @@ export default {
   grid-template-columns: 100%;
   grid-template-areas: "view";
   background-color: #f0f0f0;
+  position: relative;
 }
 
 #view-area {
   grid-area: view;
+  overflow: hidden;
+  position: relative;
 }
 
 /*   ------------------------------------------------------------
@@ -167,8 +302,6 @@ export default {
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
-  /* line-height: 1.6; */
-  /* letter-spacing: 0.05em; */
   font-kerning: nomal;
   color: #6d6d6d;
   margin-block-end: 0em;
@@ -176,7 +309,6 @@ export default {
 
 .content-splitter {
   border-block-end: solid 1px #c5c5c5;
-  /* padding-bottom: 5px; */
 }
 
 /*  */
@@ -185,20 +317,41 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  position: relative;
 }
+
 ::-webkit-scrollbar {
   display: none;
   -webkit-appearance: none;
 }
 
+.board-wrapper {
+  position: relative;
+}
+
 .board {
   flex: 0 0 auto;
   overflow: scroll;
-
   height: 500px;
   width: 300px;
   margin: 20px;
   position: relative;
+  background: #52555a6b;
+  padding: 0px 0px;
+  border-radius: 25px;
+}
+
+.board-title {
+  top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+
+  font-family: Roboto;
+  font-size: 24px;
+  text-align: center;
+  line-height: 30px;
+  color: rgb(128, 128, 128);
 }
 
 .item {
@@ -208,6 +361,7 @@ export default {
   margin: 20px 10px;
   padding: 20px;
   border-radius: 25px;
+  background: #f0f0f0;
 }
 
 .item:hover {

@@ -12,7 +12,6 @@
           </v-row>
 
           <v-row justify="center">
-            <v-spacer></v-spacer>
             <v-col cols="8">
               <v-text-field label="Email"></v-text-field>
             </v-col>
@@ -123,5 +122,14 @@ export default {
 
 .btn-color {
   color: rgb(84, 136, 214);
+}
+
+.goal_title {
+  color: #5f75b0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 56px;
 }
 </style>
