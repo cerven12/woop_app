@@ -137,7 +137,7 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 28px;
+  font-size: 34px;
   line-height: 40px;
   color: #4465c0;
 }
@@ -146,10 +146,11 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 40px;
   color: rgb(41, 41, 41);
-  top: 20px;
+  /* top: 20px; */
+  padding-left: 50px;
 }
 
 .writing-text {

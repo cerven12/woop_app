@@ -28,4 +28,11 @@ body {
   font-family: "Roboto", sans-serif;
   background: #f0f0f0;
 }
+
+/*  Gray Scale */
+/* body {
+  -webkit-filter: grayscale(1);
+  -ms-filter: grayscale(1);
+  filter: grayscale(1);
+} */
 </style>

@@ -5,7 +5,6 @@
       <v-container fluid id="view-area">
         <!-- Vew Goal Title -->
         <v-row>
-          <v-col cols="2"></v-col>
           <v-col cols="10">
             <h1 class="message-title">
               Task Kanban Flow
@@ -16,7 +15,6 @@
         <!--                      Kanban                      -->
         <!-- -----------------------     -------------------- -->
         <v-row>
-          <v-col cols="2"></v-col>
           <div class="scrolling-wrapper">
             <div class="board-wrapper">
               <h2 class="board-title">Todo</h2>
@@ -264,8 +262,9 @@ export default {
 #css-grid {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 100%;
-  grid-template-areas: "view";
+  /* adjust white space of Kanban to other component. */
+  grid-template-columns: 16.5% 70%;
+  grid-template-areas: "... view";
   background-color: #f0f0f0;
   position: relative;
 }
@@ -283,9 +282,9 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 28px;
+  font-size: 34px;
   line-height: 40px;
-  color: #d69e37;
+  color: #c96b00;
 }
 
 .category-title {
@@ -336,7 +335,7 @@ export default {
   width: 300px;
   margin: 20px;
   position: relative;
-  background: #52555a6b;
+  background: #609bff;
   padding: 0px 0px;
   border-radius: 25px;
 }

@@ -67,7 +67,7 @@
           <v-col cols="2"></v-col>
           <v-col cols="8">
             <template>
-              <v-simple-table fixed-header height="500px">
+              <v-simple-table fixed-header height="1200px">
                 <template v-slot:default>
                   <thead>
                     <tr>
@@ -195,6 +195,42 @@ export default {
             "https://www.amazon.co.jp/%E5%A2%97%E8%A3%9C%E6%94%B9%E8%A8%82%E7%89%88-Java%E8%A8%80%E8%AA%9E%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E5%85%A5%E9%96%80-%E7%B5%90%E5%9F%8E-%E6%B5%A9-ebook/dp/B00I8ATHGW/ref=msx_wsirn_v1_2/356-4593790-2043255?_encoding=UTF8&pd_rd_i=B00I8ATHGW&pd_rd_r=23c708f0-847e-4c74-90d4-e8fddb3f2c7f&pd_rd_w=YKOlR&pd_rd_wg=FGtaR&pf_rd_p=8acfbc98-0f10-4ca5-ab7c-019f8ea70a4e&pf_rd_r=9WC76FT7EKXDHB3R94T8&psc=1&refRID=9WC76FT7EKXDHB3R94T8",
           reference_img: require("/Users/takuto/python1/woop_app/frontend/src/assets/login.png"),
         },
+        {
+          reference_name:
+            "Learn the basics of website development with Wakaba-Chan",
+          reference_use:
+            "I work hard at my studies while worshipping my wakaba chan.",
+          reference_source:
+            "https://www.amazon.co.jp/%E3%82%8F%E3%81%8B%E3%81%B0%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8%E5%AD%A6%E3%81%B6-Web%E3%82%B5%E3%82%A4%E3%83%88%E5%88%B6%E4%BD%9C%E3%81%AE%E5%9F%BA%E6%9C%AC-%E6%B9%8A%E5%B7%9D%E3%81%82%E3%81%84-ebook/dp/B01L8CANVO?ref_=s9_apbd_ps_hd_bw_b1x4K&pf_rd_r=53K0M7HN8Q97C3MESMGV&pf_rd_p=fedc39c9-dd8f-5c8f-b647-f8112fd79df4&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=465392",
+          reference_img: require("/Users/takuto/python1/woop_app/frontend/src/assets/wakaba.jpg"),
+        },
+        {
+          reference_name:
+            "Learn the basics of website development with Wakaba-Chan",
+          reference_use:
+            "I work hard at my studies while worshipping my wakaba chan.",
+          reference_source:
+            "https://www.amazon.co.jp/%E3%82%8F%E3%81%8B%E3%81%B0%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8%E5%AD%A6%E3%81%B6-Web%E3%82%B5%E3%82%A4%E3%83%88%E5%88%B6%E4%BD%9C%E3%81%AE%E5%9F%BA%E6%9C%AC-%E6%B9%8A%E5%B7%9D%E3%81%82%E3%81%84-ebook/dp/B01L8CANVO?ref_=s9_apbd_ps_hd_bw_b1x4K&pf_rd_r=53K0M7HN8Q97C3MESMGV&pf_rd_p=fedc39c9-dd8f-5c8f-b647-f8112fd79df4&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=465392",
+          reference_img: require("/Users/takuto/python1/woop_app/frontend/src/assets/wakaba.jpg"),
+        },
+        {
+          reference_name:
+            "Learn the basics of website development with Wakaba-Chan",
+          reference_use:
+            "I work hard at my studies while worshipping my wakaba chan.",
+          reference_source:
+            "https://www.amazon.co.jp/%E3%82%8F%E3%81%8B%E3%81%B0%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8%E5%AD%A6%E3%81%B6-Web%E3%82%B5%E3%82%A4%E3%83%88%E5%88%B6%E4%BD%9C%E3%81%AE%E5%9F%BA%E6%9C%AC-%E6%B9%8A%E5%B7%9D%E3%81%82%E3%81%84-ebook/dp/B01L8CANVO?ref_=s9_apbd_ps_hd_bw_b1x4K&pf_rd_r=53K0M7HN8Q97C3MESMGV&pf_rd_p=fedc39c9-dd8f-5c8f-b647-f8112fd79df4&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=465392",
+          reference_img: require("/Users/takuto/python1/woop_app/frontend/src/assets/wakaba.jpg"),
+        },
+        {
+          reference_name:
+            "Learn the basics of website development with Wakaba-Chan",
+          reference_use:
+            "I work hard at my studies while worshipping my wakaba chan.",
+          reference_source:
+            "https://www.amazon.co.jp/%E3%82%8F%E3%81%8B%E3%81%B0%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8%E5%AD%A6%E3%81%B6-Web%E3%82%B5%E3%82%A4%E3%83%88%E5%88%B6%E4%BD%9C%E3%81%AE%E5%9F%BA%E6%9C%AC-%E6%B9%8A%E5%B7%9D%E3%81%82%E3%81%84-ebook/dp/B01L8CANVO?ref_=s9_apbd_ps_hd_bw_b1x4K&pf_rd_r=53K0M7HN8Q97C3MESMGV&pf_rd_p=fedc39c9-dd8f-5c8f-b647-f8112fd79df4&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=465392",
+          reference_img: require("/Users/takuto/python1/woop_app/frontend/src/assets/wakaba.jpg"),
+        },
       ],
     };
   },
@@ -224,7 +260,7 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 34px;
   line-height: 40px;
   color: #4465c0;
 }
@@ -236,6 +272,7 @@ export default {
   font-size: 24px;
   line-height: 40px;
   color: rgb(41, 41, 41);
+  padding-left: 50px;
 }
 
 .writing-text {

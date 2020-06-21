@@ -54,10 +54,9 @@ export default {};
  ------------------------------------------------------------*/
 .goal_title {
   color: #4465c0;
-  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 48px;
+  font-size: 50px;
   line-height: 56px;
 }
 
