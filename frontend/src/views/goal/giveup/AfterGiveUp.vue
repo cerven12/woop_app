@@ -271,7 +271,7 @@ export default {
   font-weight: normal;
   font-size: 24px;
   line-height: 40px;
-  color: rgb(41, 41, 41);
+  color: #292929;
   padding-left: 50px;
 }
 

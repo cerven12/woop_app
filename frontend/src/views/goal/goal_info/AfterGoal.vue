@@ -66,7 +66,7 @@ export default {};
   font-weight: normal;
   font-size: 18px;
   line-height: 1.6;
-  color: rgb(41, 41, 41);
+  color: #292929;
   /* letter-spacing: 0.05em; */
 }
 </style>

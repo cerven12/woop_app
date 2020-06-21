@@ -284,7 +284,7 @@ export default {
   font-weight: normal;
   font-size: 34px;
   line-height: 40px;
-  color: #c96b00;
+  color: #4465c0;
 }
 
 .category-title {
@@ -335,7 +335,7 @@ export default {
   width: 300px;
   margin: 20px;
   position: relative;
-  background: #609bff;
+  background: #4465c0;
   padding: 0px 0px;
   border-radius: 25px;
 }
@@ -350,7 +350,7 @@ export default {
   font-size: 24px;
   text-align: center;
   line-height: 30px;
-  color: rgb(128, 128, 128);
+  color: #444444;
 }
 
 .item {
@@ -372,7 +372,7 @@ export default {
 
 .text_position {
   font-size: 18px;
-  color: rgb(59, 58, 83);
+  color: #292929;
   position: relative;
 }
 
