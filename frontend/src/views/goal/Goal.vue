@@ -4,6 +4,7 @@
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
       <AfterGoal></AfterGoal>
       <Kanban></Kanban>
+      <Note></Note>
 
       <AfterMotive></AfterMotive>
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
@@ -13,8 +14,6 @@
 
       <AfterSchedule></AfterSchedule>
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-
-      <Note></Note>
 
       <BeforeGoal></BeforeGoal>
       <BeforeMotive></BeforeMotive>

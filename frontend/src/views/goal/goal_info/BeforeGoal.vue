@@ -43,6 +43,17 @@
               ></v-textarea>
             </v-col>
           </v-row>
+
+          <v-row>
+            <v-col cols="12" md="12">
+              <v-textarea
+                name="Success criteria"
+                label="Success criteria"
+                rows="1"
+                auto-grow
+              ></v-textarea>
+            </v-col>
+          </v-row>
         </div>
       </v-container>
 

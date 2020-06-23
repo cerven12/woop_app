@@ -17,7 +17,7 @@
         <v-row>
           <div class="scrolling-wrapper">
             <div class="board-wrapper">
-              <h2 class="board-title">Todo</h2>
+              <h2 class="board-title">Todo <span> + </span></h2>
               <div class="board">
                 <draggable
                   v-model="itemsA"
@@ -28,7 +28,7 @@
                 >
                   <div class="item" v-for="item in itemsA" :key="item.id">
                     <div>
-                      <p class="text_position">
+                      <p class="text_position" @click="eachTaskView(item.name)">
                         {{ item.name }}
                       </p>
                       <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
@@ -198,6 +198,48 @@
           </div>
         </v-row>
       </v-container>
+
+      <v-container>
+        <v-overlay :value="isClick">
+          <div class="overlay-back">
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="1">
+                <v-btn icon @click="isClick = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="12">
+                now goal title
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="12">
+                <h1 class="message-title">{{ nowViewTask }}!!!</h1>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="12">
+                <h1 class="writing-text ">
+                  A task management app that incorporates the Woop concept. When
+                  you set goals, it asks various questions to motivate you and
+                  prevent setbacks. Set small goals (tasks) to reach your goals
+                  and complete them one by one.A task management app that
+                  incorporates the Woop concept. When you set goals, it asks
+                  various questions to motivate you and prevent setbacks. Set
+                  small goals (tasks) to reach your goals and complete them one
+                  by one.
+                </h1>
+              </v-col>
+            </v-row>
+          </div>
+        </v-overlay>
+      </v-container>
     </div>
   </div>
 </template>
@@ -210,6 +252,8 @@ export default {
   components: { draggable },
   data() {
     return {
+      isClick: false,
+      nowViewTask: "",
       options: {
         animation: 200,
       },
@@ -251,6 +295,12 @@ export default {
         { id: 18, name: "name18" },
       ],
     };
+  },
+  methods: {
+    eachTaskView: function(itemname) {
+      this.nowViewTask = itemname;
+      this.isClick = true;
+    },
   },
 };
 </script>
@@ -382,5 +432,16 @@ export default {
   position: absolute;
   bottom: 5px;
   right: 20px;
+}
+
+/* -------------   --------------- */
+/*           Over lay            */
+/* -------------   --------------- */
+.overlay-back {
+  background: #f0f0f0;
+  width: 1200px;
+  border-radius: 50px;
+  padding: 40px 60px;
+  position: relative;
 }
 </style>

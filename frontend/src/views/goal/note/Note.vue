@@ -84,7 +84,8 @@ export default {
   font-weight: normal;
   /* font-size: 34px; */
   line-height: 40px;
-  color: #5f75b0;
+  color: #4465c0;
+  font-size: 34px;
 }
 
 .category-title {
