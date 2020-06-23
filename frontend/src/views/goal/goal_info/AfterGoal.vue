@@ -36,8 +36,8 @@
         <v-row justify="center">
           <v-col cols="8">
             <p class="writing-text">
-              Developed in Django and Vue.js. It has a login feature. Make sure
-              it is usable on the net without any problems.
+              <span>👍</span> Developed in Django and Vue.js. It has a login
+              feature. Make sure it is usable on the net without any problems.
             </p>
           </v-col>
         </v-row>
