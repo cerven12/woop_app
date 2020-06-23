@@ -27,8 +27,8 @@
                   :options="options"
                 >
                   <div class="item" v-for="item in itemsA" :key="item.id">
-                    <div>
-                      <p class="text_position" @click="eachTaskView(item.name)">
+                    <div @click="showDialog(item.name)">
+                      <p class="text_position">
                         {{ item.name }}
                       </p>
                       <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
@@ -199,59 +199,23 @@
         </v-row>
       </v-container>
 
-      <v-container>
-        <v-overlay :value="isClick">
-          <div class="overlay-back">
-            <v-row>
-              <v-spacer></v-spacer>
-              <v-col cols="1">
-                <v-btn icon @click="isClick = false">
-                  <v-icon>mdi-close</v-icon>
-                </v-btn>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12">
-                now goal title
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12">
-                <h1 class="message-title">{{ nowViewTask }}!!!</h1>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12">
-                <h1 class="writing-text ">
-                  A task management app that incorporates the Woop concept. When
-                  you set goals, it asks various questions to motivate you and
-                  prevent setbacks. Set small goals (tasks) to reach your goals
-                  and complete them one by one.A task management app that
-                  incorporates the Woop concept. When you set goals, it asks
-                  various questions to motivate you and prevent setbacks. Set
-                  small goals (tasks) to reach your goals and complete them one
-                  by one.
-                </h1>
-              </v-col>
-            </v-row>
-          </div>
-        </v-overlay>
-      </v-container>
+      <div class="text-xs-center">
+        <Task :text="text" ref="task"></Task>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
+import Task from "./Task";
 
 export default {
   name: "dnd",
-  components: { draggable },
+  components: { draggable, Task },
   data() {
     return {
+      dialog: false,
       isClick: false,
       nowViewTask: "",
       options: {
@@ -300,6 +264,11 @@ export default {
     eachTaskView: function(itemname) {
       this.nowViewTask = itemname;
       this.isClick = true;
+    },
+
+    showDialog(itemname) {
+      this.$refs.task.open();
+      this.$refs.task.task_info = itemname;
     },
   },
 };
