@@ -1,7 +1,7 @@
 <template>
-  <div class="background">
+  <div>
     <v-dialog fullscreen scrollable hide-overlay v-model="isDisplay">
-      <v-card>
+      <v-card color="#f0f0f0f5" tag>
         <v-container>
           <br />
           <br />
@@ -9,7 +9,7 @@
           <!-- Goal -->
           <v-row>
             <h4 class="goal-title">
-              Create Web SPA Todo App at use Django Rest Framework and Vue.
+              > Create Web SPA Todo App at use Django Rest Framework and Vue.
             </h4>
           </v-row>
 
@@ -21,30 +21,12 @@
           <br />
           <br />
 
-          <v-row>
-            <v-col cols="12">
-              <h1 class="message-title">{{ task_info }}</h1>
-            </v-col>
-          </v-row>
-
-          <v-row>
-            <v-col cols="12">
-              <h1 class="writing-text ">
-                A task management app that incorporates the Woop concept. When
-                you set goals, it asks various questions to motivate you and
-                prevent setbacks. Set small goals (tasks) to reach your goals
-                and complete them one by one.A task management app that
-                incorporates the Woop concept. When you set goals, it asks
-                various questions to motivate you and prevent setbacks. Set
-                small goals (tasks) to reach your goals and complete them one by
-                one.
-              </h1>
-            </v-col>
-          </v-row>
-
+          <!-- task info -->
+          <AfterTask>{{ task_info }}</AfterTask>
           <br /><br />
+
           <!-- expectation -->
-          <Expectation></Expectation>
+          <AfterExpectation></AfterExpectation>
         </v-container>
       </v-card>
     </v-dialog>
@@ -52,11 +34,13 @@
 </template>
 
 <script>
-import Expectation from "./task_info/Expectation";
+import AfterExpectation from "./expectation/AfterExpectation";
+import AfterTask from "./task_info/AfterTask";
 
 export default {
   components: {
-    Expectation,
+    AfterExpectation,
+    AfterTask,
   },
   data: () => ({
     isDisplay: false,
@@ -110,12 +94,12 @@ export default {
   font-weight: normal;
   font-size: 18px;
   font-kerning: nomal;
-  color: #6d6d6d;
+  color: #2e2e2e;
   margin-block-end: 0em;
 }
 
 .back {
-  background: #f0f0f0;
+  background: #f0f0f0f5;
 }
 
 .goal-title {

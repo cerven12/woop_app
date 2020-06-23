@@ -14,7 +14,7 @@
           <v-row>
             <v-spacer></v-spacer>
             <v-col cols="9">
-              <h1>😩😩😩😩😩</h1>
+              <h1>☺ ☺ ☺ ☺ ☺</h1>
             </v-col>
           </v-row>
 
@@ -38,7 +38,7 @@
           <v-row>
             <v-spacer></v-spacer>
             <v-col cols="9">
-              <h1>🌋🌋🌋🌋🌋</h1>
+              <h1>🌋 🌋 🌋 🌋 🌋</h1>
             </v-col>
           </v-row>
 

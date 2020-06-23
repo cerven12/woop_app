@@ -12,15 +12,9 @@ class NestedRouter(NestedRouterMixin, DefaultRouter):
 
 router = NestedRouter()
 
+# Goal
 goals_routes = router.register(r'goals', views.GoalViewSet, basename='goals')
 
-# Tasks
-goals_routes.register(
-    r'tasks',
-    views.TaskViewSet,
-    basename='tasks',
-    parents_query_lookups=['goal']
-)
 
 # Motives
 goals_routes.register(
@@ -52,9 +46,8 @@ goals_routes.register(
     views.WorryViewSet,
     basename='worries',
     parents_query_lookups=['goal']
-# Ideas
-).register(
-    'ideas',
+).register(  # Ideas
+    r'ideas',
     views.IdeaViewSet,
     basename='ideas',
     parents_query_lookups=['worry__goal', 'worry']
@@ -75,5 +68,59 @@ goals_routes.register(
     basename='notes',
     parents_query_lookups=['goal']
 )
+
+
+# Tasks
+tasks_routes = goals_routes.register(
+    r'tasks',
+    views.TaskViewSet,
+    basename='tasks',
+    parents_query_lookups=['goal']
+)
+
+# Reasons
+tasks_routes.register(
+    r'reasons',
+    views.ReasonViewSet,
+    basename='reasons',
+    parents_query_lookups=['task__goal', 'task']
+)
+
+# Feedbacks
+tasks_routes.register(
+    r'feedbacks',
+    views.FeedbackViewSet,
+    basename='feedbacks',
+    parents_query_lookups=['task__goal', 'task']
+)
+
+# Hurdles
+tasks_routes.register(
+    r'hurdles',
+    views.HurdleViewSet,
+    basename='hurdles',
+    parents_query_lookups=['task__goal', 'task']
+).register( # Solutions
+    r'solutions',
+    views.SolutionViewSet,
+    basename='solutions',
+    parents_query_lookups=['hurdle__task__goal','hurdle__task', 'hurdle']
+)
+
+tasks_routes.register(
+    r'documents',
+    views.DocumentViewSet,
+    basename='documents',
+    parents_query_lookups=['task__goal', 'task']
+)
+
+tasks_routes.register(
+    r'discovers',
+    views.DiscoverViewSet,
+    basename='discovers',
+    parents_query_lookups=['task__goal', 'task']
+)
+
+
 
 urlpatterns = router.urls
