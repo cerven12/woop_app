@@ -2,6 +2,7 @@
   <v-app>
     <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
+
       <AfterGoal></AfterGoal>
       <Kanban></Kanban>
       <Note></Note>
