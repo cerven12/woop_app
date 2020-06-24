@@ -57,7 +57,8 @@ class TaskSerializer(WritableNestedModelSerializer):
         model = Task
         fields = ['task_id', 'task_title', 'created_at',
                   'goal', 'is_repeat', 'backup_plan',
-                  'reasons','feedbacks','hurdles','documents','discovers']
+                  'reasons','feedbacks','hurdles','documents','discovers',
+                  'satisfaction','difficulty']
 
 
 

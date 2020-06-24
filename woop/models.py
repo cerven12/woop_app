@@ -154,7 +154,24 @@ class Note(models.Model):
 #                           TASK                                 #
 ####################################
 
+
 class Task(models.Model):
+    satisfaction_level = (
+        (10, '全くない'),
+        (20, 'あまりない'),
+        (30, 'ほどほど'),
+        (40, 'ある'),
+        (50, 'かなりある'),
+    )
+
+    difficulty_level = (
+        (10, 'かなり簡単'),
+        (20, '簡単'),
+        (30, '普通'),
+        (40, '難しい'),
+        (50, 'かなり難しい'),
+    )
+
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='tasks')
     task_id = models.UUIDField(
@@ -165,6 +182,10 @@ class Task(models.Model):
     # Run tasks for when get stuck to main task.
     backup_plan = models.ForeignKey(
         'self', on_delete=models.CASCADE, blank=True, null=True)
+    satisfaction = models.IntegerField(
+        verbose_name='満足度', choices=satisfaction_level, null=True)
+    difficulty = models.IntegerField(
+        verbose_name='困難度', choices=difficulty_level, null=True)
 
     def __str__(self):
         return self.task_title or ''
