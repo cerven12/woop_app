@@ -78,6 +78,33 @@ tasks_routes = goals_routes.register(
     parents_query_lookups=['goal']
 )
 
+# Boards
+goals_routes.register(
+    r'boards',
+    views.BoardViewSet,
+    basename='boards',
+    parents_query_lookups=['goal']
+).register(
+    r'tasks',
+    views.TaskViewSet,
+    basename='tasks',
+    parents_query_lookups=['board__goal', 'board']
+)
+
+# Steps
+goals_routes.register(
+    r'steps',
+    views.StepViewSet,
+    basename='steps',
+    parents_query_lookups=['goal']
+).register(
+    r'tasks',
+    views.TaskViewSet,
+    basename='tasks',
+    parents_query_lookups=['step__goal', 'step']
+)
+
+
 # Reasons
 tasks_routes.register(
     r'reasons',
@@ -100,11 +127,11 @@ tasks_routes.register(
     views.HurdleViewSet,
     basename='hurdles',
     parents_query_lookups=['task__goal', 'task']
-).register( # Solutions
+).register(  # Solutions
     r'solutions',
     views.SolutionViewSet,
     basename='solutions',
-    parents_query_lookups=['hurdle__task__goal','hurdle__task', 'hurdle']
+    parents_query_lookups=['hurdle__task__goal', 'hurdle__task', 'hurdle']
 )
 
 tasks_routes.register(
@@ -120,7 +147,6 @@ tasks_routes.register(
     basename='discovers',
     parents_query_lookups=['task__goal', 'task']
 )
-
 
 
 urlpatterns = router.urls

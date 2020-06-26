@@ -1,21 +1,31 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Note
-from .models import Task, Reason, Feedback, Hurdle, Solution, Document, Discover
+from .models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Note, Step
+from .models import Task, Reason, Feedback, Hurdle, Solution, Document, Discover, Board
 
 
 ####################################
 #                           Goal                                 #
 ####################################
 class GoalAdmin(admin.ModelAdmin):
-    list_display = ('created_by', 'goal_title', 'created_at', 'goal_description',
+    list_display = ('created_by', 'goal_title', 'created_at', 'goal_description', 'criteria',
                     'start_date', 'deadline', 'achievement', 'progress_type', 'goal_id')
     ordering = ('-created_at',)
     readonly_field = ('goal_id', 'created_at')
 
 
 admin.site.register(Goal, GoalAdmin)
+
+
+class StepAdmin(admin.ModelAdmin):
+    list_display = ('step_id', 'goal', 'step_title',
+                    'created_at', 'updated_at', 'order_by', 'is_active')
+    ordering = ('-order_by',)
+    readonly_field = ('step_id', 'created_at', 'updated_at')
+
+
+admin.site.register(Step, StepAdmin)
 
 
 class MotiveAdmin(admin.ModelAdmin):
@@ -80,8 +90,7 @@ admin.site.register(Note, NotesAdmin)
 
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('task_title', 'created_at', 'goal',
-                    'task_id', 'is_repeat', 'backup_plan'
-                    ,'satisfaction', 'difficulty')
+                    'task_id', 'is_repeat', 'backup_plan', 'satisfaction', 'difficulty')
     ordering = ('-created_at', 'is_repeat')
     readonly_field = ('task_id', 'created_at')
 
@@ -90,7 +99,7 @@ admin.site.register(Task, TaskAdmin)
 
 
 class ReasonAdmin(admin.ModelAdmin):
-    list_displey = ('reason_id', 'reason', 'created_at', 'task')
+    list_display = ('reason_id', 'reason', 'created_at', 'task')
     ordering = ('-created_at',)
     readonly_field = ('reason_id', 'created_at')
 
@@ -99,7 +108,7 @@ admin.site.register(Reason, ReasonAdmin)
 
 
 class FeedbackAdmin(admin.ModelAdmin):
-    list_displey = ('feedback_id', 'feedback', 'created_at', 'task')
+    list_display = ('feedback_id', 'feedback', 'created_at', 'task')
     ordering = ('-created_at',)
     readonly_field = ('feedback_id', 'created_at')
 
@@ -108,7 +117,7 @@ admin.site.register(Feedback, FeedbackAdmin)
 
 
 class HurdleAdmin(admin.ModelAdmin):
-    list_displey = ('hurdle_id', 'hurdle', 'created_at', 'task')
+    list_display = ('hurdle_id', 'hurdle', 'created_at', 'task')
     ordering = ('-created_at',)
     readonly_field = ('hurdle_id', 'created_at')
 
@@ -117,7 +126,7 @@ admin.site.register(Hurdle, HurdleAdmin)
 
 
 class SolutionAdmin(admin.ModelAdmin):
-    list_displey = ('solution_id', 'solution', 'created_at', 'hurdle')
+    list_display = ('solution_id', 'solution', 'created_at', 'hurdle')
     ordering = ('-created_at',)
     readonly_field = ('solution_id', 'created_at')
 
@@ -126,7 +135,7 @@ admin.site.register(Solution, SolutionAdmin)
 
 
 class DocumentAdmin(admin.ModelAdmin):
-    list_displey = ('document_id', 'document_name',
+    list_display = ('document_id', 'document_name',
                     'document_use', 'document_source', 'created_at', 'task')
     ordering = ('-created_at',)
     readonly_field = ('document_id', 'created_at')
@@ -136,10 +145,20 @@ admin.site.register(Document, DocumentAdmin)
 
 
 class DiscoverAdmin(admin.ModelAdmin):
-    list_displey = ('discover_id', 'discover_title',
+    list_display = ('discover_id', 'discover_title',
                     'discover_main', 'created_at', 'update_at', 'first_hint', 'second_hint', 'third_hint')
     ordering = ('-created_at',)
     readonly_field = ('discover_id', 'created_at')
 
 
 admin.site.register(Discover, DiscoverAdmin)
+
+
+class BoardAdmin(admin.ModelAdmin):
+    list_display = ('board_id', 'goal', 'board_title',
+                    'created_at', 'updated_at', 'order_by')
+    ordering = ('-created_at',)
+    readonly_field = ('board_id', 'created_at', 'updated_at')
+
+
+admin.site.register(Board, BoardAdmin)
