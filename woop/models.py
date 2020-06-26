@@ -24,11 +24,13 @@ class Goal(models.Model):
         (1, '挑戦中'),
         (2, '達成済'),
     )
-    created_by = models.ForeignKey(CustomUser,
-                                   on_delete=models.CASCADE, verbose_name='ユーザー')
+    created_by = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, verbose_name='ユーザー')
     goal_id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
     goal_title = models.CharField(verbose_name='目標', max_length=200)
+    criteria = models.TextField(
+        verbose_name='成功基準', blank=True, null=True)
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
     goal_description = models.TextField(
@@ -44,11 +46,38 @@ class Goal(models.Model):
         return self.goal_title or ''
 
 
+# board
+class Board(models.Model):
+    board_id = models.AutoField(primary_key=True)
+    goal = models.ForeignKey(
+        Goal, on_delete=models.CASCADE, related_name='boards')
+    board_title = models.CharField(verbose_name='ボード', max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    order_by = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.board_title or ''
+
+
+class Step(models.Model):
+    step_id = models.AutoField(primary_key=True)
+    goal = models.ForeignKey(
+        Goal, on_delete=models.CASCADE, related_name='step')
+    step_title = models.CharField(verbose_name='ステップ', max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    order_by = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.step_title or ''
+
+
 class Motive(models.Model):
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='motives')
-    motive_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    motive_id = models.AutoField(primary_key=True)
     motive = models.TextField(verbose_name='動機', blank=True, null=True)
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
@@ -60,8 +89,7 @@ class Motive(models.Model):
 class SelfTranscendenceGoal(models.Model):
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='self_transcendence_goals')
-    selftrans_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    selftrans_id = models.AutoField(primary_key=True)
     self_transcendence_goal = models.TextField(
         verbose_name='自己超越目標', null=True, blank=True)
     created_at = models.DateTimeField(
@@ -74,8 +102,7 @@ class SelfTranscendenceGoal(models.Model):
 class FutureSelf(models.Model):
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='future_selves')
-    future_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    future_id = models.AutoField(primary_key=True)
     future_self = models.TextField(verbose_name='将来の自分', null=True, blank=True)
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
@@ -87,8 +114,7 @@ class FutureSelf(models.Model):
 class Worry(models.Model):
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='worries')
-    worry_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    worry_id = models.AutoField(primary_key=True)
     worry = models.TextField(verbose_name='心配事', null=True, blank=True)
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
@@ -100,8 +126,7 @@ class Worry(models.Model):
 class Idea(models.Model):
     worry = models.ForeignKey(
         Worry, on_delete=models.CASCADE, related_name='ideas')
-    idea_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    idea_id = models.AutoField(primary_key=True)
     idea = models.TextField(verbose_name='対策', null=True, blank=True)
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
@@ -113,8 +138,7 @@ class Idea(models.Model):
 class Reference(models.Model):
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='references')
-    reference_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    reference_id = models.AutoField(primary_key=True)
     reference_name = models.CharField(
         verbose_name='資料', null=True, blank=True, max_length=200)
     reference_use = models.CharField(
@@ -131,8 +155,7 @@ class Reference(models.Model):
 class Note(models.Model):
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='notes')
-    note_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    note_id = models.AutoField(primary_key=True)
     note_title = models.CharField(
         verbose_name='タイトル', null=True, blank=True, max_length=200)
     note_main = models.TextField(verbose_name='本文', null=True, blank=True)
@@ -174,8 +197,12 @@ class Task(models.Model):
 
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='tasks')
-    task_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    board = models.ForeignKey(
+        Board, on_delete=models.CASCADE, related_name='tasks', blank=True, null=True)
+    step = models.ForeignKey(
+        Step, on_delete=models.CASCADE, related_name='tasks', blank=True, null=True)
+    task_id = models.AutoField(primary_key=True)
+    order_by = models.IntegerField(default=0)
     task_title = models.CharField(verbose_name='やること', max_length=40)
     created_at = models.DateTimeField(default=timezone.now)
     is_repeat = models.BooleanField(verbose_name='繰り返し', default=False)
@@ -194,8 +221,7 @@ class Task(models.Model):
 class Reason(models.Model):
     task = models.ForeignKey(
         Task, on_delete=models.CASCADE, related_name='reasons')
-    reason_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    reason_id = models.AutoField(primary_key=True)
     reason = models.TextField(
         verbose_name='理由', null=True, blank=True)
     created_at = models.DateTimeField(
@@ -208,8 +234,7 @@ class Reason(models.Model):
 class Feedback(models.Model):
     task = models.ForeignKey(
         Task, on_delete=models.CASCADE, related_name='feedbacks')
-    feedback_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    feedback_id = models.AutoField(primary_key=True)
     feedback = models.TextField(
         verbose_name='報酬', null=True, blank=True)
     created_at = models.DateTimeField(
@@ -222,8 +247,7 @@ class Feedback(models.Model):
 class Hurdle(models.Model):
     task = models.ForeignKey(
         Task, on_delete=models.CASCADE, related_name='hurdles')
-    hurdle_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    hurdle_id = models.AutoField(primary_key=True)
     hurdle = models.TextField(verbose_name='障害', null=True, blank=True)
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
@@ -235,8 +259,7 @@ class Hurdle(models.Model):
 class Solution(models.Model):
     hurdle = models.ForeignKey(
         Hurdle, on_delete=models.CASCADE, related_name='solutions')
-    solution_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    solution_id = models.AutoField(primary_key=True)
     solution = models.TextField(verbose_name='解決策', null=True, blank=True)
     created_at = models.DateTimeField(
         verbose_name='作成日時', default=timezone.now)
@@ -248,8 +271,7 @@ class Solution(models.Model):
 class Document(models.Model):
     task = models.ForeignKey(
         Task, on_delete=models.CASCADE, related_name='documents')
-    document_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    document_id = models.AutoField(primary_key=True)
     document_name = models.TextField(verbose_name='資料', null=True, blank=True)
     document_use = models.CharField(
         verbose_name='用途', null=True, blank=True, max_length=200)
@@ -265,8 +287,7 @@ class Document(models.Model):
 class Discover(models.Model):
     task = models.ForeignKey(
         Task, on_delete=models.CASCADE, related_name='discovers')
-    discover_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
+    discover_id = models.AutoField(primary_key=True)
     discover_title = models.CharField(
         verbose_name='タイトル', null=True, blank=True, max_length=200)
     discover_main = models.TextField(
