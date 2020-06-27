@@ -15,6 +15,18 @@ router = NestedRouter()
 # Goal
 goals_routes = router.register(r'goals', views.GoalViewSet, basename='goals')
 
+# Steps
+goals_routes.register(
+    r'steps',
+    views.StepViewSet,
+    basename='steps',
+    parents_query_lookups=['goal']
+).register(
+    r'tasks',
+    views.TaskViewSet,
+    basename='tasks',
+    parents_query_lookups=['step__goal', 'step']
+)
 
 # Motives
 goals_routes.register(
@@ -89,19 +101,6 @@ goals_routes.register(
     views.TaskViewSet,
     basename='tasks',
     parents_query_lookups=['board__goal', 'board']
-)
-
-# Steps
-goals_routes.register(
-    r'steps',
-    views.StepViewSet,
-    basename='steps',
-    parents_query_lookups=['goal']
-).register(
-    r'tasks',
-    views.TaskViewSet,
-    basename='tasks',
-    parents_query_lookups=['step__goal', 'step']
 )
 
 

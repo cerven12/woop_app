@@ -60,6 +60,7 @@ class Board(models.Model):
         return self.board_title or ''
 
 
+# step
 class Step(models.Model):
     step_id = models.AutoField(primary_key=True)
     goal = models.ForeignKey(

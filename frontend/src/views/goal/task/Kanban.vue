@@ -38,6 +38,71 @@
               </div>
             </div>
 
+            <div class="board-wrapper">
+              <h2 class="board-title">Success <span> + </span></h2>
+              <div class="board" style="background: #517322">
+                <draggable
+                  v-model="itemsB"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsB" :key="item.id">
+                    <div @click="showDialog(item.name)">
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+
+            <div class="board-wrapper">
+              <h2 class="board-title">Wait <span> + </span></h2>
+              <div class="board" style="background: rgb(55, 55, 55)">
+                <draggable
+                  v-model="itemsC"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsC" :key="item.id">
+                    <div @click="showDialog(item.name)">
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+
+            <div class="board-wrapper">
+              <h2 class="board-title">None <span> + </span></h2>
+              <div class="board" style="background: #BF6A56">
+                <draggable
+                  v-model="itemsC"
+                  group="myGroup"
+                  @start="drag = true"
+                  @end="drag = false"
+                  :options="options"
+                >
+                  <div class="item" v-for="item in itemsC" :key="item.id">
+                    <div @click="showDialog(item.name)">
+                      <p class="text_position">
+                        {{ item.name }}
+                      </p>
+                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                    </div>
+                  </div>
+                </draggable>
+              </div>
+            </div>
             <!--  -->
             <!--  -->
             <!--  -->
@@ -73,7 +138,11 @@ export default {
       },
       itemsA: [{ id: 1, name: "Add new icon." }],
       itemsB: [{ id: 6, name: "name06" }],
-      itemsC: [{ id: 11, name: "name11" }],
+      itemsC: [
+        { id: 11, name: "name11" },
+        { id: 11, name: "name11" },
+        { id: 11, name: "name11" },
+      ],
     };
   },
   methods: {

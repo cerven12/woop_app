@@ -60,7 +60,7 @@ export default {
   max-width: auto;
   /* font-family: Lato; */
   margin-bottom: 30px;
-  background-color: #2d9cdb;
+  background-color: #4465c0;
   border-radius: 27.5px;
 }
 

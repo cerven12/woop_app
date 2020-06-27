@@ -49,7 +49,7 @@ class ReasonSerializer(serializers.ModelSerializer):
         fields = ['reason_id', 'reason', 'created_at', 'task', ]
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(WritableNestedModelSerializer):
     reasons = ReasonSerializer(many=True, required=False, allow_null=True)
     feedbacks = FeedbackSerializer(many=True, required=False, allow_null=True)
     hurdles = HurdleSerializer(many=True, required=False, allow_null=True)
@@ -143,10 +143,11 @@ class TaskSerializeForStep(serializers.ModelSerializer):
         fields = ['task_id', 'task_title', 'created_at', 'board', 'step', 'order_by',
                   'goal', 'is_repeat', 'backup_plan',
                   'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
-                  'satisfaction', 'difficulty']
+                  'satisfaction', 'difficulty'
+                  ]
 
 
-class StepSerializer(serializers.ModelSerializer):
+class StepSerializer(WritableNestedModelSerializer):
     tasks = TaskSerializeForStep(many=True, required=False)
 
     class Meta:
@@ -157,10 +158,10 @@ class StepSerializer(serializers.ModelSerializer):
         ]
 
 
-class GoalSerializer(serializers.ModelSerializer):
+class GoalSerializer(WritableNestedModelSerializer):
     tasks = TaskSerializer(many=True, required=False)
+    steps = StepSerializer(many=True, required=False)
     boards = BoardSerializerNestedJustTask(many=True, required=False)
-    steps = StepSerializer(many=True, required=False, allow_null=True)
     motives = MotiveSerializer(many=True, required=False)
     self_transcendence_goals = SelfTranscendenceGoalSerializer(
         many=True, required=False)
