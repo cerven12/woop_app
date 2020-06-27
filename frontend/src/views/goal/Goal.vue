@@ -19,7 +19,7 @@
       <BeforeGoal></BeforeGoal>
       <BeforeMotive></BeforeMotive>
       <BeforeGiveUp></BeforeGiveUp>
-      <BeforeSchedule></BeforeSchedule>
+      <!-- <BeforeSchedule></BeforeSchedule> -->
     </div>
   </v-app>
 </template>
@@ -38,8 +38,8 @@ import BeforeGiveUp from "./giveup/BeforeGiveUp";
 import AfterGIveUp from "./giveup/AfterGiveUp";
 
 // Schedule
-import BeforeSchedule from "./schedule/BeforeSchedule";
-import AfterSchedule from "./schedule/AfterSchedule";
+// import BeforeSchedule from "./schedule/BeforeSchedule";
+// import AfterSchedule from "./schedule/AfterSchedule";
 
 // Note
 import Note from "./note/Note.vue";
@@ -53,8 +53,8 @@ export default {
     AfterMotive,
     BeforeGiveUp,
     AfterGIveUp,
-    BeforeSchedule,
-    AfterSchedule,
+    // BeforeSchedule,
+    // AfterSchedule,
     Note,
     Kanban,
   },

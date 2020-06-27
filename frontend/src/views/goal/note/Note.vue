@@ -17,16 +17,13 @@
           <v-col cols="6">
             <div v-for="note in noteList" :key="note.id">
               <accordion>
+                <div slot="source">@countermeasure#44</div>
                 <div slot="header">
                   {{ note.title }}
-                  <span slot="parent" class="atto">@countermeasure#44</span>
                 </div>
-                <div></div>
-                <div slot="body">{{ note.main }}</div>
-              </accordion>
-              <accordion theme="purple">
-                <div slot="header">TIPS</div>
-                Purple accordion
+                <div slot="body">
+                  {{ note.main }}
+                </div>
               </accordion>
             </div>
           </v-col>
@@ -48,6 +45,22 @@ export default {
       start_date: "2019-01-06",
       deadline: "2019-05-08",
       noteList: [
+        {
+          main:
+            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
+          title: "Hello World",
+        },
+        {
+          main:
+            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
+          title: "How to use the Django Rest Fwamework.",
+        },
+        {
+          main:
+            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
+          title:
+            "Post of API on Django database to sort order by Draggable of Vue.js use the Django Rest Fwamework. Post of API on Django database to sort order by Draggable of Vue.js use the Django Rest Fwamework.",
+        },
         {
           main:
             "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
@@ -112,10 +125,5 @@ export default {
 .content-splitter {
   border-block-end: solid 1px #c5c5c5;
   /* padding-bottom: 5px; */
-}
-.atto {
-  padding: -90px;
-  margin: 0;
-  font-size: 14px;
 }
 </style>

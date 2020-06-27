@@ -27,11 +27,11 @@
         </v-container>
       </div>
 
-      <div id="difficlut">
+      <div id="difficulty">
         <v-container>
           <v-row>
             <v-col cols="12">
-              <h1 class="sub-title">Difficlut</h1>
+              <h1 class="sub-title">Difficulty</h1>
             </v-col>
           </v-row>
 
@@ -71,7 +71,7 @@ export default {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 50% 50%;
-  grid-template-areas: "satisfaction difficlut";
+  grid-template-areas: "satisfaction difficulty";
 }
 
 #satisfaction {
@@ -79,7 +79,7 @@ export default {
 }
 
 #difficlut {
-  grid-area: difficlut;
+  grid-area: difficulty;
 }
 
 /*   ------------------------------------------------------------

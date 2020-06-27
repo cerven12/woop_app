@@ -8,10 +8,29 @@
 
           <!-- Goal -->
           <v-row>
-            <h4 class="goal-title">
-              > Create Web SPA Todo App at use Django Rest Framework and Vue.
-            </h4>
+            <v-col cols="7">
+              <h4 class="goal-title">
+                > Create Web SPA Todo App at use Django Rest Framework and Vue.
+              </h4>
+            </v-col>
+
+            <v-col cols="3">
+              <SoloStep></SoloStep>
+            </v-col>
+
+            <v-col cols="2">
+              <v-chip
+                class="ma-2"
+                label
+                color="#4465c0"
+                text-color="#f0f0f0"
+                large
+              >
+                Todo
+              </v-chip>
+            </v-col>
           </v-row>
+          <br />
 
           <v-row>
             <template>
@@ -36,11 +55,13 @@
 <script>
 import AfterExpectation from "./expectation/AfterExpectation";
 import AfterTask from "./task_info/AfterTask";
+import SoloStep from "../../../components/SoloStep";
 
 export default {
   components: {
     AfterExpectation,
     AfterTask,
+    SoloStep,
   },
   data: () => ({
     isDisplay: false,
@@ -106,6 +127,7 @@ export default {
   font-style: normal;
   font-weight: normal;
   color: #4465c0;
-  padding: 30px 0px;
+  /* Match position to SoloStep */
+  padding: 10px 0px;
 }
 </style>
