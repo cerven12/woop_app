@@ -2,10 +2,12 @@
   <div>
     <div class="accordion" v-bind:class="theme">
       <div class="header" v-on:click="toggle">
-        <slot name="header"></slot>
-        <slot name="parent"></slot>
-        <!-- <p style="font-size:14px;"><slot name="parent"></slot></p> -->
+        <div class="header-contents-wrapper ">
+          <div class="source"><slot name="source"></slot></div>
+          <div><slot name="header"></slot></div>
+        </div>
       </div>
+
       <transition
         name="accordion"
         v-on:before-enter="beforeEnter"
@@ -60,40 +62,39 @@ export default {
   max-width: auto;
   /* font-family: Lato; */
   margin-bottom: 30px;
-  background-color: #4465c0;
+  background-color: hsl(224, 50%, 51%);
   border-radius: 27.5px;
+  position: relative;
+}
+
+.header-contents-wrapper {
+  padding: 10px 20px;
+}
+
+.source {
+  font-size: 14px;
 }
 
 .accordion .header {
-  height: 75px;
-  line-height: 70px;
-  padding: 0 40px 0 30px;
-  font-size: 24px;
+  height: auto;
+  /* line-height: 20px; */
+  font-size: 20px;
   position: relative;
   color: rgb(241, 241, 241);
   cursor: pointer;
   z-index: 10;
 }
 
-.accordion .header-icon {
-  position: absolute;
-  top: 5px;
-  right: 8px;
-  transform: rotate(0deg);
-  transition-duration: 0.3s;
-}
-
 .accordion .body {
-  /*   display: none; */
+  /* The content is displayed as it expands. */
   overflow: hidden;
   background-color: #f0f0f0;
-  border-top: 0;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
   transition: 150ms ease-out;
   border-radius: 27.5px;
-  position: relative;
+
+  /*  It looks like on the board/ */
   z-index: 20;
+  position: relative;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
   right: 3px;
   top: -3px;
@@ -101,20 +102,10 @@ export default {
 
 .accordion .body-inner {
   padding: 40px 60px;
-  overflow-wrap: break-word;
-  /*   white-space: pre-wrap; */
 }
 
 .accordion .header-icon.rotate {
   transform: rotate(180deg);
   transition-duration: 0.3s;
-}
-
-.accordion.purple {
-  background-color: #8c618d;
-}
-
-.accordion.purple .body {
-  border-color: #8c618d;
 }
 </style>
