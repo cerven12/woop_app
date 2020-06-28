@@ -17,7 +17,7 @@
         <v-row>
           <v-col cols="2"></v-col>
           <v-col cols="8">
-            <h2 class="category-title">
+            <h2 class="category-title ">
               Motivation
             </h2>
           </v-col>
@@ -166,17 +166,21 @@ export default {
 }
 
 .motive-splitter {
-  border-left: 20px rgb(172, 233, 225) solid;
+  border-left: 20px rgb(28, 218, 174) solid;
   padding-left: 15px;
 }
 
 .selftrance-splitter {
-  border-left: 20px rgb(226, 158, 179) solid;
+  border-left: 20px rgb(239, 106, 148) solid;
   padding-left: 15px;
 }
 
 .future-splitter {
-  border-left: 20px rgb(124, 121, 124) solid;
+  border-left: 20px rgb(75, 75, 75) solid;
   padding-left: 15px;
+}
+
+.kakoi {
+  border: rgb(41, 41, 41) solid 1px;
 }
 </style>

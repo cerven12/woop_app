@@ -288,12 +288,12 @@ export default {
 }
 
 .obst-splitter {
-  border-left: 20px rgb(142, 100, 170) solid;
+  border-left: 20px rgb(141, 32, 213) solid;
   padding-left: 15px;
 }
 
 .idea-splitter {
-  border-left: 20px rgb(247, 186, 152) solid;
+  border-left: 20px rgb(234, 151, 63) solid;
   padding-left: 15px;
 }
 
