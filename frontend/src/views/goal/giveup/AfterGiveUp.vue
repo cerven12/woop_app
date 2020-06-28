@@ -309,4 +309,9 @@ export default {
 .font-16 {
   font-size: 16px;
 }
+
+.splitter {
+  border-left: 20px rgb(142, 100, 170) solid;
+  padding-left: 15px;
+}
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div>
-    <v-dialog fullscreen scrollable hide-overlay v-model="isDisplay">
-      <v-card color="#f0f0f0f5" tag>
+    <v-dialog hide-overlay v-model="isDisplay" width="1500px" heigh="1200px">
+      <!-- <v-card color="#f0f0f0f5" tag max-height="1000px"> -->
+      <div class="background">
         <v-container>
           <br />
           <br />
@@ -14,10 +15,12 @@
               </h4>
             </v-col>
 
+            <!-- Step -->
             <v-col cols="3">
               <SoloStep></SoloStep>
             </v-col>
 
+            <!-- Board -->
             <v-col cols="2">
               <v-chip
                 class="ma-2"
@@ -44,10 +47,14 @@
           <AfterTask>{{ task_info }}</AfterTask>
           <br /><br />
 
+          <!-- Discover -->
+          <Discover></Discover>
+
           <!-- expectation -->
           <AfterExpectation></AfterExpectation>
         </v-container>
-      </v-card>
+        <!-- </v-card> -->
+      </div>
     </v-dialog>
   </div>
 </template>
@@ -56,12 +63,14 @@
 import AfterExpectation from "./expectation/AfterExpectation";
 import AfterTask from "./task_info/AfterTask";
 import SoloStep from "../../../components/SoloStep";
+import Discover from "./discover/Discover";
 
 export default {
   components: {
     AfterExpectation,
     AfterTask,
     SoloStep,
+    Discover,
   },
   data: () => ({
     isDisplay: false,
@@ -88,7 +97,7 @@ export default {
   font-weight: normal;
   font-size: 34px;
   line-height: 40px;
-  color: #24a5f0;
+  color: #088dda;
 }
 
 .category-title {
@@ -129,5 +138,9 @@ export default {
   color: #4465c0;
   /* Match position to SoloStep */
   padding: 10px 0px;
+}
+
+.background {
+  background: #f0f0f0f7;
 }
 </style>

@@ -117,7 +117,7 @@ export default {
 <style scoped>
 /*   ------------------------------------------------------------
                             CSS Grid
- ------------------------------------------------------------*/
+------------------------------------------------------------*/
 #css-grid {
   display: grid;
   grid-template-rows: 1fr;
@@ -171,7 +171,7 @@ export default {
 }
 
 .selftrance-splitter {
-  border-left: 20px rgb(226, 158, 215) solid;
+  border-left: 20px rgb(226, 158, 179) solid;
   padding-left: 15px;
 }
 

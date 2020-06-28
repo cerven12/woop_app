@@ -55,14 +55,12 @@ export default {
 };
 </script>
 
-<style>
-@import url("https://fonts.googleapis.com/css?family=Lato");
-
+<style scoped>
 .accordion {
   max-width: auto;
   /* font-family: Lato; */
   margin-bottom: 30px;
-  background-color: hsl(224, 50%, 51%);
+  background-color: #088dda;
   border-radius: 27.5px;
   position: relative;
 }

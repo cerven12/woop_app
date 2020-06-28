@@ -19,6 +19,24 @@
         </h1>
       </v-col>
     </v-row>
+
+    <v-row justify="center">
+      <v-col cols="3">
+        <div class="sub-title">
+          <h2>Success criteria</h2>
+        </div>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
+        <p class="writing-text ">
+          🔥A task management app that incorporates the Woop concept. When you
+          set goals, it asks various questions to motivate you and prevent
+          setbacks.
+        </p>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -38,25 +56,21 @@ export default {
   font-weight: normal;
   font-size: 34px;
   line-height: 40px;
-  color: #24a5f0;
+  color: #088dda;
 }
 
 .category-title {
-  font-family: Roboto;
   font-size: 24px;
   /* text-align: center; */
   line-height: 30px;
-  color: #4d4d4d;
-  padding-bottom: 15px;
+  color: #292929;
 }
 
 .sub-title {
-  font-family: Roboto;
-  font-size: 18px;
+  font-size: 16px;
   /* text-align: center; */
   line-height: 30px;
-  color: #666666;
-  padding-bottom: 15px;
+  color: #292929;
 }
 
 .writing-text {
@@ -65,7 +79,7 @@ export default {
   font-weight: normal;
   font-size: 18px;
   font-kerning: nomal;
-  color: #6d6d6d;
+  color: #292929;
   margin-block-end: 0em;
 }
 </style>
