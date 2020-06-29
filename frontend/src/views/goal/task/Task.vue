@@ -50,6 +50,12 @@
           <!-- Discover -->
           <Discover></Discover>
 
+          <!-- AfterGiveUp -->
+          <AfterGiveUp></AfterGiveUp>
+
+          <!-- Motivasion -->
+          <AfterMotivation></AfterMotivation>
+
           <!-- expectation -->
           <AfterExpectation></AfterExpectation>
         </v-container>
@@ -60,10 +66,12 @@
 </template>
 
 <script>
+import SoloStep from "../../../components/SoloStep";
 import AfterExpectation from "./expectation/AfterExpectation";
 import AfterTask from "./task_info/AfterTask";
-import SoloStep from "../../../components/SoloStep";
 import Discover from "./discover/Discover";
+import AfterGiveUp from "../task/giveup/AfterGiveUp";
+import AfterMotivation from "../task/motivation/Motivation";
 
 export default {
   components: {
@@ -71,6 +79,8 @@ export default {
     AfterTask,
     SoloStep,
     Discover,
+    AfterGiveUp,
+    AfterMotivation,
   },
   data: () => ({
     isDisplay: false,

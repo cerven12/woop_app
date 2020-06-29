@@ -31,7 +31,7 @@
                       <p class="text_position">
                         {{ item.name }}
                       </p>
-                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
+                      <a class="task_status">☺ → 😩 </a>
                     </div>
                   </div>
                 </draggable>
@@ -242,6 +242,7 @@ export default {
   background: #4465c0;
   padding: 0px 0px;
   border-radius: 25px;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
 }
 
 .board-title {

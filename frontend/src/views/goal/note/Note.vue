@@ -5,12 +5,25 @@
         <v-row>
           <v-col cols="2"></v-col>
           <v-col cols="8">
-            <h2 class="message-title">
-              Note
-            </h2>
+            <h2 class="message-title">Note <span>+</span></h2>
           </v-col>
         </v-row>
         <v-row> </v-row>
+
+        <v-row>
+          <v-col>
+            <template>
+              <div class="text-center">
+                <v-pagination
+                  v-model="page"
+                  :length="6"
+                  color="#4465c0"
+                  circle
+                ></v-pagination>
+              </div>
+            </template>
+          </v-col>
+        </v-row>
 
         <v-row>
           <v-col cols="3"></v-col>
@@ -18,14 +31,10 @@
             <div v-for="note in noteList" :key="note.id">
               <Accordion>
                 <div slot="source">
-                  {{ note.source }}
+                  @task#23
                 </div>
-                <div slot="header">
-                  {{ note.title }}
-                </div>
-                <div slot="body">
-                  {{ note.main }}
-                </div>
+                <div slot="header">{{ note.note_title }}</div>
+                <div slot="body">{{ note.note_main }}</div>
               </Accordion>
             </div>
           </v-col>
@@ -46,33 +55,13 @@ export default {
     return {
       start_date: "2019-01-06",
       deadline: "2019-05-08",
-      noteList: [
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title: "Hello World",
-          source: "@countermeasure#44",
-        },
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title: "How to use the Django Rest Fwamework.",
-          source: "",
-        },
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title:
-            "Post of API on Django database to sort order by Draggable of Vue.js use the Django Rest Fwamework. Post of API on Django database to sort order by Draggable of Vue.js use the Django Rest Fwamework.",
-          source: "@motivation#2",
-        },
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title: "Hello World",
-        },
-      ],
+      page: 1,
+      noteList: [],
     };
+  },
+  mounted: function() {
+    let vm = this;
+    vm.noteList = vm.$store.state.goalData.notes;
   },
 };
 </script>

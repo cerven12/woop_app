@@ -8,27 +8,21 @@
             <Step> </Step>
           </v-col>
         </v-row>
+        {{ goal }}
 
         <v-row><v-col></v-col><v-col></v-col></v-row>
         <!-- Vew Goal Title -->
         <v-row justify="center">
           <v-col cols="8">
             <h1 class="goal_title">
-              Create Web SPA Todo App at use Django Rest Framework and Vue.
+              {{ goal.goal_title }}
             </h1>
           </v-col>
         </v-row>
-
         <v-row justify="center">
           <v-col cols="8">
             <p class="writing-text">
-              A task management app that incorporates the Woop concept. When you
-              set goals, it asks various questions to motivate you and prevent
-              setbacks. Set small goals (tasks) to reach your goals and complete
-              them one by one.A task management app that incorporates the Woop
-              concept. When you set goals, it asks various questions to motivate
-              you and prevent setbacks. Set small goals (tasks) to reach your
-              goals and complete them one by one.
+              {{ goal.goal_description }}
             </p>
           </v-col>
         </v-row>
@@ -43,10 +37,7 @@
 
         <v-row justify="center">
           <v-col cols="8">
-            <p class="writing-text">
-              🔥Developed in Django and Vue.js. It has a login feature. Make
-              sure it is usable on the net without any problems.
-            </p>
+            <p class="writing-text">🔥{{ goal.criteria }}</p>
           </v-col>
         </v-row>
       </v-container>
@@ -56,10 +47,27 @@
 
 <script>
 import Step from "./Step";
+import api from "@/services/api";
 
 export default {
   components: {
     Step,
+  },
+  data: function() {
+    return {
+      goal: "",
+    };
+  },
+
+  //  Get Goal information of the accessed pages.
+  mounted: function() {
+    let vm = this;
+    api
+      .get("goals/55a04a5e-8cdb-4317-b6ea-4bfb46142740/")
+      .then(function(response) {
+        vm.goal = response.data;
+        vm.$store.commit("setGoaldata", response.data);
+      });
   },
 };
 </script>

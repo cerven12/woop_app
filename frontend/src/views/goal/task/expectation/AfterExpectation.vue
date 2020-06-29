@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="category-title">Expectation</h1>
+    <h1 class="message-title">Expectation</h1>
 
     <div id="css-grid">
       <div id="satisfaction">
@@ -91,7 +91,7 @@ export default {
   font-weight: normal;
   font-size: 34px;
   line-height: 40px;
-  color: #24a5f0;
+  color: #088dda;
 }
 
 .category-title {
@@ -108,7 +108,7 @@ export default {
   font-size: 18px;
   /* text-align: center; */
   line-height: 30px;
-  color: #666666;
+  color: #4d4d4d;
   padding-bottom: 15px;
 }
 

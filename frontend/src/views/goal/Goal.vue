@@ -7,10 +7,10 @@
       <Kanban></Kanban>
       <Note></Note>
 
-      <AfterMotive></AfterMotive>
+      <AfterGIveUp></AfterGIveUp>
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
 
-      <AfterGIveUp></AfterGIveUp>
+      <AfterMotive></AfterMotive>
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
 
       <AfterSchedule></AfterSchedule>

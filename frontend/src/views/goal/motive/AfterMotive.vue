@@ -28,8 +28,9 @@
             <v-col cols="3"></v-col>
             <v-col cols="7">
               <p class="writing-text motive-splitter">
-                {{ motive }}
+                {{ motive.motive }}
               </p>
+              <p>{{ motive.created_at }}</p>
             </v-col>
           </v-row>
         </div>
@@ -54,8 +55,10 @@
             <v-col cols="3"></v-col>
             <v-col cols="7">
               <p class="writing-text selftrance-splitter">
-                {{ selfTrance }}
+                {{ selfTrance.self_transcendence_goal }}
               </p>
+              <p>{{ selfTrance.created_at }}</p>
+              
             </v-col>
           </v-row>
         </div>
@@ -77,8 +80,9 @@
             <v-col cols="3"></v-col>
             <v-col cols="7">
               <p class="writing-text future-splitter">
-                {{ futureSelf }}
+                {{ futureSelf.future_self }}
               </p>
+              <p>{{ futureSelf.created_at }}</p>
             </v-col>
           </v-row>
         </div>
@@ -96,20 +100,17 @@ export default {
       valid: "",
       form: "",
       // Registration details of Three Models
-      motiveList: [
-        'Refactor" redirects here. For the use of "refactor" on Wikipedia, see Wikipedia:Refactoring talk pages.',
-        "This article is about a behaviour-preserving change. It is not to be confused with Rewrite (programming).",
-        "In computer programming and software design, code refactoring is the process of restructuring existing computer code—changing the factoring—without changing its external behavior.",
-      ],
-      selfTranscendenceGoalList: [
-        "intended to improve the design, structure, and/or implementation of the software (its non-functional attributes), while preserving its functionality.",
-        "If done poorly, it may fail the requirement that external functionality not be changed, introduce new bugs, or both.",
-      ],
-      futureSelfList: [
-        "Refactoring is usually motivated by noticing a code smell.",
-        "For example, the method at hand may be very long, or it may be a near duplicate of another nearby method.",
-      ],
+      motiveList: [],
+      selfTranscendenceGoalList: [],
+      futureSelfList: [],
     };
+  },
+  mounted: function() {
+    let vm = this;
+    vm.motiveList = vm.$store.state.goalData.motives;
+    vm.selfTranscendenceGoalList =
+      vm.$store.state.goalData.self_transcendence_goals;
+    vm.futureSelfList = vm.$store.state.goalData.future_selves;
   },
 };
 </script>
