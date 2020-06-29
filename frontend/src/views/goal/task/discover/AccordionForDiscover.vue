@@ -63,6 +63,7 @@ export default {
   background-color: #088dda;
   border-radius: 27.5px;
   position: relative;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
 }
 
 .header-contents-wrapper {

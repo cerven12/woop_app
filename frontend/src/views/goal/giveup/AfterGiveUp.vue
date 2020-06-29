@@ -14,6 +14,7 @@
         <!----------------------------------------------------------------------->
         <!--                             Obstacles                            -->
         <!----------------------------------------------------------------------->
+
         <v-row>
           <v-col cols="2"></v-col>
           <v-col cols="8">
@@ -23,27 +24,27 @@
           </v-col>
         </v-row>
 
-        <div v-for="Obstacle in Obstacles" :key="Obstacle.id">
+        <div v-for="Obstacle in goalData" :key="Obstacle.id">
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
               <p class="writing-text obst-splitter">
                 {{ Obstacle.worry }}
               </p>
+              <p>{{ Obstacle.created_at }}</p>
             </v-col>
           </v-row>
 
-          <div v-for="ideas in Obstacle.ideaList" :key="ideas.id">
-            <div v-for="idea in ideas" :key="idea.id">
-              <v-row>
-                <v-col cols="4"></v-col>
-                <v-col cols="6">
-                  <p class="writing-text idea-splitter">
-                    {{ idea }}
-                  </p>
-                </v-col>
-              </v-row>
-            </div>
+          <div v-for="ideas in Obstacle.ideas" :key="ideas.id">
+            <v-row>
+              <v-col cols="4"></v-col>
+              <v-col cols="6">
+                <p class="writing-text idea-splitter">
+                  {{ ideas.idea }}
+                </p>
+                <p>{{ ideas.created_at }}</p>
+              </v-col>
+            </v-row>
           </div>
           <br /><br />
         </div>
@@ -62,6 +63,21 @@
         </v-row>
 
         <!-- <div v-for="Reference in References" :key="Reference.id"> -->
+
+        <v-row>
+          <v-col>
+            <template>
+              <div class="text-center">
+                <v-pagination
+                  v-model="page"
+                  :length="6"
+                  color="#4465c0"
+                  circle
+                ></v-pagination>
+              </div>
+            </template>
+          </v-col>
+        </v-row>
 
         <v-row>
           <v-col cols="2"></v-col>
@@ -117,45 +133,12 @@ export default {
   data: function() {
     return {
       valid: "",
-      Obstacles: [
-        {
-          worry:
-            "Maintainability. It is easier to fix bugs because the source code is easy to read and the intent of its author is easy to grasp.",
-          ideaList: [
-            {
-              idea:
-                "There are two general categories of benefits to the activity of refactoring.",
-            },
-            {
-              idea:
-                "Refactoring requires extracting software system structure, data models, and intra-application dependencies to get back knowledge of an existing software system.",
-            },
-            {
-              idea:
-                "The turnover of teams implies missing or inaccurate knowledge of the current state of a system and about design decisions made by departing developers. Further code refactoring activities may require additional effort to regain this knowledge",
-            },
-          ],
-        },
-        {
-          worry:
-            "Maintainability. It is easier to fix bugs because the source code is easy to read and the intent of its author is easy to grasp.",
-          ideaList: [
-            {
-              idea:
-                "There are two general categories of benefits to the activity of refactoring.",
-            },
-            {
-              idea:
-                "Refactoring requires extracting software system structure, data models, and intra-application dependencies to get back knowledge of an existing software system.",
-            },
-            {
-              idea:
-                "The turnover of teams implies missing or inaccurate knowledge of the current state of a system and about design decisions made by departing developers. Further code refactoring activities may require additional effort to regain this knowledge",
-            },
-          ],
-        },
-      ],
-
+      page: 1,
+      goalData: "",
+      // Obstacles: [
+      //   { worry: "111", ideaList: [{ idea: "1111" }] },
+      //   { worry: "222", ideaList: [{ idea: "2222" }] },
+      // ],
       refList: [
         {
           reference_name: "Woop App",
@@ -233,6 +216,10 @@ export default {
         },
       ],
     };
+  },
+  mounted: function() {
+    let vm = this;
+    vm.goalData = vm.$store.state.goalData.worries;
   },
 };
 </script>
