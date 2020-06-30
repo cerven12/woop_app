@@ -23,7 +23,7 @@
           </v-col>
         </v-row>
 
-        <div v-for="motive in motiveList" :key="motive.id">
+        <div v-for="motive in Motives.motives" :key="motive.id">
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
@@ -46,9 +46,8 @@
             </h2>
           </v-col>
         </v-row>
-
         <div
-          v-for="selfTrance in selfTranscendenceGoalList"
+          v-for="selfTrance in SelfTranscendence.self_transcendence_goals"
           :key="selfTrance.id"
         >
           <v-row>
@@ -58,7 +57,6 @@
                 {{ selfTrance.self_transcendence_goal }}
               </p>
               <p>{{ selfTrance.created_at }}</p>
-              
             </v-col>
           </v-row>
         </div>
@@ -74,8 +72,10 @@
             </h2>
           </v-col>
         </v-row>
-
-        <div v-for="futureSelf in futureSelfList" :key="futureSelf.id">
+        <div
+          v-for="futureSelf in FutureSelves.future_selves"
+          :key="futureSelf.id"
+        >
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
@@ -94,6 +94,9 @@
 
 <script>
 export default {
+  name: "Goal",
+  props: ["Motives", "SelfTranscendence", "FutureSelves"],
+
   data: function() {
     return {
       root: "",
@@ -105,13 +108,13 @@ export default {
       futureSelfList: [],
     };
   },
-  mounted: function() {
-    let vm = this;
-    vm.motiveList = vm.$store.state.goalData.motives;
-    vm.selfTranscendenceGoalList =
-      vm.$store.state.goalData.self_transcendence_goals;
-    vm.futureSelfList = vm.$store.state.goalData.future_selves;
-  },
+  // mounted: function() {
+  //   let vm = this;
+  //   vm.motiveList = vm.$store.state.goalData.motives;
+  //   vm.selfTranscendenceGoalList =
+  //     vm.$store.state.goalData.self_transcendence_goals;
+  //   vm.futureSelfList = vm.$store.state.goalData.future_selves;
+  // },
 };
 </script>
 

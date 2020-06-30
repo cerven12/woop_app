@@ -74,7 +74,7 @@ SIMPLE_JWT = {
     'USER_ID_FIELD': 'user_id',
     'JWT_ALLOW_REFRESH': True,
     'AUTH_HEADER_TYPES': ('JWT',),
-    'JWT_EXPIRATION_DELTA': timedelta(minutes=60)
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=24)
 }
 
 SESSION_COOKIE_HTTPONLY = True
@@ -140,8 +140,8 @@ DATABASES = {
 }
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    'all_applications': True,
+    'group_models': True,
 }
 
 # Password validation

@@ -8,21 +8,20 @@
             <Step> </Step>
           </v-col>
         </v-row>
-        {{ goal }}
 
-        <v-row><v-col></v-col><v-col></v-col></v-row>
-        <!-- Vew Goal Title -->
+        <!--  Goal Title -->
         <v-row justify="center">
           <v-col cols="8">
             <h1 class="goal_title">
-              {{ goal.goal_title }}
+              {{ Goal.goal_title }}
             </h1>
           </v-col>
         </v-row>
+
         <v-row justify="center">
           <v-col cols="8">
             <p class="writing-text">
-              {{ goal.goal_description }}
+              {{ Goal.goal_description }}
             </p>
           </v-col>
         </v-row>
@@ -37,7 +36,7 @@
 
         <v-row justify="center">
           <v-col cols="8">
-            <p class="writing-text">🔥{{ goal.criteria }}</p>
+            <p class="writing-text">🔥{{ Goal.criteria }}</p>
           </v-col>
         </v-row>
       </v-container>
@@ -50,6 +49,9 @@ import Step from "./Step";
 import api from "@/services/api";
 
 export default {
+  name: "Goal",
+  props: ["Goal"],
+
   components: {
     Step,
   },
@@ -57,17 +59,6 @@ export default {
     return {
       goal: "",
     };
-  },
-
-  //  Get Goal information of the accessed pages.
-  mounted: function() {
-    let vm = this;
-    api
-      .get("goals/55a04a5e-8cdb-4317-b6ea-4bfb46142740/")
-      .then(function(response) {
-        vm.goal = response.data;
-        vm.$store.commit("setGoaldata", response.data);
-      });
   },
 };
 </script>
