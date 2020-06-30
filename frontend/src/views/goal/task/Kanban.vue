@@ -15,95 +15,98 @@
         <!--                      Kanban                      -->
         <!-- -----------------------     -------------------- -->
         <v-row>
+
           <div class="scrolling-wrapper">
-            <div class="board-wrapper">
-              <h2 class="board-title">Todo <span> + </span></h2>
-              <div class="board">
-                <draggable
-                  v-model="itemsA"
-                  group="myGroup"
-                  @start="drag = true"
-                  @end="drag = false"
-                  :options="options"
-                >
-                  <div class="item" v-for="item in itemsA" :key="item.id">
-                    <div @click="showDialog(item.name)">
-                      <p class="text_position">
-                        {{ item.name }}
-                      </p>
-                      <a class="task_status">☺ → 😩 </a>
+            <div v-for="board in Boards.boards" :key="board.id">
+              <div class="board-wrapper">
+                <h2 class="board-title">{{ board.board_title }}<span> + </span></h2>
+                <div class="board">
+                  <draggable
+                    v-model="itemsA"
+                    group="myGroup"
+                    @start="drag = true"
+                    @end="drag = false"
+                    :options="options"
+                  >
+                    <div class="item" v-for="task in board.tasks" :key="task.id">
+                      <div @click="showDialog(task.task_title)">
+                        <p class="text_position">
+                          {{ task.task_title }}
+                        </p>
+                        <a class="task_status">☺ → 😩 </a>
+                      </div>
                     </div>
-                  </div>
-                </draggable>
+                  </draggable>
+                </div>
               </div>
             </div>
 
-            <div class="board-wrapper">
-              <h2 class="board-title">Success <span> + </span></h2>
-              <div class="board" style="background: #517322">
-                <draggable
-                  v-model="itemsB"
-                  group="myGroup"
-                  @start="drag = true"
-                  @end="drag = false"
-                  :options="options"
-                >
-                  <div class="item" v-for="item in itemsB" :key="item.id">
-                    <div @click="showDialog(item.name)">
-                      <p class="text_position">
-                        {{ item.name }}
-                      </p>
-                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
-                    </div>
-                  </div>
-                </draggable>
-              </div>
-            </div>
-
-            <div class="board-wrapper">
-              <h2 class="board-title">Wait <span> + </span></h2>
-              <div class="board" style="background: rgb(55, 55, 55)">
-                <draggable
-                  v-model="itemsC"
-                  group="myGroup"
-                  @start="drag = true"
-                  @end="drag = false"
-                  :options="options"
-                >
-                  <div class="item" v-for="item in itemsC" :key="item.id">
-                    <div @click="showDialog(item.name)">
-                      <p class="text_position">
-                        {{ item.name }}
-                      </p>
-                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
-                    </div>
-                  </div>
-                </draggable>
-              </div>
-            </div>
-
-            <div class="board-wrapper">
-              <h2 class="board-title">None <span> + </span></h2>
-              <div class="board" style="background: #BF6A56">
-                <draggable
-                  v-model="itemsC"
-                  group="myGroup"
-                  @start="drag = true"
-                  @end="drag = false"
-                  :options="options"
-                >
-                  <div class="item" v-for="item in itemsC" :key="item.id">
-                    <div @click="showDialog(item.name)">
-                      <p class="text_position">
-                        {{ item.name }}
-                      </p>
-                      <a class="task_status">☺ -2 -> ? 😩 4 -> ?</a>
-                    </div>
-                  </div>
-                </draggable>
-              </div>
-            </div>
+            <!-- <div class="board&#45;wrapper"> -->
+            <!--   <h2 class="board&#45;title">Success <span> + </span></h2> -->
+            <!--   <div class="board" style="background: #517322"> -->
+            <!--     <draggable -->
+            <!--       v&#45;model="itemsB" -->
+            <!--       group="myGroup" -->
+            <!--       @start="drag = true" -->
+            <!--       @end="drag = false" -->
+            <!--       :options="options" -->
+            <!--     > -->
+            <!--       <div class="item" v&#45;for="item in itemsB" :key="item.id"> -->
+            <!--         <div @click="showDialog(item.name)"> -->
+            <!--           <p class="text_position"> -->
+            <!--             {{ item.name }} -->
+            <!--           </p> -->
+            <!--           <a class="task_status">☺ &#45;2 &#45;> ? 😩 4 &#45;> ?</a> -->
+            <!--         </div> -->
+            <!--       </div> -->
+            <!--     </draggable> -->
+            <!--   </div> -->
+            <!-- </div> -->
             <!--  -->
+            <!-- <div class="board&#45;wrapper"> -->
+            <!--   <h2 class="board&#45;title">Wait <span> + </span></h2> -->
+            <!--   <div class="board" style="background: rgb(55, 55, 55)"> -->
+            <!--     <draggable -->
+            <!--       v&#45;model="itemsC" -->
+            <!--       group="myGroup" -->
+            <!--       @start="drag = true" -->
+            <!--       @end="drag = false" -->
+            <!--       :options="options" -->
+            <!--     > -->
+            <!--       <div class="item" v&#45;for="item in itemsC" :key="item.id"> -->
+            <!--         <div @click="showDialog(item.name)"> -->
+            <!--           <p class="text_position"> -->
+            <!--             {{ item.name }} -->
+            <!--           </p> -->
+            <!--           <a class="task_status">☺ &#45;2 &#45;> ? 😩 4 &#45;> ?</a> -->
+            <!--         </div> -->
+            <!--       </div> -->
+            <!--     </draggable> -->
+            <!--   </div> -->
+            <!-- </div> -->
+            <!--  -->
+            <!-- <div class="board&#45;wrapper"> -->
+            <!--   <h2 class="board&#45;title">None <span> + </span></h2> -->
+            <!--   <div class="board" style="background: #BF6A56"> -->
+            <!--     <draggable -->
+            <!--       v&#45;model="itemsC" -->
+            <!--       group="myGroup" -->
+            <!--       @start="drag = true" -->
+            <!--       @end="drag = false" -->
+            <!--       :options="options" -->
+            <!--     > -->
+            <!--       <div class="item" v&#45;for="item in itemsC" :key="item.id"> -->
+            <!--         <div @click="showDialog(item.name)"> -->
+            <!--           <p class="text_position"> -->
+            <!--             {{ item.name }} -->
+            <!--           </p> -->
+            <!--           <a class="task_status">☺ &#45;2 &#45;> ? 😩 4 &#45;> ?</a> -->
+            <!--         </div> -->
+            <!--       </div> -->
+            <!--     </draggable> -->
+            <!--   </div> -->
+            <!-- </div> -->
+            <!-- <!&#45;&#45;  &#45;&#45;> -->
             <!--  -->
             <!--  -->
           </div>
@@ -122,6 +125,8 @@ import draggable from "vuedraggable";
 import Task from "./Task";
 
 export default {
+  name: "Goal",
+  props: ["Boards"],
   name: "dnd",
   components: { draggable, Task },
   data() {

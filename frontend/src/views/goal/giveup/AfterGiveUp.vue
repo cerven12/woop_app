@@ -14,7 +14,6 @@
         <!----------------------------------------------------------------------->
         <!--                             Obstacles                            -->
         <!----------------------------------------------------------------------->
-
         <v-row>
           <v-col cols="2"></v-col>
           <v-col cols="8">
@@ -24,7 +23,7 @@
           </v-col>
         </v-row>
 
-        <div v-for="Obstacle in goalData" :key="Obstacle.id">
+        <div v-for="Obstacle in Worries.worries" :key="Obstacle.id">
           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="7">
@@ -130,6 +129,9 @@
 
 <script>
 export default {
+  name: "Goal",
+  props: ["Worries"],
+
   data: function() {
     return {
       valid: "",
@@ -217,10 +219,10 @@ export default {
       ],
     };
   },
-  mounted: function() {
-    let vm = this;
-    vm.goalData = vm.$store.state.goalData.worries;
-  },
+  // mounted: function() {
+  //   let vm = this;
+  //   vm.goalData = vm.$store.state.goalData.worries;
+  // },
 };
 </script>
 

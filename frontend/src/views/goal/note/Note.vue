@@ -24,11 +24,12 @@
             </template>
           </v-col>
         </v-row>
-
+        
         <v-row>
           <v-col cols="3"></v-col>
           <v-col cols="6">
-            <div v-for="note in noteList" :key="note.id">
+            <div v-for="note in Notes.notes" :key="note.id">
+          
               <Accordion>
                 <div slot="source">
                   @task#23
@@ -48,6 +49,9 @@
 import Accordion from "../note/Accordion";
 
 export default {
+  name: "Goal",
+  props: ["Notes"],
+
   components: {
     Accordion,
   },
@@ -59,10 +63,10 @@ export default {
       noteList: [],
     };
   },
-  mounted: function() {
-    let vm = this;
-    vm.noteList = vm.$store.state.goalData.notes;
-  },
+  // mounted: function() {
+  //   let vm = this;
+  //   vm.noteList = vm.$store.state.goalData.notes;
+  // },
 };
 </script>
 
