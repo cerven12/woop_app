@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note, Step
-from woop.models import Task, Reason, Feedback, Hurdle, Solution, Document, Discover, Board
+from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note
+from woop.models import Task, Reason, Feedback, Hurdle, Solution, Document, Discover, Board, Step
 from account.models import CustomUser
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 
@@ -67,7 +67,7 @@ class TaskSerializer(WritableNestedModelSerializer):
 class TaskSerializeForBoard(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['task_id', 'task_title', 'created_at', 'board', 'step', 'order_by',
+        fields = ['task_id', 'task_title', 'created_at', 'board',  'order_by',
                   'goal', 'is_repeat', 'backup_plan',
                   'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
                   'satisfaction', 'difficulty']
@@ -82,6 +82,23 @@ class BoardSerializerNestedJustTask(WritableNestedModelSerializer):
         fields = ['board_id', 'goal', 'board_title',
                   'created_at', 'updated_at', 'order_by', 'tasks']
 
+class TaskSerializeForStep(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ['task_id', 'task_title', 'created_at', 'board', 'step',  'order_by',
+                  'goal', 'is_repeat', 'backup_plan',
+                  'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
+                  'satisfaction', 'difficulty']
+
+
+
+class StepSerializerNestedJustTask(WritableNestedModelSerializer):
+    tasks = TaskSerializeForStep(many=True, required=False, allow_null=True)
+
+    class Meta:
+        model = Step
+        fields = ['step_id', 'goal', 'step_title', 'created_at', 'updated_at',
+                  'order_by', 'is_active', 'tasks']
 
 ####################################
 #                           Goal                                 #
@@ -137,31 +154,10 @@ class NoteSerializer(serializers.ModelSerializer):
         ]
 
 
-class TaskSerializeForStep(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = ['task_id', 'task_title', 'created_at', 'board', 'step', 'order_by',
-                  'goal', 'is_repeat', 'backup_plan',
-                  'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
-                  'satisfaction', 'difficulty'
-                  ]
-
-
-class StepSerializer(WritableNestedModelSerializer):
-    tasks = TaskSerializeForStep(many=True, required=False)
-
-    class Meta:
-        model = Step
-        fields = [
-            'step_id', 'goal', 'step_title',
-            'created_at', 'updated_at', 'order_by', 'is_active', 'tasks',
-        ]
-
-
 class GoalSerializer(WritableNestedModelSerializer):
     tasks = TaskSerializer(many=True, required=False)
-    steps = StepSerializer(many=True, required=False)
     boards = BoardSerializerNestedJustTask(many=True, required=False)
+    steps = StepSerializerNestedJustTask(many=True, required=False)
     motives = MotiveSerializer(many=True, required=False)
     self_transcendence_goals = SelfTranscendenceGoalSerializer(
         many=True, required=False)

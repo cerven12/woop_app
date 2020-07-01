@@ -64,7 +64,7 @@ class Board(models.Model):
 class Step(models.Model):
     step_id = models.AutoField(primary_key=True)
     goal = models.ForeignKey(
-        Goal, on_delete=models.CASCADE, related_name='step')
+        Goal, on_delete=models.CASCADE, related_name='steps')
     step_title = models.CharField(verbose_name='ステップ', max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -1,8 +1,9 @@
 <template>
   <v-app>
-    <div id="background">
+     <div id="background">
+     {{ All }}
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-      <AfterGoal :Goal="Goal"></AfterGoal>
+      <AfterGoal :Goal="Goal" :Steps="Steps"></AfterGoal>
       <Kanban :Boards="Boards"></Kanban>
       <Note :Notes="Notes"></Note>
       <AfterGIveUp :Worries="Worries"></AfterGIveUp>
@@ -60,6 +61,7 @@ export default {
       Worries: {},
       Notes: {},
       Boards: {},
+      Steps: {},
     };
   },
   mounted: function() {
@@ -95,6 +97,10 @@ export default {
 
         // Kanban
         vm.$set(vm.Boards, "boards", response.data.boards);
+
+        // Steps ( Since the nested APIs do not allow to sort Step by order_by, we will again axios. get. )
+        api.get(`goals/${response.data.goal_id}/steps/`).then(function(response){
+        vm.$set(vm.Steps, "steps", response.data)})
       });
   },
 };
