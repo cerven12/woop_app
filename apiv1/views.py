@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, filters
 from rest_framework.response import Response
+
 
 from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note, Step
 from .serializers import GoalSerializer, MotiveSerializer, SelfTranscendenceGoalSerializer, \
-    FutureSelfSerializer, WorrySerializer, IdeaSerializer, ReferenceSerializer, NoteSerializer, StepSerializer
+    FutureSelfSerializer, WorrySerializer, IdeaSerializer, ReferenceSerializer, NoteSerializer, StepSerializerNestedJustTask
 # permission setting
 
 from woop.models import Task, Reason, Feedback, Solution, Hurdle, Document, Discover, Board
@@ -34,11 +35,17 @@ class GoalViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
         return Goal.objects.filter(created_by=self.request.user)
 
 
-class StepViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
-    queryset = Step.objects.all()
-    serializer_class = StepSerializer
+class BoardViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = Board.objects.all()
+    serializer_class = BoardSerializerNestedJustTask
     permission_classes = [IsAuthenticated]
 
+class StepViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = Step.objects.all()
+    serializer_class = StepSerializerNestedJustTask
+    permission_classes = [IsAuthenticated]
+    filter_backends = [filters.OrderingFilter]
+    ordering = ('order_by',)
 
 class MotiveViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Motive.objects.all()
@@ -85,11 +92,6 @@ class NoteViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 ####################################
 #                           Task                                 #
 ####################################
-class BoardViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
-    queryset = Board.objects.all()
-    serializer_class = BoardSerializerNestedJustTask
-    permission_classes = [IsAuthenticated]
-
 
 # About the Task Model
 class TaskViewSet(NestedViewSetMixin, viewsets.ModelViewSet):

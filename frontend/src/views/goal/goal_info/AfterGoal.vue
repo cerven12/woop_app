@@ -5,7 +5,7 @@
         <!-- Step -->
         <v-row justify="center">
           <v-col cols="8">
-            <Step> </Step>
+            <Step :Steps="Steps"> </Step>
           </v-col>
         </v-row>
 
@@ -50,7 +50,7 @@ import api from "@/services/api";
 
 export default {
   name: "Goal",
-  props: ["Goal"],
+  props: ["Goal", "Steps",],
 
   components: {
     Step,

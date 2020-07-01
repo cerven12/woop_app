@@ -1,44 +1,58 @@
 <template>
   <div>
     <div class="step">
-      <div class="powerline" style="z-index: 10">
-        <div class="rectangle" style="background: #f0f0f0;">
-          Stady of how to use django 👾👾👾
+    <div v-for="(step, index) in Steps.steps" :key="step.id">
+       <!-- Use the v-for index to make the z-index descending. -->
+        <div class="powerline" :style="zIndexAdjuster(index)">
+        <div :class="isActiveRecColor(step.is_active)">
+          {{ step.step_title }}
         </div>
-        <div class="triangle" style="border-left: 50px solid #f0f0f0;"></div>
-      </div>
-      <div class="powerline" style="z-index: 9">
-        <div class="rectangle" style="background: #f0f0f0;">
-          Create Api with Django Rest Framework 👾👾
-        </div>
-        <div class="triangle" style="border-left: 50px solid #f0f0f0;"></div>
-      </div>
-
-      <div class="powerline" style="z-index: 8">
-        <div class="rectangle" style="color: #f0f0f0;">
-          Stady of how to use Vue.js.👾👾👾
-        </div>
-        <div class="triangle"></div>
-      </div>
-
-      <div class="powerline" style="z-index: 7">
-        <div class="rectangle" style="background: #f0f0f0;">
-          Stady of how to use django.👾👾👾
-        </div>
-        <div class="triangle" style="border-left: 50px solid #f0f0f0;"></div>
-      </div>
-
-      <div class="powerline" style="z-index: 6">
-        <div class="rectangle" style="background: #f0f0f0;">
-          Stady of how to use django.👾👾👾
-        </div>
-        <div class="triangle" style="border-left: 50px solid #f0f0f0;"></div>
+        <div :class="isActiveTriColor(step.is_active)"></div>
       </div>
     </div>
+
+   </div>
   </div>
 </template>
 
-<script></script>
+<script>
+import api from "@/services/api";
+
+export default{
+  name: "Goal",
+  props: ["Steps",],
+  data: function(){
+    return{
+    }
+  },
+  methods: {
+   // Change color of Step color depending on  `is_active` fields of Step Model.
+    isActiveRecColor(is_active){
+      if(is_active == true){
+        return "rectangle-active rectangle";
+      }
+      if(is_active == false){
+        return "rectangle-deactive rectangle";
+      }
+    },
+   // Change color of Step color depending on  `is_active` fields of Step Model. 
+   isActiveTriColor(is_active){
+    if(is_active == true){
+      return "triangle-active triangle";
+    }
+    if(is_active == false){
+      return "triangle-deactive triangle";
+    }
+  },
+  //  Use the v-for index to make the z-index descending.
+   zIndexAdjuster(index){
+    return `z-index: ${100 - index}`;
+    },
+  }
+
+}
+</script>
+
 
 <style scoped>
 .step {
@@ -57,28 +71,43 @@
 }
 
 .rectangle {
-  /* width: 0;
-  height: 0; */
   width: 260px;
   height: 80px;
-  background: #4465c0;
   display: inline-block;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 10px 0px 20px 60px;
   font-size: 18px;
+}
+
+/*  Change color of Step color depending on  `is_active` fields of Step Model. */
+.rectangle-active{
+  background: #4465c0;
+  color: #f0f0f0;
+}
+
+.rectangle-deactive{
+  background: #f0f0f0;
   color: rgb(43, 43, 43);
 }
 
 .triangle {
-  /* width: 0;
-  height: 0; */
   border-top: 40px solid transparent;
   border-bottom: 40px solid transparent;
-  border-left: 50px solid #4465c0;
   display: inline-block;
   position: absolute;
 }
+
+/* Change color of Step color depending on  `is_active` fields of Step Model. */
+.triangle-active{
+  border-left: 50px solid #4465c0;
+}
+
+.triangle-deactive{
+  border-left: 50px solid #f0f0f0;
+}
+
+
 
 ::-webkit-scrollbar {
   display: none;
