@@ -72,8 +72,7 @@
 
           <!-- expectation -->
           <AfterExpectation
-            :Satisfaction="task_info.satisfaction"
-            :Difficulty="task_info.difficulty"
+            :Expectations="task_info.expectations"
           ></AfterExpectation>
         </v-container>
         <!-- </v-card> -->

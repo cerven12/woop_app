@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Note, Step
+from .models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Note, Step, Expectation
 from .models import Task, Reason, Feedback, Hurdle, Solution, Document, Discover, Board
 
 
@@ -96,6 +96,17 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Task, TaskAdmin)
+
+
+class ExpectationAdmin(admin.ModelAdmin):
+    list_display = ('task', 'expectation_id', 'tbd_satisfaction', 'tbd_satis_comment', 'satisfaction',
+                    'satis_comment', 'tbd_difficulty', 'tbd_diff_comment', 'difficulty',
+                     'created_at')
+    ordering = ('-created_at',)
+    readonly_field = ('expectation_id', 'created_at')
+
+admin.site.register(Expectation, ExpectationAdmin)
+
 
 
 class ReasonAdmin(admin.ModelAdmin):

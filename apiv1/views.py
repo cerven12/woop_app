@@ -3,9 +3,9 @@ from rest_framework import viewsets, generics#, filters
 from rest_framework.response import Response
 
 
-from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note, Step
+from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note, Step, Expectation
 from .serializers import GoalSerializer, MotiveSerializer, SelfTranscendenceGoalSerializer, \
-    FutureSelfSerializer, WorrySerializer, IdeaSerializer, ReferenceSerializer, NoteSerializer, StepSerializerNestedJustTask
+    FutureSelfSerializer, WorrySerializer, IdeaSerializer, ReferenceSerializer, NoteSerializer, StepSerializerNestedJustTask, ExpectationSerializer
 # permission setting
 
 from woop.models import Task, Reason, Feedback, Solution, Hurdle, Document, Discover, Board
@@ -98,6 +98,12 @@ class NoteViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 class TaskViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class ExpectationViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = Expectation.objects.all()
+    serializer_class = ExpectationSerializer
     permission_classes = [IsAuthenticated]
 
 
