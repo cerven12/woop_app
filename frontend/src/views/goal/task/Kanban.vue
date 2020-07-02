@@ -28,13 +28,11 @@
                     @end="drag = false"
                     :options="options"
                   >
-                    <div class="item" v-for="task in board.tasks" :key="task.id">
-                      <div @click="showDialog(task)">
+                    <div @click="showDialog(task)" class="item" v-for="task in board.tasks" :key="task.id">
                         <p class="text_position">
                           {{ task.task_title }}
                         </p>
                         <a class="task_status">☺ → 😩 </a>
-                      </div>
                     </div>
                   </draggable>
                 </div>
