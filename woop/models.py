@@ -226,6 +226,47 @@ class Task(models.Model):
         return self.task_title or ''
 
 
+class Expectation(models.Model):
+    satisfaction_level = (
+            (20, 20),
+            (40, 40),
+            (60, 60),
+            (80, 80),
+            (100, 100),
+        )
+    difficulty_level = (
+            (20, 20),
+            (40, 40),
+            (60, 60),
+            (80, 80),
+            (100, 100),
+
+        )
+    task = models.ForeignKey(
+            Task, on_delete=models.CASCADE, related_name='expectations')
+    expectation_id = models.AutoField(primary_key=True)
+    tbd_satisfaction = models.IntegerField(
+            verbose_name="予想の満足度", choices=satisfaction_level, null=True, blank=True)
+    tbd_satis_comment = models.CharField(
+            verbose_name="満足度の予想について一言", max_length=200, null=True, blank=True)
+    satisfaction = models.IntegerField(
+            verbose_name="実際の満足度", choices=satisfaction_level, null=True, blank=True)
+    satis_comment = models.CharField(
+            verbose_name="実際の満足度について一言", max_length=200, null=True, blank=True)
+    tbd_difficulty = models.IntegerField(
+            verbose_name="予想の困難度", choices=difficulty_level, null=True, blank=True)
+    tbd_diff_comment = models.CharField(
+            verbose_name="満足度の予想について一言", max_length=200, null=True, blank=True)
+    difficulty = models.IntegerField(
+            verbose_name="実際の困難度", choices=difficulty_level, null=True, blank=True)
+    diff_comment = models.CharField(
+            verbose_name="実際の困難度について一言", max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.tbd_satis_comment or ''
+
+
 class Reason(models.Model):
     task = models.ForeignKey(
         Task, on_delete=models.CASCADE, related_name='reasons')

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note
+from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note, Expectation
 from woop.models import Task, Reason, Feedback, Hurdle, Solution, Document, Discover, Board, Step
 from account.models import CustomUser
 from drf_writable_nested.serializers import WritableNestedModelSerializer
@@ -49,6 +49,12 @@ class ReasonSerializer(serializers.ModelSerializer):
         fields = ['reason_id', 'reason', 'created_at', 'task', ]
 
 
+class ExpectationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expectation
+        fields = ['task', 'expectation_id', 'tbd_satisfaction', 'tbd_satis_comment', 'satisfaction',
+                  'tbd_difficulty', 'tbd_diff_comment', 'difficulty', 'diff_comment', 'created_at']
+
 class TaskSerializer(WritableNestedModelSerializer):
     reasons = ReasonSerializer(many=True, required=False, allow_null=True)
     feedbacks = FeedbackSerializer(many=True, required=False, allow_null=True)
@@ -57,6 +63,7 @@ class TaskSerializer(WritableNestedModelSerializer):
     discovers = DiscoverSerializer(many=True, required=False, allow_null=True)
     goal_title = serializers.CharField(read_only=True, source="goal.goal_title")
     board_title = serializers.CharField(read_only=True, source="board.board_title")
+    expectations = ExpectationSerializer(many=True, required=False, allow_null=True)
 
 
     class Meta:
@@ -65,7 +72,7 @@ class TaskSerializer(WritableNestedModelSerializer):
                   'board_title', 'order_by',
                   'goal', 'goal_title', 'is_repeat', 'backup_plan',
                   'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
-                  'satisfaction', 'difficulty']
+                  'satisfaction', 'difficulty', 'expectations']
 
 
 class TaskSerializeForBoard(serializers.ModelSerializer):

@@ -103,6 +103,13 @@ tasks_routes = goals_routes.register(
     parents_query_lookups=['goal']
 )
 
+# Expectation
+tasks_routes.register(
+    r'expectations',
+    views.ExpectationViewSet,
+    basename='expectations',
+    parents_query_lookups=['task__goal', 'task']
+)
 
 # Reasons
 tasks_routes.register(
