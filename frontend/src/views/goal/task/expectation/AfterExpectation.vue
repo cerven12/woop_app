@@ -59,6 +59,8 @@
 
 <script>
 export default {
+  name: "Task",
+  props: ["Satisfaction", "Difficulty"],
   data: () => ({}),
 };
 </script>

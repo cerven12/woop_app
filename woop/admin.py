@@ -89,7 +89,7 @@ admin.site.register(Note, NotesAdmin)
 ####################################
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('task_title', 'created_at', 'goal',
+    list_display = ('task_title', 'task_description', 'created_at', 'goal', 'criteria',
                     'task_id', 'is_repeat', 'backup_plan', 'satisfaction', 'difficulty')
     ordering = ('-created_at', 'is_repeat')
     readonly_field = ('task_id', 'created_at')

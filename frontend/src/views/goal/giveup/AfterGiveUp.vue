@@ -137,10 +137,6 @@ export default {
       valid: "",
       page: 1,
       goalData: "",
-      // Obstacles: [
-      //   { worry: "111", ideaList: [{ idea: "1111" }] },
-      //   { worry: "222", ideaList: [{ idea: "2222" }] },
-      // ],
       refList: [
         {
           reference_name: "Woop App",
@@ -219,10 +215,6 @@ export default {
       ],
     };
   },
-  // mounted: function() {
-  //   let vm = this;
-  //   vm.goalData = vm.$store.state.goalData.worries;
-  // },
 };
 </script>
 

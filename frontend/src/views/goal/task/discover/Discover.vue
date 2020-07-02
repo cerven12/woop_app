@@ -10,14 +10,14 @@
 
     <v-row justify="center">
       <v-col cols="9">
-        <div v-for="discover in DiscoverList" :key="discover.id">
+        <div v-for="discover in Discovers" :key="discover.id">
           <AccordionForDiscover>
-            <div slot="source">{{ discover.source }}</div>
+            <div slot="source">{{ discover.created_at }}</div>
             <div slot="header">
-              {{ discover.title }}
+              {{ discover.discover_title }}
             </div>
             <div slot="body">
-              {{ discover.main }}
+              {{ discover.discover_main }}
             </div>
           </AccordionForDiscover>
         </div>
@@ -30,37 +30,13 @@
 import AccordionForDiscover from "./AccordionForDiscover.vue";
 
 export default {
+  name: "Task",
+  props: ["Discovers"],
   components: {
     AccordionForDiscover,
   },
   data: function() {
     return {
-      DiscoverList: [
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title: "Hello World",
-          source: "@countermeasure#44",
-        },
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title: "How to use the Django Rest Fwamework.",
-          source: "",
-        },
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title:
-            "Post of API on Django database to sort order by Draggable of Vue.js use the Django Rest Fwamework. Post of API on Django database to sort order by Draggable of Vue.js use the Django Rest Fwamework.",
-          source: "@motivation#2",
-        },
-        {
-          main:
-            "<h1>React</h1>React and Vue share many similarities. They both:<p>・utilize a virtual DOM</p><p>・provide reactive and composable view components</p><p>・maintain focus in the</p>core library, with concerns such as routing 　and global state management handled by companion libraries Being so similar in scope, we’ve put more time into fine-tuning this comparison than any other. We want to ensure not only technical accuracy, but also balance. We point out where React  outshines Vue, for example in the richness of their ecosystem and abundance of their custom renderers. With that said, it’s inevitable that the comparison would appear biased towards Vue to some React users, as many of the subjects explored are to some extent subjective. We acknowledge the existence of varying technical taste, and this comparison primarily aims to outline the reasons why Vue could potentially be a better fit if your preferences happen to coincide with ours. Some of the sections below may also be slightly outdated due to recent updates in React 16+, and we are planning to work with the React community to revamp this section in the near future.",
-          title: "Hello World",
-        },
-      ],
     };
   },
 };

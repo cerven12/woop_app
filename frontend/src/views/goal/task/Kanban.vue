@@ -22,14 +22,14 @@
                 <h2 class="board-title">{{ board.board_title }}<span> + </span></h2>
                 <div class="board">
                   <draggable
-                    v-model="itemsA"
+                    v-model="board.tasks"
                     group="myGroup"
                     @start="drag = true"
                     @end="drag = false"
                     :options="options"
                   >
                     <div class="item" v-for="task in board.tasks" :key="task.id">
-                      <div @click="showDialog(task.task_title)">
+                      <div @click="showDialog(task)">
                         <p class="text_position">
                           {{ task.task_title }}
                         </p>
@@ -135,30 +135,15 @@ export default {
       isClick: false,
       nowViewTask: "",
       options: {
-        animation: 200,
-      },
-      options: {
         group: "myGroup",
         animation: 200,
       },
-      itemsA: [{ id: 1, name: "Add new icon." }],
-      itemsB: [{ id: 6, name: "name06" }],
-      itemsC: [
-        { id: 11, name: "name11" },
-        { id: 11, name: "name11" },
-        { id: 11, name: "name11" },
-      ],
     };
   },
   methods: {
-    eachTaskView: function(itemname) {
-      this.nowViewTask = itemname;
-      this.isClick = true;
-    },
-
-    showDialog(itemname) {
+     showDialog(item) {
       this.$refs.task.open();
-      this.$refs.task.task_info = itemname;
+      this.$refs.task.task_info = item;
     },
   },
 };
