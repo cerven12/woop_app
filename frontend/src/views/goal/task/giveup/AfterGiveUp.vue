@@ -17,28 +17,26 @@
       </v-col>
     </v-row>
 
-    <div v-for="Obstacle in Obstacles" :key="Obstacle.id">
+    <div v-for="hurdle in Hurdles" :key="hurdle.id">
       <v-row>
         <v-col cols="2"></v-col>
         <v-col cols="10">
           <p class="writing-text obst-splitter">
-            {{ Obstacle.worry }}
+            {{ hurdle.hurdle }}
           </p>
         </v-col>
       </v-row>
-
-      <div v-for="ideas in Obstacle.ideaList" :key="ideas.id">
-        <div v-for="idea in ideas" :key="idea.id">
-          <v-row>
+      <div v-for="solutions in hurdle.solutions" :key="solutions.id">
+           <v-row>
             <v-col cols="3"></v-col>
             <v-col cols="9">
               <p class="writing-text idea-splitter">
-                {{ idea }}
+                {{ solutions.solution }}
               </p>
+              <p>{{ solutions.created_at }}</p>
             </v-col>
           </v-row>
         </div>
-      </div>
       <br /><br />
     </div>
     <br />
@@ -47,38 +45,13 @@
 
 <script>
 export default {
+ name: "Task",
+ props: ["Hurdles"],
   data: function() {
     return {
       valid: "",
       page: 1,
-      Obstacles: [
-        {
-          worry:
-            "Maintainability. It is easier to fix bugs because the source code is easy to read and the intent of its author is easy to grasp.",
-          ideaList: [
-            {
-              idea:
-                "There are two general categories of benefits to the activity of refactoring.",
-            }
-          ],
-        },
-        {
-          worry:
-            "Maintainability. It is easier to fix bugs because the source code is easy to read and the intent of its author is easy to grasp.",
-          ideaList: [
-            {
-              idea:
-                "There are two general categories of benefits to the activity of refactoring.",
-            },
-            {
-              idea:
-                "The turnover of teams implies missing or inaccurate knowledge of the current state of a system and about design decisions made by departing developers. Further code refactoring activities may require additional effort to regain this knowledge",
-            },
-          ],
-        },
-      ],
-
-      refList: [
+          refList: [
         {
           reference_name: "Woop App",
           reference_use: "Thinking of design",

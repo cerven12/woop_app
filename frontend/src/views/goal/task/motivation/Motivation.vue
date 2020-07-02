@@ -21,12 +21,12 @@
         </v-col>
       </v-row>
 
-      <div v-for="motive in motiveList" :key="motive.id">
+      <div v-for="reason in Reasons" :key="reason.id">
         <v-row>
           <v-col cols="2"></v-col>
           <v-col cols="10">
             <p class="writing-text motive-splitter">
-              {{ motive }}
+              {{ reason.reason }}
             </p>
           </v-col>
         </v-row>
@@ -45,12 +45,12 @@
         </v-col>
       </v-row>
 
-      <div v-for="futureSelf in futureSelfList" :key="futureSelf.id">
+      <div v-for="feedback in Feedbacks" :key="feedback.id">
         <v-row>
           <v-col cols="2"></v-col>
           <v-col cols="10">
             <p class="writing-text future-splitter">
-              {{ futureSelf }}
+              {{ feedback.feedback }}
             </p>
           </v-col>
         </v-row>
@@ -62,20 +62,13 @@
 
 <script>
 export default {
+  name: "Task",
+  props: ["Reasons", "Feedbacks"],
   data: function() {
     return {
       root: "",
       valid: "",
       form: "",
-      // Registration details of Three Models
-      motiveList: [
-        'Refactor" redirects here. For the use of "refactor" on Wikipedia, see Wikipedia:Refactoring talk pages.',
-        "This article is about a behaviour-preserving change. It is not to be confused with Rewrite (programming).",
-      ],
-
-      futureSelfList: [
-        "For example, the method at hand may be very long, or it may be a near duplicate of another nearby method.",
-      ],
     };
   },
 };

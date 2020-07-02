@@ -98,9 +98,8 @@ export default {
         // Kanban
         vm.$set(vm.Boards, "boards", response.data.boards);
 
-        // Steps ( Since the nested APIs do not allow to sort Step by order_by, we will again axios. get. )
-        api.get(`goals/${response.data.goal_id}/steps/`).then(function(response){
-        vm.$set(vm.Steps, "steps", response.data)})
+        // Step
+        vm.$set(vm.Steps, "steps", response.data.steps);
       });
   },
 };

@@ -55,27 +55,36 @@ class TaskSerializer(WritableNestedModelSerializer):
     hurdles = HurdleSerializer(many=True, required=False, allow_null=True)
     documents = DocumentSerializer(many=True, required=False, allow_null=True)
     discovers = DiscoverSerializer(many=True, required=False, allow_null=True)
+    goal_title = serializers.CharField(read_only=True, source="goal.goal_title")
+    board_title = serializers.CharField(read_only=True, source="board.board_title")
+
 
     class Meta:
         model = Task
-        fields = ['task_id', 'task_title', 'created_at', 'board', 'order_by',
-                  'goal', 'is_repeat', 'backup_plan',
+        fields = ['task_id', 'task_title', 'task_description',  'criteria','created_at', 'board',
+                  'board_title', 'order_by',
+                  'goal', 'goal_title', 'is_repeat', 'backup_plan',
                   'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
                   'satisfaction', 'difficulty']
 
 
 class TaskSerializeForBoard(serializers.ModelSerializer):
+    goal_title = serializers.CharField(read_only=True, source="goal.goal_title")
+    board_title = serializers.CharField(read_only=True, source="board.board_title")
+
     class Meta:
         model = Task
-        fields = ['task_id', 'task_title', 'created_at', 'board',  'order_by',
-                  'goal', 'is_repeat', 'backup_plan',
+        fields = ['task_id', 'task_title', 'task_description',  'criteria','created_at',
+                  'board', 'board_title', 'step', 'order_by',
+                  'goal', 'goal_title', 'is_repeat', 'backup_plan',
                   'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
                   'satisfaction', 'difficulty']
 
 
 # Unnecessary all child models of 'Task' model,  use 'TaskSerializeForBoard' return result a just 'Task' model object.
 class BoardSerializerNestedJustTask(WritableNestedModelSerializer):
-    tasks = TaskSerializeForBoard(many=True, required=False, allow_null=True)
+    # tasks = TaskSerializeForBoard(many=True, required=False, allow_null=True)
+    tasks = TaskSerializer(many=True, required=False, allow_null=True)
 
     class Meta:
         model = Board
@@ -83,10 +92,13 @@ class BoardSerializerNestedJustTask(WritableNestedModelSerializer):
                   'created_at', 'updated_at', 'order_by', 'tasks']
 
 class TaskSerializeForStep(serializers.ModelSerializer):
+    goal_title = serializers.CharField(read_only=True, source="goal.goal_title")
+
     class Meta:
         model = Task
-        fields = ['task_id', 'task_title', 'created_at', 'board', 'step',  'order_by',
-                  'goal', 'is_repeat', 'backup_plan',
+        fields = ['task_id', 'task_title','task_description', 'criteria',
+                  'created_at', 'board', 'step',  'order_by',
+                  'goal', 'goal_title', 'is_repeat', 'backup_plan',
                   'reasons', 'feedbacks', 'hurdles', 'documents', 'discovers',
                   'satisfaction', 'difficulty']
 
@@ -98,7 +110,7 @@ class StepSerializerNestedJustTask(WritableNestedModelSerializer):
     class Meta:
         model = Step
         fields = ['step_id', 'goal', 'step_title', 'created_at', 'updated_at',
-                  'order_by', 'is_active', 'tasks']
+                  'order_by', 'is_active', 'tasks' ]
 
 ####################################
 #                           Goal                                 #

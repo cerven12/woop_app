@@ -6,12 +6,12 @@
         <v-container>
           <br />
           <br />
-
+{{ task_info }}
           <!-- Goal -->
           <v-row>
             <v-col cols="7">
               <h4 class="goal-title">
-                > Create Web SPA Todo App at use Django Rest Framework and Vue.
+                > {{ task_info.goal_title }} 
               </h4>
             </v-col>
 
@@ -29,7 +29,7 @@
                 text-color="#f0f0f0"
                 large
               >
-                Todo
+                {{ task_info.board_title }}
               </v-chip>
             </v-col>
           </v-row>
@@ -44,20 +44,37 @@
           <br />
 
           <!-- task info -->
-          <AfterTask>{{ task_info }}</AfterTask>
+          <AfterTask>
+            <template #task_title>
+             {{ task_info.task_title }}
+            </template>
+            <template #task_description>
+             {{ task_info.task_description }}
+            </template>
+            <template #criteria>
+             {{ task_info.criteria }}
+            </template>
+          </AfterTask>
+
           <br /><br />
 
           <!-- Discover -->
-          <Discover></Discover>
+          <Discover :Discovers="task_info.discovers"></Discover>
 
           <!-- AfterGiveUp -->
-          <AfterGiveUp></AfterGiveUp>
+          <AfterGiveUp :Hurdles="task_info.hurdles"></AfterGiveUp>
 
           <!-- Motivasion -->
-          <AfterMotivation></AfterMotivation>
+          <AfterMotivation
+            :Reasons="task_info.reasons"
+            :Feedbacks="task_info.feedbacks"
+          ></AfterMotivation>
 
           <!-- expectation -->
-          <AfterExpectation></AfterExpectation>
+          <AfterExpectation
+            :Satisfaction="task_info.satisfaction"
+            :Difficulty="task_info.difficulty"
+          ></AfterExpectation>
         </v-container>
         <!-- </v-card> -->
       </div>
@@ -84,7 +101,7 @@ export default {
   },
   data: () => ({
     isDisplay: false,
-    task_info: "",
+    task_info: '',
   }),
   methods: {
     open() {

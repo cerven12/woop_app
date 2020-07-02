@@ -2,21 +2,13 @@
   <div>
     <v-row>
       <v-col cols="12">
-        <h1 class="message-title"><slot></slot></h1>
+        <h1 class="message-title"><slot name="task_title"></slot></h1>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="12">
-        <h1 class="writing-text ">
-          A task management app that incorporates the Woop concept. When you set
-          goals, it asks various questions to motivate you and prevent setbacks.
-          Set small goals (tasks) to reach your goals and complete them one by
-          one.A task management app that incorporates the Woop concept. When you
-          set goals, it asks various questions to motivate you and prevent
-          setbacks. Set small goals (tasks) to reach your goals and complete
-          them one by one.
-        </h1>
+        <p class="writing-text"><slot name="task_description"></slot></p>
       </v-col>
     </v-row>
 
@@ -30,11 +22,7 @@
 
     <v-row>
       <v-col cols="12">
-        <p class="writing-text ">
-          🔥A task management app that incorporates the Woop concept. When you
-          set goals, it asks various questions to motivate you and prevent
-          setbacks.
-        </p>
+        <p class="writing-text"><slot name="criteria"></slot></p>
       </v-col>
     </v-row>
   </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets, generics, filters
+from rest_framework import viewsets, generics#, filters
 from rest_framework.response import Response
 
 
@@ -40,12 +40,13 @@ class BoardViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     serializer_class = BoardSerializerNestedJustTask
     permission_classes = [IsAuthenticated]
 
+
 class StepViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Step.objects.all()
     serializer_class = StepSerializerNestedJustTask
     permission_classes = [IsAuthenticated]
-    filter_backends = [filters.OrderingFilter]
-    ordering = ('order_by',)
+    # filter_backends = [filters.OrderingFilter]
+    # ordering = ('order_by',)
 
 class MotiveViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Motive.objects.all()

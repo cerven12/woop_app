@@ -71,6 +71,9 @@ class Step(models.Model):
     order_by = models.IntegerField(default=0)
     is_active = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ["order_by"]
+
     def __str__(self):
         return self.step_title or ''
 
@@ -205,6 +208,10 @@ class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
     order_by = models.IntegerField(default=0)
     task_title = models.CharField(verbose_name='やること', max_length=40)
+    task_description = models.TextField(
+        verbose_name='詳細', blank=True, null=True)
+    criteria = models.TextField(
+        verbose_name='成功基準', blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     is_repeat = models.BooleanField(verbose_name='繰り返し', default=False)
     # Run tasks for when get stuck to main task.

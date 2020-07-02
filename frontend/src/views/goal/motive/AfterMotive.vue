@@ -95,7 +95,7 @@
 <script>
 export default {
   name: "Goal",
-  props: ["Motives", "SelfTranscendence", "FutureSelves"],
+ props: ["Motives", "SelfTranscendence", "FutureSelves"],
 
   data: function() {
     return {
