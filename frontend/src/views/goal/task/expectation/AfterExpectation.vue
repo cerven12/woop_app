@@ -16,6 +16,7 @@
             <v-spacer></v-spacer>
             <v-col cols="9">
             <template>
+<!-- The API gets it in increments of 20, so it should be corrected to 1-5. -->
               <v-rating
                 v-bind="conversionSatisValue(ex.tbd_satisfaction)"
                 v-model="tbdSatisRating"
