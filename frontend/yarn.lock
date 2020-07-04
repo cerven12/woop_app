@@ -860,6 +860,37 @@
   resolved "https://registry.npm.taobao.org/@nodelib/fs.stat/download/@nodelib/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha1-K1o6s/kYzKSKjHVMCBaOPwPrphs=
 
+"@prettier/plugin-lua@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-lua/-/plugin-lua-0.0.1.tgz#60498b7e3ca23bf390a9923c8d9072ca4020ce61"
+  integrity sha512-fZ6hUPKfZq3KY4zWSQpdvPrbi1LtxPXJvFJYMJHxt8HxRyyySlFWspKhgcIdlaZ1EL3cMyP2muPvvDpM7GbyBQ==
+  dependencies:
+    luaparse "0.2.1"
+
+"@prettier/plugin-php@^0.10.2":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.10.2.tgz#324b7bc4dc7305c7e43f864234e82a9cc0c862a4"
+  integrity sha512-FCzNR2kqlS9YV81JguX4vYnpwFn6cOlLwUZaEB0jIjPcrEgqqBwk6KSERTA5cE+lX5Ynip5rkV1hydGufwyJ7A==
+  dependencies:
+    linguist-languages "^6.3.0"
+    mem "^4.0.0"
+    php-parser glayzzle/php-parser#71485979b688d12fb130d3e853fdc00348671e00
+
+"@prettier/plugin-ruby@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-ruby/-/plugin-ruby-0.8.0.tgz#e305cb31310d865805b2db7ddfc2cc9273149505"
+  integrity sha512-EbhlgBzeHv6P0jnjMf6MCmgz28C6MCB0yU81enR7605mrUzUO8wg7RMaWCJsbfp7TRs5u9OqimMmib1Ivi4c0A==
+  dependencies:
+    prettier "^1.16.4"
+
+"@prettier/plugin-xml@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-xml/-/plugin-xml-0.7.2.tgz#f4b6e7c45a9e36663d403828e380e8a4c6a12106"
+  integrity sha512-c6i6OQ2y9kvWeUTrfkwHy+jdJXI3bpO8TT9EoVjJIEAApj5gLtJ/O2D9qthxWXh5zbipngueDEC2CT6tBZzBdA==
+  dependencies:
+    "@xml-tools/parser" "^1.0.2"
+    prettier ">=1.10"
+
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.7.1"
   resolved "https://registry.npm.taobao.org/@soda/friendly-errors-webpack-plugin/download/@soda/friendly-errors-webpack-plugin-1.7.1.tgz#706f64bcb4a8b9642b48ae3ace444c70334d615d"
@@ -1274,6 +1305,13 @@
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
+
+"@xml-tools/parser@^1.0.2":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@xml-tools/parser/-/parser-1.0.7.tgz#2228b77856cd552392057b8e2e507101b64261cb"
+  integrity sha512-mdjG4dWj4zaubxWAgr0YMNkZr182aHek5xrpDqgITNnGf+E8FhvAmCU95QiL9+pGjqK8Qfd+qnuer9f8KELRyQ==
+  dependencies:
+    chevrotain "7.0.1"
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -2015,6 +2053,13 @@ check-types@^8.0.3:
   version "8.0.3"
   resolved "https://registry.npm.taobao.org/check-types/download/check-types-8.0.3.tgz#3356cca19c889544f2d7a95ed49ce508a0ecf552"
   integrity sha1-M1bMoZyIlUTy16le1JzlCKDs9VI=
+
+chevrotain@7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/chevrotain/-/chevrotain-7.0.1.tgz#55d1d21a9afea0aad23b4d30e75650212eb4cc9f"
+  integrity sha512-B/44jrdw5GAzy483LEeVSgXSX0qOYM8lUd3l5+yf6Vl6OQjEUCm2BUiYbHRCIK6xCEvCLAFe1kj8uyV6+zdaVw==
+  dependencies:
+    regexp-to-ast "0.5.0"
 
 "chokidar@>=2.0.0 <4.0.0":
   version "3.3.1"
@@ -4563,6 +4608,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.npm.taobao.org/lines-and-columns/download/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+linguist-languages@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/linguist-languages/-/linguist-languages-6.3.0.tgz#b15a847c130229cc9239ebb11f0525a0e4c7a092"
+  integrity sha512-d86fIQM00SqmBmAErxRpBEBe2Nw/WK4Se999wavaXc+lqarOLnoenGP3V/wgBclxKsRXEYWTd6mvv8373vPSKg==
+
 loader-runner@^2.3.1, loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.npm.taobao.org/loader-runner/download/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -4692,6 +4742,11 @@ lru-cache@^5.1.1:
   integrity sha1-HaJ+ZxAnGUdpXa9oSOhH8B2EuSA=
   dependencies:
     yallist "^3.0.2"
+
+luaparse@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/luaparse/-/luaparse-0.2.1.tgz#aa8f56132b0de97d37f3c991a9df42e0e17f656c"
+  integrity sha1-qo9WEysN6X0388mRqd9C4OF/ZWw=
 
 make-dir@^2.0.0:
   version "2.1.0"
@@ -5585,6 +5640,10 @@ performance-now@^2.1.0:
   resolved "https://registry.npm.taobao.org/performance-now/download/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
+"php-parser@github:glayzzle/php-parser#71485979b688d12fb130d3e853fdc00348671e00":
+  version "3.0.0-prerelease.8"
+  resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/71485979b688d12fb130d3e853fdc00348671e00"
+
 picomatch@^2.0.4, picomatch@^2.0.7:
   version "2.2.2"
   resolved "https://registry.npm.taobao.org/picomatch/download/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
@@ -5999,7 +6058,12 @@ prepend-http@^1.0.0:
   resolved "https://registry.npm.taobao.org/prepend-http/download/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-prettier@^1.18.2:
+prettier@>=1.10:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
+  integrity sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
+
+prettier@^1.16.4, prettier@^1.18.2, prettier@^1.19.1:
   version "1.19.1"
   resolved "https://registry.npm.taobao.org/prettier/download/prettier-1.19.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fprettier%2Fdownload%2Fprettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha1-99f1/4qc2HKnvkyhQglZVqYHl8s=
@@ -6262,6 +6326,11 @@ regex-not@^1.0.0, regex-not@^1.0.2:
   dependencies:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
+
+regexp-to-ast@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/regexp-to-ast/-/regexp-to-ast-0.5.0.tgz#56c73856bee5e1fef7f73a00f1473452ab712a24"
+  integrity sha512-tlbJqcMHnPKI9zSrystikWKwHkBqu2a/Sgw01h3zFjvYrMxEDYHzzoMZnUrbIfpTFEsoRnnviOXNCzFiSc54Qw==
 
 regexp.prototype.flags@^1.2.0:
   version "1.3.0"
@@ -7556,6 +7625,16 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vim-prettier@prettier/vim-prettier:
+  version "1.0.0-alpha"
+  resolved "https://codeload.github.com/prettier/vim-prettier/tar.gz/d927452f2db2c43dc78c6b62783b64670569e5c9"
+  dependencies:
+    "@prettier/plugin-lua" "0.0.1"
+    "@prettier/plugin-php" "^0.10.2"
+    "@prettier/plugin-ruby" "^0.8.0"
+    "@prettier/plugin-xml" "^0.7.2"
+    prettier "^1.19.1"
 
 vivus@^0.4.5:
   version "0.4.5"

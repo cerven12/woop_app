@@ -2,7 +2,7 @@
   <div>
     <div class="accordion" v-bind:class="theme">
       <div class="header" v-on:click="toggle">
-        <div class="header-contents-wrapper ">
+        <div class="header-contents-wrapper">
           <div class="source"><slot name="source"></slot></div>
           <div><slot name="header"></slot></div>
         </div>
@@ -31,27 +31,27 @@ export default {
 
   data() {
     return {
-      show: false,
+      show: false
     };
   },
 
   methods: {
-    toggle: function() {
+    toggle: function () {
       this.show = !this.show;
     },
-    beforeEnter: function(el) {
+    beforeEnter: function (el) {
       el.style.height = "0";
     },
-    enter: function(el) {
+    enter: function (el) {
       el.style.height = el.scrollHeight + "px";
     },
-    beforeLeave: function(el) {
+    beforeLeave: function (el) {
       el.style.height = el.scrollHeight + "px";
     },
-    leave: function(el) {
+    leave: function (el) {
       el.style.height = "0";
-    },
-  },
+    }
+  }
 };
 </script>
 

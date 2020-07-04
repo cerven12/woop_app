@@ -31,7 +31,7 @@ export default {
 
   data() {
     return {
-      show: false,
+      show: false
     };
   },
 
@@ -50,8 +50,8 @@ export default {
     },
     leave: function(el) {
       el.style.height = "0";
-    },
-  },
+    }
+  }
 };
 </script>
 

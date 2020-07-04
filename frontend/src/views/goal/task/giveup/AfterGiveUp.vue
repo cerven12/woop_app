@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12">
         <h2 class="message-title">
-          Lets preparations for not give up.
+  Lets preparations for not give up.
         </h2>
       </v-col>
     </v-row>

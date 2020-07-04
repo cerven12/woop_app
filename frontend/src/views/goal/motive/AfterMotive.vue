@@ -95,7 +95,7 @@
 <script>
 export default {
   name: "Goal",
- props: ["Motives", "SelfTranscendence", "FutureSelves"],
+  props: ["Motives", "SelfTranscendence", "FutureSelves"],
 
   data: function() {
     return {
@@ -105,9 +105,9 @@ export default {
       // Registration details of Three Models
       motiveList: [],
       selfTranscendenceGoalList: [],
-      futureSelfList: [],
+      futureSelfList: []
     };
-  },
+  }
   // mounted: function() {
   //   let vm = this;
   //   vm.motiveList = vm.$store.state.goalData.motives;
