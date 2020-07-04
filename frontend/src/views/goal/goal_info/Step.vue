@@ -1,5 +1,8 @@
 <template>
   <div>
+    <v-container fluid class="background">
+    <v-row justify="center">
+    <v-col cols="8">
     <div class="step">
     <div v-for="(step, index) in Steps.steps" :key="step.id">
        <!-- Use the v-for index to make the z-index descending. -->
@@ -12,6 +15,9 @@
     </div>
 
    </div>
+   </v-col>
+   </v-row>
+   </v-container>
   </div>
 </template>
 
@@ -55,6 +61,10 @@ export default{
 
 
 <style scoped>
+.background {
+  background: #f0f0f0;
+}
+
 .step {
   position: relative;
   display: flex;

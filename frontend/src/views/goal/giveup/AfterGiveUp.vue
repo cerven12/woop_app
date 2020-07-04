@@ -52,76 +52,76 @@
         <!----------------------------------------------------------------------->
         <!--                                 Reference                         -->
         <!----------------------------------------------------------------------->
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="8">
-            <h2 class="category-title">
-              Reference
-            </h2>
-          </v-col>
-        </v-row>
-
-        <!-- <div v-for="Reference in References" :key="Reference.id"> -->
-
-        <v-row>
-          <v-col>
-            <template>
-              <div class="text-center">
-                <v-pagination
-                  v-model="page"
-                  :length="6"
-                  color="#4465c0"
-                  circle
-                ></v-pagination>
-              </div>
-            </template>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="8">
-            <template>
-              <v-simple-table fixed-header height="1200px">
-                <template v-slot:default>
-                  <thead>
-                    <tr>
-                      <th class="text-left" style="background:#f0f0f0;"></th>
-                      <th class="text-left" style="background:#f0f0f0;">
-                        Name
-                      </th>
-                      <th class="text-left" style="background:#f0f0f0;">
-                        How to Use?
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="item in refList" :key="item.id">
-                      <td
-                        style="text-align:center; "
-                        class="table-color-change"
-                      >
-                        <img :src="item.reference_img" class="resize" />
-                      </td>
-                      <td class="table-color-change">
-                        <a
-                          class="writing-text font-16"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          :href="item.reference_source"
-                          >{{ item.reference_name }}</a
-                        >
-                      </td>
-                      <td class="table-color-change writing-text font-16">
-                        {{ item.reference_use }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
-            </template>
-          </v-col>
-        </v-row>
+        <!-- <v&#45;row> -->
+        <!--   <v&#45;col cols="2"></v&#45;col> -->
+        <!--   <v&#45;col cols="8"> -->
+        <!--     <h2 class="category&#45;title"> -->
+        <!--       Reference -->
+        <!--     </h2> -->
+        <!--   </v&#45;col> -->
+        <!-- </v&#45;row> -->
+        <!--  -->
+        <!-- <!&#45;&#45; <div v&#45;for="Reference in References" :key="Reference.id"> &#45;&#45;> -->
+        <!--  -->
+        <!-- <v&#45;row> -->
+        <!--   <v&#45;col> -->
+        <!--     <template> -->
+        <!--       <div class="text&#45;center"> -->
+        <!--         <v&#45;pagination -->
+        <!--           v&#45;model="page" -->
+        <!--           :length="6" -->
+        <!--           color="#4465c0" -->
+        <!--           circle -->
+        <!--         ></v&#45;pagination> -->
+        <!--       </div> -->
+        <!--     </template> -->
+        <!--   </v&#45;col> -->
+        <!-- </v&#45;row> -->
+        <!--  -->
+        <!-- <v&#45;row> -->
+        <!--   <v&#45;col cols="2"></v&#45;col> -->
+        <!--   <v&#45;col cols="8"> -->
+        <!--     <template> -->
+        <!--       <v&#45;simple&#45;table fixed&#45;header height="1200px"> -->
+        <!--         <template v&#45;slot:default> -->
+        <!--           <thead> -->
+        <!--             <tr> -->
+        <!--               <th class="text&#45;left" style="background:#f0f0f0;"></th> -->
+        <!--               <th class="text&#45;left" style="background:#f0f0f0;"> -->
+        <!--                 Name -->
+        <!--               </th> -->
+        <!--               <th class="text&#45;left" style="background:#f0f0f0;"> -->
+        <!--                 How to Use? -->
+        <!--               </th> -->
+        <!--             </tr> -->
+        <!--           </thead> -->
+        <!--           <tbody> -->
+        <!--             <tr v&#45;for="item in refList" :key="item.id"> -->
+        <!--               <td -->
+        <!--                 style="text&#45;align:center; " -->
+        <!--                 class="table&#45;color&#45;change" -->
+        <!--               > -->
+        <!--                 <img :src="item.reference_img" class="resize" /> -->
+        <!--               </td> -->
+        <!--               <td class="table&#45;color&#45;change"> -->
+        <!--                 <a -->
+        <!--                   class="writing&#45;text font&#45;16" -->
+        <!--                   target="_blank" -->
+        <!--                   rel="noopener noreferrer" -->
+        <!--                   :href="item.reference_source" -->
+        <!--                   >{{ item.reference_name }}</a -->
+        <!--                 > -->
+        <!--               </td> -->
+        <!--               <td class="table&#45;color&#45;change writing&#45;text font&#45;16"> -->
+        <!--                 {{ item.reference_use }} -->
+        <!--               </td> -->
+        <!--             </tr> -->
+        <!--           </tbody> -->
+        <!--         </template> -->
+        <!--       </v&#45;simple&#45;table> -->
+        <!--     </template> -->
+        <!--   </v&#45;col> -->
+        <!-- </v&#45;row> -->
       </v-container>
     </div>
   </div>
