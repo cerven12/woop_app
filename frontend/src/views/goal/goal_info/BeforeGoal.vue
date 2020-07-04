@@ -9,15 +9,18 @@
         <div id="line">
           <!-- Label -->
           <v-row>
-            <v-col cols="12">
+            <v-col cols="10">
               <h4 class="form-group-title">Write it down your Goal.</h4>
+            </v-col>
+            <v-col>
+              <v-btn small color="gray" @click="endEdit">OK!</v-btn>
             </v-col>
           </v-row>
 
           <!-- Vew Goal Title -->
           <v-row>
             <v-col cols="12">
-              <h1 class="goal_title">{{ goal_title }}</h1>
+              <h1 class="goal_title">{{ Goal.goal_title }}</h1>
             </v-col>
           </v-row>
 
@@ -26,7 +29,7 @@
             <v-col cols="12">
               <v-text-field
                 label="Your Goal"
-                v-model="goal_title"
+                v-model="Goal.goal_title"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -37,9 +40,8 @@
               <v-textarea
                 name="Description"
                 label="Description"
-                rows="1"
                 auto-grow
-                v-model="goal_description"
+                v-model="Goal.goal_description"
               ></v-textarea>
             </v-col>
           </v-row>
@@ -49,12 +51,14 @@
               <v-textarea
                 name="Success criteria"
                 label="Success criteria"
-                rows="1"
                 auto-grow
+                v-model="Goal.criteria"
+                rows="3"
               ></v-textarea>
             </v-col>
           </v-row>
         </div>
+        <br />
       </v-container>
 
       <!----------------------------------------------------------------------->
@@ -69,14 +73,16 @@
 
 <script>
 export default {
-  data: function() {
-    return {
-      goal_title:
-        "Create Web SPA Todo App  at use Django Rest Framework and Vue.",
-      goal_description: "",
-      valid: "",
-    };
+  name: "Goal",
+  props: ["Goal"],
+  data: function () {
+    return {};
   },
+  methods: {
+    endEdit: function () {
+      this.$emit("close");
+    }
+  }
 };
 </script>
 
@@ -90,6 +96,7 @@ export default {
   grid-template-columns: 55% 45%;
   grid-template-areas: "form tips";
   background-color: #f0f0f0;
+  padding: 0px 300px;
 }
 
 #form-area {
@@ -100,20 +107,10 @@ export default {
 }
 
 /*   ------------------------------------------------------------
-                            Form Design
- ------------------------------------------------------------*/
-#line {
-  margin: 80px;
-  padding: 60px 100px;
-  border-radius: 77px;
-  box-shadow: 5px 5px 5px #b9b9b9, -5px -5px 5px #fafafa;
-}
-
-/*   ------------------------------------------------------------
                             Font Desiign
  ------------------------------------------------------------*/
 .goal_title {
-  color: #5f75b0;
+  color: #4465c0;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;

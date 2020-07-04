@@ -2,22 +2,21 @@
   <div>
     <div id="css-grid">
       <v-container fluid id="view-area">
-        <!-- Step -->
-        <v-row justify="center">
-          <v-col cols="8">
-            <Step :Steps="Steps"> </Step>
-          </v-col>
-        </v-row>
-
         <!--  Goal Title -->
         <v-row justify="center">
-          <v-col cols="8">
+          <v-col cols="7">
             <h1 class="goal_title">
               {{ Goal.goal_title }}
             </h1>
           </v-col>
+          <v-col cols="1">
+            <v-btn fab small depressed color="gray" @click="switchEdit">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+          </v-col>
         </v-row>
 
+        <br />
         <v-row justify="center">
           <v-col cols="8">
             <p class="writing-text">
@@ -25,7 +24,7 @@
             </p>
           </v-col>
         </v-row>
-
+        <br /><br />
         <v-row justify="center">
           <v-col cols="8">
             <h2 class="category-title">
@@ -39,6 +38,7 @@
             <p class="writing-text">🔥{{ Goal.criteria }}</p>
           </v-col>
         </v-row>
+        <br />
       </v-container>
     </div>
   </div>
@@ -50,16 +50,21 @@ import api from "@/services/api";
 
 export default {
   name: "Goal",
-  props: ["Goal", "Steps",],
+  props: ["Goal", "Steps"],
 
   components: {
-    Step,
+    Step
   },
-  data: function() {
+  data: function () {
     return {
-      goal: "",
+      goal: ""
     };
   },
+  methods: {
+    switchEdit: function () {
+      this.$emit("startEdit");
+    }
+  }
 };
 </script>
 

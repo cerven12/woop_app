@@ -1,9 +1,28 @@
 <template>
   <v-app>
-     <div id="background">
-     {{ All }}
+    <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-      <AfterGoal :Goal="Goal" :Steps="Steps"></AfterGoal>
+      {{ All }}
+
+      <Steps :Steps="Steps"></Steps>
+
+      <transition-group mode="out-in">
+        <AfterGoal
+          key="3"
+          @startEdit="startEdit"
+          v-show="isGoalRegistered && !isGoalEditMode"
+          :Goal="Goal"
+          :Steps="Steps"
+        ></AfterGoal>
+        <BeforeGoal
+          key="1"
+          @close="endEdit"
+          v-show="!isGoalRegistered || isGoalEditMode"
+          :Goal="Goal"
+          :Steps="Steps"
+        ></BeforeGoal>
+      </transition-group>
+
       <Kanban :Boards="Boards"></Kanban>
       <Note :Notes="Notes"></Note>
       <AfterGIveUp :Worries="Worries"></AfterGIveUp>
@@ -22,6 +41,8 @@
 </template>
 
 <script>
+import Steps from "./goal_info/Step";
+
 // Goal
 import BeforeGoal from "./goal_info/BeforeGoal";
 import AfterGoal from "./goal_info/AfterGoal";
@@ -50,10 +71,11 @@ export default {
     AfterGIveUp,
     Note,
     Kanban,
+    Steps
   },
-  data: function() {
+  data: function () {
     return {
-      All: {},
+      All: {}, // For Debug
       Goal: {},
       Motives: {},
       SelfTranscendence: {},
@@ -62,13 +84,17 @@ export default {
       Notes: {},
       Boards: {},
       Steps: {},
+
+      // Componetns switch.
+      isGoalRegistered: true,
+      isGoalEditMode: false
     };
   },
-  mounted: function() {
+  mounted: function () {
     let vm = this;
     api
       .get("goals/55a04a5e-8cdb-4317-b6ea-4bfb46142740/")
-      .then(function(response) {
+      .then(function (response) {
         vm.All = response;
         // Goal_Info
         vm.$set(vm.Goal, "goal_title", response.data.goal_title);
@@ -102,11 +128,48 @@ export default {
         vm.$set(vm.Steps, "steps", response.data.steps);
       });
   },
+  methods: {
+    startEdit: function () {
+      this.isGoalEditMode = true;
+    },
+    endEdit: function () {
+      this.isGoalEditMode = false;
+    }
+  }
 };
 </script>
 
 <style scoped>
 body {
-  background: #f4f4f4;
+  background: #f0f0f0;
+}
+
+#background {
+  background: #f0f0f0;
+}
+
+.v-enter {
+  transform: translate(-100px, 0);
+  opacity: 0;
+}
+.v-enter-to {
+  opacity: 1;
+}
+.v-enter-active {
+  transition: all 1s 0s ease;
+}
+.v-leave {
+  transform: translate(0, 0);
+  opacity: 1;
+  position: absolute;
+}
+.v-leave-to {
+  transform: translate(-100px, 0);
+  opacity: 0;
+  position: absolute;
+}
+.v-leave-active {
+  transition: all 0.5s 0s ease;
+  position: absolute;
 }
 </style>
