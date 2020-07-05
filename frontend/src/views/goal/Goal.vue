@@ -9,17 +9,15 @@
       <transition-group mode="out-in">
         <AfterGoal
           key="3"
-          @startEdit="startEdit"
+          @startGoalEdit="startGoalEdit"
           v-show="isGoalRegistered && !isGoalEditMode"
           :Goal="Goal"
-          :Steps="Steps"
         ></AfterGoal>
         <BeforeGoal
           key="1"
-          @close="endEdit"
+          @close="endGoalEdit"
           v-show="!isGoalRegistered || isGoalEditMode"
           :Goal="Goal"
-          :Steps="Steps"
         ></BeforeGoal>
       </transition-group>
 
@@ -27,14 +25,26 @@
       <Note :Notes="Notes"></Note>
       <AfterGIveUp :Worries="Worries"></AfterGIveUp>
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-      <AfterMotive
-        :Motives="Motives"
-        :SelfTranscendence="SelfTranscendence"
-        :FutureSelves="FutureSelves"
-      ></AfterMotive>
-      <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-      <BeforeGoal></BeforeGoal>
-      <BeforeMotive></BeforeMotive>
+
+      <transition-group mode="out-in">
+        <AfterMotive
+          key="3"
+          @startMotiveEdit="startMotiveEdit"
+          v-show="isMotiveRegisterd && !isMotiveEditMode"
+          :Motives="Motives"
+          :SelfTranscendence="SelfTranscendence"
+          :FutureSelves="FutureSelves"
+        ></AfterMotive>
+        <BeforeMotive
+          key="1"
+          @close="endMotiveEdit"
+          v-show="!isMotiveRegisterd || isMotiveEditMode"
+          :Motives="Motives"
+          :SelfTranscendence="SelfTranscendence"
+          :FutureSelves="FutureSelves"
+        ></BeforeMotive>
+      </transition-group>
+
       <BeforeGiveUp></BeforeGiveUp>
     </div>
   </v-app>
@@ -87,7 +97,10 @@ export default {
 
       // Componetns switch.
       isGoalRegistered: true,
-      isGoalEditMode: false
+      isGoalEditMode: false,
+
+      isMotiveRegisterd: true,
+      isMotiveEditMode: false
     };
   },
   mounted: function () {
@@ -129,11 +142,18 @@ export default {
       });
   },
   methods: {
-    startEdit: function () {
+    startGoalEdit: function () {
       this.isGoalEditMode = true;
     },
-    endEdit: function () {
+    endGoalEdit: function () {
       this.isGoalEditMode = false;
+    },
+
+    startMotiveEdit: function () {
+      this.isMotiveEditMode = true;
+    },
+    endMotiveEdit: function () {
+      this.isMotiveEditMode = false;
     }
   }
 };

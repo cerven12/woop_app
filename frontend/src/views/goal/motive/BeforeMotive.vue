@@ -9,10 +9,13 @@
         <div id="line">
           <!-- Label -->
           <v-row>
-            <v-col cols="12">
+            <v-col cols="10">
               <h2 class="message-title">
                 To Keep Your Motivation Flying High.
               </h2>
+            </v-col>
+            <v-col>
+              <v-btn small color="gray" @click="endEdit">OK!</v-btn>
             </v-col>
           </v-row>
 
@@ -23,7 +26,7 @@
             <h2 class="category-title">Motivation</h2>
             <transition-group name="form" tag="div">
               <div
-                v-for="(motives, motive_index) in motiveList"
+                v-for="(motives, motive_index) in Motives.motives"
                 :key="motive_index"
               >
                 <!-- If it's two or more forms, show ✘, and label and hint is hide. -->
@@ -85,7 +88,7 @@
             <transition-group name="form" tag="div">
               <div
                 v-for="(self_transcendence_goals,
-                self_index) in selfTranscendenceGoalList"
+                self_index) in SelfTranscendence.self_transcendence_goals"
                 :key="self_index"
               >
                 <!-- If it's two or more forms, show ✘, and label and hint is hide. -->
@@ -150,7 +153,8 @@
             <h2 class="category-title">Bad future self</h2>
             <transition-group name="form" tag="div">
               <div
-                v-for="(future_selves, future_selves_index) in futureSelfList"
+                v-for="(future_selves,
+                future_selves_index) in FutureSelves.future_selves"
                 v-bind:key="future_selves_index"
               >
                 <!-- If it's two or more forms, show ✘, and label and hint is hide. -->
@@ -199,7 +203,7 @@
                 ><v-btn depressed small @click="addFutureSelf">＋</v-btn></v-col
               >
             </v-row>
-            <v-btn @click="allMotivesRegister" outlined>submit</v-btn>
+            <v-btn outlined>submit</v-btn>
           </v-form>
         </div>
       </v-container>
@@ -216,7 +220,9 @@
 
 <script>
 export default {
-  data: function() {
+  name: "Goal",
+  props: ["Motives", "SelfTranscendence", "FutureSelves"],
+  data: function () {
     return {
       root: "",
       valid: "",
@@ -224,47 +230,54 @@ export default {
       // Registration details of Three Models
       motiveList: [{ motive: "" }],
       selfTranscendenceGoalList: [{ self_transcendence_goal: "" }],
-      futureSelfList: [{ future_self: "" }],
+      futureSelfList: [{ future_self: "" }]
     };
   },
 
   methods: {
+    endEdit: function () {
+      this.$emit("close");
+    },
+
     //  ------------------------------------------------------------
     //                   Form Increase
     //  ------------------------------------------------------------
-    addMotiveForm: function() {
+    addMotiveForm: function () {
       const form = { motive: "" };
-      this.motiveList.push(form);
+      this.Motives.motives.push(form);
     },
 
-    addSelfTranscendenceGoalForm: function() {
+    addSelfTranscendenceGoalForm: function () {
       const form = { self_transcendence_goal: "" };
-      this.selfTranscendenceGoalList.push(form);
+      this.SelfTranscendence.self_transcendence_goals.push(form);
     },
 
-    addFutureSelf: function() {
+    addFutureSelf: function () {
       const form = { future_self: "" };
-      this.futureSelfList.push(form);
+      this.FutureSelves.future_selves.push(form);
     },
 
     //  ------------------------------------------------------------
     //                   Form Delete
     //  ------------------------------------------------------------
     deleteMotiveForm(index) {
-      this.motiveList.splice(index, 1);
+      this.Motives.motives.splice(index, 1);
       console.log(this.motiveList);
     },
 
     deleteSelfTranscendenceGoalForm(index) {
-      this.selfTranscendenceGoalList.splice(index, 1);
+      this.SelfTranscendence.self_transcendence_goals.splice(index, 1);
       console.log(this.selfTranscendenceGoalList);
     },
 
     deleteFutureSelfForm(index) {
-      this.futureSelfList.splice(index, 1);
+      this.FutureSelves.future_selves.splice(index, 1);
       console.log(this.futureSelfList);
     },
-  },
+    endEdit: function () {
+      this.$emit("close");
+    }
+  }
 };
 </script>
 
@@ -278,6 +291,7 @@ export default {
   grid-template-columns: 55% 45%;
   grid-template-areas: "form tips";
   background-color: #f0f0f0;
+  padding: 0px 300px;
 }
 
 #form-area {
@@ -285,16 +299,6 @@ export default {
 }
 #tips-area {
   grid-area: tips;
-}
-
-/*   ------------------------------------------------------------
-                            Form Design
- ------------------------------------------------------------*/
-#line {
-  margin: 80px;
-  padding: 60px 100px;
-  border-radius: 77px;
-  box-shadow: 5px 5px 5px #b9b9b9, -5px -5px 5px #fafafa;
 }
 
 /*   ------------------------------------------------------------

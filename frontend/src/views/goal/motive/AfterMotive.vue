@@ -4,10 +4,15 @@
       <v-container fluid id="view-area">
         <v-row>
           <v-col cols="2"></v-col>
-          <v-col cols="8">
+          <v-col cols="7">
             <h2 class="message-title">
               To Keep Your Motivation Flying High.
             </h2>
+          </v-col>
+          <v-col cols="1">
+            <v-btn fab small depressed color="gray" @click="switchEdit">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
           </v-col>
         </v-row>
 
@@ -17,7 +22,7 @@
         <v-row>
           <v-col cols="2"></v-col>
           <v-col cols="8">
-            <h2 class="category-title ">
+            <h2 class="category-title">
               Motivation
             </h2>
           </v-col>
@@ -97,24 +102,18 @@ export default {
   name: "Goal",
   props: ["Motives", "SelfTranscendence", "FutureSelves"],
 
-  data: function() {
+  data: function () {
     return {
       root: "",
       valid: "",
-      form: "",
-      // Registration details of Three Models
-      motiveList: [],
-      selfTranscendenceGoalList: [],
-      futureSelfList: []
+      form: ""
     };
+  },
+  methods: {
+    switchEdit: function () {
+      this.$emit("startMotiveEdit");
+    }
   }
-  // mounted: function() {
-  //   let vm = this;
-  //   vm.motiveList = vm.$store.state.goalData.motives;
-  //   vm.selfTranscendenceGoalList =
-  //     vm.$store.state.goalData.self_transcendence_goals;
-  //   vm.futureSelfList = vm.$store.state.goalData.future_selves;
-  // },
 };
 </script>
 

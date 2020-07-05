@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     switchEdit: function () {
-      this.$emit("startEdit");
+      this.$emit("startGoalEdit");
     }
   }
 };
