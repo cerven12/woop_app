@@ -262,17 +262,14 @@ export default {
     //  ------------------------------------------------------------
     deleteMotiveForm(index) {
       this.Motives.motives.splice(index, 1);
-      console.log(this.motiveList);
     },
 
     deleteSelfTranscendenceGoalForm(index) {
       this.SelfTranscendence.self_transcendence_goals.splice(index, 1);
-      console.log(this.selfTranscendenceGoalList);
     },
 
     deleteFutureSelfForm(index) {
       this.FutureSelves.future_selves.splice(index, 1);
-      console.log(this.futureSelfList);
     },
     endEdit: function () {
       this.$emit("close");

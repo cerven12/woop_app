@@ -23,8 +23,22 @@
 
       <Kanban :Boards="Boards"></Kanban>
       <Note :Notes="Notes"></Note>
-      <AfterGIveUp :Worries="Worries"></AfterGIveUp>
-      <div style="padding: 50px 0px; background: #f0f0f0;"></div>
+
+      <transition-group mode="out-in">
+      <AfterGIveUp
+        key="3"
+        :Worries="Worries"
+        @startGiveUpEdit="startGiveUpEdit"
+        v-show="isGiveUpRegisterd && !isGiveUpEditMode"
+      ></AfterGIveUp>
+      <BeforeGiveUp
+        :Worries="Worries"
+        key="1"
+        @close="endGiveUpEdit"
+        v-show="!isGiveUpRegisterd || isGiveUpEditMode"
+      ></BeforeGiveUp>
+      </transition-group>
+      <!-- <div style="padding: 50px 0px; background: #f0f0f0;"></div> -->
 
       <transition-group mode="out-in">
         <AfterMotive
@@ -44,8 +58,6 @@
           :FutureSelves="FutureSelves"
         ></BeforeMotive>
       </transition-group>
-
-      <BeforeGiveUp></BeforeGiveUp>
     </div>
   </v-app>
 </template>
@@ -100,7 +112,10 @@ export default {
       isGoalEditMode: false,
 
       isMotiveRegisterd: true,
-      isMotiveEditMode: false
+      isMotiveEditMode: false,
+
+      isGiveUpRegisterd: true,
+      isGiveUpEditMode: false,
     };
   },
   mounted: function () {
@@ -154,7 +169,9 @@ export default {
     },
     endMotiveEdit: function () {
       this.isMotiveEditMode = false;
-    }
+    },
+    startGiveUpEdit: function(){this.isGiveUpEditMode=true;},
+    endGiveUpEdit: function(){this.isGiveUpEditMode=false;},
   }
 };
 </script>

@@ -112,7 +112,7 @@ export default {
   methods: {
     switchEdit: function () {
       this.$emit("startMotiveEdit");
-    }
+    },
   }
 };
 </script>

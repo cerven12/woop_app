@@ -9,8 +9,11 @@
         <div id="line">
           <!-- Label -->
           <v-row>
-            <v-col cols="12">
+            <v-col cols="10">
               <h2 class="message-title">Lets preparations for not give up.</h2>
+            </v-col>
+            <v-col>
+              <v-btn small color="gray" @click="endEdit">OK!</v-btn>
             </v-col>
           </v-row>
 
@@ -20,7 +23,7 @@
           <h3 class="category-title">Obstacle & Countermeasure.</h3>
           <transition-group name="form" tag="div">
             <div
-              v-for="(worries, worries_index) in worryList"
+              v-for="(worries, worries_index) in Worries.worries"
               :key="worries_index"
             >
               <!-- If it's two or more Worry Model forms, show ✘, and label and hint is hide of Worry. Idea Model form. -->
@@ -49,7 +52,7 @@
                 <!-- Idea Model Form -->
                 <transition-group name="form" tag="div">
                   <div
-                    v-for="(ideas, ideas_index) in worries.ideaList"
+                    v-for="(ideas, ideas_index) in worries.ideas"
                     :key="ideas_index"
                   >
                     <v-row justify="end">
@@ -109,7 +112,7 @@
                 <!-- Idea Model Form -->
                 <transition-group name="form" tag="div">
                   <div
-                    v-for="(ideas, ideas_index) in worries.ideaList"
+                    v-for="(ideas, ideas_index) in worries.ideas"
                     :key="ideas_index"
                   >
                     <v-row justify="end">
@@ -173,7 +176,7 @@
           <!--                          Reference                               -->
           <!----------------------------------------------------------------------->
           <v-form v-model="valid">
-            <h3 class="category-title ">References</h3>
+            <h3 class="category-title">References</h3>
             <transition-group name="form" tag="div">
               <div
                 v-for="(references, ref_index) in refList"
@@ -265,14 +268,15 @@
 
 <script>
 export default {
-  data: function() {
+  name: "Goal",
+  props: ["Worries"],
+
+  data: function () {
     return {
       valid: "",
       worryList: [{ worry: "", ideaList: [{ idea: "" }] }],
       parentWorryId: "",
-      refList: [
-        { reference_name: "", reference_use: "", reference_source: "" },
-      ],
+      refList: [{ reference_name: "", reference_use: "", reference_source: "" }]
     };
   },
 
@@ -280,21 +284,19 @@ export default {
     //  ------------------------------------------------------------
     //                   Form  Increase
     //  ------------------------------------------------------------
-    addWorryIdeaForm: function() {
-      const form = { worry: "", ideaList: [{ idea: "" }] };
-      this.worryList.push(form);
+    addWorryIdeaForm: function () {
+      const form = { worry: "", ideas: [{ idea: "" }] };
+      this.Worries.worries.push(form);
     },
-
-    addIdeaForm: function(worries_id) {
+    addIdeaForm: function (worries_id) {
       const form = { idea: "" };
-      this.worryList[worries_id].ideaList.push(form);
+      this.Worries.worries[worries_id].ideas.push(form);
     },
-
-    addReferenceForm: function() {
+    addReferenceForm: function () {
       const form = {
         reference_name: "",
         reference_use: "",
-        reference_source: "",
+        reference_source: ""
       };
       this.refList.push(form);
     },
@@ -302,18 +304,21 @@ export default {
     //  ------------------------------------------------------------
     //                   Form Delete
     //  ------------------------------------------------------------
-    deleteWorryIdeaForm: function(worry_id) {
-      this.worryList.splice(worry_id, 1);
+    deleteWorryIdeaForm: function (worry_id) {
+      this.Worries.worries.splice(worry_id, 1);
       console.log(this.worryList);
     },
-    deleteIdeaForm: function(worries_id, ideas_id) {
-      this.worryList[worries_id].ideaList.splice(ideas_id, 1);
+    deleteIdeaForm: function (worries_id, ideas_id) {
+      this.Worries.worries[worries_id].ideas.splice(ideas_id, 1);
     },
-    deleteRefernceForm: function(index) {
+    deleteRefernceForm: function (index) {
       this.refList.splice(index, 1);
       console.log(this.refList);
     },
-  },
+    endEdit: function () {
+      this.$emit("close");
+    }
+  }
 };
 </script>
 
@@ -327,6 +332,7 @@ export default {
   grid-template-columns: 55% 45%;
   grid-template-areas: "form tips";
   background-color: #f0f0f0;
+  padding: 0px 300px;
 }
 
 #form-area {
@@ -334,16 +340,6 @@ export default {
 }
 #tips-area {
   grid-area: tips;
-}
-
-/*   ------------------------------------------------------------
-                            Form Design
- ------------------------------------------------------------*/
-#line {
-  margin: 80px;
-  padding: 60px 100px;
-  border-radius: 77px;
-  box-shadow: 5px 5px 5px #b9b9b9, -5px -5px 5px #fafafa;
 }
 
 /*   ------------------------------------------------------------
