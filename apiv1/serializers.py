@@ -95,7 +95,7 @@ class BoardSerializerNestedJustTask(WritableNestedModelSerializer):
 
     class Meta:
         model = Board
-        fields = ['board_id', 'goal', 'board_title',
+        fields = ['board_id', 'goal', 'board_title', 'color',
                   'created_at', 'updated_at', 'order_by', 'tasks']
 
 class TaskSerializeForStep(serializers.ModelSerializer):

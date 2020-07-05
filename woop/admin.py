@@ -166,7 +166,7 @@ admin.site.register(Discover, DiscoverAdmin)
 
 
 class BoardAdmin(admin.ModelAdmin):
-    list_display = ('board_id', 'goal', 'board_title',
+    list_display = ('board_id', 'goal', 'board_title', 'color',
                     'created_at', 'updated_at', 'order_by')
     ordering = ('-created_at',)
     readonly_field = ('board_id', 'created_at', 'updated_at')

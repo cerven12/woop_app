@@ -17,10 +17,10 @@
         <v-row>
 
           <div class="scrolling-wrapper">
-            <div v-for="board in Boards.boards" :key="board.id">
+            <div v-for="(board, index) in Boards.boards" :key="board.id">
               <div class="board-wrapper">
                 <h2 class="board-title">{{ board.board_title }}<span> + </span></h2>
-                <div class="board">
+                <div class="board" :style="boardColor(index)">
                   <draggable
                     v-model="board.tasks"
                     group="myGroup"
@@ -142,6 +142,9 @@ export default {
      showDialog(item) {
       this.$refs.task.open();
       this.$refs.task.task_info = item;
+    },
+      boardColor(index){
+        return `background: #${this.Boards.boards[index].color}`;
     },
   },
 };

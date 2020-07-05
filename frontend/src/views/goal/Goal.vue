@@ -21,7 +21,12 @@
         ></BeforeGoal>
       </transition-group>
 
+      <transition>
       <Kanban :Boards="Boards"></Kanban>
+      </transition>
+
+
+
       <Note :Notes="Notes"></Note>
 
       <transition-group mode="out-in">

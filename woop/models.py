@@ -52,6 +52,7 @@ class Board(models.Model):
     goal = models.ForeignKey(
         Goal, on_delete=models.CASCADE, related_name='boards')
     board_title = models.CharField(verbose_name='ボード', max_length=255)
+    color = models.CharField(verbose_name="色", max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     order_by = models.IntegerField(default=0)

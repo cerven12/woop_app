@@ -10,11 +10,10 @@
             </h2>
           </v-col>
           <v-col cols="1">
-           <v-btn fab small depressed color="gray" @click="switchEdit">
-             <v-icon>mdi-pencil</v-icon>
-           </v-btn>
+            <v-btn fab small depressed color="gray" @click="switchEdit">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
           </v-col>
-
         </v-row>
 
         <!----------------------------------------------------------------------->
@@ -27,7 +26,7 @@
               Obstacle & Countermeasure.
             </h2>
           </v-col>
-       </v-row>
+        </v-row>
 
         <div v-for="Obstacle in Worries.worries" :key="Obstacle.id">
           <v-row>
