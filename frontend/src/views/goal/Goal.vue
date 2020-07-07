@@ -126,7 +126,7 @@ export default {
   mounted: function () {
     let vm = this;
     api
-      .get("goals/55a04a5e-8cdb-4317-b6ea-4bfb46142740/")
+      .get("goals/5664a112-6166-4439-ab43-8a440378e237/")
       .then(function (response) {
         vm.All = response;
         // Goal_Info
