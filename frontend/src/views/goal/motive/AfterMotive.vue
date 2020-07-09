@@ -35,7 +35,6 @@
               <p class="writing-text motive-splitter">
                 {{ motive.motive }}
               </p>
-              <p>{{ motive.created_at }}</p>
             </v-col>
           </v-row>
         </div>
@@ -61,7 +60,6 @@
               <p class="writing-text selftrance-splitter">
                 {{ selfTrance.self_transcendence_goal }}
               </p>
-              <p>{{ selfTrance.created_at }}</p>
             </v-col>
           </v-row>
         </div>
@@ -87,7 +85,6 @@
               <p class="writing-text future-splitter">
                 {{ futureSelf.future_self }}
               </p>
-              <p>{{ futureSelf.created_at }}</p>
             </v-col>
           </v-row>
         </div>
@@ -169,7 +166,7 @@ export default {
 }
 
 .motive-splitter {
-  border-left: 20px rgb(28, 218, 174) solid;
+border-left: 20px #3994BF solid;
   padding-left: 15px;
 }
 
@@ -179,7 +176,7 @@ export default {
 }
 
 .future-splitter {
-  border-left: 20px rgb(75, 75, 75) solid;
+border-left: 20px #794DBF solid;
   padding-left: 15px;
 }
 

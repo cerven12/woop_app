@@ -2,7 +2,7 @@
   <v-app>
     <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-      {{ All }}
+      <!-- <Write></Write> -->
 
       <Steps :Steps="Steps"></Steps>
 
@@ -88,6 +88,8 @@ import Kanban from "./task/Kanban.vue";
 
 import api from "@/services/api";
 
+import Write from "./note/Write.vue"
+
 export default {
   components: {
     BeforeGoal,
@@ -98,7 +100,8 @@ export default {
     AfterGIveUp,
     Note,
     Kanban,
-    Steps
+    Steps,
+    Write,
   },
   data: function () {
     return {
@@ -111,6 +114,7 @@ export default {
       Notes: {},
       Boards: {},
       Steps: {},
+      Write: {},
 
       // Componetns switch.
       isGoalRegistered: true,
@@ -126,7 +130,7 @@ export default {
   mounted: function () {
     let vm = this;
     api
-      .get("goals/5664a112-6166-4439-ab43-8a440378e237/")
+      .get("goals/55a04a5e-8cdb-4317-b6ea-4bfb46142740/")
       .then(function (response) {
         vm.All = response;
         // Goal_Info
@@ -159,6 +163,7 @@ export default {
 
         // Step
         vm.$set(vm.Steps, "steps", response.data.steps);
+        
       });
   },
   methods: {

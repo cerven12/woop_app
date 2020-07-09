@@ -35,7 +35,6 @@
               <p class="writing-text obst-splitter">
                 {{ Obstacle.worry }}
               </p>
-              <p>{{ Obstacle.created_at }}</p>
             </v-col>
           </v-row>
 
@@ -46,7 +45,6 @@
                 <p class="writing-text idea-splitter">
                   {{ ideas.idea }}
                 </p>
-                <p>{{ ideas.created_at }}</p>
               </v-col>
             </v-row>
           </div>
@@ -277,13 +275,13 @@ export default {
 }
 
 .obst-splitter {
-  border-left: 20px rgb(141, 32, 213) solid;
+border-left: 20px #494359 solid;
   padding-left: 15px;
 }
 
 .idea-splitter {
-  border-left: 20px rgb(234, 151, 63) solid;
-  padding-left: 15px;
+border-left: 20px #F2953D solid;
+padding-left: 15px;
 }
 
 .resize {
