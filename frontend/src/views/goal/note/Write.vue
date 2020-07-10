@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="css-grid">
-      <v-container fluid >
+      <v-container fluid id="form-area">
         <v-row>
           <v-col cols="12">
             <div class="editorx_body">
@@ -20,15 +20,15 @@
         </v-row>
       </v-container>
 
-      <!-- <v&#45;container fluid id="tips&#45;area"> -->
-      <!--   <v&#45;row> -->
-      <!--     <v&#45;col cols="12"> -->
-      <!--       <div> -->
-      <!--         <pre>{{ value }}</pre> -->
-      <!--       </div> -->
-      <!--     </v&#45;col> -->
-      <!--   </v&#45;row> -->
-      <!-- </v&#45;container> -->
+      <v-container fluid id="tips-area">
+        <v-row>
+          <v-col cols="12">
+            <div>
+              <pre>{{ value }}</pre>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
   </div>
 </template>
@@ -226,24 +226,24 @@ export default {
 /*   ------------------------------------------------------------
                             CSS Grid
  ------------------------------------------------------------*/
-/* #css-grid { */
-/*   display: grid; */
-/*   grid-template-rows: 1fr; */
-/*   grid-template-columns: 50% 50%; */
-/*   grid-template-areas: "form tips"; */
-/* } */
-/*  */
-/* #form-area { */
-/*   grid-area: form; */
-/* } */
-/* #tips-area { */
-/*   grid-area: tips; */
-/* } */
-/*  */
+#css-grid {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "form tips";
+}
+
+#form-area {
+  grid-area: form;
+}
+#tips-area {
+  grid-area: tips;
+}
+
 .editorx_body {
-   box-sizing: border-box;
-  border-radius: 50px; 
-   /* padding: 50px;  */
-  /* box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);  */
- } 
+  /* box-sizing: border-box; */
+  border-radius: 50px;
+  padding: 50px;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+}
 </style>

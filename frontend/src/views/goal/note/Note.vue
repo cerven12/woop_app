@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import Write from "../note/Write.vue";
 import Accordion from "../note/Accordion";
 
 export default {
@@ -55,7 +54,6 @@ export default {
 
   components: {
     Accordion,
-    Write,
   },
   data: function() {
     return {
@@ -65,6 +63,10 @@ export default {
       noteList: [],
     };
   },
+  // mounted: function() {
+  //   let vm = this;
+  //   vm.noteList = vm.$store.state.goalData.notes;
+  // },
 };
 </script>
 

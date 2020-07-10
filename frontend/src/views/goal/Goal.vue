@@ -2,7 +2,8 @@
   <v-app>
     <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-      <!-- <Write></Write> -->
+      <Tiptap></Tiptap>
+      <Write></Write>
 
       <Steps :Steps="Steps"></Steps>
 
@@ -89,6 +90,7 @@ import Kanban from "./task/Kanban.vue";
 import api from "@/services/api";
 
 import Write from "./note/Write.vue"
+import Tiptap from "./note/Tiptap.vue"
 
 export default {
   components: {
@@ -102,6 +104,7 @@ export default {
     Kanban,
     Steps,
     Write,
+    Tiptap,
   },
   data: function () {
     return {
