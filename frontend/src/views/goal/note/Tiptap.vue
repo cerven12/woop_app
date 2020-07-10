@@ -1,8 +1,10 @@
 <template>
   <div class="editor">
+    <!------------------------------------------------------------------------>
+    <!--                       Editor Menu Bar                              -->
+    <!------------------------------------------------------------------------>
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
       <div class="menubar">
-
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.bold() }"
@@ -11,7 +13,6 @@
           <!-- <icon name="bold" /> -->
           Bold
         </button>
-
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.italic() }"
@@ -117,40 +118,124 @@
           Code
         </button>
 
-        <button
-          class="menubar__button"
-          @click="commands.horizontal_rule"
-        >
+        <button class="menubar__button" @click="commands.horizontal_rule">
           <!-- <icon name="hr" /> -->
           Hr
         </button>
 
-        <button
-          class="menubar__button"
-          @click="commands.undo"
-        >
+        <button class="menubar__button" @click="commands.undo">
           <!-- <icon name="undo" /> -->
           Undo
         </button>
 
-        <button
-          class="menubar__button"
-          @click="commands.redo"
-        >
+        <button class="menubar__button" @click="commands.redo">
           <!-- <icon name="redo" /> -->
           Redo
         </button>
-
       </div>
     </editor-menu-bar>
 
+    <!------------------------------------------------------------------------>
+    <!--                       Editor Floating Bar                              -->
+    <!------------------------------------------------------------------------>
+
+    <editor-floating-menu
+      :editor="editor"
+      v-slot="{ commands, isActive, menu }"
+    >
+      <div
+        class="editor__floating-menu"
+        :class="{ 'is-active': menu.isActive }"
+        :style="`top: ${menu.top}px`"
+      >
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+          @click="commands.heading({ level: 1 })"
+        >
+          H1
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+          @click="commands.heading({ level: 2 })"
+        >
+          H2
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+          @click="commands.heading({ level: 3 })"
+        >
+          H3
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.bullet_list() }"
+          @click="commands.bullet_list"
+        >
+          <icon name="ul" /> ul
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.ordered_list() }"
+          @click="commands.ordered_list"
+        >
+          <icon name="ol" /> ol
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.blockquote() }"
+          @click="commands.blockquote"
+        >
+          <icon name="quote" /> quote
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.code_block() }"
+          @click="commands.code_block"
+        >
+          <icon name="code" /> code
+        </button>
+      </div>
+    </editor-floating-menu>
+
     <editor-content class="editor__content" :editor="editor" />
+
+    <!--   clear & output as HTML / JSON    -->
+    <div class="actions">
+      <button class="button" @click="clearContent">
+        Clear Content
+      </button>
+      <button class="button" @click="setContent">
+        Set Content
+      </button>
+    </div>
+
+    <div class="export">
+      <h3>JSON</h3>
+      <pre><code v-html="json"></code></pre>
+
+      <h3>HTML</h3>
+      <pre><code>{{ html }}</code></pre>
+    </div>
   </div>
 </template>
 
 <script>
 // import Icon from 'Components/Icon'
-import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
+import {
+  Editor,
+  EditorContent,
+  EditorMenuBar,
+  EditorFloatingMenu
+} from "tiptap";
 import {
   Blockquote,
   CodeBlock,
@@ -168,13 +253,14 @@ import {
   Link,
   Strike,
   Underline,
-  History,
-} from 'tiptap-extensions'
+  History
+} from "tiptap-extensions";
 
 export default {
   components: {
     EditorContent,
     EditorMenuBar,
+    EditorFloatingMenu
     // Icon,
   },
   data() {
@@ -197,41 +283,73 @@ export default {
           new Italic(),
           new Strike(),
           new Underline(),
-          new History(),
+          new History()
         ],
-        content: `
-          <h2>
-            Hi there,
-          </h2>
-          <p>
-            this is a very <em>basic</em> example of tiptap.
-          </p>
-          <pre><code>body { display: none; }</code></pre>
-          <ul>
-            <li>
-              A regular list
-            </li>
-            <li>
-              With regular items
-            </li>
-          </ul>
-          <blockquote>
-            It's amazing 👏
-            <br />
-            – mom
-          </blockquote>
-        `,
+        content: `<h2>Hi there,</h2><p>this is a very <em>basic</em> example of tiptap.</p><pre><code>body { display: none; }</code></pre><ul><li><p>A regular list</p></li><li><p>With regular ite</p></li></ul><blockquote><p>It's amazing 👏 <br>– mom</p></blockquote>`,
+        onUpdate: ({ getJSON, getHTML }) => {
+          this.json = getJSON();
+          this.html = getHTML();
+        }
       }),
-    }
+      json: "Update content to see changes",
+      html: "Update content to see changes"
+    };
   },
   beforeDestroy() {
-    this.editor.destroy()
+    this.editor.destroy();
   },
-}
+  methods: {
+    clearContent() {
+      this.editor.clearContent(true);
+      this.editor.focus();
+    },
+    setContent() {
+      // you can pass a json document
+      this.editor.setContent(
+        {
+          type: "doc",
+          content: [
+            {
+              type: "paragraph",
+              content: [
+                {
+                  type: "text",
+                  text: "This is some inserted text. 👋"
+                }
+              ]
+            }
+          ]
+        },
+        true
+      );
+
+      // HTML string is also supported
+      // this.editor.setContent('<p>This is some inserted text. 👋</p>')
+
+      this.editor.focus();
+    }
+  }
+};
 </script>
 
-<style scoped>
-.editor{
-background: #f8f8f8;
+<style scoped lang="scss">
+.editor {
+  background: #f8f8f8;
+}
+
+.editor {
+  position: relative;
+  &__floating-menu {
+    position: absolute;
+    z-index: 1;
+    margin-top: -0.25rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 </style>
