@@ -2,7 +2,47 @@
   <v-app>
     <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
-      <Tiptap></Tiptap>
+      <Tiptap initial-content="
+          <h2>
+            Hi there,
+          </h2>
+          <p>
+            this is avery <em>basic</em> example of tiptap.
+          </p>
+          <pre><code>body { display: none; }</code></pre>
+          <ul>
+            <li>
+              A regular list
+            </li>
+            <li>
+              With regular items
+            </li>
+          </ul>
+          <blockquote>
+            It's amazing 👏
+            <br />
+            – mom
+          </blockquote>"
+      :active-buttons="[
+        'bold',
+        'italic',
+        'strike',
+        'underline',
+        'code',
+        'paragraph',
+        'h1',
+        'h2',
+        'h3',
+        'bullet_list',
+        'ordered_list',
+        'blockquote',
+        'code_block',
+        'horizontal_rule',
+        'undo',
+        'redo',
+      ]"
+      @update="test"
+    />
 
       <Steps :Steps="Steps"></Steps>
 
@@ -183,6 +223,12 @@ export default {
   }
 };
 </script>
+
+
+<style lang="sass">
+@import '../../assets/sass/main.scss'
+</style>
+
 
 <style scoped>
 body {
