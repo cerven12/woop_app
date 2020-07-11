@@ -3,7 +3,6 @@
     <div id="background">
       <div style="padding: 50px 0px; background: #f0f0f0;"></div>
       <Tiptap></Tiptap>
-      <Write></Write>
 
       <Steps :Steps="Steps"></Steps>
 
@@ -89,7 +88,6 @@ import Kanban from "./task/Kanban.vue";
 
 import api from "@/services/api";
 
-import Write from "./note/Write.vue"
 import Tiptap from "./note/Tiptap.vue"
 
 export default {
@@ -103,7 +101,6 @@ export default {
     Note,
     Kanban,
     Steps,
-    Write,
     Tiptap,
   },
   data: function () {
@@ -117,7 +114,6 @@ export default {
       Notes: {},
       Boards: {},
       Steps: {},
-      Write: {},
 
       // Componetns switch.
       isGoalRegistered: true,
@@ -166,7 +162,6 @@ export default {
 
         // Step
         vm.$set(vm.Steps, "steps", response.data.steps);
-        
       });
   },
   methods: {

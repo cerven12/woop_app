@@ -24,9 +24,14 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
 body {
-  font-family: "Roboto", sans-serif;
   background: #f0f0f0;
+}
+#app{
+font-family: 'Roboto', sans-serif;
 }
 
 /*  Gray Scale */
@@ -34,5 +39,8 @@ body {
   -webkit-filter: grayscale(1);
   -ms-filter: grayscale(1);
   filter: grayscale(1);
-} */
+}  */
+
+
+/*  Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> */
 </style>
