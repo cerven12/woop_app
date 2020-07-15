@@ -103,7 +103,7 @@ export default {
 }
 
 .accordion .body-inner {
-  padding: 40px 60px;
+  padding: 10px 60px;
   position: relative;
   z-index: 25px;
 }

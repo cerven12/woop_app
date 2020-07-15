@@ -1,156 +1,162 @@
 <template>
   <div class="editor">
-    
+    <div class="horizontal-menu">
+      <editor-menu-bar
+        v-slot="{ commands, isActive, focused }"
+        :editor="editor"
+      >
+        <div class="menubar is-hidden" :class="{ 'is-focused': editable }">
+          <span v-for="actionName in activeButtons" :key="actionName">
+            <button
+              v-if="actionName === 'bold'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.bold() }"
+              @click="commands.bold"
+            >
+              <icon name="bold" />
+            </button>
+            <button
+              v-if="actionName === 'italic'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.italic() }"
+              @click="commands.italic"
+            >
+              <icon name="italic" />
+            </button>
 
-        <div class="checkbox">
-      <v-switch type="checkbox" id="editable" v-model="editable" label="Edit"></v-switch>
+            <button
+              v-if="actionName === 'strike'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.strike() }"
+              @click="commands.strike"
+            >
+              <icon name="strike" />
+            </button>
+
+            <button
+              v-if="actionName === 'underline'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.underline() }"
+              @click="commands.underline"
+            >
+              <icon name="underline" />
+            </button>
+
+            <button
+              v-if="actionName === 'code'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.code() }"
+              @click="commands.code"
+            >
+              <icon name="code" />
+            </button>
+
+            <button
+              v-if="actionName === 'paragraph'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.paragraph() }"
+              @click="commands.paragraph"
+            >
+              <icon name="paragraph" />
+            </button>
+
+            <button
+              v-if="actionName === 'h1'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+              @click="commands.heading({ level: 1 })"
+            >
+              H1
+            </button>
+
+            <button
+              v-if="actionName === 'h2'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+              @click="commands.heading({ level: 2 })"
+            >
+              H2
+            </button>
+
+            <button
+              v-if="actionName === 'h3'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+              @click="commands.heading({ level: 3 })"
+            >
+              H3
+            </button>
+
+            <button
+              v-if="actionName === 'bullet_list'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.bullet_list() }"
+              @click="commands.bullet_list"
+            >
+              <icon name="ul" />
+            </button>
+
+            <button
+              v-if="actionName === 'ordered_list'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.ordered_list() }"
+              @click="commands.ordered_list"
+            >
+              <icon name="ol" />
+            </button>
+
+            <button
+              v-if="actionName === 'blockquote'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.blockquote() }"
+              @click="commands.blockquote"
+            >
+              <icon name="quote" />
+            </button>
+
+            <button
+              v-if="actionName === 'code_block'"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.code_block() }"
+              @click="commands.code_block"
+            >
+              <icon name="code" />
+            </button>
+
+            <button
+              v-if="actionName === 'horizontal_rule'"
+              class="menubar__button"
+              @click="commands.horizontal_rule"
+            >
+              <icon name="hr" />
+            </button>
+
+            <button
+              v-if="actionName === 'undo'"
+              class="menubar__button"
+              @click="commands.undo"
+            >
+              <icon name="undo" />
+            </button>
+
+            <button
+              v-if="actionName === 'redo'"
+              class="menubar__button"
+              @click="commands.redo"
+            >
+              <icon name="redo" />
+            </button>
+          </span>
+        </div>
+      </editor-menu-bar>
+      <v-switch
+        type="checkbox"
+        id="editable"
+        v-model="editable"
+        label="Edit"
+        class="switch-buttom"
+      ></v-switch>
     </div>
-
-    <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
-      <div class="menubar">
-        <span v-for="actionName in activeButtons" :key="actionName">
-          <button
-            v-if="actionName === 'bold'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.bold() }"
-            @click="commands.bold"
-          >
-            <icon name="bold" />
-          </button>
-          <button
-            v-if="actionName === 'italic'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.italic() }"
-            @click="commands.italic"
-          >
-            <icon name="italic" />
-          </button>
-
-          <button
-            v-if="actionName === 'strike'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.strike() }"
-            @click="commands.strike"
-          >
-            <icon name="strike" />
-          </button>
-
-          <button
-            v-if="actionName === 'underline'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.underline() }"
-            @click="commands.underline"
-          >
-            <icon name="underline" />
-          </button>
-
-          <button
-            v-if="actionName === 'code'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.code() }"
-            @click="commands.code"
-          >
-            <icon name="code" />
-          </button>
-
-          <button
-            v-if="actionName === 'paragraph'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.paragraph() }"
-            @click="commands.paragraph"
-          >
-            <icon name="paragraph" />
-          </button>
-
-          <button
-            v-if="actionName === 'h1'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-            @click="commands.heading({ level: 1 })"
-          >
-           H1
-          </button>
-
-          <button
-            v-if="actionName === 'h2'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-            @click="commands.heading({ level: 2 })"
-          >
-            H2
-          </button>
-
-          <button
-            v-if="actionName === 'h3'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-            @click="commands.heading({ level: 3 })"
-          >
-            H3
-          </button>
-
-          <button
-            v-if="actionName === 'bullet_list'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.bullet_list() }"
-            @click="commands.bullet_list"
-          >
-            <icon name="ul" />
-          </button>
-
-          <button
-            v-if="actionName === 'ordered_list'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.ordered_list() }"
-            @click="commands.ordered_list"
-          >
-            <icon name="ol" />
-          </button>
-
-          <button
-            v-if="actionName === 'blockquote'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.blockquote() }"
-            @click="commands.blockquote"
-          >
-            <icon name="quote" />
-          </button>
-
-          <button
-            v-if="actionName === 'code_block'"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.code_block() }"
-            @click="commands.code_block"
-          >
-            <icon name="code" />
-          </button>
-
-          <button
-            v-if="actionName === 'horizontal_rule'"
-            class="menubar__button"
-            @click="commands.horizontal_rule"
-          >
-            <icon name="hr" />
-          </button>
-
-          <button
-            v-if="actionName === 'undo'"
-            class="menubar__button"
-            @click="commands.undo"
-          >
-            <icon name="undo" />
-          </button>
-
-          <button
-            v-if="actionName === 'redo'"
-            class="menubar__button"
-            @click="commands.redo"
-          >
-            <icon name="redo" />
-          </button>
-        </span>
-      </div>
-    </editor-menu-bar>
 
     <editor-content class="editor__content" :editor="editor" />
     <!-- {{ html}} -->
@@ -224,7 +230,7 @@ export default {
         return 1;
       },
       default: () => ["bold", "italic"]
-   }
+    }
   },
   data() {
     return {
@@ -252,16 +258,17 @@ export default {
           new Underline(),
           new History()
         ],
-        content: this.initialContent,
+        content: this.initialContent
       })
     };
   },
-    watch: {
+  watch: {
     editable() {
       this.editor.setOptions({
-        editable: this.editable,
-      })
-    }},
+        editable: this.editable
+      });
+    }
+  },
   beforeDestroy() {
     this.editor.destroy();
   },
@@ -278,4 +285,17 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+/* Horizontaly display menubar of Tiptap and editable toggle switch. */
+.horizontal-menu {
+  display: flex;
+}
+.menubar{
+  padding-top: 20px;
+  }
+
+/*  Switch only is display to right end. */
+.switch-buttom{
+   margin-left: auto;
+}
+</style>
