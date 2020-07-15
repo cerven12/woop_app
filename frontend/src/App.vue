@@ -10,11 +10,14 @@
       <router-link to="/sign-in">Sign in</router-link>
     </nav>
     <router-view />
-  </div>
-</template>
+  </div
+
+  >
+</template
+
+>
 <script>
 export default {
-  components: {},
   computed: {
     url() {
       return this.$store.state.url;

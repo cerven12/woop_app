@@ -24,18 +24,52 @@
             </template>
           </v-col>
         </v-row>
-        
+
         <v-row>
           <v-col cols="3"></v-col>
           <v-col cols="6">
             <div v-for="note in Notes.notes" :key="note.id">
-          
               <Accordion>
                 <div slot="source">
                   @task#23
                 </div>
                 <div slot="header">{{ note.note_title }}</div>
-                <div slot="body">{{ note.note_main }}</div>
+                <div slot="body">
+
+                  <div class="editButton">
+                    <v-btn
+                      fab
+                      small
+                      depressed
+                      color="#f0f0f0"
+                    >
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                  </div>
+
+                  <Tiptap
+                    :initial-content="note.note_main"
+                    :editableToggle="editable"
+                    :active-buttons="[
+                      'bold',
+                      'italic',
+                      'strike',
+                      'underline',
+                      'code',
+                      'paragraph',
+                      'h1',
+                      'h2',
+                      'h3',
+                      'bullet_list',
+                      'ordered_list',
+                      'blockquote',
+                      'code_block',
+                      'horizontal_rule',
+                      'undo',
+                      'redo',
+                    ]"
+                  />
+                </div>
               </Accordion>
             </div>
           </v-col>
@@ -47,6 +81,7 @@
 
 <script>
 import Accordion from "../note/Accordion";
+import Tiptap from "./Tiptap.vue";
 
 export default {
   name: "Goal",
@@ -54,8 +89,9 @@ export default {
 
   components: {
     Accordion,
+    Tiptap
   },
-  data: function() {
+  data: function () {
     return {
       start_date: "2019-01-06",
       deadline: "2019-05-08",
@@ -63,10 +99,6 @@ export default {
       noteList: [],
     };
   },
-  // mounted: function() {
-  //   let vm = this;
-  //   vm.noteList = vm.$store.state.goalData.notes;
-  // },
 };
 </script>
 
@@ -123,5 +155,11 @@ export default {
 .content-splitter {
   border-block-end: solid 1px #c5c5c5;
   /* padding-bottom: 5px; */
+}
+.editButton {
+  z-index: 50;
+  position: absolute;
+  right: 2%;
+  top: 2%;
 }
 </style>

@@ -4,7 +4,7 @@
       <div class="header" v-on:click="toggle">
         <div class="header-contents-wrapper">
           <div class="source"><slot name="source"></slot></div>
-          <div><slot name="header"></slot></div>
+          <div class="header-title"><slot name="header"></slot></div>
         </div>
       </div>
 
@@ -15,8 +15,9 @@
         v-on:before-leave="beforeLeave"
         v-on:leave="leave"
       >
+
         <div class="body" v-show="show">
-          <div class="body-inner">
+               <div class="body-inner">
             <slot name="body"></slot>
           </div>
         </div>
@@ -69,7 +70,7 @@ export default {
 }
 
 .header-contents-wrapper {
-  padding: 10px 20px;
+  padding: 20px 20px;
 }
 
 .source {
@@ -103,10 +104,14 @@ export default {
 
 .accordion .body-inner {
   padding: 40px 60px;
+  position: relative;
+  z-index: 25px;
 }
 
 .accordion .header-icon.rotate {
   transform: rotate(180deg);
   transition-duration: 0.3s;
 }
+
+
 </style>

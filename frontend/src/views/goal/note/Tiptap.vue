@@ -147,7 +147,7 @@
     </editor-menu-bar>
 
     <editor-content class="editor__content" :editor="editor" />
-    {{ html}}
+    <!-- {{ html}} -->
   </div>
 </template>
 
@@ -218,13 +218,14 @@ export default {
         return 1;
       },
       default: () => ["bold", "italic"]
-    }
+   }
   },
   data() {
     return {
       html: "",
       json: "",
       editor: new Editor({
+        editable: true,
         extensions: [
           new Blockquote(),
           new BulletList(),
@@ -244,7 +245,8 @@ export default {
           new Underline(),
           new History()
         ],
-        content: this.initialContent
+        content: this.initialContent,
+        editable: this.editableToggle,
       })
     };
   },
