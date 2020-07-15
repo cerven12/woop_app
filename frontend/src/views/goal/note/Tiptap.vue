@@ -1,5 +1,11 @@
 <template>
   <div class="editor">
+    
+
+        <div class="checkbox">
+      <v-switch type="checkbox" id="editable" v-model="editable" label="Edit"></v-switch>
+    </div>
+
     <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
       <div class="menubar">
         <span v-for="actionName in activeButtons" :key="actionName">
@@ -222,10 +228,11 @@ export default {
   },
   data() {
     return {
+      editable: false,
       html: "",
       json: "",
       editor: new Editor({
-        editable: true,
+        editable: false,
         extensions: [
           new Blockquote(),
           new BulletList(),
@@ -246,10 +253,15 @@ export default {
           new History()
         ],
         content: this.initialContent,
-        editable: this.editableToggle,
       })
     };
   },
+    watch: {
+    editable() {
+      this.editor.setOptions({
+        editable: this.editable,
+      })
+    }},
   beforeDestroy() {
     this.editor.destroy();
   },

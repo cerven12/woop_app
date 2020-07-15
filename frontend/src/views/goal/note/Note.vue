@@ -36,20 +36,9 @@
                 <div slot="header">{{ note.note_title }}</div>
                 <div slot="body">
 
-                  <div class="editButton">
-                    <v-btn
-                      fab
-                      small
-                      depressed
-                      color="#f0f0f0"
-                    >
-                      <v-icon>mdi-pencil</v-icon>
-                    </v-btn>
-                  </div>
 
                   <Tiptap
                     :initial-content="note.note_main"
-                    :editableToggle="editable"
                     :active-buttons="[
                       'bold',
                       'italic',
@@ -82,6 +71,7 @@
 <script>
 import Accordion from "../note/Accordion";
 import Tiptap from "./Tiptap.vue";
+
 
 export default {
   name: "Goal",
