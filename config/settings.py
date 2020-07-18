@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # app
     'apiv1.apps.Apiv1Config',
     'woop.apps.WoopConfig',
-    'account',
+    'accounts',
 
 
     # 3rd party
@@ -54,10 +54,37 @@ INSTALLED_APPS = [
 
     # 認証,　認可
     'djoser',
-
+    'rest_auth',
+    'rest_framework.authtoken',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
 ]
 
-AUTH_USER_MODEL = 'account.CustomUser'
+
+### for allauth
+SITE_ID=1
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+# Eliminate the need for an SMTP server
+# ref : https://stackoverflow.com/questions/21563227/django-allauth-example-errno-61-connection-refused
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Tells rest_auth to use a custom user serializer instead of the default user serializer.
+REST_AUTH_SERIALIZERS = {
+         # http://localhost:8000/rest-auth/user/
+         # ref : https://krakensystems.co/blog/2020/custom-users-using-django-rest-framework
+        'USER_DETAILS_SERIALIZER': 'apiv1.serializers.CustomUserSerializer',
+}
+
+
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Django REST frameworkの設定
 REST_FRAMEWORK = {
@@ -65,6 +92,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 
