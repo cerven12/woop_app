@@ -38,16 +38,13 @@ class UserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     # Change Validator UNICODE -> ASCII
-    username_validator = ASCIIUsernameValidator()
+    # username_validator = ASCIIUsernameValidator()
     user_id = models.UUIDField(default=uuid.uuid4,
                             primary_key=True, editable=False)
     # username is just display.
     username = models.CharField(
         _('username'),
-        max_length=150,
-        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
-        validators=[username_validator],
-        error_messages={'unique': _("A user with that username already exists."),},
+        max_length=30, unique=False,
     )
     email = models.EmailField(_('email address'), unique=True)
     # profile_icon = models.ImageField(_('profile icon'), upload_to='profile_icons', null=True, blank=True)
@@ -69,7 +66,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
 
     class Meta:
         verbose_name = _('user')
@@ -78,3 +74,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+

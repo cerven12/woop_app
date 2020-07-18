@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from woop.models import Goal, Motive, SelfTranscendenceGoal, FutureSelf, Worry, Idea, Reference, Note, Expectation
 from woop.models import Task, Reason, Feedback, Hurdle, Solution, Document, Discover, Board, Step
-from account.models import CustomUser
+from accounts.models import CustomUser
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 
 
@@ -201,4 +201,4 @@ class GoalSerializer(WritableNestedModelSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['email', 'username', 'user_id']
+        fields = ['email', 'username']
