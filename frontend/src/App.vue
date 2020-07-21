@@ -2,8 +2,8 @@
   <div id="app">
     <nav>
       <!-- サインインしているかどうか (v-if='"authorized"') でページを遷移 -->
-      <router-link to="/mypage"><h3>MyPage</h3></router-link>
-      <router-link to="/signin"><h3>Sign in</h3></router-link>
+      <router-link to="/mypage" class="hide">MyPage</router-link>
+      <router-link to="/signin"class="hide">Sign in</router-link>
     </nav>
     <router-view />
   </div>
@@ -27,6 +27,9 @@ body {
 #app {
   font-family: "Roboto", sans-serif;
 }
+.hide{
+ position: absolute
+ }
 
 /*  Gray Scale */
 /* body {
