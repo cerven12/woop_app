@@ -134,6 +134,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://192.168.129.16:8080',
     'http://192.168.3.7:8080',
     'http://192.168.129.16:8080',
+    'http://192.168.3.6:8080',
 ]
 
 ROOT_URLCONF = 'config.urls'

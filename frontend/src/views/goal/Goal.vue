@@ -124,8 +124,10 @@ export default {
   },
   mounted: function () {
     let vm = this;
+    // 動的に生成されたURLの"id"を取得して、そのidを元にapiでgetを投げる
+    let goalId = vm.$route.params.id;
     api
-      .get("goals/55a04a5e-8cdb-4317-b6ea-4bfb46142740/")
+      .get(`goals/${goalId}/`)
       .then(function (response) {
         vm.All = response;
         // Goal_Info
@@ -139,7 +141,7 @@ export default {
 
         // Self Transcendence Goal
         vm.$set(
-          vm.SelfTranscendence,
+         vm.SelfTranscendence,
           "self_transcendence_goals",
           response.data.self_transcendence_goals
         );
