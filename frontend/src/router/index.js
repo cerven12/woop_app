@@ -1,30 +1,34 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import CreateGoal from "@/views/CreateGoal/CreateGoal.vue";
 import SignIn from "../views/SignIn.vue";
 import Goal from "../views/goal/Goal.vue";
+import MyPage from "../views/MyPage.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    component: CreateGoal,
+    path: "/signin",
+    component: SignIn
+  },
+    {
+    path: "/mypage",
+    name: "mypage",
+    component: MyPage
   },
   {
-    path: "/sign-in",
-    component: SignIn,
-  },
-  {
-    path: "/goal",
+    path: "/mypage/goal/:id",
+    name: "goal",
     component: Goal,
+    props: true
   },
+
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;
