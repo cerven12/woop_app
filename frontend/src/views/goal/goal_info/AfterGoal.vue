@@ -3,19 +3,21 @@
     <div id="css-grid">
       <v-container fluid id="view-area">
         <!--  Goal Title -->
+
+        <v-row justify="end">
+          <v-col cols="2">
+              <v-btn fab small depressed color="gray" @click="switchEdit">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+          </v-col>
+        </v-row>
+
         <v-row justify="center">
           <v-col cols="8" md="9" lg="8" sm="11" xs="12">
             <h1 class="goal_title">
               {{ Goal.goal_title }}
             </h1>
           </v-col>
-          <!-- <v&#45;col cols="1" lg="1" md="1" sm="1" xs="1"> -->
-          <div class="edit-button">
-            <v-btn fab small depressed color="gray" @click="switchEdit">
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-            </div>
-          <!-- </v&#45;col> -->
         </v-row>
 
         <br />
@@ -119,7 +121,7 @@ export default {
   position: relative;
 }
 
-.edit-button{
+.edit-button {
   position: absolute;
   left: 95%;
 }

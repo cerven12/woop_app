@@ -2,16 +2,19 @@
   <div>
     <div id="css-grid">
       <v-container fluid id="view-area">
-        <v-row justify="center">
-          <v-col cols="7" lg="7" md="8" sm="10">
-            <h2 class="message-title">
-              Lets preparations for not give up.
-            </h2>
-          </v-col>
-          <v-col cols="1">
+        <v-row justify="end">
+          <v-col cols="2">
             <v-btn fab small depressed color="gray" @click="switchEdit">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
+          </v-col>
+        </v-row>
+
+        <v-row justify="center">
+          <v-col cols="7" lg="8" md="9" sm="11">
+            <h2 class="message-title">
+              Lets preparations for not give up.
+            </h2>
           </v-col>
         </v-row>
 
