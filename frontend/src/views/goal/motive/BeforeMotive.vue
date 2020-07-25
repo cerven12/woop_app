@@ -32,7 +32,7 @@
                 <!-- If it's two or more forms, show ✘, and label and hint is hide. -->
                 <template v-if="motive_index >= 1">
                   <v-row>
-                    <v-col cols="11" >
+                    <v-col cols="11">
                       <v-textarea
                         v-model="motives.motive"
                         rows="1"
@@ -379,5 +379,7 @@ motivation-enter-active,
   color: #4d4d4d;
 }
 
-.motive-left-border{border-left: 20px #3994bf solid;}
+.motive-left-border {
+  border-left: 20px #3994bf solid;
+}
 </style>
