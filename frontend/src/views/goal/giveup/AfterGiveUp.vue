@@ -2,9 +2,8 @@
   <div>
     <div id="css-grid">
       <v-container fluid id="view-area">
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="7">
+        <v-row justify="center">
+          <v-col cols="7" lg="7" md="8" sm="10">
             <h2 class="message-title">
               Lets preparations for not give up.
             </h2>
@@ -19,9 +18,8 @@
         <!----------------------------------------------------------------------->
         <!--                             Obstacles                            -->
         <!----------------------------------------------------------------------->
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="8">
+        <v-row justify="center">
+          <v-col cols="8" lg="8" md="9" sm="12">
             <h2 class="category-title">
               Obstacle & Countermeasure.
             </h2>
@@ -30,8 +28,8 @@
 
         <div v-for="Obstacle in Worries.worries" :key="Obstacle.id">
           <v-row>
-            <v-col cols="3"></v-col>
-            <v-col cols="7">
+            <v-col cols="3" lg="3" md="3" sm="1"></v-col>
+            <v-col cols="7" lg="7" md="7" sm="10">
               <p class="writing-text obst-splitter">
                 {{ Obstacle.worry }}
               </p>
@@ -40,8 +38,8 @@
 
           <div v-for="ideas in Obstacle.ideas" :key="ideas.id">
             <v-row>
-              <v-col cols="4"></v-col>
-              <v-col cols="6">
+              <v-col cols="4" lg="4" md="4" sm="2"></v-col>
+              <v-col cols="6" lg="6" md="6" sm="9">
                 <p class="writing-text idea-splitter">
                   {{ ideas.idea }}
                 </p>
@@ -275,13 +273,13 @@ export default {
 }
 
 .obst-splitter {
-border-left: 20px #494359 solid;
+  border-left: 20px #494359 solid;
   padding-left: 15px;
 }
 
 .idea-splitter {
-border-left: 20px #F2953D solid;
-padding-left: 15px;
+  border-left: 20px #f2953d solid;
+  padding-left: 15px;
 }
 
 .resize {

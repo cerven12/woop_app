@@ -2,13 +2,11 @@
   <div>
     <div id="css-grid">
       <v-container fluid id="view-area">
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="8">
+        <v-row justify="center">
+          <v-col cols="8" lg="8" md="9" sm="11">
             <h2 class="message-title">Note <span>+</span></h2>
           </v-col>
         </v-row>
-        <v-row> </v-row>
 
         <v-row>
           <v-col>
@@ -25,9 +23,8 @@
           </v-col>
         </v-row>
 
-        <v-row>
-          <v-col cols="3"></v-col>
-          <v-col cols="6">
+        <v-row justify="center">
+          <v-col cols="6" lg="6" md="8" sm="9">
             <div v-for="note in Notes.notes" :key="note.id">
               <Accordion>
                 <div slot="source">
@@ -35,8 +32,6 @@
                 </div>
                 <div slot="header">{{ note.note_title }}</div>
                 <div slot="body">
-
-
                   <Tiptap
                     :initial-content="note.note_main"
                     :active-buttons="[
@@ -55,7 +50,7 @@
                       'code_block',
                       'horizontal_rule',
                       'undo',
-                      'redo',
+                      'redo'
                     ]"
                   />
                 </div>
@@ -72,7 +67,6 @@
 import Accordion from "../note/Accordion";
 import Tiptap from "./Tiptap.vue";
 
-
 export default {
   name: "Goal",
   props: ["Notes"],
@@ -86,9 +80,9 @@ export default {
       start_date: "2019-01-06",
       deadline: "2019-05-08",
       page: 1,
-      noteList: [],
+      noteList: []
     };
-  },
+  }
 };
 </script>
 

@@ -14,7 +14,11 @@
           <v-row justify="center">
             <v-col cols="1"></v-col>
             <v-col cols="10">
-              <h1 class="yourgoal">Your Goals<span>+</span></h1>
+              <nav>
+                <router-link :to="{ name: 'create'}">
+                  <h1 class="yourgoal">Your Goals<span>+</span></h1>
+                </router-link>
+              </nav>
             </v-col>
           </v-row>
 
@@ -49,7 +53,7 @@ export default {
   components: {},
   data: function () {
     return {
-      Goals: {},
+      Goals: {}
     };
   },
   methods: {},
@@ -85,7 +89,7 @@ export default {
   border-radius: 80px 0px 0px 80px;
   position: relative;
   width: 200%;
-  min-height:950px;
+  min-height: 950px;
 }
 
 #memos-area {
@@ -105,8 +109,7 @@ export default {
   min-height: 70px;
   padding: 10px 40px;
   margin: 20px;
-    font-weight: 700;
-
+  font-weight: 700;
 }
 
 a {

@@ -4,21 +4,23 @@
       <v-container fluid id="view-area">
         <!--  Goal Title -->
         <v-row justify="center">
-          <v-col cols="7">
+          <v-col cols="8" md="9" lg="8" sm="11" xs="12">
             <h1 class="goal_title">
               {{ Goal.goal_title }}
             </h1>
           </v-col>
-          <v-col cols="1">
+          <!-- <v&#45;col cols="1" lg="1" md="1" sm="1" xs="1"> -->
+          <div class="edit-button">
             <v-btn fab small depressed color="gray" @click="switchEdit">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
-          </v-col>
+            </div>
+          <!-- </v&#45;col> -->
         </v-row>
 
         <br />
         <v-row justify="center">
-          <v-col cols="8">
+          <v-col cols="8" md="9" lg="8" sm="11" xs="12">
             <p class="writing-text">
               {{ Goal.goal_description }}
             </p>
@@ -26,7 +28,7 @@
         </v-row>
         <br /><br />
         <v-row justify="center">
-          <v-col cols="8">
+          <v-col cols="8" md="9" lg="8" sm="11" xs="12">
             <h2 class="category-title">
               Success criteria
             </h2>
@@ -34,7 +36,7 @@
         </v-row>
 
         <v-row justify="center">
-          <v-col cols="8">
+          <v-col cols="8" md="9" lg="8" sm="11" xs="12">
             <p class="writing-text">🔥{{ Goal.criteria }}</p>
           </v-col>
         </v-row>
@@ -115,5 +117,10 @@ export default {
 
 .center {
   position: relative;
+}
+
+.edit-button{
+  position: absolute;
+  left: 95%;
 }
 </style>

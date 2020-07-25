@@ -175,84 +175,84 @@
           <!----------------------------------------------------------------------->
           <!--                          Reference                               -->
           <!----------------------------------------------------------------------->
-          <v-form v-model="valid">
-            <h3 class="category-title">References</h3>
-            <transition-group name="form" tag="div">
-              <div
-                v-for="(references, ref_index) in refList"
-                v-bind:key="ref_index"
-              >
-                <!-- First Referenec Model form -->
-                <template v-if="ref_index >= 1">
-                  <v-row>
-                    <v-col cols="6">
-                      <v-text-field v-model="references.reference_name">
-                      </v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                      <v-text-field v-model="references.reference_source">
-                      </v-text-field>
-                    </v-col>
-                  </v-row>
-
-                  <v-row>
-                    <v-col cols="11">
-                      <v-text-field v-model="references.reference_use">
-                      </v-text-field>
-                    </v-col>
-                    <v-col cols="1">
-                      <v-btn
-                        @click="deleteRefernceForm(ref_index)"
-                        color="error"
-                        text
-                      >
-                        ✘
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </template>
-
-                <!-- after second  -->
-                <template v-else>
-                  <v-row>
-                    <v-col cols="6">
-                      <v-text-field
-                        label="Name"
-                        hint=""
-                        v-model="references.reference_name"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                      <v-text-field
-                        label="URL"
-                        hint=""
-                        v-model="references.reference_source"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-
-                  <v-row>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="Use"
-                        hint=""
-                        v-model="references.reference_use"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </template>
-              </div>
-            </transition-group>
-
-            <v-row justify="end">
-              <v-col cols="1">
-                <v-btn @click="addReferenceForm" depressed small>
-                  +
-                </v-btn>
-              </v-col>
-            </v-row>
-            <v-btn outlined @click="counterMeasureAllRegister">登録！</v-btn>
-          </v-form>
+          <!--   <v&#45;form v&#45;model="valid"> -->
+          <!--     <h3 class="category&#45;title">References</h3> -->
+          <!--     <transition&#45;group name="form" tag="div"> -->
+          <!--       <div -->
+          <!--         v&#45;for="(references, ref_index) in refList" -->
+          <!--         v&#45;bind:key="ref_index" -->
+          <!--       > -->
+          <!--         <!&#45;&#45; First Referenec Model form &#45;&#45;> -->
+          <!--         <template v&#45;if="ref_index >= 1"> -->
+          <!--           <v&#45;row> -->
+          <!--             <v&#45;col cols="6"> -->
+          <!--               <v&#45;text&#45;field v&#45;model="references.reference_name"> -->
+          <!--               </v&#45;text&#45;field> -->
+          <!--             </v&#45;col> -->
+          <!--             <v&#45;col cols="6"> -->
+          <!--               <v&#45;text&#45;field v&#45;model="references.reference_source"> -->
+          <!--               </v&#45;text&#45;field> -->
+          <!--             </v&#45;col> -->
+          <!--           </v&#45;row> -->
+          <!--  -->
+          <!--           <v&#45;row> -->
+          <!--             <v&#45;col cols="11"> -->
+          <!--               <v&#45;text&#45;field v&#45;model="references.reference_use"> -->
+          <!--               </v&#45;text&#45;field> -->
+          <!--             </v&#45;col> -->
+          <!--             <v&#45;col cols="1"> -->
+          <!--               <v&#45;btn -->
+          <!--                 @click="deleteRefernceForm(ref_index)" -->
+          <!--                 color="error" -->
+          <!--                 text -->
+          <!--               > -->
+          <!--                 ✘ -->
+          <!--               </v&#45;btn> -->
+          <!--             </v&#45;col> -->
+          <!--           </v&#45;row> -->
+          <!--         </template> -->
+          <!--  -->
+          <!--         <!&#45;&#45; after second  &#45;&#45;> -->
+          <!--         <template v&#45;else> -->
+          <!--           <v&#45;row> -->
+          <!--             <v&#45;col cols="6"> -->
+          <!--               <v&#45;text&#45;field -->
+          <!--                 label="Name" -->
+          <!--                 hint="" -->
+          <!--                 v&#45;model="references.reference_name" -->
+          <!--               ></v&#45;text&#45;field> -->
+          <!--             </v&#45;col> -->
+          <!--             <v&#45;col cols="6"> -->
+          <!--               <v&#45;text&#45;field -->
+          <!--                 label="URL" -->
+          <!--                 hint="" -->
+          <!--                 v&#45;model="references.reference_source" -->
+          <!--               ></v&#45;text&#45;field> -->
+          <!--             </v&#45;col> -->
+          <!--           </v&#45;row> -->
+          <!--  -->
+          <!--           <v&#45;row> -->
+          <!--             <v&#45;col cols="12"> -->
+          <!--               <v&#45;text&#45;field -->
+          <!--                 label="Use" -->
+          <!--                 hint="" -->
+          <!--                 v&#45;model="references.reference_use" -->
+          <!--               ></v&#45;text&#45;field> -->
+          <!--             </v&#45;col> -->
+          <!--           </v&#45;row> -->
+          <!--         </template> -->
+          <!--       </div> -->
+          <!--     </transition&#45;group> -->
+          <!--  -->
+          <!--     <v&#45;row justify="end"> -->
+          <!--       <v&#45;col cols="1"> -->
+          <!--         <v&#45;btn @click="addReferenceForm" depressed small> -->
+          <!--           + -->
+          <!--         </v&#45;btn> -->
+          <!--       </v&#45;col> -->
+          <!--     </v&#45;row> -->
+          <!--     <v&#45;btn outlined @click="counterMeasureAllRegister">登録！</v&#45;btn> -->
+          <!--   </v&#45;form> -->
         </div>
       </v-container>
 
@@ -328,11 +328,7 @@ export default {
  ------------------------------------------------------------*/
 #css-grid {
   display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 55% 45%;
-  grid-template-areas: "form tips";
   background-color: #f0f0f0;
-  padding: 0px 300px;
 }
 
 #form-area {
@@ -340,6 +336,30 @@ export default {
 }
 #tips-area {
   grid-area: tips;
+}
+
+@media all and (max-width: 100000px) {
+  #css-grid {
+    grid-template-columns: 55% 45%;
+    grid-template-areas: "form tips";
+    padding: 0px 17%;
+  }
+}
+
+@media all and (max-width: 1264px) {
+  #css-grid {
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "form"
+      "tips";
+    padding: 0px 13%;
+  }
+}
+
+@media all and (max-width: 960px){
+  #css-grid{
+    padding: 0px 5%;
+  }
 }
 
 /*   ------------------------------------------------------------
@@ -389,16 +409,16 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 28px;
+  font-size: 34px;
   line-height: 40px;
-  color: #5f75b0;
+  color: #4465c0;
 }
 
 .category-title {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 40px;
   color: #3c3d3d;
 }

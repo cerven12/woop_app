@@ -6,13 +6,11 @@
         <v-container>
           <br />
           <br />
-{{ task_info }}
+          {{ task_info }}
           <!-- Goal -->
           <v-row>
             <v-col cols="7">
-              <h4 class="goal-title">
-                > {{ task_info.goal_title }} 
-              </h4>
+              <h4 class="goal-title">> {{ task_info.goal_title }}</h4>
             </v-col>
 
             <!-- Step -->
@@ -46,13 +44,13 @@
           <!-- task info -->
           <AfterTask>
             <template #task_title>
-             {{ task_info.task_title }}
+              {{ task_info.task_title }}
             </template>
             <template #task_description>
-             {{ task_info.task_description }}
+              {{ task_info.task_description }}
             </template>
             <template #criteria>
-             {{ task_info.criteria }}
+              {{ task_info.criteria }}
             </template>
           </AfterTask>
 
@@ -96,11 +94,11 @@ export default {
     SoloStep,
     Discover,
     AfterGiveUp,
-    AfterMotivation,
+    AfterMotivation
   },
   data: () => ({
     isDisplay: false,
-    task_info: '',
+    task_info: ""
   }),
   methods: {
     open() {
@@ -108,8 +106,8 @@ export default {
     },
     close() {
       this.isDisplay = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
