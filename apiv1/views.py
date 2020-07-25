@@ -22,6 +22,7 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 #  About the Goal Model
 class GoalViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     'add "return self.queryset.filter(user=self.request.user)"'
+    model = Goal
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
     permission_classes = [IsAuthenticated]
@@ -36,6 +37,7 @@ class GoalViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 
 
 class BoardViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    model = Board
     queryset = Board.objects.all()
     serializer_class = BoardSerializerNestedJustTask
     permission_classes = [IsAuthenticated]

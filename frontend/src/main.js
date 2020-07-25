@@ -11,10 +11,13 @@ import mavonEditor from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 import Cookies from "js-cookie";
 import draggable from "vuedraggable";
+import VueFormWizard from 'vue-form-wizard';
+import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 
 Vue.config.productionTip = false;
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 Vue.use(VueAxios, axios);
+Vue.use(VueFormWizard);
 Vue.use(mavonEditor);
 
 new Vue({

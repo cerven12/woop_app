@@ -5687,7 +5687,7 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-"php-parser@github:glayzzle/php-parser#71485979b688d12fb130d3e853fdc00348671e00":
+php-parser@glayzzle/php-parser#71485979b688d12fb130d3e853fdc00348671e00:
   version "3.0.0-prerelease.8"
   resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/71485979b688d12fb130d3e853fdc00348671e00"
 
@@ -7843,6 +7843,11 @@ vue-cli-plugin-vuetify@~2.0.5:
   dependencies:
     semver "^7.1.2"
     shelljs "^0.8.3"
+
+vue-form-wizard@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/vue-form-wizard/-/vue-form-wizard-0.8.4.tgz#ddf864c9709b7ba2a6323f59e5d6d17536b7800e"
+  integrity sha512-/Zk1+B7bz7qHFJ16mwu021lpPXWf/9Tlr2mTNG3J7M0Hdy3rgA802lWsbKYySns0B0qtsD8BYGjQ2Wyxgg+4uw==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

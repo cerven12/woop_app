@@ -32,7 +32,7 @@
                 <!-- If it's two or more forms, show ✘, and label and hint is hide. -->
                 <template v-if="motive_index >= 1">
                   <v-row>
-                    <v-col cols="11">
+                    <v-col cols="11" >
                       <v-textarea
                         v-model="motives.motive"
                         rows="1"
@@ -284,11 +284,7 @@ export default {
  ------------------------------------------------------------*/
 #css-grid {
   display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 55% 45%;
-  grid-template-areas: "form tips";
   background-color: #f0f0f0;
-  padding: 0px 300px;
 }
 
 #form-area {
@@ -296,6 +292,30 @@ export default {
 }
 #tips-area {
   grid-area: tips;
+}
+
+@media all and (max-width: 100000px) {
+  #css-grid {
+    grid-template-columns: 55% 45%;
+    grid-template-areas: "form tips";
+    padding: 0px 17%;
+  }
+}
+
+@media all and (max-width: 1264px) {
+  #css-grid {
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "form"
+      "tips";
+    padding: 0px 13%;
+  }
+}
+
+@media all and (max-width: 960px) {
+  #css-grid {
+    padding: 0px 5%;
+  }
 }
 
 /*   ------------------------------------------------------------
@@ -345,17 +365,19 @@ motivation-enter-active,
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 28px;
+  font-size: 34px;
   line-height: 40px;
-  color: #5f75b0;
+  color: #4465c0;
 }
 
 .category-title {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 40px;
   color: #4d4d4d;
 }
+
+.motive-left-border{border-left: 20px #3994bf solid;}
 </style>

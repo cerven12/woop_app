@@ -4,8 +4,8 @@
       <!-- 難しさと満足度はVuetifyのRatingを使うとよいかも　https://vuetifyjs.com/en/components/ratings/ -->
       <v-container fluid id="view-area">
         <!-- Vew Goal Title -->
-        <v-row>
-          <v-col cols="10">
+        <v-row justify="center">
+          <v-col cols="8" lg="8" md="9" sm="11">
             <h1 class="message-title">
               Task Kanban Flow
             </h1>
@@ -14,100 +14,39 @@
         <!-- -----------------------     -------------------- -->
         <!--                      Kanban                      -->
         <!-- -----------------------     -------------------- -->
-        <v-row>
-
-          <div class="scrolling-wrapper">
-            <div v-for="(board, index) in Boards.boards" :key="board.id">
-              <div class="board-wrapper">
-                <h2 class="board-title">{{ board.board_title }}<span> + </span></h2>
-                <div class="board" :style="boardColor(index)">
-                  <draggable
-                    v-model="board.tasks"
-                    group="myGroup"
-                    @start="drag = true"
-                    @end="drag = false"
-                    :options="options"
-                  >
-                    <div @click="showDialog(task)" class="item" v-for="task in board.tasks" :key="task.id">
+        <v-row justify="center">
+          <v-col cols="8" lg="8" md="9" sm="12">
+            <div class="scrolling-wrapper">
+              <div v-for="(board, index) in Boards.boards" :key="board.id">
+                <div class="board-wrapper">
+                  <h2 class="board-title">
+                    {{ board.board_title }}<span> + </span>
+                  </h2>
+                  <div class="board" :style="boardColor(index)">
+                    <draggable
+                      v-model="board.tasks"
+                      group="myGroup"
+                      @start="drag = true"
+                      @end="drag = false"
+                      :options="options"
+                    >
+                      <div
+                        @click="showDialog(task)"
+                        class="item"
+                        v-for="task in board.tasks"
+                        :key="task.id"
+                      >
                         <p class="text_position">
                           {{ task.task_title }}
                         </p>
                         <a class="task_status">☺ → 😩 </a>
-                    </div>
-                  </draggable>
+                      </div>
+                    </draggable>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <!-- <div class="board&#45;wrapper"> -->
-            <!--   <h2 class="board&#45;title">Success <span> + </span></h2> -->
-            <!--   <div class="board" style="background: #517322"> -->
-            <!--     <draggable -->
-            <!--       v&#45;model="itemsB" -->
-            <!--       group="myGroup" -->
-            <!--       @start="drag = true" -->
-            <!--       @end="drag = false" -->
-            <!--       :options="options" -->
-            <!--     > -->
-            <!--       <div class="item" v&#45;for="item in itemsB" :key="item.id"> -->
-            <!--         <div @click="showDialog(item.name)"> -->
-            <!--           <p class="text_position"> -->
-            <!--             {{ item.name }} -->
-            <!--           </p> -->
-            <!--           <a class="task_status">☺ &#45;2 &#45;> ? 😩 4 &#45;> ?</a> -->
-            <!--         </div> -->
-            <!--       </div> -->
-            <!--     </draggable> -->
-            <!--   </div> -->
-            <!-- </div> -->
-            <!--  -->
-            <!-- <div class="board&#45;wrapper"> -->
-            <!--   <h2 class="board&#45;title">Wait <span> + </span></h2> -->
-            <!--   <div class="board" style="background: rgb(55, 55, 55)"> -->
-            <!--     <draggable -->
-            <!--       v&#45;model="itemsC" -->
-            <!--       group="myGroup" -->
-            <!--       @start="drag = true" -->
-            <!--       @end="drag = false" -->
-            <!--       :options="options" -->
-            <!--     > -->
-            <!--       <div class="item" v&#45;for="item in itemsC" :key="item.id"> -->
-            <!--         <div @click="showDialog(item.name)"> -->
-            <!--           <p class="text_position"> -->
-            <!--             {{ item.name }} -->
-            <!--           </p> -->
-            <!--           <a class="task_status">☺ &#45;2 &#45;> ? 😩 4 &#45;> ?</a> -->
-            <!--         </div> -->
-            <!--       </div> -->
-            <!--     </draggable> -->
-            <!--   </div> -->
-            <!-- </div> -->
-            <!--  -->
-            <!-- <div class="board&#45;wrapper"> -->
-            <!--   <h2 class="board&#45;title">None <span> + </span></h2> -->
-            <!--   <div class="board" style="background: #BF6A56"> -->
-            <!--     <draggable -->
-            <!--       v&#45;model="itemsC" -->
-            <!--       group="myGroup" -->
-            <!--       @start="drag = true" -->
-            <!--       @end="drag = false" -->
-            <!--       :options="options" -->
-            <!--     > -->
-            <!--       <div class="item" v&#45;for="item in itemsC" :key="item.id"> -->
-            <!--         <div @click="showDialog(item.name)"> -->
-            <!--           <p class="text_position"> -->
-            <!--             {{ item.name }} -->
-            <!--           </p> -->
-            <!--           <a class="task_status">☺ &#45;2 &#45;> ? 😩 4 &#45;> ?</a> -->
-            <!--         </div> -->
-            <!--       </div> -->
-            <!--     </draggable> -->
-            <!--   </div> -->
-            <!-- </div> -->
-            <!-- <!&#45;&#45;  &#45;&#45;> -->
-            <!--  -->
-            <!--  -->
-          </div>
+          </v-col>
         </v-row>
       </v-container>
 
@@ -134,19 +73,19 @@ export default {
       nowViewTask: "",
       options: {
         group: "myGroup",
-        animation: 200,
-      },
+        animation: 200
+      }
     };
   },
   methods: {
-     showDialog(item) {
+    showDialog(item) {
       this.$refs.task.open();
       this.$refs.task.task_info = item;
     },
-      boardColor(index){
-        return `background: #${this.Boards.boards[index].color}`;
-    },
-  },
+    boardColor(index) {
+      return `background: #${this.Boards.boards[index].color}`;
+    }
+  }
 };
 </script>
 
@@ -158,8 +97,8 @@ export default {
   display: grid;
   grid-template-rows: 1fr;
   /* adjust white space of Kanban to other component. */
-  grid-template-columns: 16.5% 70%;
-  grid-template-areas: "... view";
+  grid-template-columns: 100%;
+  grid-template-areas: " view";
   background-color: #f0f0f0;
   position: relative;
 }

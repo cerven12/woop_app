@@ -2,9 +2,8 @@
   <div>
     <div id="css-grid">
       <v-container fluid id="view-area">
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="7">
+        <v-row justify="center">
+          <v-col cols="7" lg="7" md="8" sm="10">
             <h2 class="message-title">
               To Keep Your Motivation Flying High.
             </h2>
@@ -19,9 +18,8 @@
         <!----------------------------------------------------------------------->
         <!--                             Motivation                            -->
         <!----------------------------------------------------------------------->
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="8">
+        <v-row justify="center">
+          <v-col cols="8" lg="8" md="9" sm="12">
             <h2 class="category-title">
               Motivation
             </h2>
@@ -30,8 +28,8 @@
 
         <div v-for="motive in Motives.motives" :key="motive.id">
           <v-row>
-            <v-col cols="3"></v-col>
-            <v-col cols="7">
+            <v-col cols="3" lg="3" md="3" sm="1"></v-col>
+            <v-col cols="7" lg="7" md="7" sm="10">
               <p class="writing-text motive-splitter">
                 {{ motive.motive }}
               </p>
@@ -42,9 +40,8 @@
         <!----------------------------------------------------------------------->
         <!--                         Self Transcendens                   -->
         <!----------------------------------------------------------------------->
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="8">
+        <v-row justify="center">
+          <v-col cols="8" lg="8" md="9" sm="12">
             <h2 class="category-title">
               Self Transcendence
             </h2>
@@ -55,8 +52,8 @@
           :key="selfTrance.id"
         >
           <v-row>
-            <v-col cols="3"></v-col>
-            <v-col cols="7">
+            <v-col cols="3" lg="3" md="3" sm="1"></v-col>
+            <v-col cols="7" lg="7" md="7" sm="10">
               <p class="writing-text selftrance-splitter">
                 {{ selfTrance.self_transcendence_goal }}
               </p>
@@ -67,9 +64,8 @@
         <!----------------------------------------------------------------------->
         <!--                             Future Self                          -->
         <!----------------------------------------------------------------------->
-        <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="8">
+        <v-row justify="center">
+          <v-col cols="8" lg="8" md="9" sm="12">
             <h2 class="category-title">
               Bad Future Self
             </h2>
@@ -80,8 +76,8 @@
           :key="futureSelf.id"
         >
           <v-row>
-            <v-col cols="3"></v-col>
-            <v-col cols="7">
+            <v-col cols="3" lg="3" md="3" sm="1"></v-col>
+            <v-col cols="7" lg="7" md="7" sm="10">
               <p class="writing-text future-splitter">
                 {{ futureSelf.future_self }}
               </p>
@@ -109,7 +105,7 @@ export default {
   methods: {
     switchEdit: function () {
       this.$emit("startMotiveEdit");
-    },
+    }
   }
 };
 </script>
@@ -166,7 +162,7 @@ export default {
 }
 
 .motive-splitter {
-border-left: 20px #3994BF solid;
+  border-left: 20px #3994bf solid;
   padding-left: 15px;
 }
 
@@ -176,7 +172,7 @@ border-left: 20px #3994BF solid;
 }
 
 .future-splitter {
-border-left: 20px #794DBF solid;
+  border-left: 20px #794dbf solid;
   padding-left: 15px;
 }
 
