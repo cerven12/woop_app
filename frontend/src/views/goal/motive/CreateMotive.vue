@@ -362,7 +362,7 @@ motivation-enter-active,
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 34px;
+  font-size: 28px;
   line-height: 40px;
   color: #4465c0;
 }

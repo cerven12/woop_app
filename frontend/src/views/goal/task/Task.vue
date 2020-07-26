@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-dialog hide-overlay v-model="isDisplay" width="1500px" heigh="1200px">
-      <!-- <v-card color="#f0f0f0f5" tag max-height="1000px"> -->
+    <v-dialog class="dialog-shape" v-model="isDisplay">
       <div class="background">
         <v-container>
           <br />
@@ -166,5 +165,6 @@ export default {
 
 .background {
   background: #f0f0f0f7;
+  border-radius: 20px;
 }
 </style>

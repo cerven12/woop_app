@@ -15,7 +15,7 @@
             <v-col cols="1"></v-col>
             <v-col cols="10">
               <nav>
-                <router-link :to="{ name: 'create'}">
+                <router-link :to="{ name: 'create' }">
                   <h1 class="yourgoal">Your Goals<span>+</span></h1>
                 </router-link>
               </nav>
@@ -23,8 +23,8 @@
           </v-row>
 
           <v-row>
-            <v-col cols="2"></v-col>
-            <v-col cols="8">
+            <v-col cols="2" lg="2" md="1" sm="1"></v-col>
+            <v-col cols="8" lg="8" md="10" sm="11">
               <div v-for="(goal, index) in Goals" :key="index">
                 <nav>
                   <router-link
@@ -74,30 +74,59 @@ export default {
 #css-grid {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 50% 25% 25%;
+  grid-template-columns: 54% 23% 23%;
   grid-template-areas: "goals tasks memos";
+}
+
+@media all and (max-width: 10000px) {
+  #css-grid {
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 70% 30%;
+    grid-template-areas:
+      "goals tasks"
+      "goals memos";
+  }
+  #tasks-area {
+    grid-area: tasks;
+    background: #56ccf2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 80px 0px 0px 80px;
+    position: relative;
+    width: 200%;
+    min-height: 950px;
+  }
+
+  #memos-area {
+    grid-area: memos;
+    background: #2d9cdb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 80px 0px 0px 80px;
+    position: relative;
+  }
+}
+
+@media all and (max-width: 960px) {
+  #css-grid {
+    grid-template-rows: 40% 10% 50%;
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "goals"
+      "tasks"
+      "memos";
+  }
+  #tasks-area {
+    grid-area: tasks;
+    border-radius: 80px 80px 0px 0px;
+    width: 100%;
+  }
+  #memos-area {
+    grid-area: memos;
+    border-radius: 80px 80px 0px 0px;
+  }
 }
 
 #goals-area {
   grid-area: goals;
-}
-
-#tasks-area {
-  grid-area: tasks;
-  background: #56ccf2;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 80px 0px 0px 80px;
-  position: relative;
-  width: 200%;
-  min-height: 950px;
-}
-
-#memos-area {
-  grid-area: memos;
-  background: #2d9cdb;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 80px 0px 0px 80px;
-  position: relative;
 }
 
 .goals-list {
