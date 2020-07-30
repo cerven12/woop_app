@@ -9,7 +9,8 @@
             <h1 class="message-title">
               Task Kanban Flow
 
-              <v-dialog v-model="addBoardDialog" width="400" persistent>
+              <!--         Add Board Dialog   -->
+              <v-dialog v-model="addBoardDialog" width="400">
                 <template v-slot:activator="{ on, attrs }">
                   <span v-bind="attrs" v-on="on">+</span>
                 </template>
@@ -43,8 +44,10 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="red" text @click="addBoardDialog = false"
-                      >Disagree</v-btn
+                      >Cancel</v-btn
                     >
+
+                    <!-- Add Board -->
                     <v-btn
                       color="blue"
                       text
@@ -52,7 +55,7 @@
                         addBoardDialog = false;
                         addBoard(boardTitle, showColor);
                       "
-                      >Agree</v-btn
+                      >OK</v-btn
                     >
                   </v-card-actions>
                 </v-card>
@@ -60,10 +63,10 @@
             </h1>
           </v-col>
         </v-row>
+
         <!-- -----------------------     -------------------- -->
         <!--                      Kanban                      -->
         <!-- -----------------------     -------------------- -->
-        {{ Boards }}
         <v-row justify="center">
           <v-col cols="8" lg="8" md="9" sm="12">
             <div class="scrolling-wrapper">
@@ -79,6 +82,8 @@
                     <span> + </span>
                   </h2>
                   <div class="board" :style="boardColor(index)">
+
+                  <!-- Task Draggable -->
                     <draggable
                       v-model="board.tasks"
                       group="myGroup"
@@ -105,12 +110,12 @@
           </v-col>
         </v-row>
 
-        <v-dialog v-model="editBoardDialog" width="400" persistent>
+        <!--   Edit Board Dialog       -->
+        <v-dialog v-model="editBoardDialog" width="400">
           <v-card style="border-radius: 25px; padding: 20px;">
             <v-card-title style="font-weight: 500;"
               >Change Borad Title & Color</v-card-title
             >
-            {{ currentBoard }}
             <v-card-text>
               <v-container>
                 <v-row>
@@ -136,8 +141,10 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="red" text @click="editBoardDialog = false"
-                >Disagree</v-btn
+                >Cancel</v-btn
               >
+
+              <!-- Application of the change -->
               <v-btn
                 color="blue"
                 text
@@ -150,7 +157,7 @@
                     currentIndex
                   );
                 "
-                >Agree</v-btn
+                >OK</v-btn
               >
             </v-card-actions>
           </v-card>
@@ -176,15 +183,23 @@ export default {
   components: { draggable, Task },
   data() {
     return {
+      // each dialog 
       dialog: false,
       addBoardDialog: false,
       editBoardDialog: false,
+
+      // add dialog data
       boardTitle: "",
       showColor: "#4465c0",
+
+      // edit dialog data
       currentBoard: {},
       currentIndex: "",
+
       isClick: false,
       nowViewTask: "",
+
+      // draggable data
       options: {
         group: "myGroup",
         animation: 200
@@ -192,10 +207,12 @@ export default {
     };
   },
   methods: {
+    // task dialog
     showDialog(item) {
       this.$refs.task.open();
       this.$refs.task.task_info = item;
     },
+    // dynamic background
     boardColor(index) {
       const color = this.Boards.boards[index].color;
       if (color.slice(0, 1) == "#") {
@@ -205,16 +222,30 @@ export default {
       }
     },
     addBoard(title, color) {
-      const data = {
-        goal: this.$route.params.id,
-        board_title: title,
-        color: color,
-        tasks: []
-      };
-      this.Boards.boards.push(data);
-      this.boardTitle = "";
-      this.showColor = "#4465c0";
+      const vm = this;
+      let goalId = this.$route.params.id;
+      api
+        .post(
+          `goals/${goalId}/boards/`,
+          {
+            goal: goalId,
+            board_title: title,
+            color: color
+          },
+          { useCredentails: true }
+        )
+        .then(function (response) {
+          vm.Boards.boards.push(response.data);
+          vm.editBoardDialog = false;
+          // initialize input form
+          vm.boardTitle = "";
+          vm.showColor = "#4465c0";
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
+
     editBoard(title, color, id, index) {
       const vm = this;
       let goalId = this.$route.params.id;
@@ -237,6 +268,7 @@ export default {
           console.log(error);
         });
     },
+    // In order to define `v-dialog` outside of `v-for`, you copy the whole data and use it.
     clickBoardTitle(board, index) {
       this.$set(this.currentBoard, "board_title", board.board_title);
       this.$set(this.currentBoard, "color", board.color);
