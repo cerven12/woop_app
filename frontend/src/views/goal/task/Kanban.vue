@@ -8,19 +8,75 @@
           <v-col cols="8" lg="8" md="9" sm="11">
             <h1 class="message-title">
               Task Kanban Flow
+
+              <v-dialog v-model="addBoardDialog" width="400" persistent>
+                <template v-slot:activator="{ on, attrs }">
+                  <span v-bind="attrs" v-on="on">+</span>
+                </template>
+                <v-card style="border-radius: 25px; padding: 20px;">
+                  <v-card-title style="font-weight: 500;"
+                    >Borad Title & Color</v-card-title
+                  >
+
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-text-field
+                            label="Title*"
+                            required
+                            v-model="boardTitle"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="12">
+                          <v-color-picker
+                            v-model="showColor"
+                            show-swatches
+                            flat
+                          ></v-color-picker>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                    <small>*indicates required field</small>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="red" text @click="addBoardDialog = false"
+                      >Disagree</v-btn
+                    >
+                    <v-btn
+                      color="blue"
+                      text
+                      @click="
+                        addBoardDialog = false;
+                        addBoard(boardTitle, showColor);
+                      "
+                      >Agree</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </h1>
           </v-col>
         </v-row>
         <!-- -----------------------     -------------------- -->
         <!--                      Kanban                      -->
         <!-- -----------------------     -------------------- -->
+        {{ Boards }}
         <v-row justify="center">
           <v-col cols="8" lg="8" md="9" sm="12">
             <div class="scrolling-wrapper">
               <div v-for="(board, index) in Boards.boards" :key="board.id">
                 <div class="board-wrapper">
                   <h2 class="board-title">
-                    {{ board.board_title }}<span> + </span>
+                    <div
+                      @click.stop="clickBoardTitle(board, index)"
+                      style="display: inline;"
+                    >
+                      {{ board.board_title }}
+                    </div>
+                    <span> + </span>
                   </h2>
                   <div class="board" :style="boardColor(index)">
                     <draggable
@@ -48,6 +104,57 @@
             </div>
           </v-col>
         </v-row>
+
+        <v-dialog v-model="editBoardDialog" width="400" persistent>
+          <v-card style="border-radius: 25px; padding: 20px;">
+            <v-card-title style="font-weight: 500;"
+              >Change Borad Title & Color</v-card-title
+            >
+            {{ currentBoard }}
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="Title*"
+                      required
+                      v-model="currentBoard.board_title"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12">
+                    <v-color-picker
+                      show-swatches
+                      flat
+                      v-model="currentBoard.color"
+                    ></v-color-picker>
+                  </v-col>
+                </v-row>
+              </v-container>
+              <small>*indicates required field</small>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red" text @click="editBoardDialog = false"
+                >Disagree</v-btn
+              >
+              <v-btn
+                color="blue"
+                text
+                @click="
+                  editBoardDialog = false;
+                  editBoard(
+                    currentBoard.board_title,
+                    currentBoard.color,
+                    currentBoard.id,
+                    currentIndex
+                  );
+                "
+                >Agree</v-btn
+              >
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
 
       <div class="text-xs-center">
@@ -60,6 +167,7 @@
 <script>
 import draggable from "vuedraggable";
 import Task from "./Task";
+import api from "@/services/api";
 
 export default {
   name: "Goal",
@@ -69,6 +177,12 @@ export default {
   data() {
     return {
       dialog: false,
+      addBoardDialog: false,
+      editBoardDialog: false,
+      boardTitle: "",
+      showColor: "#4465c0",
+      currentBoard: {},
+      currentIndex: "",
       isClick: false,
       nowViewTask: "",
       options: {
@@ -83,7 +197,52 @@ export default {
       this.$refs.task.task_info = item;
     },
     boardColor(index) {
-      return `background: #${this.Boards.boards[index].color}`;
+      const color = this.Boards.boards[index].color;
+      if (color.slice(0, 1) == "#") {
+        return `background: ${this.Boards.boards[index].color}`;
+      } else {
+        return `background: #${this.Boards.boards[index].color}`;
+      }
+    },
+    addBoard(title, color) {
+      const data = {
+        goal: this.$route.params.id,
+        board_title: title,
+        color: color,
+        tasks: []
+      };
+      this.Boards.boards.push(data);
+      this.boardTitle = "";
+      this.showColor = "#4465c0";
+    },
+    editBoard(title, color, id, index) {
+      const vm = this;
+      let goalId = this.$route.params.id;
+      api
+        .patch(
+          `goals/${goalId}/boards/${id}/`,
+          {
+            board_title: title,
+            color: color
+          },
+          { useCredentails: true }
+        )
+        .then(function (response) {
+          // Overwrite the data in the changed part.
+          // Use `splice` to reflect it immediately.
+          vm.Boards.boards.splice(index, 1, response.data);
+          vm.editBoardDialog = false;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    clickBoardTitle(board, index) {
+      this.$set(this.currentBoard, "board_title", board.board_title);
+      this.$set(this.currentBoard, "color", board.color);
+      this.$set(this.currentBoard, "id", board.board_id);
+      this.currentIndex = index;
+      this.editBoardDialog = true;
     }
   }
 };

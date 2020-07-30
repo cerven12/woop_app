@@ -125,16 +125,18 @@ MIDDLEWARE = [
 
 # CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_NAME = "csrftoken"
+
 CORS_ORIGIN_WHITELIST = [
     'https://fiddle.jshell.net',
     'http://127.0.0.1:5500',
     'http://127.0.0.1:8080',
     'http://localhost:8080',
     'http://192.168.3.7:8080',
-    'http://192.168.129.16:8080',
     'http://192.168.3.7:8080',
     'http://192.168.129.16:8080',
     'http://192.168.3.6:8080',
+    'http://192.168.129.16:8080',
+
 ]
 
 ROOT_URLCONF = 'config.urls'

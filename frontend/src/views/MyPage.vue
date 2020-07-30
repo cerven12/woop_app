@@ -15,15 +15,17 @@
             <v-col cols="1"></v-col>
             <v-col cols="10">
               <nav>
-                <router-link :to="{ name: 'create' }">
-                  <h1 class="yourgoal">Your Goals<span>+</span></h1>
-                </router-link>
+                <h1 class="yourgoal">
+                  Your Goals<router-link :to="{ name: 'create' }">
+                    <span>+</span></router-link
+                  >
+                </h1>
               </nav>
             </v-col>
           </v-row>
 
           <v-row>
-            <v-col cols="2" lg="2" md="1" sm="1"></v-col>
+            <v-col cols="1" lg="1" md="1" sm="1"></v-col>
             <v-col cols="8" lg="8" md="10" sm="11">
               <div v-for="(goal, index) in Goals" :key="index">
                 <nav>
@@ -74,14 +76,14 @@ export default {
 #css-grid {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 54% 23% 23%;
+  grid-template-columns: 30% 35% 35%;
   grid-template-areas: "goals tasks memos";
 }
 
 @media all and (max-width: 10000px) {
   #css-grid {
     grid-template-rows: 50% 50%;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 45% 55%;
     grid-template-areas:
       "goals tasks"
       "goals memos";
@@ -130,15 +132,18 @@ export default {
 }
 
 .goals-list {
-  background: #e8e8e8;
+  background: #f5f5f5;
   color: #4465c0;
   font-size: 20px;
-  border-radius: 80px;
+  border-radius: 20px;
   width: 550px;
   min-height: 70px;
-  padding: 10px 40px;
-  margin: 20px;
+  padding: 25px 30px;
+  margin: 25px 15px;
   font-weight: 700;
+}
+.goals-list:hover {
+  box-shadow: 9px 7px 18px 2px rgba(0, 0, 0, 0.1);
 }
 
 a {

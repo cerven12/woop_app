@@ -63,7 +63,7 @@ export default {
   max-width: auto;
   /* font-family: Lato; */
   margin-bottom: 30px;
-  background-color: hsl(224, 50%, 51%);
+  background-color:#354779;
   border-radius: 27.5px;
   position: relative;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);

@@ -76,7 +76,7 @@ export default{
 .powerline {
   display: inline-block;
   position: relative;
-  filter: drop-shadow(0px 1px 1px rgba(70, 70, 70, 0.6));
+  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.1));
   height: 100px;
 }
 
@@ -84,8 +84,8 @@ export default{
   width: 260px;
   height: 80px;
   display: inline-block;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
   padding: 10px 0px 20px 60px;
   font-size: 18px;
 }
