@@ -6,9 +6,9 @@
 
         <v-row justify="end">
           <v-col cols="2">
-              <v-btn fab small depressed color="gray" @click="switchEdit">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
+            <v-btn fab small depressed color="gray" @click="switchEdit">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
           </v-col>
         </v-row>
 

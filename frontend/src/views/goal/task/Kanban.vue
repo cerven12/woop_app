@@ -201,6 +201,10 @@ export default {
 
       // draggable data
       options: {
+        group: "boardGroup",
+        animation: 200
+      },
+      options: {
         group: "myGroup",
         animation: 200
       }
