@@ -13,7 +13,7 @@
               <h4 class="form-group-title">Write it down your Goal.</h4>
             </v-col>
             <v-col>
-              <v-btn small color="gray" @click="endEdit">OK!</v-btn>
+              <v-btn small color="gray" @click="editGoal">OK!</v-btn>
             </v-col>
           </v-row>
 
@@ -61,6 +61,8 @@
         <br />
       </v-container>
 
+<pre>Goal : {{ Goal }}</pre>
+<pre>Original Goal {{ OriginalGoal }}</pre>
       <!----------------------------------------------------------------------->
       <!--                       Right Side "form"                        -->
       <!----------------------------------------------------------------------->
@@ -72,16 +74,58 @@
 </template>
 
 <script>
+import api from "@/services/api";
+
 export default {
   name: "Goal",
-  props: ["Goal"],
+  props: ["Goal",],
   data: function () {
-    return {};
+    return {
+      OriginalGoal: {},
+    };
   },
   methods: {
-    endEdit: function () {
-      this.$emit("close");
+    editGoal: function () {
+      const vm = this;
+      let goalId = this.$route.params.id;
+      let postData = {}; // in Changed Data
+      let isChanged = 0; // Use post methods if over 1.
+      // add postData if change values.
+      if (vm.OriginalGoal.goal_title != vm.Goal.goal_title) {
+        postData["goal_title"] = vm.Goal.goal_title;
+        isChanged++;
+      }
+      if (vm.OriginalGoal.goal_description != vm.Goal.goal_description) {
+        postData["goal_description"] = vm.Goal.goal_description;
+        isChanged++;
+      }
+      if (vm.OriginalGoal.criteria != vm.Goal.criteria) {
+        postData["criteria"] = vm.Goal.criteria;
+        isChanged++;
+      }
+
+      if (isChanged >= 1) {
+        api
+          .patch(`goals/${goalId}/`, postData, { useCredentails: true })
+          .then(function (response) {
+            console.log(response.data.Goal);
+            // for next edit
+            vm.OriginalGoal.goal_title = vm.Goal.goal_title;
+            vm.OriginalGoal.goal_description = vm.Goal.goal_description;
+            vm.OriginalGoal.criteria = vm.Goal.criteria;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      // switch component. `close` is parent component.
+      vm.$emit("close");
     }
+  },
+  mounted: function(){
+    // Deep Copy of Goal data.
+    // `this.OriginalGoal = this.Goal` is  it only assigns a reference to it.
+    this.OriginalGoal = JSON.parse(JSON.stringify(this.Goal));
   }
 };
 </script>

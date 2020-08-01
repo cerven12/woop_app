@@ -16,30 +16,29 @@
           @close="endGoalEdit"
           v-show="!isGoalRegistered || isGoalEditMode"
           :Goal="Goal"
+          :Originals="Goal"
         ></BeforeGoal>
       </transition-group>
 
       <transition>
-      <Kanban :Boards="Boards"></Kanban>
+        <Kanban :Boards="Boards"></Kanban>
       </transition>
-
-
 
       <Note :Notes="Notes"></Note>
 
       <transition-group mode="out-in">
-      <AfterGIveUp
-        key="3"
-        :Worries="Worries"
-        @startGiveUpEdit="startGiveUpEdit"
-        v-show="isGiveUpRegisterd && !isGiveUpEditMode"
-      ></AfterGIveUp>
-      <BeforeGiveUp
-        :Worries="Worries"
-        key="1"
-        @close="endGiveUpEdit"
-        v-show="!isGiveUpRegisterd || isGiveUpEditMode"
-      ></BeforeGiveUp>
+        <AfterGIveUp
+          key="3"
+          :Worries="Worries"
+          @startGiveUpEdit="startGiveUpEdit"
+          v-show="isGiveUpRegisterd && !isGiveUpEditMode"
+        ></AfterGIveUp>
+        <BeforeGiveUp
+          :Worries="Worries"
+          key="1"
+          @close="endGiveUpEdit"
+          v-show="!isGiveUpRegisterd || isGiveUpEditMode"
+        ></BeforeGiveUp>
       </transition-group>
       <!-- <div style="padding: 50px 0px; background: #f0f0f0;"></div> -->
 
@@ -86,7 +85,6 @@ import Kanban from "./task/Kanban.vue";
 
 import api from "@/services/api";
 
-
 export default {
   components: {
     BeforeGoal,
@@ -97,7 +95,7 @@ export default {
     AfterGIveUp,
     Note,
     Kanban,
-    Steps,
+    Steps
   },
   data: function () {
     return {
@@ -119,48 +117,46 @@ export default {
       isMotiveEditMode: false,
 
       isGiveUpRegisterd: true,
-      isGiveUpEditMode: false,
+      isGiveUpEditMode: false
     };
   },
   mounted: function () {
     let vm = this;
     // 動的に生成されたURLの"id"を取得して、そのidを元にapiでgetを投げる
     let goalId = vm.$route.params.id;
-    api
-      .get(`goals/${goalId}/`)
-      .then(function (response) {
-        vm.All = response;
-        // Goal_Info
-        vm.$set(vm.Goal, "goal_title", response.data.goal_title);
-        vm.$set(vm.Goal, "goal_description", response.data.goal_description);
-        vm.$set(vm.Goal, "criteria", response.data.criteria);
-        vm.$set(vm.Goal, "created_at", response.data.created_at);
+    api.get(`goals/${goalId}/`).then(function (response) {
+      vm.All = response;
+      // Goal_Info
+      vm.$set(vm.Goal, "goal_title", response.data.goal_title);
+      vm.$set(vm.Goal, "goal_description", response.data.goal_description);
+      vm.$set(vm.Goal, "criteria", response.data.criteria);
+      vm.$set(vm.Goal, "created_at", response.data.created_at);
 
-        // Motive
-        vm.$set(vm.Motives, "motives", response.data.motives);
+      // Motive
+      vm.$set(vm.Motives, "motives", response.data.motives);
 
-        // Self Transcendence Goal
-        vm.$set(
-         vm.SelfTranscendence,
-          "self_transcendence_goals",
-          response.data.self_transcendence_goals
-        );
+      // Self Transcendence Goal
+      vm.$set(
+        vm.SelfTranscendence,
+        "self_transcendence_goals",
+        response.data.self_transcendence_goals
+      );
 
-        //  Future Selves
-        vm.$set(vm.FutureSelves, "future_selves", response.data.future_selves);
+      //  Future Selves
+      vm.$set(vm.FutureSelves, "future_selves", response.data.future_selves);
 
-        //  Worry, Idea
-        vm.$set(vm.Worries, "worries", response.data.worries);
+      //  Worry, Idea
+      vm.$set(vm.Worries, "worries", response.data.worries);
 
-        //  Notes
-        vm.$set(vm.Notes, "notes", response.data.notes);
+      //  Notes
+      vm.$set(vm.Notes, "notes", response.data.notes);
 
-        // Kanban
-        vm.$set(vm.Boards, "boards", response.data.boards);
+      // Kanban
+      vm.$set(vm.Boards, "boards", response.data.boards);
 
-        // Step
-        vm.$set(vm.Steps, "steps", response.data.steps);
-      });
+      // Step
+      vm.$set(vm.Steps, "steps", response.data.steps);
+    });
   },
   methods: {
     startGoalEdit: function () {
@@ -176,17 +172,19 @@ export default {
     endMotiveEdit: function () {
       this.isMotiveEditMode = false;
     },
-    startGiveUpEdit: function(){this.isGiveUpEditMode=true;},
-    endGiveUpEdit: function(){this.isGiveUpEditMode=false;},
+    startGiveUpEdit: function () {
+      this.isGiveUpEditMode = true;
+    },
+    endGiveUpEdit: function () {
+      this.isGiveUpEditMode = false;
+    }
   }
 };
 </script>
 
-
 <style lang="sass">
 @import '../../assets/sass/main.scss'
 </style>
-
 
 <style scoped>
 body {

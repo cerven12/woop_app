@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog class="dialog-shape" v-model="isDisplay">
+    <v-dialog class="dialog-shape" v-model="isDisplay" width="1400">
       <div class="background">
         <v-container>
           <br />
