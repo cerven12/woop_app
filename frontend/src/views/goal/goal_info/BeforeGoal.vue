@@ -13,7 +13,7 @@
               <h4 class="form-group-title">Write it down your Goal.</h4>
             </v-col>
             <v-col>
-              <v-btn small color="gray" @click="editGoal">OK!</v-btn>
+              <v-btn small color="gray" @click="editGoal">OK! </v-btn>
             </v-col>
           </v-row>
 
@@ -61,8 +61,8 @@
         <br />
       </v-container>
 
-<pre>Goal : {{ Goal }}</pre>
-<pre>Original Goal {{ OriginalGoal }}</pre>
+      <pre>Goal : {{ Goal }}</pre>
+      <pre>Original Goal {{ OriginalGoal }}</pre>
       <!----------------------------------------------------------------------->
       <!--                       Right Side "form"                        -->
       <!----------------------------------------------------------------------->
@@ -78,10 +78,9 @@ import api from "@/services/api";
 
 export default {
   name: "Goal",
-  props: ["Goal",],
+  props: ["Goal", "OriginalGoal"],
   data: function () {
     return {
-      OriginalGoal: {},
     };
   },
   methods: {
@@ -108,7 +107,6 @@ export default {
         api
           .patch(`goals/${goalId}/`, postData, { useCredentails: true })
           .then(function (response) {
-            console.log(response.data.Goal);
             // for next edit
             vm.OriginalGoal.goal_title = vm.Goal.goal_title;
             vm.OriginalGoal.goal_description = vm.Goal.goal_description;
@@ -121,11 +119,6 @@ export default {
       // switch component. `close` is parent component.
       vm.$emit("close");
     }
-  },
-  mounted: function(){
-    // Deep Copy of Goal data.
-    // `this.OriginalGoal = this.Goal` is  it only assigns a reference to it.
-    this.OriginalGoal = JSON.parse(JSON.stringify(this.Goal));
   }
 };
 </script>

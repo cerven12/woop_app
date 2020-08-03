@@ -16,7 +16,7 @@
           @close="endGoalEdit"
           v-show="!isGoalRegistered || isGoalEditMode"
           :Goal="Goal"
-          :Originals="Goal"
+          :OriginalGoal="OriginalGoal"
         ></BeforeGoal>
       </transition-group>
 
@@ -56,8 +56,11 @@
           @close="endMotiveEdit"
           v-show="!isMotiveRegisterd || isMotiveEditMode"
           :Motives="Motives"
+          :OriginalMotives="OriginalMotives"
           :SelfTranscendence="SelfTranscendence"
+          :OriginalSelf="OriginalSelf"
           :FutureSelves="FutureSelves"
+          :OriginalFuture="OriginalFuture"
         ></BeforeMotive>
       </transition-group>
     </div>
@@ -101,9 +104,17 @@ export default {
     return {
       All: {}, // For Debug
       Goal: {},
+      OriginalGoal: {},
+
       Motives: {},
+      OriginalMotives: {},
+
       SelfTranscendence: {},
+      OriginalSelf: {},
+
       FutureSelves: {},
+      OriginalFuture: {},
+
       Worries: {},
       Notes: {},
       Boards: {},
@@ -132,8 +143,23 @@ export default {
       vm.$set(vm.Goal, "criteria", response.data.criteria);
       vm.$set(vm.Goal, "created_at", response.data.created_at);
 
+      vm.$set(vm.OriginalGoal, "goal_title", response.data.goal_title);
+      vm.$set(
+        vm.OriginalGoal,
+        "goal_description",
+        response.data.goal_description
+      );
+      vm.$set(vm.OriginalGoal, "criteria", response.data.criteria);
+      vm.$set(vm.OriginalGoal, "created_at", response.data.created_at);
+
       // Motive
       vm.$set(vm.Motives, "motives", response.data.motives);
+      vm.$set(
+        vm.OriginalMotives,
+        "motives",
+        // Deep Copy
+        JSON.parse(JSON.stringify(vm.Motives))
+      );
 
       // Self Transcendence Goal
       vm.$set(
@@ -141,9 +167,20 @@ export default {
         "self_transcendence_goals",
         response.data.self_transcendence_goals
       );
+      vm.$set(
+        vm.OriginalSelf,
+        "self_transcendence_goals",
+        // deep copy
+        JSON.parse(JSON.stringify(vm.SelfTranscendence))
+      );
 
       //  Future Selves
       vm.$set(vm.FutureSelves, "future_selves", response.data.future_selves);
+      vm.$set(
+        vm.OriginalFuture,
+        "future_selves",
+        JSON.parse(JSON.stringify(vm.FutureSelves))
+      );
 
       //  Worry, Idea
       vm.$set(vm.Worries, "worries", response.data.worries);
