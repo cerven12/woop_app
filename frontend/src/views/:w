@@ -15,7 +15,7 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access')
     if (token) {
       config.headers.Authorization = `JWT ${token}`;
-      console.log("デバッグ用のログです", config); // DEBUG 
+      console.log(config); // DEBUG 
       return config
     }
   return config

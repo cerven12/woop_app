@@ -2,6 +2,9 @@
   <div>
     <!-- Split | Left Side "form"| Right Side "TIps" | -->
     <div id="css-grid">
+      <button @click="editMotive">EDIT</button>
+
+      <pre>{{ testdata }}</pre>
       <!----------------------------------------------------------------------->
       <!--                       Left Side "form"                         -->
       <!----------------------------------------------------------------------->
@@ -15,9 +18,7 @@
               </h2>
             </v-col>
             <v-col>
-               <v-btn fab small depressed color="#b3b3b3" @click="editMotive">
-               <v-icon>mdi-pencil</v-icon>
-               </v-btn>
+              <v-btn small color="gray" @click="endEdit">OK!</v-btn>
             </v-col>
           </v-row>
 
@@ -307,11 +308,13 @@ export default {
 
       let goalId = vm.$route.params.id;
       Array.from(vm.MotivesData.motives).forEach((motive, index) => {
+        console.log("test");
         // For compute to difference by `OriginalMotives`.
         let originalMo = vm.OriginalMotivesData.motives.motives[index];
 
         // If existence new post
         if (!motive.motive_id) {
+          console.log("これは追加されたもの");
           NewData.push({
             motive: motive.motive
           });
@@ -337,8 +340,10 @@ export default {
         postPromises.push(newPostPromise);
       });
 
-      // create patch datas
       ChangeData.forEach(function (item, index) {
+        // items is data whose content has been changed.
+
+        // crate a 1 post data
         let newPromise = api({
           method: "patch",
           url: `goals/${goalId}/motives/${item.motive_id}/`,
@@ -347,19 +352,17 @@ export default {
           },
           useCredentails: true
         });
+        // create post datas
         promises.push(newPromise);
       });
+
+      console.log(promises);
 
       // post
       Promise.all(postPromises).then(responses => {
         responses.forEach(res => {
+          console.log(res.data);
           vm.OriginalMotivesData.motives.motives.push(res.data);
-          vm.$set(
-            vm.MotivesData,
-            "motives",
-            // Deep Copy
-            JSON.parse(JSON.stringify(vm.OriginalMotivesData.motives.motives))
-          );
         });
       });
 
@@ -367,8 +370,6 @@ export default {
       Promise.all(promises).then(responses => {
         responses.forEach(res => {
           let currentId = res.data.motive_id;
-          // Find the object to be changed by `OriginalMotive`.
-          // superscription motive.
           if (
             vm.OriginalMotivesData.motives.motives.find(
               item => item.motive_id == currentId
@@ -378,9 +379,11 @@ export default {
               item => item.motive_id == currentId
             ).motive = res.data.motive;
           }
+          // Find the object to be changed by `OriginalMotive`.
+          // superscription motive.
         });
       });
-      vm.$emit("close");
+      console.log("配列すべて一致しているはず");
     }
   }
 };
