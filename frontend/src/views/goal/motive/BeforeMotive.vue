@@ -15,9 +15,9 @@
               </h2>
             </v-col>
             <v-col>
-               <v-btn fab small depressed color="#b3b3b3" @click="editMotive">
-               <v-icon>mdi-pencil</v-icon>
-               </v-btn>
+              <v-btn fab small depressed color="#b3b3b3" @click="editMotive">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
             </v-col>
           </v-row>
 
@@ -36,6 +36,7 @@
                   <v-row>
                     <v-col cols="11">
                       <v-textarea
+                        color="#3994bf"
                         v-model="motives.motive"
                         rows="1"
                         auto-grow
@@ -44,7 +45,9 @@
                     <v-col cols="1">
                       <!-- Form Delete Buttom -->
                       <v-btn
-                        @click="deleteMotiveForm(motive_index)"
+                        @click="
+                          deleteMotiveForm(motives.motive_id, motive_index)
+                        "
                         text
                         depressed
                         height="55"
@@ -90,7 +93,7 @@
             <transition-group name="form" tag="div">
               <div
                 v-for="(self_transcendence_goals,
-                self_index) in SelfTranscendence.self_transcendence_goals"
+                self_index) in SelfTransData.self_transcendence_goals"
                 :key="self_index"
               >
                 <!-- If it's two or more forms, show ✘, and label and hint is hide. -->
@@ -108,7 +111,12 @@
                     <v-col cols="1">
                       <!-- Form Delete Buttom -->
                       <v-btn
-                        @click="deleteSelfTranscendenceGoalForm(self_index)"
+                        @click="
+                          deleteSelfTranscendenceGoalForm(
+                            self_transcendence_goals.selftrans_id,
+                            self_index
+                          )
+                        "
                         text
                         depressed
                         height="55"
@@ -156,7 +164,7 @@
             <transition-group name="form" tag="div">
               <div
                 v-for="(future_selves,
-                future_selves_index) in FutureSelves.future_selves"
+                future_selves_index) in FutureData.future_selves"
                 v-bind:key="future_selves_index"
               >
                 <!-- If it's two or more forms, show ✘, and label and hint is hide. -->
@@ -172,7 +180,7 @@
                     <v-col cols="1">
                       <!-- Form Delete Buttom -->
                       <v-btn
-                        @click="deleteFutureSelfForm(future_selves_index)"
+                        @click="deleteFutureSelfForm(future_selves.future_id ,future_selves_index)"
                         text
                         depressed
                         height="55"
@@ -218,10 +226,10 @@
         <pre>MotivesData :{{ MotivesData }}</pre>
         <pre>OriginalMotivesData:{{ OriginalMotivesData }}</pre>
         <hr />
-        <pre>SelfTranscendence :{{ SelfTranscendence }}</pre>
+        <pre>SelfTransData :{{ SelfTransData }}</pre>
         <pre>OriginalSelf :{{ OriginalSelf }}</pre>
         <hr />
-        <pre>FutureSelves:{{ FutureSelves }}</pre>
+        <pre>FutureData:{{ FutureData }}</pre>
         <pre>OriginalFuture:{{ OriginalFuture }}</pre>
       </v-container>
     </div>
@@ -246,10 +254,18 @@ export default {
     return {
       MotivesData: this.Motives,
       OriginalMotivesData: this.OriginalMotives,
+
+      SelfTransData: this.SelfTranscendence,
+      OriginalSelfTransData: this.OriginalSelf,
+
+      FutureData: this.FutureSelves,
+      OriginalFutureData: this.OriginalFuture,
+
       testdata: "",
       root: "",
       valid: "",
       form: "",
+
       // Registration details of Three Models
       motiveList: [{ motive: "" }],
       selfTranscendenceGoalList: [{ self_transcendence_goal: "" }],
@@ -272,28 +288,52 @@ export default {
 
     addSelfTranscendenceGoalForm: function () {
       const form = { self_transcendence_goal: "" };
-      this.SelfTranscendence.self_transcendence_goals.push(form);
+      this.SelfTransData.self_transcendence_goals.push(form);
     },
 
     addFutureSelf: function () {
       const form = { future_self: "" };
-      this.FutureSelves.future_selves.push(form);
+      this.FutureData.future_selves.push(form);
     },
 
     //  ------------------------------------------------------------
     //                   Form Delete
     //  ------------------------------------------------------------
-    deleteMotiveForm(index) {
-      this.MotivesData.motives.splice(index, 1);
+    deleteMotiveForm(motive_id, index) {
+      const vm = this;
+      let goalid = vm.$route.params.id;
+      api
+        .delete(`goals/${goalid}/motives/${motive_id}/`)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+      vm.MotivesData.motives.splice(index, 1);
+      vm.OriginalMotivesData.motives.motives.splice(index, 1);
     },
 
-    deleteSelfTranscendenceGoalForm(index) {
-      this.SelfTranscendence.self_transcendence_goals.splice(index, 1);
+    deleteSelfTranscendenceGoalForm(selftrans_id, index) {
+      const vm = this;
+      let goalid = vm.$route.params.id;
+      api
+        .delete(`goals/${goalid}/self_transcendence_goals/${selftrans_id}/`)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+      vm.SelfTransData.self_transcendence_goals.splice(index, 1);
+      vm.OriginalSelfTransData.self_transcendence_goals.self_transcendence_goals.splice(
+        index,
+        1
+      );
     },
 
-    deleteFutureSelfForm(index) {
-      this.FutureSelves.future_selves.splice(index, 1);
+    deleteFutureSelfForm(future_id, index) {
+      const vm = this;
+      let goalid = vm.$route.params.id;
+      api.delete(`goals/${goalid}/future_selves/${future_id}/`)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+      vm.FutureData.future_selves.splice(index, 1);
+      vm.OriginalFuture.future_selves.future_selves.splice(index, 1);
     },
+
     endEdit: function () {
       this.$emit("close");
     },
