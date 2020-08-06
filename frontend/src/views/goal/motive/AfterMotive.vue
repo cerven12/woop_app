@@ -182,4 +182,19 @@ export default {
 .kakoi {
   border: rgb(41, 41, 41) solid 1px;
 }
+
+@media only screen and (max-width: 600px) {
+
+.col-7 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.col-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.category-title{
+  padding-left: 0px;
+}
+}
 </style>

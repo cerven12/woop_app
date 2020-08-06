@@ -113,5 +113,35 @@ export default {
   transition-duration: 0.3s;
 }
 
+@media only screen and (max-width: 600px) {
+
+.col-7 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.col-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.category-title{
+  padding-left: 0px;
+}
+}
+@media only screen and (max-width: 600px) {
+
+.col-7 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.category-title{
+  padding-left: 0px;
+}
+}
+
+
 
 </style>

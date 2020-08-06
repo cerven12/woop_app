@@ -4,6 +4,8 @@
       <v-container fluid id="view-area">
         <!--  Goal Title -->
 
+{{ $vuetify.breakpoint.name }}
+
         <v-row justify="end">
           <v-col cols="2">
             <v-btn fab small depressed color="gray" @click="switchEdit">
@@ -61,14 +63,14 @@ export default {
   },
   data: function () {
     return {
-      goal: ""
+      goal: "",
     };
   },
   methods: {
     switchEdit: function () {
       this.$emit("startGoalEdit");
     }
-  }
+  },
 };
 </script>
 
@@ -125,4 +127,13 @@ export default {
   position: absolute;
   left: 95%;
 }
+
+@media only screen and (max-width: 600px) {
+
+.col-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+}
+
 </style>

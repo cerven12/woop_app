@@ -5,41 +5,41 @@
         <v-container>
           <br />
           <br />
-          {{ task_info }}
+          <!-- {{ task_info }} -->
           <!-- Goal -->
-          <v-row>
-            <v-col cols="7">
-              <h4 class="goal-title">> {{ task_info.goal_title }}</h4>
-            </v-col>
-
-            <!-- Step -->
-            <v-col cols="3">
-              <SoloStep></SoloStep>
-            </v-col>
-
-            <!-- Board -->
-            <v-col cols="2">
-              <v-chip
-                class="ma-2"
-                label
-                color="#4465c0"
-                text-color="#f0f0f0"
-                large
-              >
-                {{ task_info.board_title }}
-              </v-chip>
-            </v-col>
-          </v-row>
-          <br />
-
-          <v-row>
-            <template>
-              <v-divider></v-divider>
-            </template>
-          </v-row>
-          <br />
-          <br />
-
+          <!-- <v&#45;row> -->
+          <!--   <v&#45;col cols="7"> -->
+          <!--     <h4 class="goal&#45;title">> {{ task_info.goal_title }}</h4> -->
+          <!--   </v&#45;col> -->
+          <!--  -->
+          <!--   <!&#45;&#45; Step &#45;&#45;> -->
+          <!--   <v&#45;col cols="3"> -->
+          <!--     <SoloStep></SoloStep> -->
+          <!--   </v&#45;col> -->
+          <!--  -->
+          <!--   <!&#45;&#45; Board &#45;&#45;> -->
+          <!--   <v&#45;col cols="2"> -->
+          <!--     <v&#45;chip -->
+          <!--       class="ma&#45;2" -->
+          <!--       label -->
+          <!--       color="#4465c0" -->
+          <!--       text&#45;color="#f0f0f0" -->
+          <!--       large -->
+          <!--     > -->
+          <!--       {{ task_info.board_title }} -->
+          <!--     </v&#45;chip> -->
+          <!--   </v&#45;col> -->
+          <!-- </v&#45;row> -->
+          <!-- <br /> -->
+          <!--  -->
+          <!-- <v&#45;row> -->
+          <!--   <template> -->
+          <!--     <v&#45;divider></v&#45;divider> -->
+          <!--   </template> -->
+          <!-- </v&#45;row> -->
+          <!-- <br /> -->
+          <!-- <br /> -->
+          <!--  -->
           <!-- task info -->
           <AfterTask>
             <template #task_title>
@@ -52,6 +52,7 @@
               {{ task_info.criteria }}
             </template>
           </AfterTask>
+          
 
           <br /><br />
 

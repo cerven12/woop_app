@@ -302,4 +302,24 @@ export default {
   border-left: 20px rgb(142, 100, 170) solid;
   padding-left: 15px;
 }
+
+@media only screen and (max-width: 600px) {
+
+.col-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.col-7 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.category-title{
+  padding-left: 0px;
+}
+}
+
 </style>
