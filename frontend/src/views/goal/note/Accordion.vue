@@ -126,6 +126,14 @@ export default {
 .category-title{
   padding-left: 0px;
 }
+.accordion .header{
+  font-size: 18px;
+}
+.accordion .body-inner {
+  padding: 20px;
+  position: relative;
+  z-index: 25px;
+}
 }
 @media only screen and (max-width: 600px) {
 

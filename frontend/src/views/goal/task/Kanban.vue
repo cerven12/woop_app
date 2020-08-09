@@ -7,8 +7,7 @@
         <v-row justify="center">
           <v-col cols="8" lg="8" md="9" sm="11">
             <h1 class="message-title">
-              Task Kanban Flow
-
+              Tasks
               <!--         Add Board Dialog   -->
               <v-dialog v-model="addBoardDialog" width="400">
                 <template v-slot:activator="{ on, attrs }">
@@ -82,8 +81,7 @@
                     <span> + </span>
                   </h2>
                   <div class="board" :style="boardColor(index)">
-
-                  <!-- Task Draggable -->
+                    <!-- Task Draggable -->
                     <draggable
                       v-model="board.tasks"
                       group="myGroup"
@@ -183,7 +181,7 @@ export default {
   components: { draggable, Task },
   data() {
     return {
-      // each dialog 
+      // each dialog
       dialog: false,
       addBoardDialog: false,
       editBoardDialog: false,
@@ -387,7 +385,7 @@ export default {
   position: relative;
   /* border: solid purple 5px; */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
-  margin: 20px 10px;
+  margin: 20px 15px;
   padding: 20px;
   border-radius: 25px;
   background: #f0f0f0;
@@ -424,4 +422,25 @@ export default {
   padding: 40px 60px;
   position: relative;
 }
+
+@media only screen and (max-width: 600px) {
+
+.message-title{
+  font-size: 30px;
+  line-height: 56px;
+}
+.board{
+  height:450px;
+  width: 270px;
+  margin: 15px;
+}
+.text_position{
+  font-size: 16px;
+}
+.item{
+  padding:15px;
+  margin: 20px 15px;
+}
+}
+
 </style>

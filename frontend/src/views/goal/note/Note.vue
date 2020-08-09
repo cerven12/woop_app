@@ -146,4 +146,11 @@ export default {
   right: 2%;
   top: 2%;
 }
+
+@media only screen and (max-width: 600px) {
+.message-title{
+  font-size: 30px;
+}
+
+}
 </style>

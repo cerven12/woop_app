@@ -4,7 +4,6 @@
       <v-container fluid id="view-area">
         <!--  Goal Title -->
 
-{{ $vuetify.breakpoint.name }}
 
         <v-row justify="end">
           <v-col cols="2">
@@ -133,6 +132,10 @@ export default {
 .col-8 {
     flex: 0 0 100%;
     max-width: 100%;
+}
+.goal_title {
+  font-size: 40px;
+  line-height: 56px;
 }
 }
 

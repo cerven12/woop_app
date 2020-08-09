@@ -320,6 +320,9 @@ export default {
 .category-title{
   padding-left: 0px;
 }
+.message-title{
+ font-size: 30px;
+}
 }
 
 </style>
