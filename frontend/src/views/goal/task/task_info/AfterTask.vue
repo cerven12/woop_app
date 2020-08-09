@@ -1,16 +1,25 @@
 <template>
+
   <div>
+  <br>
+    <br>
+
     <v-row>
       <v-col cols="12">
         <h1 class="message-title"><slot name="task_title"></slot></h1>
       </v-col>
     </v-row>
 
+    <br>
+
     <v-row>
       <v-col cols="12">
         <p class="writing-text"><slot name="task_description"></slot></p>
       </v-col>
     </v-row>
+              <br />
+          <br />
+
 
     <v-row justify="center">
       <v-col cols="3">
@@ -19,6 +28,7 @@
         </div>
       </v-col>
     </v-row>
+          <br />
 
     <v-row>
       <v-col cols="12">
@@ -42,7 +52,7 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 34px;
+  font-size: 40px;
   line-height: 40px;
   color: #088dda;
 }

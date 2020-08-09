@@ -33,7 +33,6 @@
               <p class="writing-text idea-splitter">
                 {{ solutions.solution }}
               </p>
-              <p>{{ solutions.created_at }}</p>
             </v-col>
           </v-row>
         </div>

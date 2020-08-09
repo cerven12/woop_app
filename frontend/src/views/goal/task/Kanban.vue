@@ -78,7 +78,9 @@
                     >
                       {{ board.board_title }}
                     </div>
-                    <span> + </span>
+                    <div class="add-item-button">
+                      +
+                    </div>
                   </h2>
                   <div class="board" :style="boardColor(index)">
                     <!-- Task Draggable -->
@@ -411,6 +413,9 @@ export default {
   bottom: 5px;
   right: 20px;
 }
+.add-item-button {
+  display: inline;
+}
 
 /* -------------   --------------- */
 /*           Over lay            */
@@ -424,23 +429,21 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-
-.message-title{
-  font-size: 30px;
-  line-height: 56px;
+  .message-title {
+    font-size: 30px;
+    line-height: 56px;
+  }
+  .board {
+    height: 450px;
+    width: 270px;
+    margin: 15px;
+  }
+  .text_position {
+    font-size: 16px;
+  }
+  .item {
+    padding: 15px;
+    margin: 20px 15px;
+  }
 }
-.board{
-  height:450px;
-  width: 270px;
-  margin: 15px;
-}
-.text_position{
-  font-size: 16px;
-}
-.item{
-  padding:15px;
-  margin: 20px 15px;
-}
-}
-
 </style>
