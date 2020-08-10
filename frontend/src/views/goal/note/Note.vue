@@ -4,24 +4,67 @@
       <v-container fluid id="view-area">
         <v-row justify="center">
           <v-col cols="8" lg="8" md="9" sm="11">
-            <h2 class="message-title">Note <span>+</span></h2>
+            <h2 class="message-title">
+              Note
+              <div style="display: inline;" @click="addNote">+</div>
+            </h2>
           </v-col>
         </v-row>
 
-        <v-row>
-          <v-col>
-            <template>
-              <div class="text-center">
-                <v-pagination
-                  v-model="page"
-                  :length="6"
-                  color="#4465c0"
-                  circle
-                ></v-pagination>
-              </div>
-            </template>
-          </v-col>
-        </v-row>
+        <!-- <v&#45;row> -->
+        <!--   <v&#45;col> -->
+        <!--     <template> -->
+        <!--       <div class="text&#45;center"> -->
+        <!--         <v&#45;pagination -->
+        <!--           v&#45;model="page" -->
+        <!--           :length="6" -->
+        <!--           color="#4465c0" -->
+        <!--           circle -->
+        <!--         ></v&#45;pagination> -->
+        <!--       </div> -->
+        <!--     </template> -->
+        <!--   </v&#45;col> -->
+        <!-- </v&#45;row> -->
+
+        <template>
+          <v-row justify="center">
+            <v-dialog
+              width="1200"
+              v-model="dialog"
+            >
+
+            <Accordion>
+                <div slot="source">
+                  @task#23
+                </div>
+                <div slot="header">test test</div>
+                <div slot="body">
+                  <Tiptap
+                    :active-buttons="[
+                      'bold',
+                      'italic',
+                      'strike',
+                      'underline',
+                      'code',
+                      'paragraph',
+                      'h1',
+                      'h2',
+                      'h3',
+                      'bullet_list',
+                      'ordered_list',
+                      'blockquote',
+                      'code_block',
+                      'horizontal_rule',
+                      'undo',
+                      'redo'
+                    ]"
+                  />
+                </div>
+              </Accordion>
+
+           </v-dialog>
+          </v-row>
+        </template>
 
         <v-row justify="center">
           <v-col cols="6" lg="6" md="8" sm="9">
@@ -80,8 +123,15 @@ export default {
       start_date: "2019-01-06",
       deadline: "2019-05-08",
       page: 1,
-      noteList: []
+      noteList: [],
+      dialog: false
     };
+  },
+  methods: {
+    addNote: function () {
+      this.dialog = true;
+      console.log("ok");
+    }
   }
 };
 </script>
@@ -148,9 +198,8 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-.message-title{
-  font-size: 30px;
-}
-
+  .message-title {
+    font-size: 30px;
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="message-title">Expectation</h1>
+    <!-- <h1 class="message&#45;title">Expectation</h1> -->
 
     <div id="css-grid">
       <div id="satisfaction">
@@ -22,7 +22,7 @@
                     v-model="tbdSatisRating"
                     empty-icon="●"
                     full-icon="☺"
-                    size="32"
+                    size="27"
                     color="red lighten-3"
                     background-color="grey lighten-2"
                     readonly="true"
@@ -59,7 +59,7 @@
                     v-model="tbdDiffRating"
                     empty-icon="▲"
                     full-icon="🌋"
-                    size="32"
+                    size="27"
                     color="red lighten-3"
                     background-color="grey lighten-2"
                     readonly="true"
@@ -91,7 +91,7 @@ export default {
     tbdDiffRating: 0
   }),
   methods: {
-    conversionSatisValue: function(value) {
+    conversionSatisValue: function (value) {
       if (value == 20) {
         this.tbdSatisRating = 1;
       }
@@ -108,7 +108,7 @@ export default {
         this.tbdSatisRating = 5;
       }
     },
-    conversionDiffValue: function(value) {
+    conversionDiffValue: function (value) {
       if (value == 20) {
         this.tbdDiffRating = 1;
       }

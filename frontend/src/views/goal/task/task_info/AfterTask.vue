@@ -1,40 +1,35 @@
 <template>
-
   <div>
-  <br>
-    <br>
+      <br />
+      <br />
 
-    <v-row>
-      <v-col cols="12">
-        <h1 class="message-title"><slot name="task_title"></slot></h1>
-      </v-col>
-    </v-row>
+      <v-row>
+        <v-col cols="12">
+          <h1 class="message-title"><slot name="task_title"></slot></h1>
+        </v-col>
+      </v-row>
+      <br />
 
-    <br>
+      <v-row>
+        <v-col cols="12">
+          <p class="writing-text"><slot name="task_description"></slot></p>
+        </v-col>
+      </v-row>
 
-    <v-row>
-      <v-col cols="12">
-        <p class="writing-text"><slot name="task_description"></slot></p>
-      </v-col>
-    </v-row>
-              <br />
-          <br />
+      <br />
+      <br />
 
+      <v-row justify="center">
+            <h2>Success criteria</h2>
+      </v-row>
 
-    <v-row justify="center">
-      <v-col cols="3">
-        <div class="sub-title">
-          <h2>Success criteria</h2>
-        </div>
-      </v-col>
-    </v-row>
-          <br />
+      <br />
 
-    <v-row>
-      <v-col cols="12">
-        <p class="writing-text"><slot name="criteria"></slot></p>
-      </v-col>
-    </v-row>
+      <v-row>
+        <v-col cols="12">
+          <p class="writing-text"><slot name="criteria"></slot></p>
+        </v-col>
+      </v-row>
   </div>
 </template>
 

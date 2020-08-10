@@ -1,16 +1,15 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12">
+         <v-col cols="7" lg="8" md="9" sm="11">
         <h2 class="message-title">
   Lets preparations for not give up.
         </h2>
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="1"></v-col>
-      <v-col cols="11">
+    <v-row justify="center">
+              <v-col cols="10" lg="10" md="11" sm="12">
         <h2 class="category-title">
           Hurdle & Solution.
         </h2>
@@ -19,8 +18,8 @@
 
     <div v-for="hurdle in Hurdles" :key="hurdle.id">
       <v-row>
-        <v-col cols="2"></v-col>
-        <v-col cols="10">
+                  <v-col cols="2" lg="2" md="2" sm="1"></v-col>
+          <v-col cols="8" lg="10" md="10" sm="11">
           <p class="writing-text obst-splitter">
             {{ hurdle.hurdle }}
           </p>
@@ -28,8 +27,8 @@
       </v-row>
       <div v-for="solutions in hurdle.solutions" :key="solutions.id">
            <v-row>
-            <v-col cols="3"></v-col>
-            <v-col cols="9">
+                      <v-col cols="3" lg="3" md="3" sm="2"></v-col>
+          <v-col cols="8" lg="8" md="9" sm="10">
               <p class="writing-text idea-splitter">
                 {{ solutions.solution }}
               </p>
@@ -147,8 +146,12 @@ export default {
 .category-title {
   font-size: 24px;
   /* text-align: center; */
-  line-height: 30px;
+  line-height: 40px;
   color: #292929;
+  font-weight: normal;
+  font-style: normal;
+
+
 }
 
 .sub-title {
@@ -177,4 +180,14 @@ export default {
   border-left: 20px rgb(225, 155, 80) solid;
   padding-left: 15px;
 }
+@media only screen and (max-width: 600px) {
+.col-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.message-title {
+  font-size: 30px;
+}
+}
+
 </style>

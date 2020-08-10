@@ -9,7 +9,7 @@
     </v-row>
 
     <v-row justify="center">
-      <v-col cols="9">
+      <v-col cols="9" lg="8" md="9" sm="10" xs="11">
         <div v-for="discover in Discovers" :key="discover.id">
           <AccordionForDiscover>
             <div slot="source">{{ discover.created_at }}</div>
@@ -80,5 +80,14 @@ export default {
 .content-splitter {
   border-block-end: solid 1px #c5c5c5;
   /* padding-bottom: 5px; */
+}
+@media only screen and (max-width: 600px) {
+.col-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.message-title{
+ font-size: 30px;
+}
 }
 </style>

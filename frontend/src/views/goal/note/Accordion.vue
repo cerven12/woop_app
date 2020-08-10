@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="accordion" v-bind:class="theme">
+    <div class="accordion">
       <div class="header" v-on:click="toggle">
         <div class="header-contents-wrapper">
           <div class="source"><slot name="source"></slot></div>
@@ -67,6 +67,8 @@ export default {
   border-radius: 27.5px;
   position: relative;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+  height: 100%;
+
 }
 
 .header-contents-wrapper {
@@ -85,6 +87,7 @@ export default {
   color: rgb(241, 241, 241);
   cursor: pointer;
   z-index: 10;
+
 }
 
 .accordion .body {
@@ -106,6 +109,7 @@ export default {
   padding: 10px 60px;
   position: relative;
   z-index: 25px;
+
 }
 
 .accordion .header-icon.rotate {

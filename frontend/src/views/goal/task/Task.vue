@@ -21,8 +21,14 @@
               {{ task_info.criteria }}
             </template>
           </AfterTask>
+<br>
 
-          <br /><br />
+          <!-- expectation -->
+          <AfterExpectation
+            :Expectations="task_info.expectations"
+          ></AfterExpectation>
+
+
 
           <!-- Discover -->
           <Discover :Discovers="task_info.discovers"></Discover>
@@ -36,11 +42,7 @@
             :Feedbacks="task_info.feedbacks"
           ></AfterMotivation>
 
-          <!-- expectation -->
-          <AfterExpectation
-            :Expectations="task_info.expectations"
-          ></AfterExpectation>
-        </v-container>
+       </v-container>
         <!-- </v-card> -->
       </div>
     </v-dialog>

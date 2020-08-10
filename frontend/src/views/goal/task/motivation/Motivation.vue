@@ -2,7 +2,7 @@
   <div>
     <div id="css-grid">
       <v-row>
-        <v-col cols="8">
+        <v-col cols="7" lg="8" md="9" sm="11">
           <h2 class="message-title">
             To Keep Your Motivation Flying High.
           </h2>
@@ -12,10 +12,9 @@
       <!----------------------------------------------------------------------->
       <!--                             Reasons                            -->
       <!----------------------------------------------------------------------->
-      <v-row>
-        <v-col cols="1"></v-col>
-        <v-col cols="11">
-          <h2 class="category-title ">
+      <v-row justify="center">
+        <v-col cols="10" lg="10" md="11" sm="12">
+          <h2 class="category-title">
             Reasons
           </h2>
         </v-col>
@@ -23,8 +22,8 @@
 
       <div v-for="reason in Reasons" :key="reason.id">
         <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="10">
+          <v-col cols="2" lg="2" md="2" sm="1"></v-col>
+          <v-col cols="8" lg="10" md="10" sm="11">
             <p class="writing-text motive-splitter">
               {{ reason.reason }}
             </p>
@@ -36,9 +35,8 @@
       <!----------------------------------------------------------------------->
       <!--                             Feedbacks                         -->
       <!----------------------------------------------------------------------->
-      <v-row>
-        <v-col cols="1"></v-col>
-        <v-col cols="11">
+      <v-row justify="center">
+        <v-col cols="10" lg="10" md="11" sm="12">
           <h2 class="category-title">
             Feedbacks
           </h2>
@@ -47,8 +45,8 @@
 
       <div v-for="feedback in Feedbacks" :key="feedback.id">
         <v-row>
-          <v-col cols="2"></v-col>
-          <v-col cols="10">
+          <v-col cols="2" lg="2" md="2" sm="1"></v-col>
+          <v-col cols="8" lg="10" md="10" sm="11">
             <p class="writing-text future-splitter">
               {{ feedback.feedback }}
             </p>
@@ -64,13 +62,13 @@
 export default {
   name: "Task",
   props: ["Reasons", "Feedbacks"],
-  data: function() {
+  data: function () {
     return {
       root: "",
       valid: "",
-      form: "",
+      form: ""
     };
-  },
+  }
 };
 </script>
 
@@ -105,7 +103,7 @@ export default {
 .category-title {
   font-family: Roboto;
   font-style: normal;
-  /* font-weight: normal; */
+  font-weight: normal;
   font-size: 24px;
   line-height: 40px;
   color: #292929;
@@ -141,5 +139,17 @@ export default {
 
 .kakoi {
   border: rgb(41, 41, 41) solid 1px;
+}
+
+@media only screen and (max-width: 600px) {
+
+.col-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.message-title {
+  font-size: 30px;
+}
+
 }
 </style>

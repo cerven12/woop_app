@@ -107,4 +107,9 @@ export default {
   transform: rotate(180deg);
   transition-duration: 0.3s;
 }
+@media only screen and (max-width: 600px) {
+.accordion .body-inner {
+  padding: 30px;
+}
+}
 </style>
