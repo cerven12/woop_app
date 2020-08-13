@@ -15,7 +15,17 @@
               </h2>
             </v-col>
             <v-col>
-              <v-btn fab small depressed color="#b3b3b3" @click="editMotive">
+              <v-btn
+                fab
+                small
+                depressed
+                color="#b3b3b3"
+                @click="
+                  editMotive();
+                  editSelfTrans();
+                  editfuture();
+                "
+              >
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
             </v-col>
@@ -180,7 +190,12 @@
                     <v-col cols="1">
                       <!-- Form Delete Buttom -->
                       <v-btn
-                        @click="deleteFutureSelfForm(future_selves.future_id ,future_selves_index)"
+                        @click="
+                          deleteFutureSelfForm(
+                            future_selves.future_id,
+                            future_selves_index
+                          )
+                        "
                         text
                         depressed
                         height="55"
@@ -223,9 +238,7 @@
       <!----------------------------------------------------------------------->
       <v-container fluid id="tips-area">
         <h1>Tips</h1>
-        <pre>MotivesData :{{ MotivesData }}</pre>
-        <pre>OriginalMotivesData:{{ OriginalMotivesData }}</pre>
-        <hr />
+        <pre>MotivesData: {{ MotivesData }}</pre>
         <pre>SelfTransData :{{ SelfTransData }}</pre>
         <pre>OriginalSelf :{{ OriginalSelf }}</pre>
         <hr />
@@ -327,9 +340,10 @@ export default {
     deleteFutureSelfForm(future_id, index) {
       const vm = this;
       let goalid = vm.$route.params.id;
-      api.delete(`goals/${goalid}/future_selves/${future_id}/`)
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+      api
+        .delete(`goals/${goalid}/future_selves/${future_id}/`)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
       vm.FutureData.future_selves.splice(index, 1);
       vm.OriginalFuture.future_selves.future_selves.splice(index, 1);
     },
@@ -417,6 +431,198 @@ export default {
             vm.OriginalMotivesData.motives.motives.find(
               item => item.motive_id == currentId
             ).motive = res.data.motive;
+          }
+        });
+      });
+      vm.$emit("close");
+    },
+
+    editSelfTrans: function () {
+      const vm = this;
+      // Stores the object whose content has changed.
+      let ChangeData = [];
+      let NewData = [];
+      let postPromises = []; // post datas
+      let promises = []; // patch datas
+
+      let goalId = vm.$route.params.id;
+      Array.from(vm.SelfTransData.self_transcendence_goals).forEach(
+        (selftrans, index) => {
+          // For compute to difference by `OriginalMotives`.
+          let originalMo =
+            vm.OriginalSelfTransData.self_transcendence_goals
+              .self_transcendence_goals[index];
+
+          // If existence new post
+          if (!selftrans.selftrans_id) {
+            NewData.push({
+              self_transcendence_goal: selftrans.self_transcendence_goal
+            });
+          }
+
+          // edit
+          else if (
+            selftrans.self_transcendence_goal !==
+            originalMo.self_transcendence_goal
+          ) {
+            ChangeData.push({
+              selftrans_id: selftrans.selftrans_id,
+              self_transcendence_goal: selftrans.self_transcendence_goal
+            });
+          }
+        }
+      );
+
+      //create post datas and axios.all
+      NewData.forEach(function (item, index) {
+        let newPostPromise = api({
+          method: "post",
+          url: `goals/${goalId}/self_transcendence_goals/`,
+          data: {
+            self_transcendence_goal: item.self_transcendence_goal,
+            goal: goalId
+          },
+          useCredentails: true
+        });
+        postPromises.push(newPostPromise);
+      });
+
+      // create patch datas
+      ChangeData.forEach(function (item, index) {
+        let newPromise = api({
+          method: "patch",
+          url: `goals/${goalId}/self_transcendence_goals/${item.selftrans_id}/`,
+          data: {
+            self_transcendence_goal: item.self_transcendence_goal
+          },
+          useCredentails: true
+        });
+        promises.push(newPromise);
+      });
+
+      // post
+      Promise.all(postPromises).then(responses => {
+        responses.forEach(res => {
+          vm.OriginalSelfTransData.self_transcendence_goals.self_transcendence_goals.push(
+            res.data
+          );
+          vm.$set(
+            vm.SelfTransData,
+            "self_transcendence_goals",
+            // Deep Copy
+            JSON.parse(
+              JSON.stringify(
+                vm.OriginalSelfTransData.self_transcendence_goals
+                  .self_transcendence_goals
+              )
+            )
+          );
+        });
+      });
+
+      // patch
+      Promise.all(promises).then(responses => {
+        responses.forEach(res => {
+          let currentId = res.data.selftrans_id;
+          // Find the object to be changed by `OriginalMotive`.
+          // superscription motive.
+          if (
+            vm.OriginalSelfTransData.self_transcendence_goals.self_transcendence_goals.find(
+              item => item.selftrans_id == currentId
+            )
+          ) {
+            vm.OriginalSelfTransData.self_transcendence_goals.self_transcendence_goals.find(
+              item => item.selftrans_id == currentId
+            ).self_transcendence_goal = res.data.self_transcendence_goal;
+          }
+        });
+      });
+      vm.$emit("close");
+    },
+
+    editfuture: function () {
+      const vm = this;
+      // Stores the object whose content has changed.
+      let ChangeData = [];
+      let NewData = [];
+      let postPromises = []; // post datas
+      let promises = []; // patch datas
+
+      let goalId = vm.$route.params.id;
+      Array.from(vm.FutureData.future_selves).forEach((futureSelf, index) => {
+        // For compute to difference by `OriginalMotives`.
+        let originalMo =
+          vm.OriginalFutureData.future_selves.future_selves[index];
+
+        // If existence new post
+        if (!futureSelf.future_id) {
+          NewData.push({
+            future_self: futureSelf.future_self
+          });
+        }
+
+        // edit
+        else if (futureSelf.future_self !== originalMo.future_self) {
+          ChangeData.push({
+            future_id: futureSelf.future_id,
+            future_self: futureSelf.future_self
+          });
+        }
+      });
+
+      //create post datas and axios.all
+      NewData.forEach(function (item, index) {
+        let newPostPromise = api({
+          method: "post",
+          url: `goals/${goalId}/future_selves/`,
+          data: { future_self: item.future_self, goal: goalId },
+          useCredentails: true
+        });
+        postPromises.push(newPostPromise);
+      });
+
+      // create patch datas
+      ChangeData.forEach(function (item, index) {
+        let newPromise = api({
+          method: "patch",
+          url: `goals/${goalId}/future_selves/${item.future_id}/`,
+          data: {
+            future_self: item.future_self
+          },
+          useCredentails: true
+        });
+        promises.push(newPromise);
+      });
+
+      // post
+      Promise.all(postPromises).then(responses => {
+        responses.forEach(res => {
+          vm.OriginalFutureData.future_selves.future_selves.push(res.data);
+          vm.$set(
+            vm.FutureData,
+            "future_selves",
+            // Deep Copy
+            JSON.parse(
+              JSON.stringify(vm.OriginalFutureData.future_selves.future_selves)
+            )
+          );
+        });
+      });
+
+      // patch
+      Promise.all(promises).then(responses => {
+        responses.forEach(res => {
+          let currentId = res.data.future_id;
+          // Find the object to be changed by `OriginalMotive`.
+          // superscription motive.
+          if (
+            vm.OriginalFutureData.future_selves.future_selves.find(
+              item => item.future_id == currentId
+            )
+          ) {
+            vm.OriginalFutureData.future_selves.future_selves.find(
+              item => item.future_id == currentId
+            ).future_self = res.data.future_self;
           }
         });
       });
