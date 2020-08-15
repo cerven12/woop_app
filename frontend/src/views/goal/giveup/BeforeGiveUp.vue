@@ -23,7 +23,7 @@
           <h3 class="category-title">Obstacle & Countermeasure.</h3>
           <transition-group name="form" tag="div">
             <div
-              v-for="(worries, worries_index) in Worries.worries"
+              v-for="(worries, worries_index) in WorryData.worries"
               :key="worries_index"
             >
               <!-- If it's two or more Worry Model forms, show ✘, and label and hint is hide of Worry. Idea Model form. -->
@@ -38,7 +38,9 @@
                   </v-col>
                   <v-col cols="1">
                     <v-btn
-                      @click="deleteWorryIdeaForm(worries_index)"
+                      @click="
+                        deleteWorryIdeaForm(worries.worry_id, worries_index)
+                      "
                       text
                       depressed
                       height="55"
@@ -69,7 +71,14 @@
 
                         <v-col cols="1">
                           <v-btn
-                            @click="deleteIdeaForm(worries_index, ideas_index)"
+                            @click="
+                              deleteIdeaForm(
+                                worries.worry_id,
+                                ideas.idea_id,
+                                worries_index,
+                                ideas_index
+                              )
+                            "
                             text
                             depressed
                             height="55"
@@ -126,7 +135,14 @@
                         </v-col>
                         <v-col cols="1">
                           <v-btn
-                            @click="deleteIdeaForm(worries_index, ideas_index)"
+                            @click="
+                              deleteIdeaForm(
+                                worries.worry_id,
+                                ideas.idea_id,
+                                worries_index,
+                                ideas_index
+                              )
+                            "
                             text
                             depressed
                             height="55"
@@ -261,12 +277,15 @@
       <!----------------------------------------------------------------------->
       <v-container fluid id="tips-area">
         <h1>Tips</h1>
+        <pre>{{ WorryData }}</pre>
       </v-container>
     </div>
   </div>
 </template>
 
 <script>
+import api from "@/services/api.js";
+
 export default {
   name: "Goal",
   props: ["Worries"],
@@ -276,7 +295,11 @@ export default {
       valid: "",
       worryList: [{ worry: "", ideaList: [{ idea: "" }] }],
       parentWorryId: "",
-      refList: [{ reference_name: "", reference_use: "", reference_source: "" }]
+      refList: [
+        { reference_name: "", reference_use: "", reference_source: "" }
+      ],
+
+      WorryData: this.Worries
     };
   },
 
@@ -304,17 +327,37 @@ export default {
     //  ------------------------------------------------------------
     //                   Form Delete
     //  ------------------------------------------------------------
-    deleteWorryIdeaForm: function (worry_id) {
-      this.Worries.worries.splice(worry_id, 1);
-      console.log(this.worryList);
+    deleteWorryIdeaForm(worry_id, index) {
+      const vm = this;
+      let goalid = vm.$route.params.id;
+      if (worry_id == null) {
+        vm.WorryData.worries.splice(index, 1);
+      } else {
+        api
+          .delete(`goals/${goalid}/worries/${worry_id}/`)
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
+        vm.WorryData.worries.splice(index, 1);
+      }
     },
-    deleteIdeaForm: function (worries_id, ideas_id) {
-      this.Worries.worries[worries_id].ideas.splice(ideas_id, 1);
+
+    deleteIdeaForm(worry_id, idea_id, worries_index, ideas_index) {
+      const vm = this;
+      let goalid = vm.$route.params.id;
+      if (idea_id == null) {
+        vm.WorryData.worries[worries_index].ideas.splice(ideas_index, 1);
+      } else {
+        api
+          .delete(`goals/${goalid}/worries/${worry_id}/ideas/${idea_id}/`)
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
+        vm.WorryData.worries[worries_index].ideas.splice(ideas_index, 1);
+      }
     },
-    deleteRefernceForm: function (index) {
-      this.refList.splice(index, 1);
-      console.log(this.refList);
-    },
+    // deleteRefernceForm: function (index) {
+    //   this.refList.splice(index, 1);
+    //   console.log(this.refList);
+    // },
     endEdit: function () {
       this.$emit("close");
     }
@@ -356,8 +399,8 @@ export default {
   }
 }
 
-@media all and (max-width: 960px){
-  #css-grid{
+@media all and (max-width: 960px) {
+  #css-grid {
     padding: 0px 5%;
   }
 }

@@ -315,37 +315,49 @@ export default {
     deleteMotiveForm(motive_id, index) {
       const vm = this;
       let goalid = vm.$route.params.id;
-      api
-        .delete(`goals/${goalid}/motives/${motive_id}/`)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-      vm.MotivesData.motives.splice(index, 1);
-      vm.OriginalMotivesData.motives.motives.splice(index, 1);
+      if (motive_id == null) {
+        vm.MotivesData.motives.splice(index, 1);
+      } else {
+        api
+          .delete(`goals/${goalid}/motives/${motive_id}/`)
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
+        vm.MotivesData.motives.splice(index, 1);
+        vm.OriginalMotivesData.motives.motives.splice(index, 1);
+      }
     },
 
     deleteSelfTranscendenceGoalForm(selftrans_id, index) {
       const vm = this;
       let goalid = vm.$route.params.id;
-      api
-        .delete(`goals/${goalid}/self_transcendence_goals/${selftrans_id}/`)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-      vm.SelfTransData.self_transcendence_goals.splice(index, 1);
-      vm.OriginalSelfTransData.self_transcendence_goals.self_transcendence_goals.splice(
-        index,
-        1
-      );
+      if (selftrans_id == null) {
+        vm.SelfTransData.self_transcendence_goals.splice(index, 1);
+      } else {
+        api
+          .delete(`goals/${goalid}/self_transcendence_goals/${selftrans_id}/`)
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
+        vm.SelfTransData.self_transcendence_goals.splice(index, 1);
+        vm.OriginalSelfTransData.self_transcendence_goals.self_transcendence_goals.splice(
+          index,
+          1
+        );
+      }
     },
 
     deleteFutureSelfForm(future_id, index) {
       const vm = this;
       let goalid = vm.$route.params.id;
-      api
-        .delete(`goals/${goalid}/future_selves/${future_id}/`)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-      vm.FutureData.future_selves.splice(index, 1);
-      vm.OriginalFuture.future_selves.future_selves.splice(index, 1);
+      if (future_id == null) {
+        vm.FutureData.future_selves.splice(index, 1);
+      } else {
+        api
+          .delete(`goals/${goalid}/future_selves/${future_id}/`)
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
+        vm.FutureData.future_selves.splice(index, 1);
+        vm.OriginalFuture.future_selves.future_selves.splice(index, 1);
+      }
     },
 
     endEdit: function () {
