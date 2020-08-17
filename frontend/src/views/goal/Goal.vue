@@ -35,6 +35,7 @@
         ></AfterGIveUp>
         <BeforeGiveUp
           :Worries="Worries"
+          :OriginalWorries="OriginalWorries"
           key="1"
           @close="endGiveUpEdit"
           v-show="!isGiveUpRegisterd || isGiveUpEditMode"
@@ -116,6 +117,8 @@ export default {
       OriginalFuture: {},
 
       Worries: {},
+      OriginalWorries: {},
+
       Notes: {},
       Boards: {},
       Steps: {},
@@ -184,6 +187,11 @@ export default {
 
       //  Worry, Idea
       vm.$set(vm.Worries, "worries", response.data.worries);
+      vm.$set(
+        vm.OriginalWorries,
+        "worries",
+        JSON.parse(JSON.stringify(vm.Worries))
+      );
 
       //  Notes
       vm.$set(vm.Notes, "notes", response.data.notes);
