@@ -6,7 +6,16 @@
           <v-col cols="8" lg="8" md="9" sm="11">
             <h2 class="message-title">
               Note
-              <div style="display: inline;" @click="addNote"><v-btn depressed small rounded color="#4465c0" style="color: #f0f0f0;">add memo +</v-btn></div>
+              <div style="display: inline;" @click="addNote">
+                <v-btn
+                  depressed
+                  small
+                  rounded
+                  color="#4465c0"
+                  style="color: #f0f0f0;"
+                  >memo +</v-btn
+                >
+              </div>
             </h2>
           </v-col>
         </v-row>
@@ -28,12 +37,8 @@
 
         <template>
           <v-row justify="center">
-            <v-dialog
-              width="1200"
-              v-model="dialog"
-            >
-
-            <Accordion>
+            <v-dialog width="1200" v-model="dialog">
+              <Accordion>
                 <div slot="source">
                   @task#23
                 </div>
@@ -61,8 +66,7 @@
                   />
                 </div>
               </Accordion>
-
-           </v-dialog>
+            </v-dialog>
           </v-row>
         </template>
 

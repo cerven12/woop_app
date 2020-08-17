@@ -40,7 +40,7 @@
 
         <v-row justify="center">
           <v-col cols="8" md="9" lg="8" sm="11" xs="12">
-            <p class="writing-text">🔥{{ Goal.criteria }}</p>
+            <p class="writing-text">{{ Goal.criteria }}</p>
           </v-col>
         </v-row>
         <br />

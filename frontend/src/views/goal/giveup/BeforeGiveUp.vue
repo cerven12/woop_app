@@ -277,8 +277,6 @@
       <!----------------------------------------------------------------------->
       <v-container fluid id="tips-area">
         <h1>Tips</h1>
-        <pre>WorryData: {{ WorryData }}</pre>
-        <pre>Original: {{ OriginalWorryData }}</pre>
       </v-container>
     </div>
   </div>

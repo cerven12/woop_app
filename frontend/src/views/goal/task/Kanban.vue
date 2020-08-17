@@ -18,7 +18,7 @@
                       rounded
                       color="#4465c0"
                       style="color: #f0f0f0;"
-                      >Add Board +</v-btn
+                      >Board +</v-btn
                     ></span
                   >
                 </template>

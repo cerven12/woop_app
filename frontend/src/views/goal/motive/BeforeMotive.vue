@@ -238,12 +238,6 @@
       <!----------------------------------------------------------------------->
       <v-container fluid id="tips-area">
         <h1>Tips</h1>
-        <pre>MotivesData: {{ MotivesData }}</pre>
-        <pre>SelfTransData :{{ SelfTransData }}</pre>
-        <pre>OriginalSelf :{{ OriginalSelf }}</pre>
-        <hr />
-        <pre>FutureData:{{ FutureData }}</pre>
-        <pre>OriginalFuture:{{ OriginalFuture }}</pre>
       </v-container>
     </div>
   </div>
