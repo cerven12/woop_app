@@ -51,7 +51,7 @@
 
                   <v-card-actions>
                     <v-spacer></v-spacer>
-
+                     
                     <v-btn color="red" text @click="addBoardDialog = false"
                       >Cancel</v-btn
                     >
@@ -127,9 +127,11 @@
         <!--   Edit Board Dialog       -->
         <v-dialog v-model="editBoardDialog" width="400">
           <v-card style="border-radius: 25px; padding: 20px;">
-            <v-btn icon color="#B6B6B6" @click="deleteBoardPopup = true">
-              <v-icon>delete</v-icon>
-            </v-btn>
+                 <v-btn icon color="#B6B6B6" @click="deleteBoardPopup(currentBoard.board_title,
+                    currentBoard.color,
+                    currentBoard.id,)">
+                  <v-icon>delete</v-icon>
+                    </v-btn>
 
             <v-card-title style="font-weight: 500;"
               >Change Borad Title & Color</v-card-title
@@ -181,45 +183,6 @@
           </v-card>
         </v-dialog>
       </v-container>
-
-      <v-dialog v-model="deleteBoardPopup" max-width="290">
-        <v-card>
-          <v-card-title class="headline"
-            >Delete "{{ currentBoard.board_title }} ?"</v-card-title
-          >
-
-          <v-card-text>
-            Tasks that belong to "{{ currentBoard.board_title }}" will not be
-            deleted. They will be assigned to "Unattached".
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-
-            <v-btn
-              color="green darken-1"
-              text
-              @click="deleteBoardPopup = false"
-            >
-              Cancel
-            </v-btn>
-
-            <v-btn
-              color="red"
-              text
-              @click="
-                deleteBoard(
-                  currentBoard.board_title,
-                  currentBoard.id,
-                  currentIndex
-                )
-              "
-            >
-              Delete
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
 
       <div class="text-xs-center">
         <Task :text="text" ref="task"></Task>
@@ -308,16 +271,14 @@ export default {
         });
     },
 
-    deleteBoard(title, id, index) {
-      const vm = this;
-      let goalId = this.$route.params.id;
-      api.delete(`goals/${goalId}/boards/${id}/`).then(function (res) {
-        console.log(res);
-        vm.deleteBoardPopup = false;
-        vm.editBoardDialog = false;
-        vm.Boards.boards.splice(index, 1);
-      });
-    },
+
+  deleteBoard(title, id){
+    const vm = this;
+          let goalId = this.$route.params.id;
+    api.delete(`goals/${goalId}/boards/${id}/`)
+    .then(function(res){ console.log(res) })
+  }
+
 
     editBoard(title, color, id, index) {
       const vm = this;
@@ -499,9 +460,9 @@ export default {
   position: relative;
 }
 
-.delete-message {
-  font-size: 14px;
-  color: #b6b6b6;
+.delete-message{
+ font-size: 14px;
+ color: #B6B6B6;
 }
 
 @media only screen and (max-width: 600px) {
