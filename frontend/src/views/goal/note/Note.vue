@@ -6,7 +6,7 @@
           <v-col cols="8" lg="8" md="9" sm="11">
             <h2 class="message-title">
               Note
-              <div style="display: inline;" @click="addNote">+</div>
+              <div style="display: inline;" @click="addNote"><v-btn depressed small rounded color="#4465c0" style="color: #f0f0f0;">add memo +</v-btn></div>
             </h2>
           </v-col>
         </v-row>
