@@ -356,7 +356,7 @@ export default {
           .then(response => console.log(response))
           .catch(error => console.log(error));
         vm.FutureData.future_selves.splice(index, 1);
-        vm.OriginalFuture.future_selves.future_selves.splice(index, 1);
+        vm.OriginalFutureData.future_selves.future_selves.splice(index, 1);
       }
     },
 

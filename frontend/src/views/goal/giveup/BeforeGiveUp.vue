@@ -13,7 +13,7 @@
               <h2 class="message-title">Lets preparations for not give up.</h2>
             </v-col>
             <v-col>
-              <v-btn small color="gray" @click="endEdit">OK!</v-btn>
+              <v-btn small color="gray" @click="editWorry()">OK!</v-btn>
             </v-col>
           </v-row>
 
@@ -277,7 +277,8 @@
       <!----------------------------------------------------------------------->
       <v-container fluid id="tips-area">
         <h1>Tips</h1>
-        <pre>{{ WorryData }}</pre>
+        <pre>WorryData: {{ WorryData }}</pre>
+        <pre>Original: {{ OriginalWorryData }}</pre>
       </v-container>
     </div>
   </div>
@@ -288,7 +289,7 @@ import api from "@/services/api.js";
 
 export default {
   name: "Goal",
-  props: ["Worries"],
+  props: ["Worries", "OriginalWorries"],
 
   data: function () {
     return {
@@ -299,7 +300,8 @@ export default {
         { reference_name: "", reference_use: "", reference_source: "" }
       ],
 
-      WorryData: this.Worries
+      WorryData: this.Worries,
+      OriginalWorryData: this.OriginalWorries
     };
   },
 
@@ -338,6 +340,7 @@ export default {
           .then(response => console.log(response))
           .catch(error => console.log(error));
         vm.WorryData.worries.splice(index, 1);
+        vm.OriginalWorryData.worries.worries.splice(index, 1);
       }
     },
 
@@ -352,6 +355,10 @@ export default {
           .then(response => console.log(response))
           .catch(error => console.log(error));
         vm.WorryData.worries[worries_index].ideas.splice(ideas_index, 1);
+        vm.OriginalWorryData.worries.worries[worries_index].ideas.splice(
+          ideas_index,
+          1
+        );
       }
     },
     // deleteRefernceForm: function (index) {
@@ -360,6 +367,201 @@ export default {
     // },
     endEdit: function () {
       this.$emit("close");
+    },
+
+    editWorry: function () {
+      const vm = this;
+      // Stores the object whose content has changed.
+      let ChangeData = [];
+      let NewData = [];
+      let postPromises = []; // post datas
+      let editPromises = []; // patch datas
+      let NewIdeaData = [];
+      let ChangeIdeaData = [];
+      let postIdeaPromises = [];
+      let editIdeaPromises = [];
+
+      let goalId = vm.$route.params.id;
+
+      Array.from(vm.WorryData.worries).forEach((worry, index) => {
+        // For compute to difference by `OriginalMotives`.
+        let originalMo = vm.OriginalWorryData.worries.worries[index];
+        let ideaList = [];
+
+        // If existence new `Worry`
+        if (!worry.worry_id) {
+          // add new `ideas`
+          ideaList = worry.ideas.map(idea => {
+            return { idea: idea.idea, worry: 1 };
+          });
+          NewData.push({
+            worry: worry.worry,
+            ideas: ideaList // ideaList = { idea: '', worry: 1}, { idea: '', worry:1}, ......
+          });
+        }
+
+        // edit
+        else if (worry.worry !== originalMo.worry) {
+          ChangeData.push({
+            worry_id: worry.worry_id,
+            worry: worry.worry
+          });
+        }
+
+        // `idea` diff
+        else if (worry.ideas !== originalMo.ideas) {
+          Array.from(worry.ideas).forEach((idea, index) => {
+            let original = originalMo.ideas[index];
+            let currentWorryId = worry.worry_id;
+            if (!idea.idea_id) {
+              // idea = new input data, original = original
+              NewIdeaData.push({
+                worry: worry.worry_id,
+                idea: idea.idea
+              });
+            } else if (idea.idea !== original.idea) {
+              ChangeIdeaData.push({
+                idea_id: original.idea_id,
+                idea: idea.idea,
+                worry: original.worry
+              });
+            }
+          });
+        }
+      });
+
+      //create post datas and axios.all
+      NewData.forEach(function (item, index) {
+        let newPostPromise = api({
+          method: "post",
+          url: `goals/${goalId}/worries/`,
+          data: { worry: item.worry, ideas: item.ideas, goal: goalId },
+          useCredentails: true
+        });
+        postPromises.push(newPostPromise);
+      });
+      // idea
+      NewIdeaData.forEach(function (item, index) {
+        let newPostPromise = api({
+          method: "post",
+          url: `goals/${goalId}/worries/${item.worry}/ideas/`,
+          data: { idea: item.idea, worry: item.worry },
+          useCredentails: true
+        });
+        postIdeaPromises.push(newPostPromise);
+      });
+
+      // create patch datas
+      ChangeData.forEach(function (item, index) {
+        let newPromise = api({
+          method: "patch",
+          url: `goals/${goalId}/worries/${item.worry_id}/`,
+          data: {
+            worry: item.worry
+          },
+          useCredentails: true
+        });
+        editPromises.push(newPromise);
+      });
+      // idea
+      ChangeIdeaData.forEach(function (item, index) {
+        let newPromise = api({
+          method: "patch",
+          url: `goals/${goalId}/worries/${item.worry}/ideas/${item.idea_id}/`,
+          data: {
+            idea: item.idea
+          },
+          useCredentails: true
+        });
+        editIdeaPromises.push(newPromise);
+      });
+
+      // post
+      Promise.all(postPromises).then(responses => {
+        responses.forEach(res => {
+          vm.OriginalWorryData.worries.worries.push(res.data);
+          vm.$set(
+            vm.WorryData,
+            "worries",
+            // Deep Copy
+            JSON.parse(JSON.stringify(vm.OriginalWorryData.worries.worries))
+          );
+        });
+      });
+
+      Promise.all(postIdeaPromises).then(responses => {
+        responses.forEach(res => {
+          let postIdea = res.data;
+          // Identifying the Parent Object.
+          if (
+            vm.OriginalWorryData.worries.worries.find(
+              item => item.worry_id == postIdea.worry
+            )
+          ) {
+            vm.OriginalWorryData.worries.worries
+              .find(item => item.worry_id == postIdea.worry)
+              .ideas.push(postIdea);
+
+            vm.$set(
+              vm.WorryData,
+              "worries",
+              // Deep Copy
+              JSON.parse(JSON.stringify(vm.OriginalWorryData.worries.worries))
+            );
+          }
+        });
+      });
+
+      // patch
+      Promise.all(editPromises).then(responses => {
+        responses.forEach(res => {
+          let currentId = res.data.worry_id;
+          // Find the object to be changed by `OriginalMotive`.
+          // superscription motive.
+          if (
+            vm.OriginalWorryData.worries.worries.find(
+              item => item.worry_id == currentId
+            )
+          ) {
+            vm.OriginalWorryData.worries.worries.find(
+              item => item.worry_id == currentId
+            ).worry = res.data.worry;
+
+            vm.$set(
+              vm.WorryData,
+              "worries",
+              // Deep Copy
+              JSON.parse(JSON.stringify(vm.OriginalWorryData.worries.worries))
+            );
+          }
+        });
+      });
+
+      Promise.all(editIdeaPromises).then(responses => {
+        responses.forEach(res => {
+          let postIdea = res.data;
+          // Identifying the Parent Object.
+          if (
+            vm.OriginalWorryData.worries.worries.find(
+              item => item.worry_id == postIdea.worry
+            )
+          ) {
+            vm.OriginalWorryData.worries.worries
+              .find(item => item.worry_id == postIdea.worry)
+              .ideas.find(i => i.idea_id == postIdea.idea_id).idea =
+              postIdea.idea;
+
+            vm.$set(
+              vm.WorryData,
+              "worries",
+              // Deep Copy
+              JSON.parse(JSON.stringify(vm.OriginalWorryData.worries.worries))
+            );
+          }
+        });
+      });
+
+      vm.$emit("close");
     }
   }
 };
