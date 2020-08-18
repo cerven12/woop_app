@@ -21,7 +21,6 @@
               {{ task_info.criteria }}
             </template>
           </AfterTask>
-          <AfterTask :></AfterTask>
 <br>
 
           <!-- expectation -->
