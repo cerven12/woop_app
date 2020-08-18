@@ -21,6 +21,7 @@
               {{ task_info.criteria }}
             </template>
           </AfterTask>
+          <AfterTask :></AfterTask>
 <br>
 
           <!-- expectation -->
@@ -68,7 +69,7 @@ export default {
   },
   data: () => ({
     isDisplay: false,
-    task_info: ""
+    task_info: "" // from Kanban.vue.
   }),
   methods: {
     open() {
