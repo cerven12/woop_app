@@ -273,6 +273,8 @@ export default {
     showDialog(item) {
       this.$refs.task.open();
       this.$refs.task.task_info = item;
+      // Deep copy
+      this.$refs.task.OriginalTaskInfo = JSON.parse(JSON.stringify(item));
     },
     // dynamic background
     boardColor(index) {

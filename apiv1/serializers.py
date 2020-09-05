@@ -27,6 +27,10 @@ class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Solution
         fields = ['solution_id', 'solution', 'created_at', 'hurdle']
+        extra_kwargs = {
+            # This was key!
+            "hurdle":{"required": False}
+        }
 
 
 class HurdleSerializer(WritableNestedModelSerializer):
@@ -145,6 +149,10 @@ class IdeaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Idea
         fields = ['idea_id', 'idea', 'created_at', 'worry']
+        extra_kwargs = {
+            # This was key!
+            "worry":{"required": False}
+        }
 
 
 class WorrySerializer(WritableNestedModelSerializer):
