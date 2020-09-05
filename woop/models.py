@@ -208,7 +208,7 @@ class Task(models.Model):
         Step, on_delete=models.CASCADE, related_name='tasks', blank=True, null=True)
     task_id = models.AutoField(primary_key=True)
     order_by = models.IntegerField(default=0)
-    task_title = models.CharField(verbose_name='やること', max_length=40)
+    task_title = models.CharField(verbose_name='やること', max_length=200)
     task_description = models.TextField(
         verbose_name='詳細', blank=True, null=True)
     criteria = models.TextField(

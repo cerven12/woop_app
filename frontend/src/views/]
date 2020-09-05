@@ -277,6 +277,8 @@
       <!----------------------------------------------------------------------->
       <v-container fluid id="tips-area">
         <h1>Tips</h1>
+        <pre>Worry {{ WorryData }}</pre>
+        <pre>Original {{ OriginalWorryData }}</pre>
       </v-container>
     </div>
   </div>
@@ -390,44 +392,24 @@ export default {
         if (!worry.worry_id) {
           // add new `ideas`
           ideaList = worry.ideas.map(idea => {
-            return { idea: idea.idea };
+            return { idea: idea.idea, worry: 1 };
           });
-          console.log(ideaList)
           NewData.push({
             worry: worry.worry,
             ideas: ideaList // ideaList = { idea: '', worry: 1}, { idea: '', worry:1}, ......
           });
+          console.log("新しいworry idea あり : NewData"+ NewData)
         }
 
-        // edit Worry
+        // edit
         else if (worry.worry !== originalMo.worry) {
           ChangeData.push({
             worry_id: worry.worry_id,
             worry: worry.worry
           });
-          // and idea diff
-          if (worry.ideas !== originalMo.ideas) {
-            Array.from(worry.ideas).forEach((idea, index) => {
-              let original = originalMo.ideas[index];
-              let currentWorryId = worry.worry_id;
-              if (!idea.idea_id) {
-                // idea = new input data, original = original
-                NewIdeaData.push({
-                  worry: worry.worry_id,
-                  idea: idea.idea
-                });
-              } else if (idea.idea !== original.idea) {
-                ChangeIdeaData.push({
-                  idea_id: original.idea_id,
-                  idea: idea.idea,
-                  worry: original.worry
-                });
-              }
-            });
-          }
-        }
-        // edit Idea ( Worry is still the same. )
-        else if (worry.ideas !== originalMo.ideas) {
+          console.log("Worryの変更あり : ChangeData" + ChangeData)
+          // `idea` diff
+         if (worry.ideas !== originalMo.ideas) {
           Array.from(worry.ideas).forEach((idea, index) => {
             let original = originalMo.ideas[index];
             let currentWorryId = worry.worry_id;
@@ -437,15 +419,20 @@ export default {
                 worry: worry.worry_id,
                 idea: idea.idea
               });
+              console.log("新しいideaあり : NewIdeaData " + NewIdeaData)
             } else if (idea.idea !== original.idea) {
               ChangeIdeaData.push({
                 idea_id: original.idea_id,
                 idea: idea.idea,
                 worry: original.worry
               });
+              console.log("ideaの変更あり : " + ChangeIdeaData )
             }
           });
         }
+        }
+
+        
       });
 
       //create post datas and axios.all
@@ -457,8 +444,6 @@ export default {
           useCredentails: true
         });
         postPromises.push(newPostPromise);
-        console.log(item.ideas)
-        console.log(newPostPromise)
       });
       // idea
       NewIdeaData.forEach(function (item, index) {

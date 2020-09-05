@@ -1,41 +1,52 @@
 <template>
   <div>
-      <br />
-      <br />
+    <br />
+    <br />
+ <v-btn fab small depressed color="gray" @click="switchEdit">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+    <v-row>
+      <v-col cols="12">
+        <h1 class="message-title">{{ TaskInfo.task_title }}</h1>
+      </v-col>
+    </v-row>
+    <br />
 
-      <v-row>
-        <v-col cols="12">
-          <h1 class="message-title"><slot name="task_title"></slot></h1>
-        </v-col>
-      </v-row>
-      <br />
+    <v-row>
+      <v-col cols="12">
+        <p class="writing-text">{{ TaskInfo.task_description }}</p>
+      </v-col>
+    </v-row>
 
-      <v-row>
-        <v-col cols="12">
-          <p class="writing-text"><slot name="task_description"></slot></p>
-        </v-col>
-      </v-row>
+    <br />
+    <br />
 
-      <br />
-      <br />
+    <v-row justify="center">
+      <h2>Success criteria</h2>
+    </v-row>
 
-      <v-row justify="center">
-            <h2>Success criteria</h2>
-      </v-row>
+    <br />
 
-      <br />
-
-      <v-row>
-        <v-col cols="12">
-          <p class="writing-text"><slot name="criteria"></slot></p>
-        </v-col>
-      </v-row>
+    <v-row>
+      <v-col cols="12">
+        <p class="writing-text">{{ TaskInfo.criteria }}</p>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
+import api from "@/services/api";
+
 export default {
-  data: () => ({})
+  name: "Task",
+  props: ["TaskInfo"],
+
+      methods:{
+         switchEdit: function () {
+      this.$emit("startEdit");  // <-  Control of parent method at `$emit`.
+    }
+      }
 };
 </script>
 
