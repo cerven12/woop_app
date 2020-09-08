@@ -417,7 +417,7 @@ export default {
   #css-grid {
     grid-template-columns: 55% 45%;
     grid-template-areas: "form tips";
-    padding: 0px 17%;
+    /* padding: 0px 17%; */
   }
 }
 
@@ -427,13 +427,13 @@ export default {
     grid-template-areas:
       "form"
       "tips";
-    padding: 0px 13%;
+    /* padding: 0px 13%; */
   }
 }
 
 @media all and (max-width: 960px) {
   #css-grid {
-    padding: 0px 5%;
+    /* padding: 0px 5%; */
   }
 }
 

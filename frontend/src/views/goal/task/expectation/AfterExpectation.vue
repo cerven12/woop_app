@@ -14,7 +14,7 @@
           <div v-for="ex in Expectations" :key="ex.id">
             <v-row>
               <v-spacer></v-spacer>
-              <v-col cols="9">
+              <v-col cols="10">
                 <template>
                   <!-- The API gets it in increments of 20, so it should be corrected to 1-5. -->
                   <v-rating
@@ -22,7 +22,7 @@
                     v-model="tbdSatisRating"
                     empty-icon="●"
                     full-icon="☺"
-                    size="27"
+                    size="30"
                     color="red lighten-3"
                     background-color="grey lighten-2"
                     readonly="true"
@@ -33,8 +33,34 @@
 
             <v-row>
               <v-spacer></v-spacer>
-              <v-col cols="9">
+            <v-col cols="10">
                 <p>{{ ex.tbd_satis_comment }}</p>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="10">
+                <template>
+                  <!-- The API gets it in increments of 20, so it should be corrected to 1-5. -->
+                  <v-rating
+                    v-bind="conversionSatisValueAct(ex.satisfaction)"
+                    v-model="tbdSatisActRating"
+                    empty-icon="●"
+                    full-icon="☺"
+                    size="30"
+                    color="red lighten-3"
+                    background-color="grey lighten-2"
+                    readonly="true"
+                  ></v-rating>
+                </template>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="10">
+                <p>{{ ex.satis_comment }}</p>
               </v-col>
             </v-row>
           </div>
@@ -52,14 +78,14 @@
           <div v-for="diff in Expectations" :key="diff.id">
             <v-row>
               <v-spacer></v-spacer>
-              <v-col cols="9">
+              <v-col cols="10">
                 <template>
                   <v-rating
                     v-bind="conversionDiffValue(diff.tbd_difficulty)"
                     v-model="tbdDiffRating"
                     empty-icon="▲"
                     full-icon="🌋"
-                    size="27"
+                    size="30"
                     color="red lighten-3"
                     background-color="grey lighten-2"
                     readonly="true"
@@ -71,8 +97,34 @@
 
             <v-row>
               <v-spacer></v-spacer>
-              <v-col cols="9">
+              <v-col cols="10">
                 <p>{{ diff.tbd_diff_comment }}</p>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="10">
+                <template>
+                  <v-rating
+                    v-bind="conversionDiffValueAct(diff.difficulty)"
+                    v-model="tbdDiffActRating"
+                    empty-icon="▲"
+                    full-icon="🌋"
+                    size="30"
+                    color="red lighten-3"
+                    background-color="grey lighten-2"
+                    readonly="true"
+                  >
+                  </v-rating>
+                </template>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="10">
+                <p>{{ diff.diff_comment }}</p>
               </v-col>
             </v-row>
           </div>
@@ -88,7 +140,9 @@ export default {
   props: ["Expectations"],
   data: () => ({
     tbdSatisRating: 0,
-    tbdDiffRating: 0
+    tbdSatisActRating: 0,
+    tbdDiffRating: 0,
+    tbdDiffActRating: 0
   }),
   methods: {
     conversionSatisValue: function (value) {
@@ -108,6 +162,23 @@ export default {
         this.tbdSatisRating = 5;
       }
     },
+    conversionSatisValueAct: function (value) {
+      if (value == 20) {
+        this.tbdSatisActRating = 1;
+      }
+      if (value == 40) {
+        this.tbdSatisActRating = 2;
+      }
+      if (value == 60) {
+        this.tbdSatisActRating = 3;
+      }
+      if (value == 80) {
+        this.tbdSatisActRating = 4;
+      }
+      if (value == 100) {
+        this.tbdSatisActRating = 5;
+      }
+    },
     conversionDiffValue: function (value) {
       if (value == 20) {
         this.tbdDiffRating = 1;
@@ -123,6 +194,23 @@ export default {
       }
       if (value == 100) {
         this.tbdDiffRating = 5;
+      }
+    },
+    conversionDiffValueAct: function (value) {
+      if (value == 20) {
+        this.tbdDiffActRating = 1;
+      }
+      if (value == 40) {
+        this.tbdDiffActRating = 2;
+      }
+      if (value == 60) {
+        this.tbdDiffActRating = 3;
+      }
+      if (value == 80) {
+        this.tbdDiffActRating = 4;
+      }
+      if (value == 100) {
+        this.tbdDiffActRating = 5;
       }
     }
   }

@@ -1,9 +1,12 @@
 <template>
   <div>
     <div id="css-grid">
+        <v-row justify="end">
+
             <v-btn fab small depressed color="gray" @click="switchEdit">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
+            </v-row>
 
       <v-row>
         <v-col cols="7" lg="8" md="9" sm="11">

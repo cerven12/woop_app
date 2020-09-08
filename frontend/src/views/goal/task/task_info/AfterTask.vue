@@ -2,9 +2,26 @@
   <div>
     <br />
     <br />
- <v-btn fab small depressed color="gray" @click="switchEdit">
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
+    <v-row justify="end">
+    <v-btn fab small depressed color="gray" @click="switchEdit">
+      <v-icon>mdi-pencil</v-icon>
+    </v-btn>
+    </v-row>
+    
+   <v-row>
+   <v-col>
+    <template v-if="TaskInfo.is_repeat">
+     <v-chip
+      color="gray"
+    >
+     <v-icon>loop</v-icon>Repeat
+     
+    </v-chip>
+
+</template>
+   </v-col>
+   </v-row>
+
     <v-row>
       <v-col cols="12">
         <h1 class="message-title">{{ TaskInfo.task_title }}</h1>
@@ -42,11 +59,11 @@ export default {
   name: "Task",
   props: ["TaskInfo"],
 
-      methods:{
-         switchEdit: function () {
-      this.$emit("startEdit");  // <-  Control of parent method at `$emit`.
+  methods: {
+    switchEdit: function () {
+      this.$emit("startEdit"); // <-  Control of parent method at `$emit`.
     }
-      }
+  }
 };
 </script>
 

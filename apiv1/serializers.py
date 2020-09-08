@@ -57,6 +57,7 @@ class ExpectationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expectation
         fields = ['task', 'expectation_id', 'tbd_satisfaction', 'tbd_satis_comment', 'satisfaction',
+                  'satis_comment', 
                   'tbd_difficulty', 'tbd_diff_comment', 'difficulty', 'diff_comment', 'created_at']
 
 class TaskSerializer(WritableNestedModelSerializer):
