@@ -263,6 +263,8 @@ class Expectation(models.Model):
     diff_comment = models.CharField(
             verbose_name="実際の困難度について一言", max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
+    finished_at =  models.DateTimeField(verbose_name='終了日時', default=timezone.now)
+
 
     def __str__(self):
         return self.tbd_satis_comment or ''
